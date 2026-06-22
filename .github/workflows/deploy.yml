@@ -1,32 +1,33 @@
-name: Deploy hacoled_theme via FTP
+name: Deploy hacoled_theme via SFTP
 
 on:
   push:
     branches:
-      - main # (Lưu ý: Nếu nhánh trên GitHub của bạn tên là 'master', hãy đổi 'main' thành 'master')
+      - main # (Đổi thành 'master' nếu nhánh của bạn tên là master)
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy to Hosting
+    name: 🎉 Deploy to Hosting via SFTP
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
     
-    - name: 📂 Sync files to WordPress
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+    - name: 📂 Sync files to WordPress (SFTP mode)
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.6
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         
-        # Đường dẫn thư mục theme trên hosting (Tự động tạo nếu chưa có)
-        server-dir: /public_html/wp-content/themes/hacoled_theme/
+        # Ép buộc kết nối qua cổng 22 của SFTP
+        port: 22 
         
-        # DANH SÁCH LOẠI TRỪ (Không đẩy các file/thư mục này lên host)
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/.github/**
-          **/node_modules/**
-          **/README.md
+        # Đường dẫn thư mục code hiện tại trên GitHub
+        local_path: './' 
+        
+        # Đường dẫn đích trên Hosting
+        remote_path: '/public_html/wp-content/themes/hacoled_theme/'
+        
+        # Danh sách loại trừ (Không đẩy thư mục node_modules, .git lên hosting)
+        rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=.github --exclude=README.md'
