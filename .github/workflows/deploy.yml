@@ -1,0 +1,32 @@
+name: Deploy hacoled_theme via FTP
+
+on:
+  push:
+    branches:
+      - main # (Lưu ý: Nếu nhánh trên GitHub của bạn tên là 'master', hãy đổi 'main' thành 'master')
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy to Hosting
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+    
+    - name: 📂 Sync files to WordPress
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        
+        # Đường dẫn thư mục theme trên hosting (Tự động tạo nếu chưa có)
+        server-dir: /public_html/wp-content/themes/hacoled_theme/
+        
+        # DANH SÁCH LOẠI TRỪ (Không đẩy các file/thư mục này lên host)
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/.github/**
+          **/node_modules/**
+          **/README.md
