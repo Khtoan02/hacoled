@@ -1,0 +1,643 @@
+
+Rebuilding...
+CssSyntaxError: tailwindcss: /Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/src/css/tailwind.css:709:3: The `aspect-square` class does not exist. If `aspect-square` is a custom class, make sure it is defined within a `@layer` directive.
+    at Input.error (/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/postcss/lib/input.js:135:16)
+    at AtRule.error (/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/postcss/lib/node.js:146:32)
+    at processApply (/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:380:29)
+    at /Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:551:9
+    at /Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/tailwindcss/lib/processTailwindFeatures.js:55:50
+    at async Object.Once (/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/tailwindcss/lib/cli/build/plugin.js:248:17)
+    at async LazyResult.runAsync (/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/postcss/lib/lazy-result.js:293:11)
+    at async build (/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/node_modules/tailwindcss/lib/cli/build/index.js:49:9) {
+  reason: 'The `aspect-square` class does not exist. If `aspect-square` is a custom class, make sure it is defined within a `@layer` directive.',
+  file: '/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/src/css/tailwind.css',
+  source: '@tailwind base;\n' +
+    '@tailwind components;\n' +
+    '@tailwind utilities;\n' +
+    '\n' +
+    '@layer base {\n' +
+    '  body {\n' +
+    '    @apply bg-[#FAFAFA] text-slate-800 font-sans antialiased selection:bg-accent-gold selection:text-white;\n' +
+    '    scroll-behavior: smooth;\n' +
+    '  }\n' +
+    '  ::-webkit-scrollbar { width: 8px; }\n' +
+    '  ::-webkit-scrollbar-track { @apply bg-[#FAFAFA]; }\n' +
+    '  ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full border border-[#FAFAFA] hover:bg-slate-400 transition-colors; }\n' +
+    '}\n' +
+    '\n' +
+    '@layer utilities {\n' +
+    '  .text-gradient-red {\n' +
+    '    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-red via-accent-rose to-accent-orange;\n' +
+    '  }\n' +
+    '  .bg-grid-pattern {\n' +
+    '    background-size: 40px 40px;\n' +
+    '    background-image:\n' +
+    '      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),\n' +
+    '      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);\n' +
+    '  }\n' +
+    '}\n' +
+    '\n' +
+    '.glassmorphism {\n' +
+    '  background: rgba(90, 12, 12, 0.7);\n' +
+    '  backdrop-filter: blur(12px);\n' +
+    '  border: 1px solid rgba(255, 255, 255, 0.08);\n' +
+    '}\n' +
+    '\n' +
+    '@keyframes led-glow {\n' +
+    '  0%, 100% { box-shadow: 0 0 15px rgba(239,68,68,0.2), inset 0 0 10px rgba(239,68,68,0.1); }\n' +
+    '  50%       { box-shadow: 0 0 25px rgba(239,68,68,0.5), inset 0 0 15px rgba(239,68,68,0.25); }\n' +
+    '}\n' +
+    '.led-glowing { animation: led-glow 3s infinite ease-in-out; }\n' +
+    '\n' +
+    '.bg-tech-grid {\n' +
+    '  background-image: linear-gradient(to right,rgba(180,0,0,0.04) 1px,transparent 1px),\n' +
+    '                    linear-gradient(to bottom,rgba(180,0,0,0.04) 1px,transparent 1px);\n' +
+    '  background-size: 32px 32px;\n' +
+    '}\n' +
+    '\n' +
+    '.glass-card {\n' +
+    '  background: rgba(255,255,255,0.7); backdrop-filter: blur(20px);\n' +
+    '  border: 1px solid rgba(255,255,255,0.8);\n' +
+    '  box-shadow: 0 10px 40px -10px rgba(180,0,0,0.08);\n' +
+    '  transition: all 0.4s ease;\n' +
+    '}\n' +
+    '.glass-card:hover {\n' +
+    '  background: rgba(255,255,255,0.9); border-color: rgba(245,166,35,0.4);\n' +
+    '  box-shadow: 0 20px 40px -10px rgba(204,0,0,0.15); transform: translateY(-5px);\n' +
+    '}\n' +
+    '.glass-card-dark {\n' +
+    '  background: rgba(80,5,5,0.55); backdrop-filter: blur(20px);\n' +
+    '  border: 1px solid rgba(255,255,255,0.12); transition: all 0.4s ease;\n' +
+    '}\n' +
+    '.glass-card-dark:hover { border-color: rgba(245,166,35,0.5); box-shadow: 0 10px 30px rgba(245,166,35,0.2); }\n' +
+    '\n' +
+    '.glow-red  { position:absolute; width:300px; height:300px; background:rgba(204,0,0,0.15); filter:blur(80px); border-radius:50%; pointer-events:none; z-index:0; }\n' +
+    '.glow-gold { position:absolute; width:300px; height:300px; background:rgba(245,166,35,0.15); filter:blur(80px); border-radius:50%; pointer-events:none; z-index:0; }\n' +
+    '\n' +
+    '.bg-dongson {\n' +
+    '  position: absolute;\n' +
+    "  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png');\n" +
+    '  background-repeat: no-repeat;\n' +
+    '  background-position: center;\n' +
+    '  background-size: contain;\n' +
+    '  pointer-events: none;\n' +
+    '  z-index: 0;\n' +
+    '}\n' +
+    '.bg-dongson.light {\n' +
+    '  filter: url(#to-gold-light);\n' +
+    '  opacity: 0.12;\n' +
+    '}\n' +
+    '.bg-dongson.dark {\n' +
+    '  filter: url(#to-gold-dark);\n' +
+    '  opacity: 0.15;\n' +
+    '}\n' +
+    '\n' +
+    '.fade-up { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }\n' +
+    '.fade-up.visible { opacity:1; transform:translateY(0); }\n' +
+    '\n' +
+    '\n' +
+    '/* ================================================================\n' +
+    '   SITE HEADER – HacoLED Premium\n' +
+    '   Design principles:\n' +
+    '   · Maroon top bar with centered Trống Đồng stamp on logo\n' +
+    '   · Dark near-black nav bar (not white) — premium & coherent\n' +
+    '   · CSS-only hover mega menus (reliable, no JS glitch)\n' +
+    '   · Full-width panels anchored to <nav> left/right edges\n' +
+    '   ================================================================ */\n' +
+    '\n' +
+    '/* ─── TOP BAR subtle grid ─────────────────────────────────────── */\n' +
+    '.hdr-top-bg {\n' +
+    '  position: absolute; inset: 0; pointer-events: none; z-index: 0;\n' +
+    '  background-image:\n' +
+    '    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),\n' +
+    '    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);\n' +
+    '  background-size: 44px 44px;\n' +
+    '}\n' +
+    '\n' +
+    '/* ─── LOGO: Trống Đồng centered BEHIND logo image ────────────── */\n' +
+    '/*\n' +
+    '  Structure:\n' +
+    '    <div class="hdr-logo">          ← 160×64px positioned container\n' +
+    '      <div class="hdr-logo-ds"></div> ← 140×140 stamp, abs-centered\n' +
+    '      <a class="hdr-logo-link">     ← z:10, on top of stamp\n' +
+    '        <img>\n' +
+    '      </a>\n' +
+    '    </div>\n' +
+    '*/\n' +
+    '.hdr-logo {\n' +
+    '  position: relative;\n' +
+    '  flex-shrink: 0;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: flex-start;\n' +
+    '  height: 80px;\n' +
+    '}\n' +
+    '.hdr-logo-ds {\n' +
+    '  position: absolute;\n' +
+    '  top: 50%;\n' +
+    '  left: 50%;\n' +
+    '  transform: translate(-50%, -50%);\n' +
+    '  width: 420px;\n' +
+    '  height: 420px;\n' +
+    "  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png');\n" +
+    '  background-repeat: no-repeat;\n' +
+    '  background-position: center;\n' +
+    '  background-size: contain;\n' +
+    '  opacity: 0.12;\n' +
+    '  pointer-events: none;\n' +
+    '  filter: invert(1);\n' +
+    '  z-index: 0;\n' +
+    '  transition: opacity 0.35s ease;\n' +
+    '}\n' +
+    '.hdr-logo:hover .hdr-logo-ds { opacity: 0.16; }\n' +
+    '.hdr-logo-link {\n' +
+    '  position: relative;\n' +
+    '  z-index: 10;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '}\n' +
+    '.hdr-logo-link img {\n' +
+    '  height: 72px;\n' +
+    '  width: auto;\n' +
+    '  object-fit: contain;\n' +
+    '  transition: opacity 0.2s;\n' +
+    '}\n' +
+    '.hdr-logo-link:hover img { opacity: 0.88; }\n' +
+    '\n' +
+    '/* Scrolled state: smaller logo */\n' +
+    '.site-header.is-scrolled .hdr-logo { height: 60px; width: 150px; }\n' +
+    '.site-header.is-scrolled .hdr-logo-ds { width: 240px; height: 240px; }\n' +
+    '.site-header.is-scrolled .hdr-logo-link img { height: 44px; }\n' +
+    '\n' +
+    '/* ─── SEARCH INPUT ─────────────────────────────────────────────── */\n' +
+    '.hdr-search {\n' +
+    '  flex: 1;\n' +
+    '  max-width: 480px;\n' +
+    '}\n' +
+    '.hdr-search form { position: relative; }\n' +
+    '.hdr-search input {\n' +
+    '  width: 100%;\n' +
+    '  padding: 10px 18px 10px 44px;\n' +
+    '  border-radius: 50px;\n' +
+    '  background: rgba(0,0,0,0.28);\n' +
+    '  border: 1px solid rgba(255,255,255,0.12);\n' +
+    '  color: #fff;\n' +
+    '  font-size: 13px;\n' +
+    '  font-family: inherit;\n' +
+    '  outline: none;\n' +
+    '  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;\n' +
+    '}\n' +
+    '.hdr-search input::placeholder { color: rgba(148,163,184,0.7); }\n' +
+    '.hdr-search input:focus {\n' +
+    '  border-color: rgba(251,191,36,0.55);\n' +
+    '  box-shadow: 0 0 0 3px rgba(251,191,36,0.15);\n' +
+    '  background: rgba(0,0,0,0.38);\n' +
+    '}\n' +
+    '.hdr-search-icon {\n' +
+    '  position: absolute; left: 15px; top: 50%; transform: translateY(-50%);\n' +
+    '  color: rgba(148,163,184,0.7); pointer-events: none;\n' +
+    '  transition: color 0.2s;\n' +
+    '}\n' +
+    '.hdr-search form:focus-within .hdr-search-icon { color: #fbbf24; }\n' +
+    '\n' +
+    '/* ─── HOTLINE blocks ────────────────────────────────────────────── */\n' +
+    '.hdr-hotline {\n' +
+    '  display: flex; align-items: center; gap: 12px;\n' +
+    '  text-decoration: none; color: #fff;\n' +
+    '  transition: opacity 0.2s;\n' +
+    '}\n' +
+    '.hdr-hotline:hover { opacity: 0.88; }\n' +
+    '.hdr-hotline-icon {\n' +
+    '  width: 40px; height: 40px; border-radius: 50%;\n' +
+    '  display: flex; align-items: center; justify-content: center;\n' +
+    '  flex-shrink: 0; position: relative;\n' +
+    '  transition: transform 0.2s;\n' +
+    '}\n' +
+    '.hdr-hotline:hover .hdr-hotline-icon { transform: scale(1.08); }\n' +
+    '.hdr-hotline-cskh .hdr-hotline-icon {\n' +
+    '  background: rgba(255,255,255,0.08);\n' +
+    '  border: 1px solid rgba(255,255,255,0.15);\n' +
+    '}\n' +
+    '.hdr-hotline-sales .hdr-hotline-icon {\n' +
+    '  background: rgba(239,68,68,0.15);\n' +
+    '  border: 1px solid rgba(239,68,68,0.3);\n' +
+    '}\n' +
+    '.hdr-hotline-label {\n' +
+    '  display: block; font-size: 9px; font-weight: 700;\n' +
+    '  text-transform: uppercase; letter-spacing: 0.1em;\n' +
+    '  color: rgba(148,163,184,0.8); line-height: 1;\n' +
+    '  margin-bottom: 3px;\n' +
+    '}\n' +
+    '.hdr-hotline-number {\n' +
+    '  display: block; font-size: 16px; font-weight: 900;\n' +
+    '  letter-spacing: 0.03em; line-height: 1;\n' +
+    '  transition: color 0.2s;\n' +
+    '}\n' +
+    '.hdr-hotline-cskh .hdr-hotline-number  { color: #fff; }\n' +
+    '.hdr-hotline-sales .hdr-hotline-number { color: #fbbf24; }\n' +
+    '.hdr-hotline-cskh:hover .hdr-hotline-number  { color: #fbbf24; }\n' +
+    '.hdr-hotline-sales:hover .hdr-hotline-number { color: #fff; }\n' +
+    '\n' +
+    '/* Ping ring for hotline */\n' +
+    '@keyframes hdr-ping {\n' +
+    '  0%   { transform: scale(1); opacity: 0.7; }\n' +
+    '  75%, 100% { transform: scale(2); opacity: 0; }\n' +
+    '}\n' +
+    '.hdr-ping { animation: hdr-ping 1.8s ease-out infinite; }\n' +
+    '\n' +
+    '/* ─── BOTTOM NAV ────────────────────────────────────────────────── */\n' +
+    '#hdr-nav {\n' +
+    '  display: none;                /* Hidden on mobile – shown lg+ */\n' +
+    '  background: transparent;\n' +
+    '  border-bottom: 1px solid rgba(251,191,36,0.15);\n' +
+    '  /* CRITICAL: position:relative so mega panels anchor here */\n' +
+    '  position: relative;\n' +
+    '  overflow: visible;            /* MUST NOT be hidden */\n' +
+    '  z-index: 400;\n' +
+    '  transition: box-shadow 0.3s;\n' +
+    '}\n' +
+    '@media (min-width: 1024px) { #hdr-nav { display: block; } }\n' +
+    '\n' +
+    '/* Transparent Header specific styles */\n' +
+    '.site-header-transparent .hdr-top-container {\n' +
+    '  background: transparent;\n' +
+    '  transition: background 0.3s ease;\n' +
+    '}\n' +
+    '.site-header-transparent #hdr-nav {\n' +
+    '  background: transparent;\n' +
+    '  border-bottom: 1px solid rgba(255,255,255,0.1);\n' +
+    '}\n' +
+    '\n' +
+    '/* Scrolled state for both default and transparent */\n' +
+    '.site-header.is-scrolled .hdr-top-container {\n' +
+    '  background: transparent !important;\n' +
+    '}\n' +
+    '.site-header.is-scrolled #hdr-nav {\n' +
+    '  box-shadow: 0 4px 28px rgba(0,0,0,0.45);\n' +
+    '  background: transparent;\n' +
+    '}\n' +
+    '\n' +
+    '.hdr-nav-row {\n' +
+    '  max-width: 1320px;\n' +
+    '  margin: 0 auto;\n' +
+    '  padding: 0 40px;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  overflow: visible;            /* Must be visible so mega panels show */\n' +
+    '}\n' +
+    '\n' +
+    '/* ─── COMPACT LOGO (scroll state) ──────────────────────────────── */\n' +
+    '.hdr-compact-logo {\n' +
+    '  overflow: hidden;\n' +
+    '  transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;\n' +
+    '  width: 0; opacity: 0; margin-right: 0;\n' +
+    '  flex-shrink: 0;\n' +
+    '}\n' +
+    '.site-header.is-scrolled .hdr-compact-logo {\n' +
+    '  width: 90px; opacity: 1; margin-right: 16px;\n' +
+    '}\n' +
+    '.hdr-compact-logo img {\n' +
+    '  height: 26px; width: auto; object-fit: contain;\n' +
+    '  filter: brightness(0) invert(0.9);\n' +
+    '  display: block;\n' +
+    '}\n' +
+    '\n' +
+    '/* ─── NAV LINKS ─────────────────────────────────────────────────── */\n' +
+    '.hdr-nav-items {\n' +
+    '  display: flex; align-items: stretch; flex: 1;\n' +
+    '  overflow: visible;\n' +
+    '  margin-left: -14px;\n' +
+    '}\n' +
+    '\n' +
+    '/* Each nav item wrapper */\n' +
+    '.hdr-item {\n' +
+    '  position: static;             /* For mega panels: anchors to #hdr-nav */\n' +
+    '  display: flex; align-items: stretch;\n' +
+    '}\n' +
+    '/* Simple dropdown items keep position:relative */\n' +
+    '.hdr-item.has-simple { position: relative; }\n' +
+    '\n' +
+    '.hdr-link '... 15082 more characters,
+  line: 709,
+  column: 3,
+  endLine: 709,
+  endColumn: 179,
+  input: {
+    column: 3,
+    endColumn: 179,
+    endLine: 709,
+    endOffset: 24249,
+    line: 709,
+    offset: 24073,
+    source: '@tailwind base;\n' +
+      '@tailwind components;\n' +
+      '@tailwind utilities;\n' +
+      '\n' +
+      '@layer base {\n' +
+      '  body {\n' +
+      '    @apply bg-[#FAFAFA] text-slate-800 font-sans antialiased selection:bg-accent-gold selection:text-white;\n' +
+      '    scroll-behavior: smooth;\n' +
+      '  }\n' +
+      '  ::-webkit-scrollbar { width: 8px; }\n' +
+      '  ::-webkit-scrollbar-track { @apply bg-[#FAFAFA]; }\n' +
+      '  ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full border border-[#FAFAFA] hover:bg-slate-400 transition-colors; }\n' +
+      '}\n' +
+      '\n' +
+      '@layer utilities {\n' +
+      '  .text-gradient-red {\n' +
+      '    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-red via-accent-rose to-accent-orange;\n' +
+      '  }\n' +
+      '  .bg-grid-pattern {\n' +
+      '    background-size: 40px 40px;\n' +
+      '    background-image:\n' +
+      '      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),\n' +
+      '      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);\n' +
+      '  }\n' +
+      '}\n' +
+      '\n' +
+      '.glassmorphism {\n' +
+      '  background: rgba(90, 12, 12, 0.7);\n' +
+      '  backdrop-filter: blur(12px);\n' +
+      '  border: 1px solid rgba(255, 255, 255, 0.08);\n' +
+      '}\n' +
+      '\n' +
+      '@keyframes led-glow {\n' +
+      '  0%, 100% { box-shadow: 0 0 15px rgba(239,68,68,0.2), inset 0 0 10px rgba(239,68,68,0.1); }\n' +
+      '  50%       { box-shadow: 0 0 25px rgba(239,68,68,0.5), inset 0 0 15px rgba(239,68,68,0.25); }\n' +
+      '}\n' +
+      '.led-glowing { animation: led-glow 3s infinite ease-in-out; }\n' +
+      '\n' +
+      '.bg-tech-grid {\n' +
+      '  background-image: linear-gradient(to right,rgba(180,0,0,0.04) 1px,transparent 1px),\n' +
+      '                    linear-gradient(to bottom,rgba(180,0,0,0.04) 1px,transparent 1px);\n' +
+      '  background-size: 32px 32px;\n' +
+      '}\n' +
+      '\n' +
+      '.glass-card {\n' +
+      '  background: rgba(255,255,255,0.7); backdrop-filter: blur(20px);\n' +
+      '  border: 1px solid rgba(255,255,255,0.8);\n' +
+      '  box-shadow: 0 10px 40px -10px rgba(180,0,0,0.08);\n' +
+      '  transition: all 0.4s ease;\n' +
+      '}\n' +
+      '.glass-card:hover {\n' +
+      '  background: rgba(255,255,255,0.9); border-color: rgba(245,166,35,0.4);\n' +
+      '  box-shadow: 0 20px 40px -10px rgba(204,0,0,0.15); transform: translateY(-5px);\n' +
+      '}\n' +
+      '.glass-card-dark {\n' +
+      '  background: rgba(80,5,5,0.55); backdrop-filter: blur(20px);\n' +
+      '  border: 1px solid rgba(255,255,255,0.12); transition: all 0.4s ease;\n' +
+      '}\n' +
+      '.glass-card-dark:hover { border-color: rgba(245,166,35,0.5); box-shadow: 0 10px 30px rgba(245,166,35,0.2); }\n' +
+      '\n' +
+      '.glow-red  { position:absolute; width:300px; height:300px; background:rgba(204,0,0,0.15); filter:blur(80px); border-radius:50%; pointer-events:none; z-index:0; }\n' +
+      '.glow-gold { position:absolute; width:300px; height:300px; background:rgba(245,166,35,0.15); filter:blur(80px); border-radius:50%; pointer-events:none; z-index:0; }\n' +
+      '\n' +
+      '.bg-dongson {\n' +
+      '  position: absolute;\n' +
+      "  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png');\n" +
+      '  background-repeat: no-repeat;\n' +
+      '  background-position: center;\n' +
+      '  background-size: contain;\n' +
+      '  pointer-events: none;\n' +
+      '  z-index: 0;\n' +
+      '}\n' +
+      '.bg-dongson.light {\n' +
+      '  filter: url(#to-gold-light);\n' +
+      '  opacity: 0.12;\n' +
+      '}\n' +
+      '.bg-dongson.dark {\n' +
+      '  filter: url(#to-gold-dark);\n' +
+      '  opacity: 0.15;\n' +
+      '}\n' +
+      '\n' +
+      '.fade-up { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }\n' +
+      '.fade-up.visible { opacity:1; transform:translateY(0); }\n' +
+      '\n' +
+      '\n' +
+      '/* ================================================================\n' +
+      '   SITE HEADER – HacoLED Premium\n' +
+      '   Design principles:\n' +
+      '   · Maroon top bar with centered Trống Đồng stamp on logo\n' +
+      '   · Dark near-black nav bar (not white) — premium & coherent\n' +
+      '   · CSS-only hover mega menus (reliable, no JS glitch)\n' +
+      '   · Full-width panels anchored to <nav> left/right edges\n' +
+      '   ================================================================ */\n' +
+      '\n' +
+      '/* ─── TOP BAR subtle grid ─────────────────────────────────────── */\n' +
+      '.hdr-top-bg {\n' +
+      '  position: absolute; inset: 0; pointer-events: none; z-index: 0;\n' +
+      '  background-image:\n' +
+      '    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),\n' +
+      '    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);\n' +
+      '  background-size: 44px 44px;\n' +
+      '}\n' +
+      '\n' +
+      '/* ─── LOGO: Trống Đồng centered BEHIND logo image ────────────── */\n' +
+      '/*\n' +
+      '  Structure:\n' +
+      '    <div class="hdr-logo">          ← 160×64px positioned container\n' +
+      '      <div class="hdr-logo-ds"></div> ← 140×140 stamp, abs-centered\n' +
+      '      <a class="hdr-logo-link">     ← z:10, on top of stamp\n' +
+      '        <img>\n' +
+      '      </a>\n' +
+      '    </div>\n' +
+      '*/\n' +
+      '.hdr-logo {\n' +
+      '  position: relative;\n' +
+      '  flex-shrink: 0;\n' +
+      '  display: flex;\n' +
+      '  align-items: center;\n' +
+      '  justify-content: flex-start;\n' +
+      '  height: 80px;\n' +
+      '}\n' +
+      '.hdr-logo-ds {\n' +
+      '  position: absolute;\n' +
+      '  top: 50%;\n' +
+      '  left: 50%;\n' +
+      '  transform: translate(-50%, -50%);\n' +
+      '  width: 420px;\n' +
+      '  height: 420px;\n' +
+      "  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png');\n" +
+      '  background-repeat: no-repeat;\n' +
+      '  background-position: center;\n' +
+      '  background-size: contain;\n' +
+      '  opacity: 0.12;\n' +
+      '  pointer-events: none;\n' +
+      '  filter: invert(1);\n' +
+      '  z-index: 0;\n' +
+      '  transition: opacity 0.35s ease;\n' +
+      '}\n' +
+      '.hdr-logo:hover .hdr-logo-ds { opacity: 0.16; }\n' +
+      '.hdr-logo-link {\n' +
+      '  position: relative;\n' +
+      '  z-index: 10;\n' +
+      '  display: flex;\n' +
+      '  align-items: center;\n' +
+      '}\n' +
+      '.hdr-logo-link img {\n' +
+      '  height: 72px;\n' +
+      '  width: auto;\n' +
+      '  object-fit: contain;\n' +
+      '  transition: opacity 0.2s;\n' +
+      '}\n' +
+      '.hdr-logo-link:hover img { opacity: 0.88; }\n' +
+      '\n' +
+      '/* Scrolled state: smaller logo */\n' +
+      '.site-header.is-scrolled .hdr-logo { height: 60px; width: 150px; }\n' +
+      '.site-header.is-scrolled .hdr-logo-ds { width: 240px; height: 240px; }\n' +
+      '.site-header.is-scrolled .hdr-logo-link img { height: 44px; }\n' +
+      '\n' +
+      '/* ─── SEARCH INPUT ─────────────────────────────────────────────── */\n' +
+      '.hdr-search {\n' +
+      '  flex: 1;\n' +
+      '  max-width: 480px;\n' +
+      '}\n' +
+      '.hdr-search form { position: relative; }\n' +
+      '.hdr-search input {\n' +
+      '  width: 100%;\n' +
+      '  padding: 10px 18px 10px 44px;\n' +
+      '  border-radius: 50px;\n' +
+      '  background: rgba(0,0,0,0.28);\n' +
+      '  border: 1px solid rgba(255,255,255,0.12);\n' +
+      '  color: #fff;\n' +
+      '  font-size: 13px;\n' +
+      '  font-family: inherit;\n' +
+      '  outline: none;\n' +
+      '  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;\n' +
+      '}\n' +
+      '.hdr-search input::placeholder { color: rgba(148,163,184,0.7); }\n' +
+      '.hdr-search input:focus {\n' +
+      '  border-color: rgba(251,191,36,0.55);\n' +
+      '  box-shadow: 0 0 0 3px rgba(251,191,36,0.15);\n' +
+      '  background: rgba(0,0,0,0.38);\n' +
+      '}\n' +
+      '.hdr-search-icon {\n' +
+      '  position: absolute; left: 15px; top: 50%; transform: translateY(-50%);\n' +
+      '  color: rgba(148,163,184,0.7); pointer-events: none;\n' +
+      '  transition: color 0.2s;\n' +
+      '}\n' +
+      '.hdr-search form:focus-within .hdr-search-icon { color: #fbbf24; }\n' +
+      '\n' +
+      '/* ─── HOTLINE blocks ────────────────────────────────────────────── */\n' +
+      '.hdr-hotline {\n' +
+      '  display: flex; align-items: center; gap: 12px;\n' +
+      '  text-decoration: none; color: #fff;\n' +
+      '  transition: opacity 0.2s;\n' +
+      '}\n' +
+      '.hdr-hotline:hover { opacity: 0.88; }\n' +
+      '.hdr-hotline-icon {\n' +
+      '  width: 40px; height: 40px; border-radius: 50%;\n' +
+      '  display: flex; align-items: center; justify-content: center;\n' +
+      '  flex-shrink: 0; position: relative;\n' +
+      '  transition: transform 0.2s;\n' +
+      '}\n' +
+      '.hdr-hotline:hover .hdr-hotline-icon { transform: scale(1.08); }\n' +
+      '.hdr-hotline-cskh .hdr-hotline-icon {\n' +
+      '  background: rgba(255,255,255,0.08);\n' +
+      '  border: 1px solid rgba(255,255,255,0.15);\n' +
+      '}\n' +
+      '.hdr-hotline-sales .hdr-hotline-icon {\n' +
+      '  background: rgba(239,68,68,0.15);\n' +
+      '  border: 1px solid rgba(239,68,68,0.3);\n' +
+      '}\n' +
+      '.hdr-hotline-label {\n' +
+      '  display: block; font-size: 9px; font-weight: 700;\n' +
+      '  text-transform: uppercase; letter-spacing: 0.1em;\n' +
+      '  color: rgba(148,163,184,0.8); line-height: 1;\n' +
+      '  margin-bottom: 3px;\n' +
+      '}\n' +
+      '.hdr-hotline-number {\n' +
+      '  display: block; font-size: 16px; font-weight: 900;\n' +
+      '  letter-spacing: 0.03em; line-height: 1;\n' +
+      '  transition: color 0.2s;\n' +
+      '}\n' +
+      '.hdr-hotline-cskh .hdr-hotline-number  { color: #fff; }\n' +
+      '.hdr-hotline-sales .hdr-hotline-number { color: #fbbf24; }\n' +
+      '.hdr-hotline-cskh:hover .hdr-hotline-number  { color: #fbbf24; }\n' +
+      '.hdr-hotline-sales:hover .hdr-hotline-number { color: #fff; }\n' +
+      '\n' +
+      '/* Ping ring for hotline */\n' +
+      '@keyframes hdr-ping {\n' +
+      '  0%   { transform: scale(1); opacity: 0.7; }\n' +
+      '  75%, 100% { transform: scale(2); opacity: 0; }\n' +
+      '}\n' +
+      '.hdr-ping { animation: hdr-ping 1.8s ease-out infinite; }\n' +
+      '\n' +
+      '/* ─── BOTTOM NAV ────────────────────────────────────────────────── */\n' +
+      '#hdr-nav {\n' +
+      '  display: none;                /* Hidden on mobile – shown lg+ */\n' +
+      '  background: transparent;\n' +
+      '  border-bottom: 1px solid rgba(251,191,36,0.15);\n' +
+      '  /* CRITICAL: position:relative so mega panels anchor here */\n' +
+      '  position: relative;\n' +
+      '  overflow: visible;            /* MUST NOT be hidden */\n' +
+      '  z-index: 400;\n' +
+      '  transition: box-shadow 0.3s;\n' +
+      '}\n' +
+      '@media (min-width: 1024px) { #hdr-nav { display: block; } }\n' +
+      '\n' +
+      '/* Transparent Header specific styles */\n' +
+      '.site-header-transparent .hdr-top-container {\n' +
+      '  background: transparent;\n' +
+      '  transition: background 0.3s ease;\n' +
+      '}\n' +
+      '.site-header-transparent #hdr-nav {\n' +
+      '  background: transparent;\n' +
+      '  border-bottom: 1px solid rgba(255,255,255,0.1);\n' +
+      '}\n' +
+      '\n' +
+      '/* Scrolled state for both default and transparent */\n' +
+      '.site-header.is-scrolled .hdr-top-container {\n' +
+      '  background: transparent !important;\n' +
+      '}\n' +
+      '.site-header.is-scrolled #hdr-nav {\n' +
+      '  box-shadow: 0 4px 28px rgba(0,0,0,0.45);\n' +
+      '  background: transparent;\n' +
+      '}\n' +
+      '\n' +
+      '.hdr-nav-row {\n' +
+      '  max-width: 1320px;\n' +
+      '  margin: 0 auto;\n' +
+      '  padding: 0 40px;\n' +
+      '  display: flex;\n' +
+      '  align-items: center;\n' +
+      '  overflow: visible;            /* Must be visible so mega panels show */\n' +
+      '}\n' +
+      '\n' +
+      '/* ─── COMPACT LOGO (scroll state) ──────────────────────────────── */\n' +
+      '.hdr-compact-logo {\n' +
+      '  overflow: hidden;\n' +
+      '  transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;\n' +
+      '  width: 0; opacity: 0; margin-right: 0;\n' +
+      '  flex-shrink: 0;\n' +
+      '}\n' +
+      '.site-header.is-scrolled .hdr-compact-logo {\n' +
+      '  width: 90px; opacity: 1; margin-right: 16px;\n' +
+      '}\n' +
+      '.hdr-compact-logo img {\n' +
+      '  height: 26px; width: auto; object-fit: contain;\n' +
+      '  filter: brightness(0) invert(0.9);\n' +
+      '  display: block;\n' +
+      '}\n' +
+      '\n' +
+      '/* ─── NAV LINKS ─────────────────────────────────────────────────── */\n' +
+      '.hdr-nav-items {\n' +
+      '  display: flex; align-items: stretch; flex: 1;\n' +
+      '  overflow: visible;\n' +
+      '  margin-left: -14px;\n' +
+      '}\n' +
+      '\n' +
+      '/* Each nav item wrapper */\n' +
+      '.hdr-item {\n' +
+      '  position: static;             /* For mega panels: anchors to #hdr-nav */\n' +
+      '  display: flex; align-items: stretch;\n' +
+      '}\n' +
+      '/* Simple dropdown items keep position:relative */\n' +
+      '.hdr-item.has-simple { position: relative; }\n' +
+      '\n' +
+      '.hdr-link '... 15082 more characters,
+    url: 'file:///Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/src/css/tailwind.css',
+    file: '/Applications/ServBay/www/hacoled/wp-content/themes/hacoled_theme/src/css/tailwind.css'
+  },
+  plugin: 'tailwindcss'
+}

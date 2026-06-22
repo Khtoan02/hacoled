@@ -1,0 +1,935 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+  display: none !important;
+}
+
+@layer base {
+  body {
+    @apply text-slate-800 font-sans antialiased selection:bg-accent-gold selection:text-white;
+    scroll-behavior: smooth;
+    background: linear-gradient(180deg, #f8f6f5 0%, #f4f2f1 40%, #f7f5f4 70%, #faf9f8 100%);
+  }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #f4f2f1; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full border border-[#f4f2f1] hover:bg-slate-400 transition-colors; }
+}
+
+@layer utilities {
+  .text-gradient-red {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-red via-accent-rose to-accent-orange;
+  }
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  }
+  .text-gradient {
+    background: linear-gradient(to right, #CC0000, #F5A623);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.glassmorphism {
+  background: rgba(90, 12, 12, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@keyframes led-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(239,68,68,0.2), inset 0 0 10px rgba(239,68,68,0.1); }
+  50%       { box-shadow: 0 0 25px rgba(239,68,68,0.5), inset 0 0 15px rgba(239,68,68,0.25); }
+}
+.led-glowing { animation: led-glow 3s infinite ease-in-out; }
+
+@keyframes bounce-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-bounce-float { animation: bounce-float 3s ease-in-out infinite; }
+.animate-bounce-float-delay { animation: bounce-float 3.5s ease-in-out 0.5s infinite; }
+.animate-bounce-float-delay2 { animation: bounce-float 4s ease-in-out 1s infinite; }
+
+.bg-tech-grid {
+  background-image: linear-gradient(to right,rgba(180,0,0,0.04) 1px,transparent 1px),
+                    linear-gradient(to bottom,rgba(180,0,0,0.04) 1px,transparent 1px);
+  background-size: 32px 32px;
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.7); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 10px 40px -10px rgba(180,0,0,0.08);
+  transition: all 0.4s ease;
+}
+.glass-card:hover {
+  background: rgba(255,255,255,0.9); border-color: rgba(245,166,35,0.4);
+  box-shadow: 0 20px 40px -10px rgba(204,0,0,0.15); transform: translateY(-5px);
+}
+.glass-card-dark {
+  background: rgba(80,5,5,0.55); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12); transition: all 0.4s ease;
+}
+.glass-card-dark:hover { border-color: rgba(245,166,35,0.5); box-shadow: 0 10px 30px rgba(245,166,35,0.2); }
+
+.glow-red  { position:absolute; width:300px; height:300px; background:rgba(204,0,0,0.15); filter:blur(80px); border-radius:50%; pointer-events:none; z-index:0; }
+.glow-gold { position:absolute; width:300px; height:300px; background:rgba(245,166,35,0.15); filter:blur(80px); border-radius:50%; pointer-events:none; z-index:0; }
+
+.bg-dongson {
+  position: absolute;
+  background-image: url('../images/dongson.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-dongson.light {
+  filter: url(#to-gold-light);
+  opacity: 0.12;
+}
+.bg-dongson.dark {
+  filter: url(#to-gold-dark);
+  opacity: 0.15;
+}
+
+.fade-up { opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1); }
+.fade-up.visible { opacity:1; transform:translateY(0); }
+
+
+/* ================================================================
+   SITE HEADER – HacoLED Premium
+   Design principles:
+   · Maroon top bar with centered Trống Đồng stamp on logo
+   · Dark near-black nav bar (not white) — premium & coherent
+   · CSS-only hover mega menus (reliable, no JS glitch)
+   · Full-width panels anchored to <nav> left/right edges
+   ================================================================ */
+
+/* ─── TOP BAR subtle grid ─────────────────────────────────────── */
+.hdr-top-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ─── LOGO: Trống Đồng centered BEHIND logo image ────────────── */
+/*
+  Structure:
+    <div class="hdr-logo">          ← 160×64px positioned container
+      <div class="hdr-logo-ds"></div> ← 140×140 stamp, abs-centered
+      <a class="hdr-logo-link">     ← z:10, on top of stamp
+        <img>
+      </a>
+    </div>
+*/
+.hdr-logo {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 80px;
+}
+.hdr-logo-ds {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 580px;
+  background-image: url('../images/dongson.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.20; /* More visible opacity as requested */
+  pointer-events: none;
+  filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); /* Gold color filter */
+  z-index: 0;
+  transition: opacity 0.35s ease;
+}
+.hdr-logo:hover .hdr-logo-ds { opacity: 0.28; }
+.hdr-logo-link {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+.hdr-logo-link img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  transition: opacity 0.2s;
+}
+.hdr-logo-link:hover img { opacity: 0.88; }
+
+/* Scrolled state: smaller logo */
+.site-header.is-scrolled .hdr-logo { height: 60px; width: 150px; }
+.site-header.is-scrolled .hdr-logo-ds { width: 380px; height: 380px; }
+.site-header.is-scrolled .hdr-logo-link img { height: 44px; }
+
+/* ─── SEARCH INPUT ─────────────────────────────────────────────── */
+.hdr-search {
+  flex: 1;
+  max-width: 480px;
+}
+.hdr-search form { position: relative; }
+.hdr-search input {
+  width: 100%;
+  padding: 10px 18px 10px 44px;
+  border-radius: 50px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.hdr-search input::placeholder { color: rgba(148,163,184,0.7); }
+.hdr-search input:focus {
+  border-color: rgba(251,191,36,0.55);
+  box-shadow: 0 0 0 3px rgba(251,191,36,0.15);
+  background: rgba(0,0,0,0.38);
+}
+.hdr-search-icon {
+  position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+  color: rgba(148,163,184,0.7); pointer-events: none;
+  transition: color 0.2s;
+}
+.hdr-search form:focus-within .hdr-search-icon { color: #fbbf24; }
+
+/* ─── HOTLINE blocks ────────────────────────────────────────────── */
+.hdr-hotline {
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none; color: #fff;
+  transition: opacity 0.2s;
+}
+.hdr-hotline:hover { opacity: 0.88; }
+.hdr-hotline-icon {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative;
+  transition: transform 0.2s;
+}
+.hdr-hotline:hover .hdr-hotline-icon { transform: scale(1.08); }
+.hdr-hotline-cskh .hdr-hotline-icon {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.hdr-hotline-sales .hdr-hotline-icon {
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+.hdr-hotline-label {
+  display: block; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(148,163,184,0.8); line-height: 1;
+  margin-bottom: 3px;
+}
+.hdr-hotline-number {
+  display: block; font-size: 16px; font-weight: 900;
+  letter-spacing: 0.03em; line-height: 1;
+  transition: color 0.2s;
+}
+.hdr-hotline-cskh .hdr-hotline-number  { color: #fff; }
+.hdr-hotline-sales .hdr-hotline-number { color: #fbbf24; }
+.hdr-hotline-cskh:hover .hdr-hotline-number  { color: #fbbf24; }
+.hdr-hotline-sales:hover .hdr-hotline-number { color: #fff; }
+
+/* Ping ring for hotline */
+@keyframes hdr-ping {
+  0%   { transform: scale(1); opacity: 0.7; }
+  75%, 100% { transform: scale(2); opacity: 0; }
+}
+.hdr-ping { animation: hdr-ping 1.8s ease-out infinite; }
+
+/* ─── BOTTOM NAV ────────────────────────────────────────────────── */
+#hdr-nav {
+  display: none;                /* Hidden on mobile – shown lg+ */
+  background: transparent;
+  border-bottom: 1px solid rgba(251,191,36,0.15);
+  /* CRITICAL: position:relative so mega panels anchor here */
+  position: relative;
+  overflow: visible;            /* MUST NOT be hidden */
+  z-index: 400;
+  transition: box-shadow 0.3s;
+}
+@media (min-width: 1024px) { #hdr-nav { display: block; } }
+
+/* Transparent Header specific styles */
+.site-header-transparent .hdr-top-container {
+  background: transparent;
+  transition: background 0.3s ease;
+}
+.site-header-transparent #hdr-nav {
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Scrolled state for both default and transparent */
+.site-header.is-scrolled .hdr-top-container {
+  background: transparent !important;
+}
+.site-header.is-scrolled #hdr-nav {
+  box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+  background: transparent;
+}
+
+.hdr-nav-row {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  overflow: visible;            /* Must be visible so mega panels show */
+}
+
+/* ─── COMPACT LOGO (scroll state) ──────────────────────────────── */
+.hdr-compact-logo {
+  overflow: hidden;
+  transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  width: 0; opacity: 0; margin-right: 0;
+  flex-shrink: 0;
+}
+.site-header.is-scrolled .hdr-compact-logo {
+  width: 90px; opacity: 1; margin-right: 16px;
+}
+.hdr-compact-logo img {
+  height: 26px; width: auto; object-fit: contain;
+  filter: brightness(0) invert(0.9);
+  display: block;
+}
+
+/* ─── NAV LINKS ─────────────────────────────────────────────────── */
+.hdr-nav-items {
+  display: flex; align-items: stretch; flex: 1;
+  overflow: visible;
+  margin-left: -14px;
+}
+
+/* Each nav item wrapper */
+.hdr-item {
+  position: static;             /* For mega panels: anchors to #hdr-nav */
+  display: flex; align-items: stretch;
+}
+/* Simple dropdown items keep position:relative */
+.hdr-item.has-simple { position: relative; }
+
+.hdr-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 0 14px;
+  height: 52px;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  white-space: nowrap; color: rgba(226,232,240,0.75);
+  text-decoration: none; background: none; border: none;
+  cursor: pointer; outline: none; font-family: inherit;
+  position: relative;
+  transition: color 0.18s, background 0.18s;
+  border-bottom: 3px solid transparent;
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+}
+.site-header.is-scrolled .hdr-link { height: 44px; }
+
+.hdr-link .hdr-chev {
+  width: 11px; height: 11px; flex-shrink: 0;
+  color: rgba(100,116,139,0.7);
+  transition: transform 0.22s ease, color 0.18s;
+}
+
+/* Hover & open states */
+.hdr-item:hover > .hdr-link,
+.hdr-link:hover,
+.hdr-link:focus-visible {
+  color: #fbbf24;
+  border-bottom-color: #f59e0b;
+  background: rgba(255,255,255,0.04);
+}
+.hdr-item:hover > .hdr-link .hdr-chev {
+  transform: rotate(180deg);
+  color: #fbbf24;
+}
+
+/* Mega Menu General Wrapper */
+.mega-menu-wrapper {
+  @apply absolute top-full left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100/50 z-[150] overflow-hidden flex flex-col md:flex-row w-[96vw] xl:w-[1040px] max-w-[1100px];
+  margin-top: 15px; /* Offset to float */
+}
+
+/* For narrower dropdowns like "Dự án đã thực hiện" (900px) or "Màn hình ghép" (600px) */
+.mega-menu-wrapper.mega-md {
+  @apply xl:w-[900px];
+}
+.mega-menu-wrapper.mega-sm {
+  @apply xl:w-[600px];
+}
+
+/* Ensure the navitem is inline block but NOT relative to let mega menus anchor to the header */
+.navitem-relative {
+  @apply inline-block;
+}
+
+.mega-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 28px 40px 24px;
+  display: grid;
+  align-items: start;
+  column-gap: 0;
+  row-gap: 0;
+}
+
+/* ─── MEGA PANEL: column divider ─────────────────────────────────  */
+.mega-sep {
+  width: 1px; align-self: stretch;
+  background: linear-gradient(to bottom, transparent 0%, #e2e8f0 15%, #e2e8f0 85%, transparent 100%);
+  margin: 0 20px;
+}
+
+/* ─── MEGA COLUMN TITLE ─────────────────────────────────────────── */
+.mega-hd {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 10px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #7f1d1d;
+  border-bottom: 2px solid #fef2f2;
+  padding-bottom: 9px; margin-bottom: 8px;
+}
+.mega-hd svg { flex-shrink: 0; }
+
+/* ─── MEGA LINK ROW ─────────────────────────────────────────────── */
+.mega-a {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5px 8px; margin: 1px 0;
+  font-size: 12.5px; font-weight: 500;
+  color: #475569; text-decoration: none;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: color 0.13s, background 0.13s, padding-left 0.13s;
+}
+.mega-a::before {
+  content: ''; width: 5px; height: 5px;
+  background: #cbd5e1; border-radius: 50%; flex-shrink: 0;
+  transition: background 0.13s, transform 0.13s;
+}
+.mega-a:hover { color: #ef4444; background: #fef2f2; padding-left: 14px; }
+.mega-a:hover::before { background: #ef4444; transform: scale(1.35); }
+
+/* Badges */
+.mb { display: inline-flex; font-size: 9px; font-weight: 800; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+.mb-hot { background: #fee2e2; color: #dc2626; }
+.mb-pro { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+.mb-new { background: #dbeafe; color: #1d4ed8; }
+
+/* ─── HIGHLIGHT CARD (replaces broken image cards) ──────────────── */
+.mega-highlight {
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3a0606 0%, #5a0c0c 60%, #6b1010 100%);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.mega-highlight:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(90,12,12,0.35);
+}
+/* Dong Son watermark inside card */
+.mega-highlight::before {
+  content: '';
+  position: absolute;
+  right: -20px; top: 50%; transform: translateY(-50%);
+  width: 160px; height: 160px;
+  background-image: url('../images/dongson.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.1;
+  filter: brightness(0) invert(1);
+}
+.mega-highlight-badge {
+  display: inline-flex;
+  font-size: 9px; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 0.09em;
+  padding: 3px 10px; border-radius: 20px;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  color: #3a0606;
+  box-shadow: 0 2px 8px rgba(251,191,36,0.5);
+  margin-bottom: 12px;
+}
+.mega-highlight-title {
+  font-size: 14px; font-weight: 700; color: #fff;
+  line-height: 1.35; margin-bottom: 6px;
+}
+.mega-highlight-desc {
+  font-size: 11.5px; color: rgba(203,213,225,0.8);
+  line-height: 1.5; margin-bottom: 14px;
+}
+.mega-highlight-cta {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: #fbbf24;
+  transition: gap 0.15s;
+}
+.mega-highlight:hover .mega-highlight-cta { gap: 8px; }
+
+/* Quick action chips below highlight card */
+.mega-chips { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.mega-chip {
+  font-size: 10px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 8px 16px; border-radius: 8px;
+  border: 1px solid rgba(90, 12, 12, 0.12); color: #5a0c0c;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+.mega-chip:hover { border-color: #fbbf24; color: #b45309; background: #fef3c7; }
+
+/* ─── SIMPLE DROPDOWN (Tin Tức) ─────────────────────────────────── */
+.simple-dd {
+  position: absolute; top: 100%; left: 0;
+  min-width: 210px; z-index: 9999;
+  background: #fff;
+  border-top: 3px solid #ef4444;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  padding: 8px;
+  opacity: 0; visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+}
+.hdr-item.has-simple:hover > .simple-dd {
+  opacity: 1; visibility: visible;
+  transform: translateY(0); pointer-events: auto;
+}
+.simple-dd a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 12px; font-size: 12.5px; font-weight: 600;
+  color: #334155; border-radius: 8px;
+  text-decoration: none; transition: all 0.13s ease;
+}
+.simple-dd a:hover { color: #ef4444; background: #fef2f2; }
+
+/* ─── COMPACT CTA (scroll) ──────────────────────────────────────── */
+.hdr-cta {
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  width: 0; opacity: 0; margin-left: 0;
+}
+.site-header.is-scrolled .hdr-cta { width: 160px; opacity: 1; margin-left: 12px; }
+.hdr-cta a {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 16px; border-radius: 50px;
+  font-size: 11px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  color: #fff; white-space: nowrap; text-decoration: none;
+  background: linear-gradient(90deg, #dc2626, #e11d48);
+  box-shadow: 0 2px 12px rgba(220,38,38,0.4);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.hdr-cta a:hover { opacity: 0.9; box-shadow: 0 4px 20px rgba(220,38,38,0.55); }
+
+/* ─── MOBILE MENU ────────────────────────────────────────────────── */
+.mob-menu {
+  display: none;                /* Alpine x-show overrides */
+  max-height: 82vh; overflow-y: auto;
+  background: rgba(14,2,2,0.97);
+  backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.mob-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  color: rgba(226,232,240,0.85);
+  text-decoration: none; background: none; border: none;
+  cursor: pointer; width: 100%; font-family: inherit;
+  transition: background 0.14s;
+}
+.mob-item:hover { background: rgba(255,255,255,0.055); color: #fff; }
+.mob-sub { color: rgba(203,213,225,0.82); font-size: 12px; font-weight: 500; }
+.mob-sub-label {
+  font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.1em; color: rgba(100,116,139,0.8);
+  padding: 8px 14px 3px;
+}
+
+/* ─── PROSE CUSTOM (Rich Article Content Styling) ────────────── */
+.prose-custom h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a; /* slate-900 */
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+.prose-custom h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b; /* slate-800 */
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+.prose-custom p {
+  margin-bottom: 1.25rem;
+  line-height: 1.65;
+  font-size: 0.9375rem;
+}
+.prose-custom ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.prose-custom ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.prose-custom li {
+  margin-bottom: 0.5rem;
+}
+.prose-custom blockquote {
+  border-left: 4px solid #ef4444; /* accent-red */
+  background-color: rgba(239, 68, 68, 0.04);
+  padding: 1rem 1.25rem;
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: #475569; /* slate-600 */
+  margin: 1.5rem 0;
+}
+.prose-custom img {
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  margin: 1.5rem auto;
+}
+
+/* ─── WOOCOMMERCE ARCHIVE OVERRIDES ────────────── */
+.woocommerce-breadcrumb {
+  @apply mb-8 text-[13px] text-slate-500 font-medium flex flex-wrap items-center gap-2 relative z-20;
+}
+.woocommerce-breadcrumb a {
+  @apply text-slate-700 hover:text-accent-red transition-colors duration-200;
+}
+.woocommerce-breadcrumb .delimiter {
+  @apply text-slate-400 text-[10px] mx-1;
+}
+
+.wc-shop-header-wrapper {
+  @apply flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-5 border-b border-slate-200 relative z-20;
+}
+.wc-shop-header-wrapper .woocommerce-result-count {
+  @apply float-none mb-4 sm:mb-0 text-slate-500 text-[13px] font-medium;
+}
+.wc-shop-header-wrapper .woocommerce-ordering {
+  @apply float-none mb-0;
+}
+.wc-shop-header-wrapper .woocommerce-ordering select {
+  @apply bg-white border border-slate-200 rounded-xl text-[13px] font-medium text-slate-700 shadow-sm focus:border-accent-red focus:ring focus:ring-accent-red focus:ring-opacity-20 py-2.5 pl-4 pr-10 appearance-none outline-none transition-all cursor-pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1em 1em;
+}
+
+/* WooCommerce Single Product Specifics */
+.woocommerce-tabs ul.tabs {
+  @apply flex flex-wrap gap-2 border-b border-slate-200 mb-8 p-0 m-0 list-none;
+}
+.woocommerce-tabs ul.tabs li {
+  @apply bg-transparent border-none m-0 p-0;
+}
+.woocommerce-tabs ul.tabs li a {
+  @apply inline-block px-6 py-3 text-sm font-bold uppercase tracking-wider text-slate-500 hover:text-accent-red border-b-2 border-transparent transition-colors;
+}
+.woocommerce-tabs ul.tabs li.active a {
+  @apply text-accent-red border-accent-red;
+}
+.woocommerce-Tabs-panel {
+  @apply bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-100 prose prose-slate max-w-none;
+}
+.product-gallery-wrapper .woocommerce-product-gallery__trigger {
+  @apply absolute top-4 right-4 z-10 bg-white w-10 h-10 rounded-full flex items-center justify-center text-slate-600 shadow-md hover:bg-slate-50 hover:text-accent-red transition-all before:content-['\2194'] before:text-lg;
+}
+.product-gallery-wrapper .flex-control-nav {
+  @apply flex flex-wrap gap-2 mt-4 justify-center m-0 p-0 list-none;
+}
+.product-gallery-wrapper .flex-control-nav li {
+  @apply w-16 md:w-20 cursor-pointer overflow-hidden rounded-md border-2 border-transparent hover:border-slate-300 transition-all opacity-70 hover:opacity-100;
+}
+.product-gallery-wrapper .flex-control-nav li img {
+  @apply w-full h-auto object-cover;
+}
+.product-gallery-wrapper .flex-control-nav li.flex-active {
+  @apply border-accent-red opacity-100;
+}
+.single-product-container .quantity {
+  @apply flex items-center border border-slate-200 rounded-lg overflow-hidden w-max bg-white mr-4 float-left;
+}
+.single-product-container .quantity input.qty {
+  @apply w-16 text-center border-none text-base font-bold text-slate-800 bg-transparent py-2.5 focus:ring-0;
+}
+.single-product-container button.single_add_to_cart_button {
+  @apply inline-flex items-center justify-center px-8 py-3 bg-accent-red text-white text-base font-bold uppercase rounded-lg hover:bg-red-700 transition-all shadow-md float-left h-[46px];
+}
+
+/* HacoLED Single Product Custom Refinements */
+.price-display del {
+  @apply line-through text-slate-400 text-sm font-semibold mr-3 block sm:inline;
+}
+.price-display ins {
+  @apply text-3xl font-black text-primary no-underline block sm:inline tracking-tight;
+}
+.price-display .amount {
+  @apply text-3xl font-black text-primary tracking-tight;
+}
+.price-display del .amount {
+  @apply line-through text-slate-400 text-sm font-semibold;
+}
+
+/* Custom Gallery & Thumbnail styles */
+.product-gallery-wrapper .woocommerce-product-gallery__wrapper {
+  @apply m-0 rounded-xl overflow-hidden;
+}
+.product-gallery-wrapper .flex-control-thumbs {
+  @apply flex flex-wrap gap-2 mt-4 justify-start m-0 p-0 list-none;
+}
+.product-gallery-wrapper .flex-control-thumbs li {
+  @apply w-[18%] cursor-pointer overflow-hidden rounded-lg border-2 border-slate-100 hover:border-slate-300 transition-all opacity-75 hover:opacity-100 bg-slate-50;
+  aspect-ratio: 1 / 1;
+}
+.product-gallery-wrapper .flex-control-thumbs li img {
+  @apply w-full h-full object-cover transition-transform duration-300;
+}
+.product-gallery-wrapper .flex-control-thumbs li img.flex-active {
+  @apply border-primary opacity-100;
+}
+
+/* Format Excerpt Tables if any exist */
+.woocommerce-product-details__short-description table {
+  @apply w-full border-collapse border border-slate-100 text-xs rounded-xl overflow-hidden my-4 shadow-sm bg-white;
+}
+.woocommerce-product-details__short-description th,
+.woocommerce-product-details__short-description td {
+  @apply border border-slate-100 p-2.5 text-left text-slate-600;
+}
+.woocommerce-product-details__short-description tr:nth-child(even) {
+  @apply bg-slate-50/40;
+}
+.woocommerce-product-details__short-description h2 {
+  @apply text-base font-bold text-slate-800 mb-2 mt-0;
+}
+
+/* ─── SINGLE PRODUCT: 3D Coverflow Gallery ────────────── */
+
+/* Fade in animation for product sections */
+.sp-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.sp-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero section background grid */
+.sp-hero-section {
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(0,0,0,0.015) 1px, transparent 1px), 
+        linear-gradient(to bottom, rgba(0,0,0,0.015) 1px, transparent 1px);
+}
+
+/* Excerpt block: remove p margins from WooCommerce excerpt */
+.sp-excerpt-block p {
+    margin: 0;
+}
+
+/* 3D Gallery Container */
+.sp-3d-container {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    overflow: visible !important; /* Let slides bleed to the sides and prevent Swiper overflow: hidden */
+    /* Webkit linear gradient mask to fade slides on far left/right without touching the active center */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 3%, black 15%, black 85%, rgba(0,0,0,0.05) 97%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 3%, black 15%, black 85%, rgba(0,0,0,0.05) 97%, transparent 100%);
+}
+
+/* 3D Slide - Square and centered */
+.sp-3d-slide {
+    background-position: center;
+    background-size: cover;
+    width: 280px !important;
+    height: 280px !important;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 0.18; /* Blurred inactive slides opacity made very faint */
+    filter: blur(10px); /* Inactive slides blur increased */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+@media (min-width: 1024px) {
+    .sp-3d-slide {
+        width: 440px !important;
+        height: 440px !important;
+    }
+}
+@media (min-width: 1280px) {
+    .sp-3d-slide {
+        width: 520px !important;
+        height: 520px !important;
+    }
+}
+.sp-3d-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Active slide highlight - perfectly clear & foreground */
+.sp-3d-gallery .swiper-slide-active {
+    opacity: 1 !important;
+    filter: blur(0px) !important;
+    border: 4px solid #ffffff;
+    box-shadow: 0 30px 60px -15px rgba(217,4,41,0.35), 0 0 40px rgba(0,0,0,0.05) !important;
+    z-index: 10;
+}
+
+/* Navigation Buttons - Elegant White Circular Chevrons */
+.sp-3d-prev, .sp-3d-next {
+    width: 48px !important;
+    height: 48px !important;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    color: #1a1a1a !important;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 30;
+}
+.sp-3d-prev:hover, .sp-3d-next:hover {
+    background-color: #ffffff;
+    transform: translateY(-50%) scale(1.1) !important;
+    color: #D90429 !important;
+}
+.sp-3d-prev::after, .sp-3d-next::after {
+    font-size: 16px !important;
+    font-weight: 900;
+}
+.sp-3d-prev {
+    left: 8% !important;
+}
+.sp-3d-next {
+    right: 8% !important;
+}
+@media (max-width: 640px) {
+    .sp-3d-prev, .sp-3d-next {
+        display: none !important;
+    }
+}
+
+/* Pagination bullet */
+.sp-3d-pagination .swiper-pagination-bullet-active {
+    background-color: #D90429 !important;
+}
+
+/* Inline Price Display (next to CTA button) */
+.sp-price-inline del {
+    @apply line-through text-gray-400 text-xs font-semibold mr-1;
+}
+.sp-price-inline ins {
+    @apply text-xl font-extrabold text-gray-900 no-underline tracking-tight;
+}
+.sp-price-inline .amount {
+    @apply text-xl font-extrabold text-gray-900 tracking-tight;
+}
+.sp-price-inline del .amount {
+    @apply line-through text-gray-400 text-xs font-semibold;
+}
+
+/* Auto-trigger fade-in animation on load */
+@keyframes sp-fade-in-anim {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Typography and Button Optimizations */
+@media (max-width: 767px) {
+  /* Paragraphs */
+  p, .prose-custom p, .prose p, .entry-content p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Heading 2 */
+  h2, .prose-custom h2, .prose h2, .entry-content h2, .woocommerce-loop-product__title {
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Heading 1 */
+  h1, .prose-custom h1, .prose h1, .entry-content h1, .product_title {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+  }
+  
+  /* Descriptions, Notes, Annotations */
+  .desc, .description, .note, .notes, .metadata, .meta, .annotation, .comment, .info-text, .text-xs, .caption, figcaption, .woocommerce-product-details__short-description {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Buttons Adjustment */
+  button, 
+  .btn, 
+  .button, 
+  input[type="submit"], 
+  input[type="button"], 
+  .single_add_to_cart_button,
+  .woocommerce-button,
+  .mega-highlight-cta,
+  a[class*="items-center"][class*="justify-center"][class*="px-6"][class*="py-3"],
+  a[class*="bg-gradient-to-r"][class*="from-accent-red"] {
+    font-size: 14px !important;
+    padding: 8px 16px !important; /* Reduced padding for mobile */
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    height: auto !important;
+    min-height: 38px !important;
+  }
+
+  /* Specific spacing tweaks for elements on mobile */
+  .single-product-container button.single_add_to_cart_button {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+    height: 40px !important;
+  }
+}
+
+
+
