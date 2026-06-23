@@ -994,10 +994,15 @@ article img {
 }
 
 /* Flex layout centering for images wrapper */
-.wp-block-image {
+.wp-block-image,
+.prose figure,
+.prose-custom figure,
+.entry-content figure {
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
   display: block;
+  max-width: 100% !important;
+  width: auto !important;
 }
 .wp-block-image.aligncenter {
   display: flex !important;

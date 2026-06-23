@@ -301,7 +301,7 @@ $price_html = $product->get_price_html();
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 border-t border-gray-200/80" x-data="{ activeTab: 'info' }">
             
             <!-- Left: Product Tabs (2/3 - 8 Cols) -->
-            <div class="lg:col-span-8 space-y-6">
+            <div class="lg:col-span-8 min-w-0 space-y-6">
                 
                 <!-- Tab Headers -->
                 <div class="flex border-b border-gray-200 bg-white rounded-t-xl p-2 gap-2">
@@ -367,7 +367,7 @@ $price_html = $product->get_price_html();
             </div>
 
             <!-- Right: Sidebar Widgets (1/3 - 4 Cols) -->
-            <div class="lg:col-span-4 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
+            <div class="lg:col-span-4 min-w-0 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
                 
                 <!-- Widget 1: Sản phẩm cùng danh mục -->
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">

@@ -23,7 +23,7 @@ $this->renderHeader($header_type ?? 'default');
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
       
       <!-- MAIN CONTENT COLUMN (70%) -->
-      <div class="lg:col-span-2 bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+      <div class="lg:col-span-2 min-w-0 bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
         
         <!-- Top Metadata & Back Link -->
         <div class="flex items-center justify-between text-xs text-slate-500 font-semibold tracking-wider pb-4 border-b border-slate-100">
