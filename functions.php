@@ -43,6 +43,14 @@ if (!function_exists('hacoled_setup')) {
         add_theme_support('wc-product-gallery-zoom');
         add_theme_support('wc-product-gallery-lightbox');
         add_theme_support('wc-product-gallery-slider');
+
+        // Enable support for custom logo
+        add_theme_support('custom-logo', [
+            'height'      => 72,
+            'width'       => 250,
+            'flex-width'  => true,
+            'flex-height' => true,
+        ]);
     }
 }
 add_action('after_setup_theme', 'hacoled_setup');

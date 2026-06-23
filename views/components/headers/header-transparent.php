@@ -9,7 +9,8 @@
 <?php wp_body_open(); ?>
 
 <?php
-$logo         = home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
+$custom_logo_id = get_theme_mod('custom_logo');
+$logo         = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
 $about_url    = home_url('/gioi-thieu/');
 $services_url = home_url('/dich-vu/');
 $contact_url  = home_url('/lien-he/');
