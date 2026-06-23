@@ -506,3 +506,46 @@ function hacoled_customize_register($wp_customize) {
     ]);
 }
 add_action('customize_register', 'hacoled_customize_register');
+
+// 7. CUSTOM CATEGORY TEMPLATE META FIELD
+function hacoled_add_category_template_field() {
+    ?>
+    <div class="form-field term-group">
+        <label for="category_template"><?php _e('Mẫu giao diện chuyên mục', 'hacoled'); ?></label>
+        <select name="category_template" id="category_template" class="postform">
+            <option value="default"><?php _e('Mặc định (Giao diện Danh mục 2 cột)', 'hacoled'); ?></option>
+            <option value="blog"><?php _e('Mẫu trang Tin tức & Blog (Tạp chí cao cấp)', 'hacoled'); ?></option>
+            <option value="project"><?php _e('Mẫu trang Dự án (Hồ sơ năng lực)', 'hacoled'); ?></option>
+        </select>
+        <p class="description"><?php _e('Chọn giao diện hiển thị cho chuyên mục này.', 'hacoled'); ?></p>
+    </div>
+    <?php
+}
+add_action('category_add_form_fields', 'hacoled_add_category_template_field', 10, 2);
+
+function hacoled_edit_category_template_field($term) {
+    $template = get_term_meta($term->term_id, 'category_template', true) ?: 'default';
+    ?>
+    <tr class="form-field term-group-wrap">
+        <th scope="row"><label for="category_template"><?php _e('Mẫu giao diện chuyên mục', 'hacoled'); ?></label></th>
+        <td>
+            <select name="category_template" id="category_template" class="postform">
+                <option value="default" <?php selected($template, 'default'); ?>><?php _e('Mặc định (Giao diện Danh mục 2 cột)', 'hacoled'); ?></option>
+                <option value="blog" <?php selected($template, 'blog'); ?>><?php _e('Mẫu trang Tin tức & Blog (Tạp chí cao cấp)', 'hacoled'); ?></option>
+                <option value="project" <?php selected($template, 'project'); ?>><?php _e('Mẫu trang Dự án (Hồ sơ năng lực)', 'hacoled'); ?></option>
+            </select>
+            <p class="description"><?php _e('Chọn giao diện hiển thị cho chuyên mục này.', 'hacoled'); ?></p>
+        </td>
+    </tr>
+    <?php
+}
+add_action('category_edit_form_fields', 'hacoled_edit_category_template_field', 10, 2);
+
+function hacoled_save_category_template_meta($term_id) {
+    if (isset($_POST['category_template'])) {
+        update_term_meta($term_id, 'category_template', sanitize_text_field($_POST['category_template']));
+    }
+}
+add_action('created_category', 'hacoled_save_category_template_meta', 10, 2);
+add_action('edited_category', 'hacoled_save_category_template_meta', 10, 2);
+
