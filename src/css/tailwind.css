@@ -931,5 +931,145 @@
   }
 }
 
+/* ================================================================
+   WORDPRESS & GUTEBUG CONTENT STYLING OVERRIDES (Prose & Entry Content)
+   Ensure images, blocks, alignments look perfect and do not break
+   ================================================================ */
+
+/* Gutenberg & WP Images / Figures Alignments */
+.aligncenter,
+div.aligncenter,
+figure.aligncenter,
+.wp-block-image.aligncenter {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
+  text-align: center !important;
+}
+
+.alignleft,
+div.alignleft,
+figure.alignleft,
+.wp-block-image.alignleft {
+  float: left !important;
+  margin-right: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  max-width: 50%;
+}
+
+.alignright,
+div.alignright,
+figure.alignright,
+.wp-block-image.alignright {
+  float: right !important;
+  margin-left: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  max-width: 50%;
+}
+
+.alignnone,
+div.alignnone,
+figure.alignnone,
+.wp-block-image.alignnone {
+  margin: 0 !important;
+  display: block !important;
+  max-width: 100%;
+}
+
+/* Image containment rules to prevent stretching or overflowing */
+.entry-content img,
+.prose img,
+.prose-custom img,
+.seo-content-block img,
+.woocommerce-product-details__short-description img,
+.woocommerce-Tabs-panel--description img,
+.product-description-content img,
+.category-description img,
+.wp-block-image img,
+article img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* Flex layout centering for images wrapper */
+.wp-block-image {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  display: block;
+}
+.wp-block-image.aligncenter {
+  display: flex !important;
+  justify-content: center !important;
+}
+.wp-block-image.aligncenter img {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Clearfix for floats inside content blocks */
+.entry-content::after,
+.prose::after,
+.prose-custom::after,
+.seo-content-block::after,
+.woocommerce-Tabs-panel--description::after,
+article::after {
+  content: "" !important;
+  display: table !important;
+  clear: both !important;
+}
+
+/* Fix Gutenberg columns on mobile and desktop */
+.wp-block-columns {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+@media (min-width: 782px) {
+  .wp-block-columns {
+    flex-wrap: nowrap !important;
+  }
+}
+.wp-block-column {
+  flex-grow: 1 !important;
+  flex-basis: 0 !important;
+  min-width: 0 !important;
+}
+@media (max-width: 781px) {
+  .wp-block-column {
+    flex-basis: 100% !important;
+  }
+}
+
+/* Gutenberg tables styling */
+.entry-content table,
+.prose table,
+.prose-custom table,
+.seo-content-block table,
+.woocommerce-Tabs-panel--description table {
+  width: 100% !important;
+  margin-bottom: 1.5rem !important;
+  border-collapse: collapse !important;
+}
+.entry-content th, .entry-content td,
+.prose th, .prose td,
+.prose-custom th, .prose-custom td,
+.seo-content-block th, .seo-content-block td,
+.woocommerce-Tabs-panel--description th, .woocommerce-Tabs-panel--description td {
+  border: 1px solid #e2e8f0 !important;
+  padding: 0.75rem 1rem !important;
+  text-align: left !important;
+}
+.entry-content th,
+.prose th,
+.prose-custom th,
+.seo-content-block th,
+.woocommerce-Tabs-panel--description th {
+  background-color: #f8fafc !important;
+  font-weight: 700 !important;
+}
+
 
 
