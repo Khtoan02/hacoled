@@ -47,6 +47,33 @@ $custom_logo_id = get_theme_mod('custom_logo');
 $logo = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
 $showcase_led   = get_template_directory_uri() . '/assets/images/showcase-led.png';
 $showcase_audio = get_template_directory_uri() . '/assets/images/showcase-audio.png';
+
+$led_cat = get_category_by_slug('blog-man-hinh-led');
+$led_url = $led_cat ? get_category_link($led_cat->term_id) : home_url('/blog-man-hinh-led/');
+
+$audio_cat = get_category_by_slug('blog-am-thanh');
+$audio_url = $audio_cat ? get_category_link($audio_cat->term_id) : home_url('/blog-am-thanh/');
+
+$tech_cat = get_category_by_slug('huong-dan-ky-thuat');
+$tech_url = $tech_cat ? get_category_link($tech_cat->term_id) : home_url('/kien-thuc-ky-thuat/');
+
+$news_cat = get_category_by_slug('tin-tuc');
+$news_url = $news_cat ? get_category_link($news_cat->term_id) : home_url('/tin-tuc/');
+
+$project_in_cat = get_category_by_slug('du-an-trong-nha');
+$project_in_url = $project_in_cat ? get_category_link($project_in_cat->term_id) : home_url('/du-an-trong-nha/');
+
+$project_out_cat = get_category_by_slug('du-an-ngoai-troi');
+$project_out_url = $project_out_cat ? get_category_link($project_out_cat->term_id) : home_url('/du-an-ngoai-troi/');
+
+$project_school_cat = get_category_by_slug('du-an-truong-hoc');
+$project_school_url = $project_school_cat ? get_category_link($project_school_cat->term_id) : home_url('/du-an-truong-hoc/');
+
+$project_videowall_cat = get_category_by_slug('du-an-man-hinh-ghep');
+$project_videowall_url = $project_videowall_cat ? get_category_link($project_videowall_cat->term_id) : home_url('/du-an-man-hinh-ghep/');
+
+$project_audio_cat = get_category_by_slug('du-an-am-thanh');
+$project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->term_id) : home_url('/du-an-am-thanh/');
 ?>
 </php-block>
 
@@ -383,28 +410,28 @@ $showcase_audio = get_template_directory_uri() . '/assets/images/showcase-audio.
               <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-l border-t border-slate-100/50"></div>
 
               <div class="relative z-10 flex flex-col space-y-1">
-                <a href="<?php echo esc_url(home_url('/blog-man-hinh-led/')); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
+                <a href="<?php echo esc_url($led_url); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
                   <div class="w-8 h-8 rounded-lg bg-red-50 text-[#b31217] flex items-center justify-center shrink-0">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125z"/></svg>
                   </div>
                   <div class="text-[13.5px] font-bold text-slate-700 group-hover/link:text-[#b31217] transition-colors whitespace-nowrap">Blog về màn hình LED</div>
                 </a>
                 
-                <a href="<?php echo esc_url(home_url('/blog-am-thanh/')); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
+                <a href="<?php echo esc_url($audio_url); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
                   <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"/></svg>
                   </div>
                   <div class="text-[13.5px] font-bold text-slate-700 group-hover/link:text-[#b31217] transition-colors whitespace-nowrap">Blog về âm thanh</div>
                 </a>
                 
-                <a href="<?php echo esc_url(home_url('/kien-thuc-ky-thuat/')); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
+                <a href="<?php echo esc_url($tech_url); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
                   <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
                   </div>
                   <div class="text-[13.5px] font-bold text-slate-700 group-hover/link:text-[#b31217] transition-colors whitespace-nowrap">Hướng dẫn kỹ thuật</div>
                 </a>
 
-                <a href="<?php echo esc_url(home_url('/tin-tuc/')); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
+                <a href="<?php echo esc_url($news_url); ?>" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group/link">
                   <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>
                   </div>
@@ -561,11 +588,11 @@ $showcase_audio = get_template_directory_uri() . '/assets/images/showcase-audio.
           <svg class="w-4 h-4 text-white/70 transition-transform" :class="open ? 'rotate-180 text-[#fbbf24]' : ''" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
         </button>
         <div x-show="open" x-cloak class="pl-6 pr-2 pb-2 mt-1 border-l border-white/20 ml-2 space-y-1">
-          <a href="<?php echo esc_url(home_url('/du-an-trong-nha/')); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án trong nhà</a>
-          <a href="<?php echo esc_url(home_url('/du-an-ngoai-troi/')); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án ngoài trời</a>
-          <a href="<?php echo esc_url(home_url('/du-an-truong-hoc/')); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án trường học</a>
-          <a href="<?php echo esc_url(home_url('/du-an-man-hinh-ghep/')); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án màn hình ghép</a>
-          <a href="<?php echo esc_url(home_url('/du-an-am-thanh/')); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án âm thanh</a>
+          <a href="<?php echo esc_url($project_in_url); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án trong nhà</a>
+          <a href="<?php echo esc_url($project_out_url); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án ngoài trời</a>
+          <a href="<?php echo esc_url($project_school_url); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án trường học</a>
+          <a href="<?php echo esc_url($project_videowall_url); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án màn hình ghép</a>
+          <a href="<?php echo esc_url($project_audio_url); ?>" class="block py-2 text-[13px] text-white/80 hover:text-white">Dự án âm thanh</a>
         </div>
       </div>
       <a href="<?php echo esc_url($services_url); ?>" class="block px-4 py-3 text-[14px] font-semibold hover:bg-white/10 rounded-xl">Dịch Vụ</a>

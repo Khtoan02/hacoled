@@ -14,6 +14,33 @@ $logo         = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, '
 $about_url    = home_url('/gioi-thieu/');
 $services_url = home_url('/dich-vu/');
 $contact_url  = home_url('/lien-he/');
+
+$led_cat = get_category_by_slug('blog-man-hinh-led');
+$led_url = $led_cat ? get_category_link($led_cat->term_id) : home_url('/blog-man-hinh-led/');
+
+$audio_cat = get_category_by_slug('blog-am-thanh');
+$audio_url = $audio_cat ? get_category_link($audio_cat->term_id) : home_url('/blog-am-thanh/');
+
+$tech_cat = get_category_by_slug('huong-dan-ky-thuat');
+$tech_url = $tech_cat ? get_category_link($tech_cat->term_id) : home_url('/kien-thuc-ky-thuat/');
+
+$news_cat = get_category_by_slug('tin-tuc');
+$news_url = $news_cat ? get_category_link($news_cat->term_id) : home_url('/tin-tuc/');
+
+$project_in_cat = get_category_by_slug('du-an-trong-nha');
+$project_in_url = $project_in_cat ? get_category_link($project_in_cat->term_id) : home_url('/du-an-trong-nha/');
+
+$project_out_cat = get_category_by_slug('du-an-ngoai-troi');
+$project_out_url = $project_out_cat ? get_category_link($project_out_cat->term_id) : home_url('/du-an-ngoai-troi/');
+
+$project_school_cat = get_category_by_slug('du-an-truong-hoc');
+$project_school_url = $project_school_cat ? get_category_link($project_school_cat->term_id) : home_url('/du-an-truong-hoc/');
+
+$project_videowall_cat = get_category_by_slug('du-an-man-hinh-ghep');
+$project_videowall_url = $project_videowall_cat ? get_category_link($project_videowall_cat->term_id) : home_url('/du-an-man-hinh-ghep/');
+
+$project_audio_cat = get_category_by_slug('du-an-am-thanh');
+$project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->term_id) : home_url('/du-an-am-thanh/');
 ?>
 
 <header
@@ -368,11 +395,11 @@ $contact_url  = home_url('/lien-he/');
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"/></svg>
                   Hồ Sơ Năng Lực
                 </div>
-                <a href="<?php echo esc_url(home_url('/du-an-trong-nha/')); ?>" class="mega-a">Dự án trong nhà</a>
-                <a href="<?php echo esc_url(home_url('/du-an-ngoai-troi/')); ?>" class="mega-a">Dự án ngoài trời</a>
-                <a href="<?php echo esc_url(home_url('/du-an-truong-hoc/')); ?>" class="mega-a">Dự án trường học</a>
-                <a href="<?php echo esc_url(home_url('/du-an-man-hinh-ghep/')); ?>" class="mega-a">Dự án màn hình ghép</a>
-                <a href="<?php echo esc_url(home_url('/du-an-am-thanh/')); ?>" class="mega-a">Dự án âm thanh</a>
+                <a href="<?php echo esc_url($project_in_url); ?>" class="mega-a">Dự án trong nhà</a>
+                <a href="<?php echo esc_url($project_out_url); ?>" class="mega-a">Dự án ngoài trời</a>
+                <a href="<?php echo esc_url($project_school_url); ?>" class="mega-a">Dự án trường học</a>
+                <a href="<?php echo esc_url($project_videowall_url); ?>" class="mega-a">Dự án màn hình ghép</a>
+                <a href="<?php echo esc_url($project_audio_url); ?>" class="mega-a">Dự án âm thanh</a>
               </div>
 
               <div class="mega-sep"></div>
@@ -428,16 +455,20 @@ $contact_url  = home_url('/lien-he/');
             </svg>
           </button>
           <div class="simple-dd" role="menu">
-            <a href="#">
+            <a href="<?php echo esc_url($led_url); ?>">
               Blog Màn Hình LED
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="opacity:0.4;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
             </a>
-            <a href="#">
+            <a href="<?php echo esc_url($audio_url); ?>">
               Blog Âm Thanh
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="opacity:0.4;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
             </a>
-            <a href="#">
+            <a href="<?php echo esc_url($tech_url); ?>">
               Kiến Thức & Kỹ Thuật
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="opacity:0.4;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+            </a>
+            <a href="<?php echo esc_url($news_url); ?>">
+              Tin Tức
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="opacity:0.4;"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
             </a>
           </div>
@@ -591,15 +622,17 @@ $contact_url  = home_url('/lien-he/');
           'PEAVEY - Loa' => home_url('/peavey-loa/'),
         ],
         'Dự án đã thực hiện' => [
-          'Dự án trong nhà' => home_url('/du-an-trong-nha/'),
-          'Dự án ngoài trời' => home_url('/du-an-ngoai-troi/'),
-          'Dự án trường học' => home_url('/du-an-truong-hoc/'),
-          'Dự án màn hình ghép' => home_url('/du-an-man-hinh-ghep/'),
-          'Dự án âm thanh' => home_url('/du-an-am-thanh/'),
+          'Dự án trong nhà' => $project_in_url,
+          'Dự án ngoài trời' => $project_out_url,
+          'Dự án trường học' => $project_school_url,
+          'Dự án màn hình ghép' => $project_videowall_url,
+          'Dự án âm thanh' => $project_audio_url,
         ],
         'Tin Tức'       => [
-          'Blog Màn Hình LED' => '#',
-          'Blog Âm Thanh' => '#',
+          'Blog Màn Hình LED' => $led_url,
+          'Blog Âm Thanh' => $audio_url,
+          'Kiến Thức & Kỹ Thuật' => $tech_url,
+          'Tất cả Tin Tức' => $news_url,
         ],
       ];
       foreach ($mob_items as $title => $subs):

@@ -3,6 +3,21 @@
  * Mega Menu: Dự Án
  */
 $showcase_audio = get_template_directory_uri() . '/assets/images/showcase-audio.png';
+
+$project_in_cat = get_category_by_slug('du-an-trong-nha');
+$project_in_url = $project_in_cat ? get_category_link($project_in_cat->term_id) : home_url('/du-an-trong-nha/');
+
+$project_out_cat = get_category_by_slug('du-an-ngoai-troi');
+$project_out_url = $project_out_cat ? get_category_link($project_out_cat->term_id) : home_url('/du-an-ngoai-troi/');
+
+$project_school_cat = get_category_by_slug('du-an-truong-hoc');
+$project_school_url = $project_school_cat ? get_category_link($project_school_cat->term_id) : home_url('/du-an-truong-hoc/');
+
+$project_videowall_cat = get_category_by_slug('du-an-man-hinh-ghep');
+$project_videowall_url = $project_videowall_cat ? get_category_link($project_videowall_cat->term_id) : home_url('/du-an-man-hinh-ghep/');
+
+$project_audio_cat = get_category_by_slug('du-an-am-thanh');
+$project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->term_id) : home_url('/du-an-am-thanh/');
 ?>
 <div class="w-full flex">
   <!-- Left: Links Area -->
@@ -15,31 +30,31 @@ $showcase_audio = get_template_directory_uri() . '/assets/images/showcase-audio.
       <h4 class="text-[13px] font-bold text-slate-800 uppercase tracking-[0.05em]">Hồ Sơ Năng Lực</h4>
     </div>
     <div class="grid grid-cols-2 gap-x-8 gap-y-1">
-      <a href="<?php echo esc_url(home_url('/du-an-trong-nha/')); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
+      <a href="<?php echo esc_url($project_in_url); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
         <span class="text-[14px] font-medium text-slate-600 group-hover:text-[#b31217] group-hover:translate-x-1 transition-transform duration-300 flex items-center whitespace-nowrap">
           Dự án trong nhà 
         </span>
         <svg class="w-3.5 h-3.5 text-slate-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#b31217] transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </a>
-      <a href="<?php echo esc_url(home_url('/du-an-ngoai-troi/')); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
+      <a href="<?php echo esc_url($project_out_url); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
         <span class="text-[14px] font-medium text-slate-600 group-hover:text-[#b31217] group-hover:translate-x-1 transition-transform duration-300 flex items-center whitespace-nowrap">
           Dự án ngoài trời 
         </span>
         <svg class="w-3.5 h-3.5 text-slate-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#b31217] transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </a>
-      <a href="<?php echo esc_url(home_url('/du-an-truong-hoc/')); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
+      <a href="<?php echo esc_url($project_school_url); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
         <span class="text-[14px] font-medium text-slate-600 group-hover:text-[#b31217] group-hover:translate-x-1 transition-transform duration-300 flex items-center whitespace-nowrap">
           Dự án trường học 
         </span>
         <svg class="w-3.5 h-3.5 text-slate-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#b31217] transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </a>
-      <a href="<?php echo esc_url(home_url('/du-an-man-hinh-ghep/')); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
+      <a href="<?php echo esc_url($project_videowall_url); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
         <span class="text-[14px] font-medium text-slate-600 group-hover:text-[#b31217] group-hover:translate-x-1 transition-transform duration-300 flex items-center whitespace-nowrap">
           Dự án màn hình ghép 
         </span>
         <svg class="w-3.5 h-3.5 text-slate-300 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[#b31217] transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </a>
-      <a href="<?php echo esc_url(home_url('/du-an-am-thanh/')); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
+      <a href="<?php echo esc_url($project_audio_url); ?>" class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg hover:bg-slate-50 transition-all duration-300">
         <span class="text-[14px] font-medium text-slate-600 group-hover:text-[#b31217] group-hover:translate-x-1 transition-transform duration-300 flex items-center whitespace-nowrap">
           Dự án âm thanh 
         </span>
