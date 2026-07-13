@@ -1,5 +1,10 @@
 <?php
 /**
+ * Controller-owned product category view.
+ *
+ * This is not a WooCommerce core template override. Actual overrides live in
+ * the theme-level woocommerce/ directory.
+ *
  * WooCommerce Product Category Archive View
  *
  * @var string $category_name
@@ -10,30 +15,10 @@
 
 $this->renderHeader($header_type ?? 'default');
 
-$current_term = get_queried_object();
-$subcategories = [];
-$has_children = false;
-
-if ( $current_term instanceof WP_Term ) {
-    // Check if the current category has child categories
-    $children = get_terms( array(
-        'taxonomy'   => 'product_cat',
-        'parent'     => $current_term->term_id,
-        'hide_empty' => false,
-    ) );
-    
-    if ( ! empty( $children ) ) {
-        $has_children = true;
-        $subcategories = $children;
-    } else {
-        // If no child categories, grab sibling categories under same parent
-        $subcategories = get_terms( array(
-            'taxonomy'   => 'product_cat',
-            'parent'     => $current_term->parent,
-            'hide_empty' => false,
-        ) );
-    }
-}
+$navigation_categories = $navigation_categories ?? [];
+$breadcrumbs = $breadcrumbs ?? [];
+$featured_projects = $featured_projects ?? [];
+$latest_articles = $latest_articles ?? [];
 ?>
 
 <main class="relative bg-[#FAFAFA] bg-tech-grid pt-28 md:pt-48 pb-20 min-h-[70vh] overflow-hidden" data-tech-bg="circuit">
@@ -69,14 +54,9 @@ if ( $current_term instanceof WP_Term ) {
           <i class="ph ph-caret-right text-[10px] text-slate-500"></i>
           <?php
           if ( $current_term instanceof WP_Term ) {
-              $ancestors = get_ancestors( $current_term->term_id, 'product_cat' );
-              $ancestors = array_reverse( $ancestors );
-              foreach ( $ancestors as $ancestor ) {
-                  $ancestor_term = get_term( $ancestor, 'product_cat' );
-                  if ( $ancestor_term ) {
-                      echo '<a href="' . esc_url( get_term_link( $ancestor_term ) ) . '" class="hover:text-white transition-colors">' . esc_html( $ancestor_term->name ) . '</a>';
-                      echo '<i class="ph ph-caret-right text-[10px] text-slate-500"></i>';
-                  }
+              foreach ( $breadcrumbs as $breadcrumb ) {
+                  echo '<a href="' . esc_url( $breadcrumb['url'] ) . '" class="hover:text-white transition-colors">' . esc_html( $breadcrumb['name'] ) . '</a>';
+                  echo '<i class="ph ph-caret-right text-[10px] text-slate-500"></i>';
               }
               echo '<span class="text-white">' . esc_html($current_term->name) . '</span>';
           } else {
@@ -191,20 +171,17 @@ if ( $current_term instanceof WP_Term ) {
         <div class="lg:col-span-3 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
             
             <!-- Widget 1: Subcategories/Siblings Links List (Giải Pháp Hiển Thị Chuyên Biệt) -->
-            <?php if ( ! empty( $subcategories ) ) : ?>
+            <?php if ( ! empty( $navigation_categories ) ) : ?>
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
                     <h3 class="text-sm font-bold text-gray-900 pb-3 border-b border-gray-100 mb-4 flex items-center gap-2">
                         <i class="ph-bold ph-squares-four text-[#D90429]"></i>
-                        <span><?php echo $has_children ? 'Giải Pháp Theo Nhu Cầu' : 'Giải Pháp Liên Quan'; ?></span>
+                        <span><?php esc_html_e('Giải pháp liên quan', 'hacoled'); ?></span>
                     </h3>
                     <div class="flex flex-col gap-2">
-                        <?php foreach ( $subcategories as $subcat ) : 
-                            $subcat_link = get_term_link( $subcat );
-                            $is_active = $current_term instanceof WP_Term && $current_term->term_id === $subcat->term_id;
-                            ?>
-                            <a href="<?php echo esc_url( $subcat_link ); ?>" 
-                               class="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold border transition-all duration-200 <?php echo $is_active ? 'bg-[#D90429] text-white border-transparent shadow-md shadow-red-500/10' : 'bg-white text-slate-700 border-slate-100 hover:border-slate-300 hover:bg-slate-50'; ?>">
-                                <span><?php echo esc_html( $subcat->name ); ?></span>
+                        <?php foreach ( $navigation_categories as $category ) : ?>
+                            <a href="<?php echo esc_url( $category['url'] ); ?>" 
+                               class="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold border transition-all duration-200 bg-white text-slate-700 border-slate-100 hover:border-slate-300 hover:bg-slate-50">
+                                <span><?php echo esc_html( $category['name'] ); ?></span>
                                 <i class="ph-bold ph-caret-right text-[10px]"></i>
                             </a>
                         <?php endforeach; ?>
@@ -272,27 +249,21 @@ if ( $current_term instanceof WP_Term ) {
                 </h3>
                 <div class="space-y-4">
                     <?php
-                    $projects_query = new WP_Query( array(
-                        'post_type'      => array( 'post', 'page' ),
-                        'posts_per_page' => 3,
-                        'category_name'  => 'du-an',
-                    ) );
-                    if ( $projects_query->have_posts() ) :
-                        while ( $projects_query->have_posts() ) : $projects_query->the_post();
+                    if ( $featured_projects ) :
+                        foreach ( $featured_projects as $project ) :
                             ?>
                             <div class="flex items-center gap-3 group">
-                                <a href="<?php the_permalink(); ?>" class="w-14 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-50">
-                                    <?php the_post_thumbnail( 'thumbnail', array( 'class' => 'w-full h-full object-cover transition-transform duration-300 group-hover:scale-110' ) ); ?>
+                                <a href="<?php echo esc_url($project['url']); ?>" class="w-14 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-50">
+                                    <?php if ($project['thumbnail']) : ?><img src="<?php echo esc_url($project['thumbnail']); ?>" alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"><?php endif; ?>
                                 </a>
                                 <div class="min-w-0 flex-1">
-                                    <a href="<?php the_permalink(); ?>" class="text-[11px] font-bold text-gray-800 hover:text-[#D90429] transition-colors line-clamp-2 leading-tight">
-                                        <?php the_title(); ?>
+                                    <a href="<?php echo esc_url($project['url']); ?>" class="text-[11px] font-bold text-gray-800 hover:text-[#D90429] transition-colors line-clamp-2 leading-tight">
+                                        <?php echo esc_html($project['title']); ?>
                                     </a>
                                 </div>
                             </div>
                             <?php
-                        endwhile;
-                        wp_reset_postdata();
+                        endforeach;
                     else :
                         echo '<p class="text-xs text-gray-400">Không có dự án mới.</p>';
                     endif;
@@ -373,42 +344,30 @@ if ( $current_term instanceof WP_Term ) {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <?php
-        $blog_query = new WP_Query( array(
-            'post_type'      => 'post',
-            'posts_per_page' => 3,
-            'category_name'  => 'blog,tin-tuc,news',
-        ) );
-        if ( ! $blog_query->have_posts() ) {
-            $blog_query = new WP_Query( array(
-                'post_type'      => 'post',
-                'posts_per_page' => 3,
-            ) );
-        }
-        if ( $blog_query->have_posts() ) :
+        if ( $latest_articles ) :
             $idx = 0;
-            while ( $blog_query->have_posts() ) : $blog_query->the_post();
+            foreach ( $latest_articles as $article ) :
                 $idx++;
-                $thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'large' ) ?: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=600&auto=format&fit=crop';
+                $thumbnail = $article['thumbnail'] ?: get_template_directory_uri() . '/assets/images/services-hero.png';
                 $badges = ['Tư vấn', 'Dự án', 'Kiến thức'];
                 $badge = $badges[$idx % 3];
                 ?>
-                <a href="<?php the_permalink(); ?>" class="group bg-white rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-500 p-3 flex flex-col justify-start">
+                <a href="<?php echo esc_url($article['url']); ?>" class="group bg-white rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-500 p-3 flex flex-col justify-start">
                   <div class="relative w-full aspect-[4/3] rounded-[14px] overflow-hidden mb-5">
-                    <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php the_title_attribute(); ?>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <img src="<?php echo esc_url( $thumbnail ); ?>" alt="<?php echo esc_attr($article['title']); ?>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute top-3 left-3 bg-[#D90429] text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-widest shadow-sm z-10">
                       <?php echo esc_html( $badge ); ?>
                     </div>
                   </div>
                   <div class="px-2 pb-3">
-                    <span class="text-[10px] text-slate-400 font-mono font-medium block mb-2 uppercase tracking-wider"><?php echo get_the_date('d/m/Y'); ?></span>
+                    <span class="text-[10px] text-slate-400 font-mono font-medium block mb-2 uppercase tracking-wider"><?php echo esc_html($article['date']); ?></span>
                     <h3 class="text-[15px] md:text-base font-extrabold text-slate-800 line-clamp-2 leading-snug group-hover:text-[#D90429] transition-colors">
-                      <?php the_title(); ?>
+                      <?php echo esc_html($article['title']); ?>
                     </h3>
                   </div>
                 </a>
                 <?php
-            endwhile;
-            wp_reset_postdata();
+            endforeach;
         endif;
         ?>
       </div>

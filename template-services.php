@@ -1,10 +1,3 @@
 <?php
-/**
- * Template Name: Dịch vụ (HACOLED)
- * Description: Custom page template for the Services listing page.
- */
-
-use App\Controllers\PageController;
-
-$controller = new PageController();
-$controller->services();
+/** @deprecated Use page-templates/services.php. Kept for existing page assignments. */
+require __DIR__ . '/page-templates/services.php';

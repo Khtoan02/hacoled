@@ -1,7 +1,7 @@
 <?php
-namespace App\Controllers;
+namespace HacoLED\Theme\Controllers;
 
-use App\Core\Controller;
+use HacoLED\Theme\Core\Controller;
 
 /**
  * Controller handling Detail layouts for posts and products

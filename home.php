@@ -1,6 +1,6 @@
 <?php
 /**
- * General archive list routing file
+ * Posts index template.
  */
 
 use HacoLED\Theme\Controllers\ArchiveController;

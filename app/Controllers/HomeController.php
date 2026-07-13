@@ -1,9 +1,9 @@
 <?php
-namespace App\Controllers;
+namespace HacoLED\Theme\Controllers;
 
-use App\Core\Controller;
-use App\Models\PostModel;
-use App\Models\LedScreenModel;
+use HacoLED\Theme\Core\Controller;
+use HacoLED\Theme\Models\PostModel;
+use HacoLED\Theme\Models\LedScreenModel;
 
 /**
  * Controller handling Homepage routing and data queries

@@ -3,7 +3,7 @@
  * WooCommerce product category taxonomy routing file
  */
 
-use App\Controllers\ProductController;
+use HacoLED\Theme\Controllers\ProductCategoryController;
 
-$controller = new ProductController();
-$controller->category();
+$controller = new ProductCategoryController();
+$controller->index();

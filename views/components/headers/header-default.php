@@ -34,19 +34,20 @@ $contact_url  = home_url('/lien-he/');
 $news_url     = home_url('/tin-tuc/');
 $posts_url    = home_url('/bai-viet/');
 
-$about_page = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-about.php'));
+$about_page = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/about.php'));
 if (!empty($about_page)) $about_url = get_permalink($about_page[0]->ID);
 
-$services_page = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-services.php'));
+$services_page = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/services.php'));
 if (!empty($services_page)) $services_url = get_permalink($services_page[0]->ID);
 
-$contact_page = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-contact.php'));
+$contact_page = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/contact.php'));
 if (!empty($contact_page)) $contact_url = get_permalink($contact_page[0]->ID);
 
 $custom_logo_id = get_theme_mod('custom_logo');
 $logo = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
 $showcase_led   = get_template_directory_uri() . '/assets/images/showcase-led.png';
 $showcase_audio = get_template_directory_uri() . '/assets/images/showcase-audio.png';
+$jobs = $jobs ?? [];
 
 $led_cat = get_category_by_slug('blog-man-hinh-led');
 $led_url = $led_cat ? get_category_link($led_cat->term_id) : home_url('/blog-man-hinh-led/');

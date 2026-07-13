@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./*.php",
     "./app/**/*.php",
+    "./page-templates/**/*.php",
     "./views/**/*.php",
     "./woocommerce/**/*.php",
     "./src/js/**/*.js"

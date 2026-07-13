@@ -1,5 +1,10 @@
 <?php
 /**
+ * Controller-owned single product layout wrapper.
+ *
+ * This is not a WooCommerce core template override. Actual overrides live in
+ * the theme-level woocommerce/ directory.
+ *
  * WooCommerce Single Product Detail View
  *
  * @var string $header_type

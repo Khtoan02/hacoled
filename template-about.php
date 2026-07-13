@@ -1,10 +1,3 @@
 <?php
-/**
- * Template Name: Giới thiệu (HACOLED)
- * Description: Custom page template for the About page.
- */
-
-use App\Controllers\PageController;
-
-$controller = new PageController();
-$controller->about();
+/** @deprecated Use page-templates/about.php. Kept for existing page assignments. */
+require __DIR__ . '/page-templates/about.php';

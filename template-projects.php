@@ -1,10 +1,3 @@
 <?php
-/**
- * Template Name: Dự án (HACOLED)
- * Description: Custom page template for listing high-quality showcase projects.
- */
-
-use App\Controllers\PageController;
-
-$controller = new PageController();
-$controller->projects();
+/** @deprecated Use page-templates/projects.php. Kept for existing page assignments. */
+require __DIR__ . '/page-templates/projects.php';

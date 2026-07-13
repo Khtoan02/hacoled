@@ -1,10 +1,3 @@
 <?php
-/**
- * Template Name: Tuyển dụng Chi tiết (HACOLED)
- * Description: Custom page template for the Job Detail page.
- */
-
-use App\Controllers\PageController;
-
-$controller = new PageController();
-$controller->jobDetail();
+/** @deprecated Use page-templates/job-detail.php. Kept for existing page assignments. */
+require __DIR__ . '/page-templates/job-detail.php';

@@ -1,5 +1,10 @@
 <?php
 /**
+ * Controller-owned catalog archive view.
+ *
+ * This is not a WooCommerce core template override. Actual overrides live in
+ * the theme-level woocommerce/ directory.
+ *
  * WooCommerce Shop Archive View
  *
  * @var string $title
@@ -9,12 +14,9 @@
 
 $this->renderHeader($header_type ?? 'default');
 
-// Get top-level product categories for navigation on the main shop page
-$subcategories = get_terms( array(
-    'taxonomy'   => 'product_cat',
-    'parent'     => 0,
-    'hide_empty' => false,
-) );
+$navigation_categories = $navigation_categories ?? [];
+$shop_description = $shop_description ?? '';
+$featured_projects = $featured_projects ?? [];
 ?>
 
 <main class="relative bg-[#FAFAFA] bg-tech-grid pt-28 md:pt-48 pb-20 min-h-[70vh] overflow-hidden" data-tech-bg="circuit">
@@ -58,25 +60,18 @@ $subcategories = get_terms( array(
     </div>
 
     <!-- Category Navigation Slider -->
-    <?php if ( ! empty( $subcategories ) ) : ?>
+    <?php if ( ! empty( $navigation_categories ) ) : ?>
       <div class="mb-8">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
           <i class="ph-bold ph-squares-four text-[#D90429]"></i>
           <span>Danh mục nổi bật</span>
         </h3>
         <div class="flex items-center gap-3 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-slate-200">
-          <?php foreach ( $subcategories as $subcat ) : 
-              $subcat_link = get_term_link( $subcat );
-              $thumbnail_id = get_term_meta( $subcat->term_id, 'thumbnail_id', true );
-              $image_url = wp_get_attachment_image_url( $thumbnail_id, 'thumbnail' );
-              if ( ! $image_url ) {
-                  $image_url = get_template_directory_uri() . '/assets/images/services-hero.png';
-              }
-              ?>
-              <a href="<?php echo esc_url( $subcat_link ); ?>" 
+          <?php foreach ( $navigation_categories as $category ) : ?>
+              <a href="<?php echo esc_url( $category['url'] ); ?>" 
                  class="flex-shrink-0 flex items-center gap-3 px-4 py-2.5 rounded-2xl border bg-white text-slate-700 border-slate-100 hover:border-slate-300 hover:shadow-md transition-all duration-200 shadow-sm">
-                <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $subcat->name ); ?>" class="w-8 h-8 rounded-lg object-cover bg-slate-50" />
-                <span class="text-xs md:text-sm font-bold tracking-tight"><?php echo esc_html( $subcat->name ); ?></span>
+                <img src="<?php echo esc_url( $category['image'] ); ?>" alt="<?php echo esc_attr( $category['name'] ); ?>" class="w-8 h-8 rounded-lg object-cover bg-slate-50" />
+                <span class="text-xs md:text-sm font-bold tracking-tight"><?php echo esc_html( $category['name'] ); ?></span>
               </a>
           <?php endforeach; ?>
         </div>
@@ -116,12 +111,7 @@ $subcategories = get_terms( array(
             </div>
 
             <!-- SEO Category Description at the Bottom (TGDD Style) -->
-            <?php 
-            $shop_page_id = wc_get_option( 'woocommerce_shop_page_id' );
-            if ( $shop_page_id ) {
-                $shop_page = get_post( $shop_page_id );
-                if ( $shop_page && $shop_page->post_content ) {
-                    ?>
+            <?php if ( ! empty( $shop_description ) ) : ?>
                     <div class="seo-content-block bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8 relative" 
                          style="overflow-anchor: none;"
                          x-data="{ expanded: false, showButton: false }"
@@ -129,7 +119,7 @@ $subcategories = get_terms( array(
                       <div x-ref="content"
                            :class="expanded ? '' : 'max-h-[280px] overflow-hidden'" 
                            class="prose prose-slate prose-sm text-gray-600 text-sm leading-relaxed max-w-none transition-all duration-300 relative">
-                        <?php echo apply_filters( 'the_content', $shop_page->post_content ); ?>
+                        <?php echo apply_filters( 'the_content', $shop_description ); ?>
                         
                         <!-- Fade overlay when not expanded -->
                         <div x-show="showButton && !expanded" 
@@ -147,10 +137,7 @@ $subcategories = get_terms( array(
                         </button>
                       </div>
                     </div>
-                    <?php
-                }
-            }
-            ?>
+            <?php endif; ?>
             
         </div>
 
@@ -158,19 +145,17 @@ $subcategories = get_terms( array(
         <div class="lg:col-span-4 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
             
             <!-- Widget 1: Main Categories Links List -->
-            <?php if ( ! empty( $subcategories ) ) : ?>
+            <?php if ( ! empty( $navigation_categories ) ) : ?>
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
                     <h3 class="text-sm font-bold text-gray-900 pb-3 border-b border-gray-100 mb-4 flex items-center gap-2">
                         <i class="ph-bold ph-tree-structure text-[#D90429]"></i>
                         <span>Danh mục sản phẩm</span>
                     </h3>
                     <div class="flex flex-col gap-2">
-                        <?php foreach ( $subcategories as $subcat ) : 
-                            $subcat_link = get_term_link( $subcat );
-                            ?>
-                            <a href="<?php echo esc_url( $subcat_link ); ?>" 
+                        <?php foreach ( $navigation_categories as $category ) : ?>
+                            <a href="<?php echo esc_url( $category['url'] ); ?>" 
                                class="flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold border bg-white text-slate-700 border-slate-100 hover:border-slate-300 hover:bg-slate-50 transition-all duration-200">
-                                <span><?php echo esc_html( $subcat->name ); ?></span>
+                                <span><?php echo esc_html( $category['name'] ); ?></span>
                                 <i class="ph-bold ph-caret-right text-[10px]"></i>
                             </a>
                         <?php endforeach; ?>
@@ -238,27 +223,21 @@ $subcategories = get_terms( array(
                 </h3>
                 <div class="space-y-4">
                     <?php
-                    $projects_query = new WP_Query( array(
-                        'post_type'      => array( 'post', 'page' ),
-                        'posts_per_page' => 3,
-                        'category_name'  => 'du-an',
-                    ) );
-                    if ( $projects_query->have_posts() ) :
-                        while ( $projects_query->have_posts() ) : $projects_query->the_post();
+                    if ( $featured_projects ) :
+                        foreach ( $featured_projects as $project ) :
                             ?>
                             <div class="flex items-center gap-3 group">
-                                <a href="<?php the_permalink(); ?>" class="w-14 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-50">
-                                    <?php the_post_thumbnail( 'thumbnail', array( 'class' => 'w-full h-full object-cover transition-transform duration-300 group-hover:scale-110' ) ); ?>
+                                <a href="<?php echo esc_url($project['url']); ?>" class="w-14 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-50">
+                                    <?php if ($project['thumbnail']) : ?><img src="<?php echo esc_url($project['thumbnail']); ?>" alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"><?php endif; ?>
                                 </a>
                                 <div class="min-w-0 flex-1">
-                                    <a href="<?php the_permalink(); ?>" class="text-[11px] font-bold text-gray-800 hover:text-[#D90429] transition-colors line-clamp-2 leading-tight">
-                                        <?php the_title(); ?>
+                                    <a href="<?php echo esc_url($project['url']); ?>" class="text-[11px] font-bold text-gray-800 hover:text-[#D90429] transition-colors line-clamp-2 leading-tight">
+                                        <?php echo esc_html($project['title']); ?>
                                     </a>
                                 </div>
                             </div>
                             <?php
-                        endwhile;
-                        wp_reset_postdata();
+                        endforeach;
                     else :
                         echo '<p class="text-xs text-gray-400">Không có dự án mới.</p>';
                     endif;

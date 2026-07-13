@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace HacoLED\Theme\Core;
 
 /**
  * Base Controller class for handling views and component rendering
@@ -12,7 +12,7 @@ class Controller {
      * @param array $data Associative array of data to pass to the view
      */
     protected function render($view, $data = []) {
-        extract($data);
+        extract($data, EXTR_SKIP);
         $file = get_template_directory() . "/views/{$view}.php";
         if (file_exists($file)) {
             include $file;
@@ -28,7 +28,8 @@ class Controller {
      * @param array $data Associative array of data
      */
     public function renderHeader($name = 'default', $data = []) {
-        extract($data);
+        extract($data, EXTR_SKIP);
+        do_action('get_header', $name, $data);
         $file = get_template_directory() . "/views/components/headers/header-{$name}.php";
         if (file_exists($file)) {
             include $file;
@@ -49,7 +50,8 @@ class Controller {
      * @param array $data Associative array of data
      */
     public function renderFooter($name = 'default', $data = []) {
-        extract($data);
+        extract($data, EXTR_SKIP);
+        do_action('get_footer', $name, $data);
         $file = get_template_directory() . "/views/components/footers/footer-{$name}.php";
         if (file_exists($file)) {
             include $file;
@@ -70,7 +72,7 @@ class Controller {
      * @param array $data Associative array of data
      */
     public function renderComponent($name, $data = []) {
-        extract($data);
+        extract($data, EXTR_SKIP);
         $file = get_template_directory() . "/views/components/{$name}.php";
         if (file_exists($file)) {
             include $file;

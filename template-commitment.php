@@ -1,10 +1,3 @@
 <?php
-/**
- * Template Name: Cam kết chất lượng dịch vụ (HACOLED)
- * Description: Custom page template for the Service Quality Commitment page.
- */
-
-use App\Controllers\PageController;
-
-$controller = new PageController();
-$controller->commitment();
+/** @deprecated Use page-templates/commitment.php. Kept for existing page assignments. */
+require __DIR__ . '/page-templates/commitment.php';

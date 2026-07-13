@@ -6,7 +6,7 @@
  *
  * @see     https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.6.0
+ * @version 9.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,7 +22,7 @@ $terms = get_the_terms( $product->get_id(), 'product_cat' );
 $category_name = ( ! empty( $terms ) && ! is_wp_error( $terms ) ) ? $terms[0]->name : __('Màn hình LED', 'hacoled');
 
 // Instantiate controller to render the component
-$controller = new \App\Controllers\ProductController();
+$controller = new \HacoLED\Theme\Controllers\ProductController();
 ?>
 <div <?php wc_product_class( 'h-full', $product ); ?>>
     <?php

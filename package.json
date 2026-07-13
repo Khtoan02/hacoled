@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "WordPress Theme for Haco LED Screen Company - Designed by Khanh Toan",
   "main": "index.php",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build:css": "tailwindcss -i ./src/css/tailwind.css -o ./assets/css/app.css --minify",
     "build:js": "esbuild ./src/js/app.js --bundle --minify --outfile=./assets/js/app.js",

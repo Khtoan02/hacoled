@@ -1,4 +1,4 @@
-name: Deploy hacoled_theme via SFTP
+name: Validate and deploy HacoLED theme
 
 on:
   push:
@@ -7,13 +7,34 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy to Hosting via SFTP
+    name: Validate and deploy via SFTP
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: Checkout source
       uses: actions/checkout@v4
-    
-    - name: 📂 Sync files to WordPress (SFTP mode)
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+
+    - name: Install frontend dependencies
+      run: npm ci
+
+    - name: Build frontend assets
+      run: npm run build
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+
+    - name: Validate PHP syntax
+      shell: bash
+      run: find . -path './node_modules' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
+
+    - name: Deploy theme to WordPress
       uses: wlixcc/SFTP-Deploy-Action@v1.2.6
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -26,8 +47,8 @@ jobs:
         # Đường dẫn thư mục code hiện tại trên GitHub
         local_path: './' 
         
-        # Đường dẫn đích trên Hosting
-        remote_path: '/public_html/wp-content/themes/hacoled_theme/'
+        # Must match the active theme directory/stylesheet slug.
+        remote_path: '/public_html/wp-content/themes/hacoled/'
         
         # Danh sách loại trừ (Không đẩy thư mục node_modules, .git lên hosting)
-        rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=.github --exclude=README.md'
+        rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=.github --exclude=README.md --exclude=ARCHITECTURE.md --exclude=.DS_Store'

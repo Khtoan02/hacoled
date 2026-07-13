@@ -1,7 +1,7 @@
 <?php
-namespace App\Controllers;
+namespace HacoLED\Theme\Controllers;
 
-use App\Core\Controller;
+use HacoLED\Theme\Core\Controller;
 
 /**
  * Controller handling Blog Archives and Categories listings (standard WP Posts)
@@ -30,7 +30,7 @@ class ArchiveController extends Controller {
 
         $this->render('common/archive', [
             'posts'       => $posts,
-            'title'       => get_the_archive_title(),
+            'title'       => is_home() ? __('Tin tức mới nhất', 'hacoled') : get_the_archive_title(),
             'header_type' => 'default',
             'footer_type' => 'default'
         ]);

@@ -1,7 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace HacoLED\Theme\Controllers;
 
-use App\Core\Controller;
+use HacoLED\Theme\Core\Controller;
+use HacoLED\Theme\Repositories\CatalogRepository;
 
 /**
  * Controller handling WooCommerce integrations (Products, Shop, and Catalog Category archives)
@@ -11,24 +12,14 @@ class ProductController extends Controller {
      * Main Product Shop Page Listing
      */
     public function shop() {
-        $this->render('woocommerce/archive-product', [
-            'title'       => woocommerce_page_title(false),
-            'header_type' => 'default',
-            'footer_type' => 'default'
-        ]);
-    }
-
-    /**
-     * Product Category list (supports parent or subcategories archives identically)
-     */
-    public function category() {
-        $current_term = get_queried_object();
-
-        $this->render('woocommerce/taxonomy-product_cat', [
-            'category_name' => $current_term ? $current_term->name : __('Danh mục sản phẩm', 'hacoled'),
-            'description'   => $current_term ? $current_term->description : '',
-            'header_type'   => 'default',
-            'footer_type'   => 'default'
+        $catalog = new CatalogRepository();
+        $this->render('catalog/archive', [
+            'title'                 => woocommerce_page_title(false),
+            'navigation_categories' => $catalog->topLevelCategories(),
+            'shop_description'      => $catalog->shopDescription(),
+            'featured_projects'     => $catalog->featuredProjects(),
+            'header_type'           => 'default',
+            'footer_type'           => 'default',
         ]);
     }
 
@@ -36,7 +27,7 @@ class ProductController extends Controller {
      * Single Product Details page
      */
     public function detail() {
-        $this->render('woocommerce/single-product', [
+        $this->render('catalog/product', [
             'header_type' => 'default',
             'footer_type' => 'default'
         ]);

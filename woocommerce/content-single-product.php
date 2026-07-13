@@ -4,6 +4,10 @@
  *
  * Override of WooCommerce template for HacoLED theme.
  * Design: Premium B2B with 3D Coverflow Gallery
+ *
+ * @see     https://woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 3.6.0
  */
 
 defined( 'ABSPATH' ) || exit;

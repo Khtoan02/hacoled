@@ -1,10 +1,3 @@
 <?php
-/**
- * Template Name: Tuyển dụng (HACOLED)
- * Description: Custom page template for the Careers page.
- */
-
-use App\Controllers\PageController;
-
-$controller = new PageController();
-$controller->careers();
+/** @deprecated Use page-templates/careers.php. Kept for existing page assignments. */
+require __DIR__ . '/page-templates/careers.php';

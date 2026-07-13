@@ -3,7 +3,7 @@
  * Static page routing file
  */
 
-use App\Controllers\PageController;
+use HacoLED\Theme\Controllers\PageController;
 
 $controller = new PageController();
 $controller->show();

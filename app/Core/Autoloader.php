@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace HacoLED\Theme\Core;
 
 /**
  * PSR-4 Autoloader for the theme
@@ -11,7 +11,7 @@ class Autoloader {
     public static function register() {
         spl_autoload_register(function ($class) {
             // Project-specific namespace prefix
-            $prefix = 'App\\';
+            $prefix = 'HacoLED\\Theme\\';
 
             // Base directory for the namespace prefix
             $base_dir = get_template_directory() . '/app/';

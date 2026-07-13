@@ -257,19 +257,19 @@ $footer_news_url     = home_url('/tin-tuc/');
 $footer_commitment_url = home_url('/cam-ket-chat-luong/');
 $footer_careers_url  = home_url('/tuyen-dung/');
 
-$footer_about_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-about.php'));
+$footer_about_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/about.php'));
 if (!empty($footer_about_pages)) $footer_about_url = get_permalink($footer_about_pages[0]->ID);
 
-$footer_services_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-services.php'));
+$footer_services_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/services.php'));
 if (!empty($footer_services_pages)) $footer_services_url = get_permalink($footer_services_pages[0]->ID);
 
-$footer_contact_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-contact.php'));
+$footer_contact_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/contact.php'));
 if (!empty($footer_contact_pages)) $footer_contact_url = get_permalink($footer_contact_pages[0]->ID);
 
-$footer_commitment_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-commitment.php'));
+$footer_commitment_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/commitment.php'));
 if (!empty($footer_commitment_pages)) $footer_commitment_url = get_permalink($footer_commitment_pages[0]->ID);
 
-$footer_careers_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-careers.php'));
+$footer_careers_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/careers.php'));
 if (!empty($footer_careers_pages)) $footer_careers_url = get_permalink($footer_careers_pages[0]->ID);
 
 $footer_job_args = array(

@@ -3,7 +3,7 @@
  * Single post detail routing file
  */
 
-use App\Controllers\SingleController;
+use HacoLED\Theme\Controllers\SingleController;
 
 $controller = new SingleController();
 $controller->show();

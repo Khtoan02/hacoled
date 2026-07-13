@@ -1,5 +1,5 @@
 <?php
-namespace App\Core;
+namespace HacoLED\Theme\Core;
 
 /**
  * Base Model class for WordPress queries
