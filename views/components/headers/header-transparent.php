@@ -9,11 +9,12 @@
 <?php wp_body_open(); ?>
 
 <?php
+$header_menu_configs = hacoled_header_menu_settings();
 $custom_logo_id = get_theme_mod('custom_logo');
-$logo         = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : get_template_directory_uri() . '/assets/images/logo-haco.png';
-$about_url    = hacoled_managed_page_url('about');
-$services_url = hacoled_managed_page_url('services');
-$contact_url  = hacoled_managed_page_url('contact');
+$logo         = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
+$about_url    = home_url('/gioi-thieu/');
+$services_url = home_url('/dich-vu/');
+$contact_url  = home_url('/lien-he/');
 
 $led_cat = get_category_by_slug('blog-man-hinh-led');
 $led_url = $led_cat ? get_category_link($led_cat->term_id) : home_url('/blog-man-hinh-led/');
@@ -25,7 +26,7 @@ $tech_cat = get_category_by_slug('huong-dan-ky-thuat');
 $tech_url = $tech_cat ? get_category_link($tech_cat->term_id) : home_url('/kien-thuc-ky-thuat/');
 
 $news_cat = get_category_by_slug('tin-tuc');
-$news_url = $news_cat ? get_category_link($news_cat->term_id) : hacoled_managed_page_url('blog');
+$news_url = $news_cat ? get_category_link($news_cat->term_id) : home_url('/tin-tuc/');
 
 $project_in_cat = get_category_by_slug('du-an-trong-nha');
 $project_in_url = $project_in_cat ? get_category_link($project_in_cat->term_id) : home_url('/du-an-trong-nha/');
@@ -45,7 +46,7 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
 
 <header
   id="site-header"
-  class="site-header hidden lg:block"
+  class="site-header"
   x-data="{ mobile: false }"
   x-init="
     function onScroll() {
@@ -56,13 +57,15 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
   "
   style="position:sticky; top:0; z-index:500; width:100%;">
 
+  <div class="hidden lg:block">
+
   <!-- ══ Gold accent line ══ -->
-  <div style="height:3px; background:linear-gradient(90deg,#78350f 0%,#fbbf24 25%,#fde68a 50%,#fbbf24 75%,#78350f 100%); box-shadow:0 2px 14px rgba(251,191,36,0.55);"></div>
+  <div class="h-[3px] haco-gold-line" style="box-shadow:0 2px 14px rgba(251,191,36,0.55);"></div>
 
   <!-- ═══════════════════════════════════════════════════
        TOP BAR
        ═══════════════════════════════════════════════════ -->
-  <div style="background:linear-gradient(90deg, #b30000 0%, #e60000 50%, #b30000 100%); position:relative; overflow:hidden;">
+  <div class="haco-brand-shell" style="position:relative; overflow:hidden;">
     <div class="hdr-top-bg"></div>
 
     <div style="max-width:1320px; margin:0 auto; padding:12px 40px; display:flex; align-items:center; gap:24px; position:relative; z-index:10;">
@@ -511,7 +514,7 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
                 }
                 ?>
                 <div style="margin-top: 15px;">
-                  <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" style="display:inline-block; font-size:12px; font-weight:700; color:#ef4444; background:#fef2f2; padding:6px 12px; border-radius:4px;">Xem toàn bộ vị trí →</a>
+                  <a href="<?php echo home_url('/tuyen-dung/'); ?>" style="display:inline-block; font-size:12px; font-weight:700; color:#ef4444; background:#fef2f2; padding:6px 12px; border-radius:4px;">Xem toàn bộ vị trí →</a>
                 </div>
               </div>
 
@@ -523,7 +526,7 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
                   Gia Nhập HacoLED
                 </div>
-                <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" class="mega-highlight">
+                <a href="<?php echo home_url('/tuyen-dung/'); ?>" class="mega-highlight">
                   <span class="mega-highlight-badge">VĂN HOÁ</span>
                   <div class="mega-highlight-title">Kiến tạo tương lai công nghệ</div>
                   <div class="mega-highlight-desc">Môi trường làm việc năng động, lộ trình thăng tiến rõ ràng cùng chế độ đãi ngộ hấp dẫn.</div>
@@ -554,148 +557,418 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
 
     </div>
   </nav><!-- /bottom nav -->
+  </div><!-- /desktop header wrapper -->
 
-  <!-- ═══════════════════════════════════════════════════
-       MOBILE MENU
-       ═══════════════════════════════════════════════════ -->
-  <div
-    class="mob-menu lg:hidden"
-    x-show="mobile" x-cloak
-    x-transition:enter="transition ease-out duration-200"
-    x-transition:enter-start="opacity-0 -translate-y-2"
-    x-transition:enter-end="opacity-100 translate-y-0"
-    x-transition:leave="transition ease-in duration-150"
-    x-transition:leave-start="opacity-100 translate-y-0"
-    x-transition:leave-end="opacity-0 -translate-y-2">
+<?php
+// Define local variables for mobile bar
+$footer_about_url    = home_url('/gioi-thieu/');
+$footer_services_url = home_url('/dich-vu/');
+$footer_contact_url  = home_url('/lien-he/');
+$footer_news_url     = home_url('/tin-tuc/');
+$footer_commitment_url = home_url('/cam-ket-chat-luong/');
+$footer_careers_url  = home_url('/tuyen-dung/');
 
-    <div style="padding:12px 16px; display:flex; flex-direction:column; gap:2px;">
+$footer_about_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-about.php'));
+if (!empty($footer_about_pages)) $footer_about_url = get_permalink($footer_about_pages[0]->ID);
 
-      <a href="<?php echo esc_url(home_url('/')); ?>" class="mob-item">Trang Chủ</a>
-      <a href="<?php echo esc_url($about_url); ?>" class="mob-item">Giới Thiệu</a>
+$footer_services_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-services.php'));
+if (!empty($footer_services_pages)) $footer_services_url = get_permalink($footer_services_pages[0]->ID);
 
-      <!-- Mobile accordion items -->
-      <?php
-      $mob_items = [
-        'Màn Hình LED'  => [
-          'LED P0.9 Trong Nhà' => home_url('/man-hinh-led-p0-9-trong-nha/'),
-          'LED P1.25 Trong Nhà' => home_url('/man-hinh-led-p1-25-trong-nha/'),
-          'LED P1.53 Trong Nhà' => home_url('/man-hinh-led-p1-53-trong-nha/'),
-          'LED P1.8 Trong Nhà' => home_url('/man-hinh-led-p1-8-trong-nha/'),
-          'LED P2 Trong Nhà' => home_url('/man-hinh-led-p2-trong-nha/'),
-          'LED P2.5 Trong Nhà' => home_url('/man-hinh-led-p2-5-trong-nha/'),
-          'LED P3 Trong Nhà' => home_url('/man-hinh-led-p3-trong-nha/'),
-          'LED P3.0 Trong Nhà' => home_url('/man-hinh-led-p3-0-trong-nha/'),
-          'LED P2.5 Ngoài Trời' => home_url('/man-hinh-led-p2-5-ngoai-troi/'),
-          'LED P3 Ngoài Trời' => home_url('/man-hinh-led-p3-ngoai-troi/'),
-          'LED P4 Ngoài Trời' => home_url('/man-hinh-led-p4-ngoai-troi/'),
-          'LED P5 Ngoài Trời' => home_url('/man-hinh-led-p5-ngoai-troi/'),
-          'LED P10 Ngoài Trời' => home_url('/man-hinh-led-p10-ngoai-troi/'),
-          'LED Hội trường' => home_url('/man-hinh-led-hoi-truong/'),
-          'LED Phòng họp' => home_url('/man-hinh-led-phong-hop-hoi-truong/'),
-          'LED Sân khấu' => home_url('/man-hinh-led-san-khau/'),
-          'LED Trường học' => home_url('/man-hinh-led-truong-hoc/'),
-          'LED Tiệc, đám cưới' => home_url('/man-hinh-led-tiec-cuoi-nha-hang/'),
-          'LED Studio' => home_url('/man-hinh-led-studio/'),
-          'LED 100, 200, 300 inch' => home_url('/man-hinh-led-100-200-300-inch/'),
-          'LED Trong suốt' => home_url('/man-hinh-led-trong-suot/'),
-          'LED Film dán kính' => home_url('/man-hinh-led-film-dan-kinh/'),
-        ],
-        'Màn hình ghép' => [
-          'Màn hình ghép BOE' => home_url('/man-hinh-ghep-boe/'),
-          'Màn hình ghép Orion' => home_url('/man-hinh-ghep-orion/'),
-          'Màn hình ghép Vestel' => home_url('/man-hinh-ghep-vestel/'),
-        ],
-        'Âm Thanh'      => [
-          'DBACOUSTIC - Loa' => home_url('/dbacoustic-loa/'),
-          'DBACOUSTIC - Amply' => home_url('/dbacoustic-amply/'),
-          'DBACOUSTIC - Micro' => home_url('/dbacoustic-micro/'),
-          'DBACOUSTIC - Loa siêu trầm - Sub' => home_url('/loa-sieu-tram-sub/'),
-          'DBACOUSTIC - Đẩy công suất' => home_url('/day-cong-suat-dbacoustic/'),
-          'DBACOUSTIC - Vang số, Mixer, Crossover' => home_url('/vangso-mixer-crossover-dbacoustic/'),
-          'DBACOUSTIC - Quản lý nguồn' => home_url('/quan-ly-nguon-dbacoustic/'),
-          'TD CLASSIC - Loa' => home_url('/loa-tdclassic/'),
-          'TD CLASSIC - Micro' => home_url('/micro-tdclassic/'),
-          'TD CLASSIC - Amply' => home_url('/amply-tdclassic/'),
-          'TD CLASSIC - Vang số' => home_url('/vang-so-tdclassic/'),
-          'TD CLASSIC - Phụ kiện âm thanh' => home_url('/phu-kien-am-thanh-tdclassic/'),
-          'CF AUDIO - Loa' => home_url('/cfaudio-loa/'),
-          'PEAVEY - Loa' => home_url('/peavey-loa/'),
-        ],
-        'Dự án đã thực hiện' => [
-          'Dự án trong nhà' => $project_in_url,
-          'Dự án ngoài trời' => $project_out_url,
-          'Dự án trường học' => $project_school_url,
-          'Dự án màn hình ghép' => $project_videowall_url,
-          'Dự án âm thanh' => $project_audio_url,
-        ],
-        'Tin Tức'       => [
-          'Blog Màn Hình LED' => $led_url,
-          'Blog Âm Thanh' => $audio_url,
-          'Kiến Thức & Kỹ Thuật' => $tech_url,
-          'Tất cả Tin Tức' => $news_url,
-        ],
-      ];
-      foreach ($mob_items as $title => $subs):
-      ?>
-      <div x-data="{ open:false }">
-        <button @click="open=!open" class="mob-item">
-          <span><?php echo esc_html($title); ?></span>
-          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-               :style="open?'transform:rotate(180deg);':''" style="transition:transform 0.2s; color:rgba(100,116,139,0.7); flex-shrink:0;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-          </svg>
-        </button>
-        <div x-show="open" x-cloak style="padding-left:12px;">
-          <?php foreach ($subs as $label => $url): ?>
-          <a href="<?php echo esc_url($url); ?>" class="mob-item mob-sub" style="font-size:12px; opacity:0.82;">
-            <?php echo esc_html($label); ?>
-          </a>
-          <?php endforeach; ?>
+$footer_contact_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-contact.php'));
+if (!empty($footer_contact_pages)) $footer_contact_url = get_permalink($footer_contact_pages[0]->ID);
+
+$footer_commitment_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-commitment.php'));
+if (!empty($footer_commitment_pages)) $footer_commitment_url = get_permalink($footer_commitment_pages[0]->ID);
+
+$footer_careers_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-careers.php'));
+if (!empty($footer_careers_pages)) $footer_careers_url = get_permalink($footer_careers_pages[0]->ID);
+
+$footer_job_args = array(
+    'post_type'      => 'job',
+    'posts_per_page' => 5,
+    'post_status'    => 'publish',
+    'orderby'        => 'date',
+    'order'          => 'DESC'
+);
+$footer_jobs = get_posts($footer_job_args);
+?>
+<!-- Mobile Bottom Navigation & Drawers (lg:hidden) -->
+<div x-data="{ activeDrawer: null }" class="lg:hidden">
+  
+  <!-- Backdrop Overlay -->
+  <div x-show="activeDrawer" x-cloak
+       @click="activeDrawer = null"
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[190]">
+  </div>
+
+  <!-- Bottom Navigation Bar -->
+  <nav aria-label="Mobile Navigation" class="fixed bottom-0 left-0 right-0 z-[210] bg-gradient-to-t from-[#7a080c] to-[#990d12] border-t border-white/10 shadow-[0_-5px_25px_rgba(0,0,0,0.3)]" style="padding-bottom: env(safe-area-inset-bottom);">
+    <div class="flex justify-around items-center h-16 px-2">
+      
+      <!-- Tab 1: Trang chủ -->
+      <a href="<?php echo esc_url(home_url('/')); ?>" 
+         class="flex items-center justify-center w-16 h-full transition-all duration-200"
+         :class="activeDrawer === null && (window.location.pathname === '/' || window.location.pathname === '/index.php') ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
+        <i class="text-[26px]" :class="activeDrawer === null && (window.location.pathname === '/' || window.location.pathname === '/index.php') ? 'ph-fill ph-house' : 'ph-bold ph-house'"></i>
+      </a>
+
+      <!-- Tab 2: Sản phẩm -->
+      <button @click="activeDrawer = activeDrawer === 'products' ? null : 'products'" 
+              class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
+              :class="activeDrawer === 'products' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
+        <i class="text-[26px]" :class="activeDrawer === 'products' ? 'ph-fill ph-package' : 'ph-bold ph-package'"></i>
+      </button>
+
+      <!-- Tab 3: Blog -->
+      <button @click="activeDrawer = activeDrawer === 'blog' ? null : 'blog'" 
+              class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
+              :class="activeDrawer === 'blog' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
+        <i class="text-[26px]" :class="activeDrawer === 'blog' ? 'ph-fill ph-newspaper' : 'ph-bold ph-newspaper'"></i>
+      </button>
+
+      <!-- Tab 4: Info -->
+      <button @click="activeDrawer = activeDrawer === 'info' ? null : 'info'" 
+              class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
+              :class="activeDrawer === 'info' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
+        <i class="text-[26px]" :class="activeDrawer === 'info' ? 'ph-fill ph-info' : 'ph-bold ph-info'"></i>
+      </button>
+
+      <!-- Tab 5: Menu -->
+      <button @click="activeDrawer = activeDrawer === 'menu' ? null : 'menu'" 
+              class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
+              :class="activeDrawer === 'menu' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
+        <i class="text-[26px]" :class="activeDrawer === 'menu' ? 'ph-fill ph-list' : 'ph-bold ph-list'"></i>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- Drawer 1: Sản phẩm -->
+  <div x-show="activeDrawer === 'products'" x-cloak
+       x-transition:enter="transition ease-out duration-300 transform"
+       x-transition:enter-start="translate-y-full"
+       x-transition:enter-end="translate-y-0"
+       x-transition:leave="transition ease-in duration-200 transform"
+       x-transition:leave-start="translate-y-0"
+       x-transition:leave-end="translate-y-full"
+       class="fixed bottom-0 left-0 right-0 z-[200] max-h-[80vh] rounded-t-[2.5rem] haco-brand-panel border-t border-white/20 text-white flex flex-col shadow-2xl pb-20 overflow-hidden">
+    
+    <!-- Dong Son Bronze Drum watermark background -->
+    <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
+         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+    </div>
+
+    <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
+    <div class="px-6 pb-4 flex items-center justify-between border-b border-white/10 shrink-0 relative z-10">
+      <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
+        <i class="ph-fill ph-package text-lg"></i> Danh Mục Sản Phẩm
+      </h3>
+      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+        <i class="ph-bold ph-x"></i>
+      </button>
+    </div>
+    <div class="overflow-y-auto px-6 py-4 space-y-4 mobile-scroll flex-1 text-left relative z-10">
+      
+      <!-- LED TRONG NHÀ -->
+      <div>
+        <h4 class="text-[12px] font-black uppercase tracking-wider text-[#fbbf24]/90 mb-2 border-b border-white/5 pb-1">Màn Hình LED Trong Nhà</h4>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://hacoled.com/man-hinh-led-trong-nha/" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Tất cả trong nhà</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p0-9-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P0.9</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p1-25-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P1.25</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p1-53-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P1.53</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p1-8-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P1.8</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p2-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P2</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p2-5-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P2.5</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p3-trong-nha/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P3</a>
         </div>
       </div>
-      <?php endforeach; ?>
 
-      <!-- Accordion Mobile: Tuyển Dụng -->
-      <div x-data="{ open:false }">
-        <button @click="open=!open" class="mob-item">
-          <span>Tuyển Dụng</span>
-          <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-               :style="open?'transform:rotate(180deg);':''" style="transition:transform 0.2s; color:rgba(100,116,139,0.7); flex-shrink:0;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
-          </svg>
-        </button>
-        <div x-show="open" x-cloak style="padding-left:12px;">
-          <?php
-          if ($jobs) {
-              foreach ($jobs as $job) {
-                  $job_link = get_permalink($job->ID);
-                  $job_title = esc_html(get_the_title($job->ID));
-                  echo '<a href="' . esc_url($job_link) . '" class="mob-item mob-sub" style="font-size:12px; opacity:0.82;">' . $job_title . '</a>';
-              }
-          }
-          ?>
-          <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" class="mob-item mob-sub" style="font-size:12px; font-weight:700; color:#ef4444; opacity:1;">Xem tất cả vị trí →</a>
+      <!-- LED NGOÀI TRỜI -->
+      <div>
+        <h4 class="text-[12px] font-black uppercase tracking-wider text-[#fbbf24]/90 mb-2 border-b border-white/5 pb-1">Màn Hình LED Ngoài Trời</h4>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://hacoled.com/man-hinh-led-ngoai-troi/" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Tất cả ngoài trời</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p2-5-ngoai-troi/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P2.5</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p3-ngoai-troi/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P3</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p4-ngoai-troi/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P4</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p5-ngoai-troi/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P5</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-led-p10-ngoai-troi/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">LED P10</a>
         </div>
       </div>
 
-      <a href="<?php echo esc_url($services_url); ?>" class="mob-item">Dịch Vụ</a>
-      <a href="<?php echo esc_url($contact_url); ?>" class="mob-item">Liên Hệ</a>
+      <!-- MÀN HÌNH GHÉP LCD -->
+      <div>
+        <h4 class="text-[12px] font-black uppercase tracking-wider text-[#fbbf24]/90 mb-2 border-b border-white/5 pb-1">Màn Hình Ghép LCD</h4>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://hacoled.com/man-hinh-ghep/" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Tất cả màn ghép</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-ghep-boe/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Màn ghép BOE</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-ghep-orion/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Màn ghép Orion</a>
+          <a href="<?php echo esc_url(home_url('/man-hinh-ghep-vestel/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Màn ghép Vestel</a>
+        </div>
+      </div>
 
-      <!-- CTA -->
-      <div style="padding-top:12px; border-top:1px solid rgba(255,255,255,0.08); margin-top:6px; display:flex; flex-direction:column; gap:8px;">
-        <a href="tel:0342324488"
-           style="display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; border-radius:14px; background:linear-gradient(90deg,#dc2626,#e11d48); color:#fff; font-size:13px; font-weight:800; text-decoration:none; box-shadow:0 4px 14px rgba(220,38,38,0.4);">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.802-5.127-4.106-6.93-6.93l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-          Hotline: 034.232.4488
-        </a>
-        <a href="tel:0868474488"
-           style="display:flex; align-items:center; justify-content:center; gap:8px; padding:11px; border-radius:14px; border:1px solid rgba(255,255,255,0.12); color:rgba(226,232,240,0.85); font-size:13px; font-weight:600; text-decoration:none;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#fbbf24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V20.25L9 17.25h6.75"/></svg>
-          CSKH: 086.847.4488
-        </a>
+      <!-- ÂM THANH & ÁNH SÁNG -->
+      <div>
+        <h4 class="text-[12px] font-black uppercase tracking-wider text-[#fbbf24]/90 mb-2 border-b border-white/5 pb-1">Âm Thanh | Ánh Sáng</h4>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="https://hacoled.com/am-thanh/" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Tất cả âm thanh</a>
+          <a href="<?php echo esc_url(home_url('/dbacoustic-loa/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Loa DBacoustic</a>
+          <a href="<?php echo esc_url(home_url('/dbacoustic-amply/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Amply DBacoustic</a>
+          <a href="<?php echo esc_url(home_url('/dbacoustic-micro/')); ?>" class="block p-3 bg-white/5 border border-white/10 rounded-xl text-center text-xs font-semibold hover:bg-white/10 hover:border-[#fbbf24] transition-all">Micro DBacoustic</a>
+        </div>
       </div>
 
     </div>
-  </div><!-- /mobile menu -->
+  </div>
 
+  <!-- Drawer 2: Blog -->
+  <div x-show="activeDrawer === 'blog'" x-cloak
+       x-transition:enter="transition ease-out duration-300 transform"
+       x-transition:enter-start="translate-y-full"
+       x-transition:enter-end="translate-y-0"
+       x-transition:leave="transition ease-in duration-200 transform"
+       x-transition:leave-start="translate-y-0"
+       x-transition:leave-end="translate-y-full"
+       class="fixed bottom-0 left-0 right-0 z-[200] max-h-[80vh] rounded-t-[2.5rem] haco-brand-panel border-t border-white/20 text-white flex flex-col shadow-2xl pb-20 overflow-hidden">
+    
+    <!-- Dong Son Bronze Drum watermark background -->
+    <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
+         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+    </div>
+
+    <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
+    <div class="px-6 pb-4 flex items-center justify-between border-b border-white/10 shrink-0 relative z-10">
+      <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
+        <i class="ph-fill ph-article text-lg"></i> Tin Tức & Blog
+      </h3>
+      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+        <i class="ph-bold ph-x"></i>
+      </button>
+    </div>
+    <div class="overflow-y-auto px-6 py-5 space-y-3 mobile-scroll flex-1 text-left relative z-10">
+      <a href="<?php echo esc_url($footer_news_url); ?>" class="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-[#fbbf24] transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-[#fbbf24] flex items-center justify-center shrink-0">
+          <i class="ph-bold ph-newspaper text-xl"></i>
+        </div>
+        <div class="flex-1 text-left">
+          <p class="font-bold text-sm">Xem tất cả Tin Tức & Blog</p>
+          <p class="text-xs text-white/50">Cập nhật xu hướng & dự án nổi bật</p>
+        </div>
+        <i class="ph-bold ph-caret-right text-white/30 group-hover:text-white transition-colors"></i>
+      </a>
+
+      <a href="<?php echo esc_url(home_url('/blog-man-hinh-led/')); ?>" class="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-[#fbbf24] transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center shrink-0">
+          <i class="ph-bold ph-monitor text-xl"></i>
+        </div>
+        <div class="flex-1 text-left">
+          <p class="font-bold text-sm">Blog về màn hình LED</p>
+          <p class="text-xs text-white/50">Kiến thức chuyên sâu về màn hình LED</p>
+        </div>
+        <i class="ph-bold ph-caret-right text-white/30 group-hover:text-white transition-colors"></i>
+      </a>
+
+      <a href="<?php echo esc_url(home_url('/blog-am-thanh/')); ?>" class="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-[#fbbf24] transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+          <i class="ph-bold ph-speaker-high text-xl"></i>
+        </div>
+        <div class="flex-1 text-left">
+          <p class="font-bold text-sm">Blog về âm thanh</p>
+          <p class="text-xs text-white/50">Tư vấn, đánh giá thiết bị âm thanh</p>
+        </div>
+        <i class="ph-bold ph-caret-right text-white/30 group-hover:text-white transition-colors"></i>
+      </a>
+
+      <a href="<?php echo esc_url(home_url('/kien-thuc-ky-thuat/')); ?>" class="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-[#fbbf24] transition-all group">
+        <div class="w-10 h-10 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center shrink-0">
+          <i class="ph-bold ph-book-open text-xl"></i>
+        </div>
+        <div class="flex-1 text-left">
+          <p class="font-bold text-sm">Hướng dẫn kỹ thuật</p>
+          <p class="text-xs text-white/50">Tài liệu, hướng dẫn vận hành kỹ thuật</p>
+        </div>
+        <i class="ph-bold ph-caret-right text-white/30 group-hover:text-white transition-colors"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Drawer 3: Info -->
+  <div x-show="activeDrawer === 'info'" x-cloak
+       x-transition:enter="transition ease-out duration-300 transform"
+       x-transition:enter-start="translate-y-full"
+       x-transition:enter-end="translate-y-0"
+       x-transition:leave="transition ease-in duration-200 transform"
+       x-transition:leave-start="translate-y-0"
+       x-transition:leave-end="translate-y-full"
+       class="fixed bottom-0 left-0 right-0 z-[200] max-h-[85vh] rounded-t-[2.5rem] haco-brand-panel border-t border-white/20 text-white flex flex-col shadow-2xl pb-20 overflow-hidden">
+    
+    <!-- Dong Son Bronze Drum watermark background -->
+    <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
+         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+    </div>
+
+    <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
+    <div class="px-6 pb-4 flex items-center justify-between border-b border-white/10 shrink-0 relative z-10">
+      <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
+        <i class="ph-fill ph-info text-lg"></i> Thông Tin Liên Hệ
+      </h3>
+      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+        <i class="ph-bold ph-x"></i>
+      </button>
+    </div>
+    <address class="overflow-y-auto px-6 py-5 space-y-6 mobile-scroll flex-1 text-left not-italic relative z-10">
+      
+      <!-- Company Branding & Socials -->
+      <div class="flex flex-col items-center text-center space-y-4 pb-5 border-b border-white/10">
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="inline-block">
+          <img class="w-[180px] h-auto object-contain rounded shadow-sm" 
+               src="<?php echo esc_url(home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png')); ?>" alt="HacoLED Logo" />
+        </a>
+        <p class="text-xs text-white/70 leading-relaxed max-w-xs">
+          <?php _e('Công ty CP Công Nghệ HACO Việt Nam - Đơn vị tiên phong cung cấp giải pháp màn hình LED và thiết bị công nghệ hiển thị cao cấp.', 'hacoled'); ?>
+        </p>
+        <div class="flex gap-2">
+          <!-- Facebook SVG -->
+          <a class="w-9 h-9 rounded bg-haco-red/80 border border-white/15 flex items-center justify-center text-slate-300 hover:bg-[#fbbf24] hover:text-haco-ink transition-all"
+             href="https://www.facebook.com/hacoled" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8H7v3h2v9h3v-9h3l.5-3H12V6c0-.883.398-1.5 1.5-1.5H15V1h-2.5C9.945 1 9 2.557 9 4.833V8z"/></svg>
+          </a>
+          <!-- Twitter / X SVG -->
+          <a class="w-9 h-9 rounded bg-haco-red/80 border border-white/15 flex items-center justify-center text-slate-300 hover:bg-[#fbbf24] hover:text-haco-ink transition-all"
+             href="https://x.com/HacoLed" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <!-- Youtube SVG -->
+          <a class="w-9 h-9 rounded bg-haco-red/80 border border-white/15 flex items-center justify-center text-slate-300 hover:bg-[#fbbf24] hover:text-haco-ink transition-all"
+             href="https://www.youtube.com/@hacoled" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.508a3.003 3.003 0 00-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 002.11 2.11c1.871.508 9.388.508 9.388.508s7.517 0 9.388-.508a3.003 3.003 0 002.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Linkedin SVG -->
+          <a class="w-9 h-9 rounded bg-haco-red/80 border border-white/15 flex items-center justify-center text-slate-300 hover:bg-[#fbbf24] hover:text-haco-ink transition-all"
+             href="https://www.linkedin.com/in/hacoled/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Contacts Quick Grid -->
+      <div class="grid grid-cols-2 gap-3">
+        <a href="tel:0342324488" class="p-3 bg-white/5 border border-white/10 rounded-2xl flex flex-col items-center text-center">
+          <i class="ph-fill ph-phone text-xl text-[#fbbf24] mb-1"></i>
+          <span class="text-[10px] text-white/50 font-bold uppercase">Hotline</span>
+          <span class="text-xs font-extrabold text-white">034.232.4488</span>
+        </a>
+        <a href="tel:0868474488" class="p-3 bg-white/5 border border-white/10 rounded-2xl flex flex-col items-center text-center">
+          <i class="ph-fill ph-headset text-xl text-[#fbbf24] mb-1"></i>
+          <span class="text-[10px] text-white/50 font-bold uppercase">CSKH & Mua Hàng</span>
+          <span class="text-xs font-extrabold text-white">086.847.4488</span>
+        </a>
+        <a href="mailto:kinhdoanh@hacoled.com" class="p-3 bg-white/5 border border-white/10 rounded-2xl flex flex-col items-center text-center col-span-2">
+          <i class="ph-fill ph-envelope text-xl text-[#fbbf24] mb-1"></i>
+          <span class="text-[10px] text-white/50 font-bold uppercase">Email</span>
+          <span class="text-xs font-semibold text-white">kinhdoanh@hacoled.com</span>
+        </a>
+      </div>
+
+      <!-- Trụ sở & Chi nhánh -->
+      <div class="space-y-4">
+        
+        <div>
+          <h4 class="text-xs font-black uppercase text-[#fbbf24] tracking-wide mb-1 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> TRỤ SỞ & VP MIỀN BẮC
+          </h4>
+          <p class="text-xs text-white/80 pl-3 leading-relaxed mb-1.5"><strong>Trụ sở chính:</strong> Ngách 57/92 Đường Quang Minh, Thôn Gia Thượng 2, Xã Quang Minh, TP. Hà Nội</p>
+          <p class="text-xs text-white/80 pl-3 leading-relaxed"><strong>Văn phòng HN:</strong> Số 11 ngõ 10 Nghĩa Đô, phường Nghĩa Đô, TP. Hà Nội</p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-black uppercase text-[#fbbf24] tracking-wide mb-1 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> CN HỒ CHÍ MINH
+          </h4>
+          <p class="text-xs text-white/80 pl-3 leading-relaxed">400 Đ.Nguyễn Thị Thập, P. Tân Hưng, TP. HCM</p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-black uppercase text-[#fbbf24] tracking-wide mb-1 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> CN ĐÀ NẴNG
+          </h4>
+          <p class="text-xs text-white/80 pl-3 leading-relaxed">Số 88 Tây Sơn, P. Ngũ Hành Sơn, TP. Đà Nẵng</p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-black uppercase text-[#fbbf24] tracking-wide mb-1 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> CN TÂY NGUYÊN
+          </h4>
+          <p class="text-xs text-white/80 pl-3 leading-relaxed">TDP4, P. Đông Gia Nghĩa, Lâm Đồng</p>
+        </div>
+
+      </div>
+
+      <div class="pt-3 border-t border-white/10 text-center">
+        <span class="text-[11px] text-white/50"><strong>MST:</strong> 0108701064</span>
+      </div>
+
+    </address>
+  </div>
+
+  <!-- Drawer 4: Menu -->
+  <div x-show="activeDrawer === 'menu'" x-cloak
+       x-transition:enter="transition ease-out duration-300 transform"
+       x-transition:enter-start="translate-y-full"
+       x-transition:enter-end="translate-y-0"
+       x-transition:leave="transition ease-in duration-200 transform"
+       x-transition:leave-start="translate-y-0"
+       x-transition:leave-end="translate-y-full"
+       class="fixed bottom-0 left-0 right-0 z-[200] max-h-[85vh] rounded-t-[2.5rem] haco-brand-panel border-t border-white/20 text-white flex flex-col shadow-2xl pb-20 overflow-hidden">
+    
+    <!-- Dong Son Bronze Drum watermark background -->
+    <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
+         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+    </div>
+
+    <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
+    <div class="px-6 pb-4 flex items-center justify-between border-b border-white/10 shrink-0 relative z-10">
+      <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
+        <i class="ph-fill ph-list text-lg"></i> Menu Điều Hướng
+      </h3>
+      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+        <i class="ph-bold ph-x"></i>
+      </button>
+    </div>
+    <div class="overflow-y-auto px-6 py-4 space-y-4 mobile-scroll flex-1 text-left relative z-10">
+      
+      <!-- Search Mobile -->
+      <div class="pb-3 border-b border-white/10 mb-4">
+        <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="relative">
+          <input type="search" name="s" placeholder="Tìm kiếm sản phẩm, dịch vụ..." class="w-full rounded-xl pl-10 pr-4 py-2.5 text-[13px] text-white placeholder-white/60 bg-white/5 border border-white/15 focus:outline-none focus:border-[#fbbf24] focus:bg-white/10 transition-all" />
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z"/></svg>
+          </span>
+        </form>
+      </div>
+
+      <!-- Primary Pages List with Accordions -->
+      <div class="space-y-2 text-left">
+        <?php if (hacoled_header_menu_enabled('home')) : ?><a href="<?php echo esc_url(hacoled_header_menu_url('home')); ?>" class="block px-3 py-2.5 text-sm font-bold text-white/90 hover:bg-white/5 rounded-xl transition-all"><?php echo esc_html(hacoled_header_menu_label('home')); ?></a><?php endif; ?>
+        <?php
+        foreach (['about', 'led', 'videowall', 'solutions', 'audio', 'projects'] as $mobile_menu_key) {
+            hacoled_render_mobile_header_menu($header_menu_configs[$mobile_menu_key] ?? []);
+        }
+        ?>
+        <?php if (hacoled_header_menu_enabled('services')) : ?><a href="<?php echo esc_url(hacoled_header_menu_url('services')); ?>" class="block px-3 py-2.5 text-sm font-bold text-white/90 hover:bg-white/5 rounded-xl transition-all"><?php echo esc_html(hacoled_header_menu_label('services')); ?></a><?php endif; ?>
+        <?php hacoled_render_mobile_header_menu($header_menu_configs['news'] ?? []); ?>
+        <?php if (hacoled_header_menu_enabled('contact')) : ?><a href="<?php echo esc_url(hacoled_header_menu_url('contact')); ?>" class="block px-3 py-2.5 text-sm font-bold text-[#fbbf24] hover:bg-white/5 rounded-xl transition-all"><?php echo esc_html(hacoled_header_menu_label('contact')); ?></a><?php endif; ?>
+      </div>
+
+    </div>
+  </div>
+
+</div>
 </header>

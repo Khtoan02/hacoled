@@ -11,26 +11,37 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        haco: {
+          red: '#B31217',
+          redHot: '#E60000',
+          redDeep: '#8A0B10',
+          gold: '#FBBF24',
+          goldSoft: '#FFFBEB',
+          surface: '#F8F6F5',
+          ink: '#1C0505',
+          muted: '#5C3030',
+        },
         primary: {
-          light: '#7f1d1d',   // brand crimson
-          DEFAULT: '#5a0c0c', // brand red maroon
-          dark: '#3f0707',    // deep dark red
+          light: '#B31217',   // header/footer brand red
+          DEFAULT: '#A30F14', // header/footer middle red
+          dark: '#8A0B10',    // header/footer deep red
         },
         accent: {
-          red: '#ef4444',
-          rose: '#e11d48',
+          red: '#E60000',
+          rose: '#B31217',
           orange: '#ea580c',
-          gold: '#fbbf24',    // brand gold accent
-          border: '#991b1b',  // brand border red
+          gold: '#FBBF24',    // brand gold accent
+          border: '#B31217',  // brand border red
         },
         brand: {
-          red: '#CC0000',      // Đỏ thương hiệu (Sang, mạnh mẽ)
-          darkRed: '#990000',  // Đỏ sậm
-          gold: '#F5A623',     // Vàng nghệ thuật (Premium)
-          lightGold: '#FDF4E3',// Vàng nhạt (Nền phụ)
+          red: '#B31217',      // Đỏ thương hiệu theo header/footer
+          hotRed: '#E60000',   // Đỏ nhấn mạnh, dùng tiết chế
+          darkRed: '#8A0B10',  // Đỏ sâu chỉ dùng làm điểm neo gradient
+          gold: '#FBBF24',     // Vàng premium theo header/footer
+          lightGold: '#FFFBEB',// Vàng nhạt (Nền phụ)
           text: '#1C0505',     // Đỏ nâu sâu (thay đen)
           muted: '#5C3030',    // Đỏ xám trung tính
-          bg: '#FAFAFA',       // Trắng kem hiện đại
+          bg: '#F8F6F5',       // Trắng kem hiện đại
         }
       },
       fontFamily: {

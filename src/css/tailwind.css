@@ -6,7 +6,38 @@
   display: none !important;
 }
 
+/* ─── Marquee animation (Breaking news ticker) ──────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ─── No-scrollbar utility ────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 @layer base {
+  :root {
+    --haco-red: #B31217;
+    --haco-red-hot: #E60000;
+    --haco-red-deep: #8A0B10;
+    --haco-gold: #FBBF24;
+    --haco-gold-soft: #FFFBEB;
+    --haco-surface: #F8F6F5;
+    --haco-ink: #1C0505;
+    --haco-muted: #5C3030;
+    --haco-gradient-shell: linear-gradient(135deg, var(--haco-red-hot) 0%, var(--haco-red) 45%, var(--haco-red-deep) 100%);
+    --haco-gradient-panel: linear-gradient(135deg, #D90D14 0%, var(--haco-red) 44%, var(--haco-red-deep) 100%);
+    --haco-gradient-gold-line: linear-gradient(90deg, #B45309, var(--haco-gold), #FFFBEB, var(--haco-gold), #B45309);
+  }
+
   body {
     @apply text-slate-800 font-sans antialiased selection:bg-accent-gold selection:text-white;
     scroll-behavior: smooth;
@@ -28,7 +59,7 @@
       linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
   }
   .text-gradient {
-    background: linear-gradient(to right, #CC0000, #F5A623);
+    background: linear-gradient(to right, var(--haco-red-hot), var(--haco-gold));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -39,10 +70,33 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  .haco-brand-shell {
+    background: var(--haco-gradient-shell);
+  }
+  .haco-brand-panel {
+    background:
+      radial-gradient(circle at 88% 18%, rgba(251, 191, 36, 0.24), transparent 30%),
+      radial-gradient(circle at 14% 10%, rgba(255, 255, 255, 0.16), transparent 24%),
+      var(--haco-gradient-panel);
+  }
+  .haco-brand-panel-soft {
+    background:
+      radial-gradient(circle at 82% 26%, rgba(251, 191, 36, 0.18), transparent 30%),
+      linear-gradient(135deg, #BF1117 0%, var(--haco-red) 52%, var(--haco-red-deep) 100%);
+  }
+  .haco-gold-line {
+    background: var(--haco-gradient-gold-line);
+  }
+  .haco-brand-grid {
+    background-image:
+      linear-gradient(90deg, rgba(255, 251, 235, 0.11) 1px, transparent 1px),
+      linear-gradient(rgba(255, 251, 235, 0.07) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
 }
 
 .glassmorphism {
-  background: rgba(90, 12, 12, 0.7);
+  background: rgba(179, 18, 23, 0.72);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -146,22 +200,19 @@
 }
 .hdr-logo-ds {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* top/left set dynamically by JS to center on logo */
   width: 580px;
   height: 580px;
   background-image: url('../images/dongson.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  opacity: 0.20; /* More visible opacity as requested */
+  opacity: 0.20;
   pointer-events: none;
   filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); /* Gold color filter */
   z-index: 0;
   transition: opacity 0.35s ease;
 }
-.hdr-logo:hover .hdr-logo-ds { opacity: 0.28; }
 .hdr-logo-link {
   position: relative;
   z-index: 10;
@@ -405,7 +456,7 @@
   display: flex; align-items: center; gap: 7px;
   font-size: 10px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.1em;
-  color: #7f1d1d;
+  color: var(--haco-red);
   border-bottom: 2px solid #fef2f2;
   padding-bottom: 9px; margin-bottom: 8px;
 }
@@ -441,7 +492,9 @@
   padding: 20px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #3a0606 0%, #5a0c0c 60%, #6b1010 100%);
+  background:
+    radial-gradient(circle at 88% 18%, rgba(251, 191, 36, 0.22), transparent 30%),
+    var(--haco-gradient-panel);
   cursor: pointer;
   text-decoration: none;
   display: block;
@@ -449,7 +502,7 @@
 }
 .mega-highlight:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(90,12,12,0.35);
+  box-shadow: 0 12px 32px rgba(179,18,23,0.35);
 }
 /* Dong Son watermark inside card */
 .mega-highlight::before {
@@ -470,7 +523,7 @@
   text-transform: uppercase; letter-spacing: 0.09em;
   padding: 3px 10px; border-radius: 20px;
   background: linear-gradient(90deg, #f59e0b, #fbbf24);
-  color: #3a0606;
+  color: var(--haco-ink);
   box-shadow: 0 2px 8px rgba(251,191,36,0.5);
   margin-bottom: 12px;
 }
@@ -497,7 +550,7 @@
   font-size: 10px; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.05em;
   padding: 8px 16px; border-radius: 8px;
-  border: 1px solid rgba(90, 12, 12, 0.12); color: #5a0c0c;
+  border: 1px solid rgba(179, 18, 23, 0.16); color: var(--haco-ink);
   text-decoration: none;
   transition: all 0.18s ease;
 }
@@ -1075,6 +1128,3 @@ article::after {
   background-color: #f8fafc !important;
   font-weight: 700 !important;
 }
-
-
-
