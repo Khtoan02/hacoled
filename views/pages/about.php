@@ -12,7 +12,7 @@ $this->renderHeader($header_type ?? 'default');
 ?>
 
 <!-- Premium About Page Wrapper (Light Theme with Brand Accents) -->
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-48 pb-24 overflow-hidden min-h-[80vh]">
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-56 pb-24 overflow-hidden min-h-[80vh]">
   
   <!-- Glowing Background Orbs -->
   <div class="glow-gold -top-20 -right-20 opacity-10"></div>

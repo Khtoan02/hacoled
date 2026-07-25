@@ -12,7 +12,7 @@ $this->renderHeader($header_type ?? 'default');
 ?>
 
 <!-- Premium Projects Page Wrapper (Style Tech-Dark) -->
-<main class="relative bg-[#0A0000] pt-28 md:pt-48 pb-24 overflow-hidden bg-tech-grid min-h-[90vh]" x-data="{ activeTab: 'all' }" data-tech-bg="particle">
+<main class="relative bg-[#0A0000] pt-28 md:pt-56 pb-24 overflow-hidden bg-tech-grid min-h-[90vh]" x-data="{ activeTab: 'all' }" data-tech-bg="particle">
   
   <!-- Glowing Background Orbs -->
   <div class="glow-red top-1/4 left-1/4 opacity-20 w-[500px] h-[500px]"></div>

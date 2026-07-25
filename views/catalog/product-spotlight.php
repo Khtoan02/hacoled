@@ -23,7 +23,7 @@ $this->renderHeader($header_type ?? 'default');
 $image_url = get_the_post_thumbnail_url($product_id, 'full') ?: wc_placeholder_img_src('woocommerce_single');
 ?>
 
-<main class="bg-slate-950 text-white pt-36 md:pt-48">
+<main class="bg-slate-950 text-white pt-36 md:pt-56">
     <section class="relative overflow-hidden border-b border-white/10">
         <div class="absolute inset-0 opacity-20">
             <img src="<?php echo esc_url($image_url); ?>" alt="" class="h-full w-full object-cover blur-sm scale-105">

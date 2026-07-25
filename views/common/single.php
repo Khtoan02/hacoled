@@ -11,7 +11,7 @@
 $this->renderHeader($header_type ?? 'default');
 ?>
 
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-48 pb-20 min-h-[85vh] bg-tech-grid overflow-hidden" data-tech-bg="circuit"
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-56 pb-20 min-h-[85vh] bg-tech-grid overflow-hidden" data-tech-bg="circuit"
       x-data="{ percent: 0 }" @scroll.window="percent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100">
   
   <!-- Reading Progress Bar -->
