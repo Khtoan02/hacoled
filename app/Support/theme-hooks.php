@@ -79,6 +79,12 @@ function hacoled_scripts() {
             [],
             filemtime(get_template_directory() . '/assets/css/fonts.css')
         );
+        wp_enqueue_style(
+            'hacoled-font-display',
+            'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap',
+            [],
+            null
+        );
     }
 
     // Use a homepage-specific Tailwind build to avoid shipping utilities that

@@ -53,8 +53,9 @@ $in_stock     = true; // placeholder
               sizes="(max-width: 767px) 40vw, 25vw"
             />
           <?php else: ?>
-            <div class="relative z-10 w-full h-full flex items-center justify-center bg-slate-100/50 rounded-full">
-              <span class="text-slate-400 text-[10px] md:text-xs font-medium">No Image</span>
+            <div class="relative z-10 w-4/5 h-4/5 flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100/60 to-red-50/40 rounded-2xl border border-dashed border-slate-200/80 p-4 text-center my-auto">
+              <i class="ph-bold ph-monitor-play text-3xl md:text-4xl text-[#D90429]/40 mb-1"></i>
+              <span class="text-[9px] md:text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">HacoLED</span>
             </div>
           <?php endif; ?>
         </div>

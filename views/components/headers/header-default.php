@@ -108,7 +108,7 @@
      SITE HEADER – Premium V7 (Visual Rich Mega Menus)
      ═══════════════════════════════════════════════════════════ -->
   <header id="site-header" x-data="{ mobile: false, scrolled: false }" @scroll.window="scrolled = (window.scrollY > 80)"
-    class="site-header fixed top-0 left-0 z-[200] w-full transition-transform duration-500 ease-out shadow-2xl"
+    class="site-header fixed top-0 left-0 z-[200] w-full transition-transform duration-500 ease-out"
     :class="scrolled ? 'translate-y-[-1px] is-scrolled' : ''">
 
     <div class="hidden lg:block">

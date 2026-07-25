@@ -336,7 +336,7 @@
   background: transparent !important;
 }
 .site-header.is-scrolled #hdr-nav {
-  box-shadow: 0 4px 28px rgba(0,0,0,0.45);
+  box-shadow: none;
   background: transparent;
 }
 
@@ -1032,7 +1032,7 @@
   @apply text-base font-bold text-slate-800 mb-2 mt-0;
 }
 
-/* ─── SINGLE PRODUCT: 3D Coverflow Gallery ────────────── */
+/* ─── SINGLE PRODUCT: Showcase Gallery ────────────── */
 
 /* Fade in animation for product sections */
 .sp-fade-in {
@@ -1058,105 +1058,266 @@
     margin: 0;
 }
 
-/* 3D Gallery Container */
-.sp-3d-container {
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    overflow: visible !important; /* Let slides bleed to the sides and prevent Swiper overflow: hidden */
-    /* Webkit linear gradient mask to fade slides on far left/right without touching the active center */
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 3%, black 15%, black 85%, rgba(0,0,0,0.05) 97%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 3%, black 15%, black 85%, rgba(0,0,0,0.05) 97%, transparent 100%);
+/* ── Privileges Card (Vibrant Brand Red & Gold — Trống Đồng) ── */
+.sp-privileges-card {
+    position: relative;
+    border: 1px solid transparent;
+    background:
+        linear-gradient(145deg, #a8031d 0%, #d90429 50%, #700110 100%) padding-box,
+        linear-gradient(120deg, #b8811f 0%, #ffe9a8 20%, #ffffff 35%, #ffb23e 50%, #ffd700 70%, #b8811f 100%) border-box;
+    box-shadow: 0 16px 40px -8px rgba(217, 4, 41, 0.4), 0 8px 20px rgba(0, 0, 0, 0.35), inset 0 0 25px rgba(255, 200, 100, 0.12);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.sp-privileges-card:hover {
+    box-shadow: 0 24px 50px -8px rgba(217, 4, 41, 0.55), 0 10px 25px rgba(0, 0, 0, 0.45), inset 0 0 35px rgba(255, 200, 100, 0.2);
+    transform: translateY(-2px);
 }
 
-/* 3D Slide - Square and centered */
-.sp-3d-slide {
-    background-position: center;
-    background-size: cover;
-    width: 280px !important;
-    height: 280px !important;
-    border-radius: 24px;
+/* Inner red/gold mat frame */
+.sp-priv-red-mat {
+    position: absolute; inset: 5px; border-radius: 14px;
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.12);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Gloss sweep overlay */
+.sp-priv-gloss {
+    background: linear-gradient(115deg, transparent 25%, rgba(255,255,255,.18) 42%, rgba(255,255,255,.04) 48%, transparent 62%);
+    mix-blend-mode: screen;
+}
+
+/* Gold gradient text for title */
+.sp-priv-gold-text {
+    background: linear-gradient(120deg, #ffffff 0%, #fff2c4 35%, #ffd700 65%, #fffbe8 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Gold hairline divider */
+.sp-priv-gold-hairline {
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,.6), rgba(255,255,255,.9), rgba(255,215,0,.6), transparent);
+    height: 1px;
+}
+
+/* Shimmer animation for gold line */
+@keyframes sp-priv-shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+.sp-priv-shimmer {
+    background: linear-gradient(90deg, rgba(212,175,55,0) 0%, rgba(255,235,170,.9) 50%, rgba(212,175,55,0) 100%);
+    background-size: 200% 100%;
+    animation: sp-priv-shimmer 4.5s ease-in-out infinite;
+}
+
+/* ── Main Showcase Container ── */
+.sp-showcase-main {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
     overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    opacity: 0.18; /* Blurred inactive slides opacity made very faint */
-    filter: blur(10px); /* Inactive slides blur increased */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    position: relative;
+    background: linear-gradient(145deg, #f8f9fa 0%, #f0f1f3 30%, #e8eaed 100%);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.04),
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        0 24px 48px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: box-shadow 0.4s ease;
 }
 @media (min-width: 1024px) {
-    .sp-3d-slide {
-        width: 440px !important;
-        height: 440px !important;
+    .sp-showcase-main {
+        aspect-ratio: 1 / 1; /* Square on desktop for balanced 50/50 grid */
     }
 }
-@media (min-width: 1280px) {
-    .sp-3d-slide {
-        width: 520px !important;
-        height: 520px !important;
-    }
+.sp-showcase-main:hover {
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.04),
+        0 12px 32px rgba(0, 0, 0, 0.08),
+        0 32px 64px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-.sp-3d-slide img {
+
+/* Gradient backdrop — subtle radial glow behind transparent product images */
+.sp-showcase-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: 
+        radial-gradient(ellipse 80% 70% at 50% 55%, rgba(217, 4, 41, 0.03) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 45% 50%, rgba(220, 230, 245, 0.3) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(250,250,252,0.2) 100%);
+}
+
+/* ── Slide (each image) ── */
+.sp-showcase-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 1;
+}
+.sp-showcase-slide:first-child {
+    position: relative; /* First slide takes flow */
+}
+
+.sp-showcase-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    /* Subtle inner shadow for "floated" product images on light bg */
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.08)) drop-shadow(0 1px 3px rgba(0,0,0,0.06));
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.sp-showcase-main:hover .sp-showcase-img {
+    transform: scale(1.02);
+}
+
+/* ── Navigation Arrows ── */
+.sp-showcase-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #333;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.25s ease;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0;
+}
+.sp-showcase-main:hover .sp-showcase-nav {
+    opacity: 1;
+    pointer-events: auto;
+}
+.sp-showcase-nav:hover {
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    color: #D90429;
+    transform: translateY(-50%) scale(1.08);
+}
+.sp-showcase-prev { left: 12px; }
+.sp-showcase-next { right: 12px; }
+
+/* Mobile: always show nav */
+@media (max-width: 1023px) {
+    .sp-showcase-nav {
+        opacity: 1;
+        pointer-events: auto;
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    .sp-showcase-prev { left: 8px; }
+    .sp-showcase-next { right: 8px; }
+}
+
+/* ── Thumbnail Strip ── */
+.sp-showcase-thumbs {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 4px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.sp-showcase-thumbs::-webkit-scrollbar { display: none; }
+
+.sp-thumb {
+    flex-shrink: 0;
+    width: 68px;
+    height: 68px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: #f5f5f5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+    outline: none;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.sp-thumb:hover {
+    border-color: rgba(217, 4, 41, 0.3);
+    box-shadow: 0 2px 8px rgba(217, 4, 41, 0.12);
+    transform: translateY(-2px);
+}
+.sp-thumb-active {
+    border-color: #D90429 !important;
+    box-shadow: 0 3px 12px rgba(217, 4, 41, 0.25) !important;
+    transform: translateY(-2px);
+}
+
+.sp-thumb-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
 }
 
-/* Active slide highlight - perfectly clear & foreground */
-.sp-3d-gallery .swiper-slide-active {
-    opacity: 1 !important;
-    filter: blur(0px) !important;
-    border: 4px solid #ffffff;
-    box-shadow: 0 30px 60px -15px rgba(217,4,41,0.35), 0 0 40px rgba(0,0,0,0.05) !important;
-    z-index: 10;
-}
-
-/* Navigation Buttons - Elegant White Circular Chevrons */
-.sp-3d-prev, .sp-3d-next {
-    width: 48px !important;
-    height: 48px !important;
-    background-color: rgba(255, 255, 255, 0.95);
-    border-radius: 50%;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    color: #1a1a1a !important;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: 30;
-}
-.sp-3d-prev:hover, .sp-3d-next:hover {
-    background-color: #ffffff;
-    transform: translateY(-50%) scale(1.1) !important;
-    color: #D90429 !important;
-}
-.sp-3d-prev::after, .sp-3d-next::after {
-    font-size: 16px !important;
-    font-weight: 900;
-}
-.sp-3d-prev {
-    left: 8% !important;
-}
-.sp-3d-next {
-    right: 8% !important;
-}
-@media (max-width: 640px) {
-    .sp-3d-prev, .sp-3d-next {
-        display: none !important;
+@media (min-width: 1024px) {
+    .sp-thumb {
+        width: 78px;
+        height: 78px;
     }
-}
-
-/* Pagination bullet */
-.sp-3d-pagination .swiper-pagination-bullet-active {
-    background-color: #D90429 !important;
 }
 
 /* Inline Price Display (next to CTA button) */
 .sp-price-inline del {
-    @apply line-through text-gray-400 text-xs font-semibold mr-1;
+    @apply line-through text-gray-400 text-sm font-semibold mr-2;
 }
 .sp-price-inline ins {
-    @apply text-xl font-extrabold text-gray-900 no-underline tracking-tight;
+    @apply text-2xl font-extrabold text-gray-900 no-underline tracking-tight;
 }
 .sp-price-inline .amount {
-    @apply text-xl font-extrabold text-gray-900 tracking-tight;
+    @apply text-2xl font-extrabold text-gray-900 tracking-tight;
 }
 .sp-price-inline del .amount {
+    @apply line-through text-gray-400 text-sm font-semibold;
+}
+@media (min-width: 1024px) {
+    .sp-price-inline ins,
+    .sp-price-inline .amount {
+        font-size: 1.875rem; /* text-3xl */
+        line-height: 2.25rem;
+    }
+}
+
+/* Sticky Bar Price Display (balanced with title) */
+.sp-sticky-price-inline del {
+    @apply line-through text-gray-400 text-xs font-semibold mr-1.5;
+}
+.sp-sticky-price-inline ins {
+    @apply text-base lg:text-lg font-bold text-gray-900 no-underline tracking-tight;
+}
+.sp-sticky-price-inline .amount {
+    @apply text-base lg:text-lg font-bold text-gray-900 tracking-tight;
+}
+.sp-sticky-price-inline del .amount {
     @apply line-through text-gray-400 text-xs font-semibold;
 }
 
