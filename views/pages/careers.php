@@ -6,7 +6,7 @@
 
 <?php $this->renderHeader($header_type ?? 'default'); ?>
 
-<main class="relative bg-brand-bg pt-28 md:pt-56 pb-24 overflow-hidden min-h-[80vh]">
+<main class="relative bg-brand-bg pt-28 md:pt-64 pb-24 overflow-hidden min-h-[80vh]">
   
   <!-- Glowing Background Orbs -->
   <div class="glow-gold -top-20 -right-20 opacity-10"></div>

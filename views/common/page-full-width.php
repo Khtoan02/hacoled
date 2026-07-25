@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
 $this->renderHeader($header_type ?? 'default');
 ?>
 
-<main class="min-h-[75vh] bg-white pt-32 md:pt-56">
+<main class="min-h-[75vh] bg-white pt-32 md:pt-64">
     <header class="border-b border-slate-200 bg-slate-950 text-white">
         <div class="mx-auto max-w-[1440px] px-4 py-14 lg:px-8 lg:py-20">
             <nav class="mb-5 text-xs font-semibold uppercase tracking-widest text-slate-400">

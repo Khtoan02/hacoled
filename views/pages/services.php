@@ -11,7 +11,7 @@ $this->renderHeader($header_type ?? 'default');
 ?>
 
 <!-- Premium Services Page Wrapper (Light Theme) -->
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-56 pb-24 overflow-hidden min-h-[80vh]">
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-24 overflow-hidden min-h-[80vh]">
   
   <!-- Glowing Background Orbs -->
   <div class="glow-gold top-1/4 right-0 opacity-10"></div>
