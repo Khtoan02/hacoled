@@ -15,7 +15,7 @@ $hero_style = !empty($post['thumbnail'])
     : '';
 ?>
 
-<main class="min-h-[80vh] bg-white pt-28 md:pt-40">
+<main class="min-h-[80vh] bg-white pt-28 md:pt-64">
     <header class="bg-slate-950 bg-cover bg-center text-white" style="<?php echo esc_attr($hero_style); ?>">
         <div class="mx-auto max-w-5xl px-4 py-20 text-center sm:px-6 lg:py-32">
             <?php if (!empty($post['categories'])) : ?>

@@ -321,7 +321,7 @@ document.addEventListener('error', function(event) {
       x-init="
         const setOffset = () => {
           const hdr = document.getElementById('site-header');
-          $el.style.setProperty('--news-top-offset', ((hdr ? hdr.offsetHeight : 96) + 28) + 'px');
+          $el.style.setProperty('--news-top-offset', ((hdr ? hdr.offsetHeight : 197) + 59) + 'px');
         };
         setOffset();
         window.addEventListener('resize', setOffset);
