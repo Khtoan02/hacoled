@@ -24,6 +24,11 @@
       display: none !important;
     }
 
+    /* Prevent home-critical.css from applying transform: translate(-50%, -50%) which misaligns the drum stamp on homepage */
+    .hdr-logo-ds {
+      transform: none !important;
+    }
+
     php-block {
       display: none !important;
     }
