@@ -415,23 +415,251 @@
   color: #fbbf24;
 }
 
-/* Mega Menu General Wrapper */
+/* ─── HACOLED DYNAMIC MEGA MENU & DROPDOWNS ────────────────────────────── */
 .mega-menu-wrapper {
-  @apply absolute top-full left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] border border-slate-100/50 z-[150] overflow-hidden flex flex-col md:flex-row w-[96vw] xl:w-[1040px] max-w-[1100px];
-  margin-top: 15px; /* Offset to float */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 150;
+  display: flex;
+  width: 96vw;
+  max-width: 1100px;
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  flex-direction: column;
+  padding-top: 10px;
+}
+@media (min-width: 1280px) {
+  .mega-menu-wrapper { width: 1040px; }
+  .mega-menu-wrapper.mega-md { width: 900px; }
+  .mega-menu-wrapper.mega-sm { width: 600px; }
+}
+.mega-menu-surface {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(226, 232, 240, .9);
+  border-radius: 14px;
+  box-shadow: 0 22px 60px -22px rgba(15, 23, 42, .42), 0 8px 24px -16px rgba(15, 23, 42, .28);
+}
+.navitem-relative { display: inline-block; }
+
+.hacoled-dropdown-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 150;
+  width: 16rem;
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  padding-top: 10px;
+}
+.hacoled-dropdown-surface {
+  position: relative;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid rgba(226, 232, 240, .9);
+  border-radius: 14px;
+  box-shadow: 0 22px 56px -22px rgba(15, 23, 42, .42), 0 8px 20px -15px rgba(15, 23, 42, .24);
+}
+.hacoled-dropdown-arrow {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-top: 1px solid rgba(226, 232, 240, .9);
+  border-left: 1px solid rgba(226, 232, 240, .9);
+  transform: translateX(-50%) rotate(45deg);
+}
+.hacoled-dropdown-items {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hacoled-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 10px;
+  border-radius: 9px;
+}
+.hacoled-dropdown-icon, .hacoled-mega-heading-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+.hacoled-menu-icon-svg {
+  width: 16px;
+  height: 16px;
+}
+.hacoled-dropdown-icon.is-red, .hacoled-mega-heading-icon.is-red { color: #b31217; background: #fff1f2; }
+.hacoled-dropdown-icon.is-gold, .hacoled-mega-heading-icon.is-gold { color: #d97706; background: #fffbeb; }
+.hacoled-dropdown-icon.is-slate, .hacoled-mega-heading-icon.is-slate { color: #475569; background: #f1f5f9; }
+.hacoled-dropdown-label {
+  color: #334155;
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 
-/* For narrower dropdowns like "Dự án đã thực hiện" (900px) or "Màn hình ghép" (600px) */
-.mega-menu-wrapper.mega-md {
-  @apply xl:w-[900px];
+.hacoled-mega-layout { display: flex; width: 100%; min-height: 232px; }
+.hacoled-mega-links { display: grid; flex: 1 1 auto; min-width: 0; gap: 32px; padding: 28px 32px; }
+.hacoled-mega-cols-1 { grid-template-columns: minmax(0, 1fr); }
+.hacoled-mega-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.hacoled-mega-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.hacoled-mega-column { min-width: 0; }
+.hacoled-mega-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
 }
-.mega-menu-wrapper.mega-sm {
-  @apply xl:w-[600px];
+.hacoled-mega-title {
+  display: block;
+  color: #1e293b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+.hacoled-mega-items { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; }
+.hacoled-mega-items.is-two-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+.hacoled-mega-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 36px;
+  margin: 0 -8px;
+  padding: 7px 8px;
+  color: #475569;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.hacoled-mega-link > span { min-width: 0; }
+.hacoled-mega-link-arrow {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  opacity: 0;
+  color: #b31217;
+  transform: translateX(-5px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.hacoled-mega-link:hover .hacoled-mega-link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.hacoled-mega-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 7px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: .04em;
+}
+.hacoled-mega-badge.is-red { color: #b31217; background: #fee2e2; }
+.hacoled-mega-badge.is-gold { color: #b45309; background: #fef3c7; }
+
+.hacoled-mega-visual {
+  position: relative;
+  display: block;
+  flex: 0 0 340px;
+  min-height: 100%;
+  overflow: hidden;
+  color: #fff;
+  background: #0f172a;
+  border-left: 1px solid #e2e8f0;
+}
+.hacoled-mega-visual-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.hacoled-mega-visual:hover .hacoled-mega-visual-image {
+  transform: scale(1.05);
+  opacity: 1;
+}
+.hacoled-mega-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(15, 23, 42, .97), rgba(15, 23, 42, .45) 58%, rgba(15, 23, 42, .08));
+}
+.hacoled-mega-visual-content {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 26px;
+}
+.hacoled-mega-visual-badge {
+  margin-bottom: 10px;
+  padding: 5px 8px;
+  color: #fff;
+  background: #b31217;
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.hacoled-mega-visual-content strong {
+  max-width: 30ch;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.28;
+}
+.hacoled-mega-visual-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  color: #fbbf24;
+  font-size: 12px;
+  font-weight: 600;
+}
+.hacoled-mega-visual-cta svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.2s ease;
+}
+.hacoled-mega-visual:hover .hacoled-mega-visual-cta svg {
+  transform: translateX(4px);
 }
 
-/* Ensure the navitem is inline block but NOT relative to let mega menus anchor to the header */
-.navitem-relative {
-  @apply inline-block;
+@media (max-width: 1279px) {
+  .hacoled-mega-links { gap: 24px; padding: 24px; }
+  .hacoled-mega-visual { flex-basis: 320px; }
+  .hacoled-mega-items.is-two-cols { column-gap: 18px; }
 }
 
 .mega-inner {
