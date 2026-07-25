@@ -39,7 +39,7 @@ $latest_articles = $latest_articles ?? [];
 
       <!-- Lớp 2: Dong Son Drum chìm xoay chậm -->
       <div class="absolute z-0 pointer-events-none opacity-[0.06] animate-[spin_60s_linear_infinite]"
-           style="width: 800px; height: 800px; top: 50%; right: -200px; transform: translateY(-50%); background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.png'); background-repeat: no-repeat; background-position: center; background-size: contain; filter: invert(0.8) sepia(1) saturate(3) hue-rotate(-20deg);">
+           style="width: 800px; height: 800px; top: 50%; right: -200px; transform: translateY(-50%); background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.webp'); background-repeat: no-repeat; background-position: center; background-size: contain; filter: invert(0.8) sepia(1) saturate(3) hue-rotate(-20deg);">
       </div>
       
       <!-- Lớp 3: Ambient Light glows -->
@@ -133,7 +133,7 @@ $latest_articles = $latest_articles ?? [];
 
           <!-- CTAs -->
           <div class="flex flex-wrap items-center gap-4">
-            <a href="/cam-ket-chat-luong-dich-vu//" class="group relative px-6 py-3 bg-gradient-to-r from-[#D90429] to-red-700 text-white text-[11px] font-extrabold uppercase tracking-widest rounded-full shadow-[0_8px_20px_rgba(217,4,41,0.3)] hover:shadow-[0_10px_25px_rgba(217,4,41,0.5)] overflow-hidden transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 border border-red-500/30">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('commitment')); ?>" class="group relative px-6 py-3 bg-gradient-to-r from-[#D90429] to-red-700 text-white text-[11px] font-extrabold uppercase tracking-widest rounded-full shadow-[0_8px_20px_rgba(217,4,41,0.3)] hover:shadow-[0_10px_25px_rgba(217,4,41,0.5)] overflow-hidden transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 border border-red-500/30">
               <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700"></span>
               <i class="ph-bold ph-file-text text-sm"></i>
               Xem chi tiết cam kết
@@ -348,7 +348,7 @@ $latest_articles = $latest_articles ?? [];
             $idx = 0;
             foreach ( $latest_articles as $article ) :
                 $idx++;
-                $thumbnail = $article['thumbnail'] ?: get_template_directory_uri() . '/assets/images/services-hero.png';
+                $thumbnail = $article['thumbnail'] ?: get_template_directory_uri() . '/assets/images/services-hero.webp';
                 $badges = ['Tư vấn', 'Dự án', 'Kiến thức'];
                 $badge = $badges[$idx % 3];
                 ?>

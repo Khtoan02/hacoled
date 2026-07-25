@@ -10,10 +10,10 @@
 
 <?php
 $custom_logo_id = get_theme_mod('custom_logo');
-$logo         = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
-$about_url    = home_url('/gioi-thieu/');
-$services_url = home_url('/dich-vu/');
-$contact_url  = home_url('/lien-he/');
+$logo         = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : get_template_directory_uri() . '/assets/images/logo-haco.png';
+$about_url    = hacoled_managed_page_url('about');
+$services_url = hacoled_managed_page_url('services');
+$contact_url  = hacoled_managed_page_url('contact');
 
 $led_cat = get_category_by_slug('blog-man-hinh-led');
 $led_url = $led_cat ? get_category_link($led_cat->term_id) : home_url('/blog-man-hinh-led/');
@@ -25,7 +25,7 @@ $tech_cat = get_category_by_slug('huong-dan-ky-thuat');
 $tech_url = $tech_cat ? get_category_link($tech_cat->term_id) : home_url('/kien-thuc-ky-thuat/');
 
 $news_cat = get_category_by_slug('tin-tuc');
-$news_url = $news_cat ? get_category_link($news_cat->term_id) : home_url('/tin-tuc/');
+$news_url = $news_cat ? get_category_link($news_cat->term_id) : hacoled_managed_page_url('blog');
 
 $project_in_cat = get_category_by_slug('du-an-trong-nha');
 $project_in_url = $project_in_cat ? get_category_link($project_in_cat->term_id) : home_url('/du-an-trong-nha/');
@@ -511,7 +511,7 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
                 }
                 ?>
                 <div style="margin-top: 15px;">
-                  <a href="<?php echo home_url('/tuyen-dung/'); ?>" style="display:inline-block; font-size:12px; font-weight:700; color:#ef4444; background:#fef2f2; padding:6px 12px; border-radius:4px;">Xem toàn bộ vị trí →</a>
+                  <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" style="display:inline-block; font-size:12px; font-weight:700; color:#ef4444; background:#fef2f2; padding:6px 12px; border-radius:4px;">Xem toàn bộ vị trí →</a>
                 </div>
               </div>
 
@@ -523,7 +523,7 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#ef4444"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.562.562 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
                   Gia Nhập HacoLED
                 </div>
-                <a href="<?php echo home_url('/tuyen-dung/'); ?>" class="mega-highlight">
+                <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" class="mega-highlight">
                   <span class="mega-highlight-badge">VĂN HOÁ</span>
                   <div class="mega-highlight-title">Kiến tạo tương lai công nghệ</div>
                   <div class="mega-highlight-desc">Môi trường làm việc năng động, lộ trình thăng tiến rõ ràng cùng chế độ đãi ngộ hấp dẫn.</div>
@@ -674,7 +674,7 @@ $project_audio_url = $project_audio_cat ? get_category_link($project_audio_cat->
               }
           }
           ?>
-          <a href="<?php echo home_url('/tuyen-dung/'); ?>" class="mob-item mob-sub" style="font-size:12px; font-weight:700; color:#ef4444; opacity:1;">Xem tất cả vị trí →</a>
+          <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" class="mob-item mob-sub" style="font-size:12px; font-weight:700; color:#ef4444; opacity:1;">Xem tất cả vị trí →</a>
         </div>
       </div>
 

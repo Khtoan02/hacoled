@@ -83,7 +83,7 @@ class CatalogRepository {
                 'name' => $term->name,
                 'url' => get_term_link($term),
                 'image' => wp_get_attachment_image_url($thumbnailId, 'thumbnail')
-                    ?: get_template_directory_uri() . '/assets/images/services-hero.png',
+                    ?: get_template_directory_uri() . '/assets/images/services-hero.webp',
             ];
         }, $terms);
     }

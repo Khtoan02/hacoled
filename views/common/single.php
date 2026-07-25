@@ -411,7 +411,7 @@ $this->renderHeader($header_type ?? 'default');
               <?php _e('Khảo sát thực địa và thiết kế phối cảnh 3D màn hình LED, âm thanh phòng họp hoàn toàn miễn phí.', 'hacoled'); ?>
             </p>
             <div class="pt-2">
-              <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-[10px] uppercase tracking-wider py-3 rounded-xl shadow-lg transition-all duration-300">
+              <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-[10px] uppercase tracking-wider py-3 rounded-xl shadow-lg transition-all duration-300">
                 <span><?php _e('Liên hệ khảo sát ngay', 'hacoled'); ?></span>
                 <i class="ph-bold ph-arrow-right text-[9px]"></i>
               </a>

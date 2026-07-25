@@ -7,11 +7,19 @@
     "node": ">=22"
   },
   "scripts": {
-    "build:css": "tailwindcss -i ./src/css/tailwind.css -o ./assets/css/app.css --minify",
-    "build:js": "esbuild ./src/js/app.js --bundle --minify --outfile=./assets/js/app.js",
+    "build:css:app": "tailwindcss -c tailwind.config.js -i ./src/css/tailwind.css -o ./assets/css/app.css --minify",
+    "build:css:home": "tailwindcss -c tailwind.home.config.js -i ./src/css/tailwind.css -o ./assets/css/home.css --minify",
+    "build:css": "npm run build:css:app && npm run build:css:home",
+    "build:js:app": "esbuild ./src/js/app.js --bundle --minify --outfile=./assets/js/app.js",
+    "build:js:home": "esbuild ./src/js/home.js --bundle --minify --outfile=./assets/js/home.js",
+    "build:js": "npm run build:js:app && npm run build:js:home",
     "build": "npm run build:css && npm run build:js",
-    "watch:css": "tailwindcss -i ./src/css/tailwind.css -o ./assets/css/app.css --watch",
-    "watch:js": "esbuild ./src/js/app.js --bundle --outfile=./assets/js/app.js --watch",
+    "watch:css:app": "tailwindcss -c tailwind.config.js -i ./src/css/tailwind.css -o ./assets/css/app.css --watch",
+    "watch:css:home": "tailwindcss -c tailwind.home.config.js -i ./src/css/tailwind.css -o ./assets/css/home.css --watch",
+    "watch:css": "concurrently \"npm run watch:css:app\" \"npm run watch:css:home\"",
+    "watch:js:app": "esbuild ./src/js/app.js --bundle --outfile=./assets/js/app.js --watch",
+    "watch:js:home": "esbuild ./src/js/home.js --bundle --outfile=./assets/js/home.js --watch",
+    "watch:js": "concurrently \"npm run watch:js:app\" \"npm run watch:js:home\"",
     "dev": "concurrently \"npm run watch:css\" \"npm run watch:js\""
   },
   "devDependencies": {

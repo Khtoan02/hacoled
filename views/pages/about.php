@@ -488,7 +488,7 @@ $this->renderHeader($header_type ?? 'default');
               <?php _e('Tại HacoLED, chúng tôi hiểu rằng một giải pháp hiển thị hoàn hảo không chỉ dừng lại ở thiết bị chất lượng mà còn đi liền với trải nghiệm dịch vụ đẳng cấp. Chúng tôi cam kết đồng hành cùng đối tác trong mọi khâu, từ tư vấn thiết kế đến bảo hành dài lâu.', 'hacoled'); ?>
             </p>
             <div class="pt-2">
-              <a href="<?php echo esc_url(home_url('/cam-ket-chat-luong-dich-vu/')); ?>" class="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full bg-accent-red hover:bg-accent-rose text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md">
+              <a href="<?php echo esc_url(hacoled_managed_page_url('commitment')); ?>" class="inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full bg-accent-red hover:bg-accent-rose text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md">
                 <?php _e('Xem chi tiết cam kết dịch vụ', 'hacoled'); ?> <i class="ph-bold ph-caret-double-right"></i>
               </a>
             </div>
@@ -549,7 +549,7 @@ $this->renderHeader($header_type ?? 'default');
             <?php _e('HacoLED hỗ trợ khảo sát thực địa tận nơi và thiết kế bản vẽ kỹ thuật 2D/3D chi tiết hoàn toàn miễn phí. Đội ngũ chuyên gia của chúng tôi sẽ đề xuất giải pháp phù hợp nhất với không gian và ngân sách của bạn.', 'hacoled'); ?>
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
               <?php _e('Yêu cầu báo giá', 'hacoled'); ?>
               <i class="ph-bold ph-arrow-right text-[11px]"></i>
             </a>

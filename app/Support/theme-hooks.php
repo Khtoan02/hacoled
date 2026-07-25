@@ -55,49 +55,285 @@ if (!function_exists('hacoled_setup')) {
 }
 add_action('after_setup_theme', 'hacoled_setup');
 
+// Native emoji rendering is sufficient for this site and avoids WordPress's
+// front-end emoji capability worker on every page view.
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('admin_print_styles', 'print_emoji_styles');
+remove_filter('the_content_feed', 'wp_staticize_emoji');
+remove_filter('comment_text_rss', 'wp_staticize_emoji');
+remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+
 // 3. ENQUEUE SCRIPTS AND STYLES
 function hacoled_scripts() {
     $theme_version = wp_get_theme()->get('Version');
 
-    // Theme metadata styles
-    wp_enqueue_style('hacoled-core-style', get_stylesheet_uri(), [], $theme_version);
+    // The homepage build already embeds font faces and style.css only contains
+    // theme metadata, so avoid two extra render-blocking requests there.
+    if (!is_front_page()) {
+        wp_enqueue_style('hacoled-core-style', get_stylesheet_uri(), [], $theme_version);
+        wp_enqueue_style(
+            'hacoled-fonts',
+            get_template_directory_uri() . '/assets/css/fonts.css',
+            [],
+            filemtime(get_template_directory() . '/assets/css/fonts.css')
+        );
+    }
 
-    // Compiled Tailwind CSS Stylesheet
-    wp_enqueue_style(
-        'hacoled-compiled-tailwind',
-        get_template_directory_uri() . '/assets/css/app.css',
-        [],
-        filemtime(get_template_directory() . '/assets/css/app.css')
-    );
+    // Use a homepage-specific Tailwind build to avoid shipping utilities that
+    // only belong to product, archive and editorial templates.
+    $tailwind_stylesheet = is_front_page()
+        ? '/assets/css/home.css'
+        : '/assets/css/app.css';
+    $tailwind_stylesheet_path = get_template_directory() . $tailwind_stylesheet;
 
-    // Enqueue Phosphor Icons Local Stylesheet
-    wp_enqueue_style(
-        'phosphor-icons',
-        get_template_directory_uri() . '/assets/css/phosphor-icons.css',
-        [],
-        '2.1.2'
-    );
+    if (is_front_page()) {
+        // Inline only the rules needed in the first viewport. The complete
+        // stylesheet is fetched with a non-matching media query and activated
+        // after first paint by home-loader.js.
+        $critical_stylesheet_path = get_template_directory() . '/assets/css/home-critical.css';
+        $homepage_css = file_get_contents($critical_stylesheet_path);
+        if (wp_is_mobile()) {
+            $homepage_css = preg_replace('/@font-face\{[^}]*\}/', '', $homepage_css);
+        }
+        $homepage_css .= '.home main>section:not(#hero-section),.home footer{content-visibility:auto;contain-intrinsic-size:auto 900px}';
+        $homepage_css = str_replace(
+            ['../fonts/', '../images/', 'assets/fonts/', 'assets/images/'],
+            [
+                get_template_directory_uri() . '/assets/fonts/',
+                get_template_directory_uri() . '/assets/images/',
+                get_template_directory_uri() . '/assets/fonts/',
+                get_template_directory_uri() . '/assets/images/',
+            ],
+            $homepage_css
+        );
 
-    // Compiled JS Bundle (Includes Alpine.js and GSAP)
+        wp_register_style('hacoled-home-critical', false, [], filemtime($critical_stylesheet_path));
+        wp_enqueue_style('hacoled-home-critical');
+        wp_add_inline_style('hacoled-home-critical', $homepage_css);
+
+        wp_register_style(
+            'hacoled-compiled-tailwind',
+            get_template_directory_uri() . $tailwind_stylesheet,
+            [],
+            filemtime($tailwind_stylesheet_path)
+        );
+        wp_enqueue_style('hacoled-compiled-tailwind');
+    } else {
+        wp_enqueue_style(
+            'hacoled-compiled-tailwind',
+            get_template_directory_uri() . $tailwind_stylesheet,
+            [],
+            filemtime($tailwind_stylesheet_path)
+        );
+    }
+
+    // Enqueue complete Phosphor Icons stylesheet for all pages
+    $icon_stylesheet = '/assets/css/phosphor-icons.css';
+    $icon_stylesheet_path = get_template_directory() . $icon_stylesheet;
+
+    if (file_exists($icon_stylesheet_path)) {
+        wp_enqueue_style(
+            'phosphor-icons',
+            get_template_directory_uri() . $icon_stylesheet,
+            [],
+            filemtime($icon_stylesheet_path)
+        );
+    }
+
+    // The homepage only needs Alpine and navigation behavior; GSAP and
+    // ScrollTrigger remain available to templates that actually use them.
+    $script_bundle = is_front_page()
+        ? '/assets/js/home-loader.js'
+        : '/assets/js/app.js';
+    $script_bundle_path = get_template_directory() . $script_bundle;
+
     wp_enqueue_script(
         'hacoled-compiled-js',
-        get_template_directory_uri() . '/assets/js/app.js',
+        get_template_directory_uri() . $script_bundle,
         [],
-        filemtime(get_template_directory() . '/assets/js/app.js'),
-        true // Load in footer
+        filemtime($script_bundle_path),
+        [
+            'in_footer' => true,
+            'strategy'  => is_front_page() ? 'async' : 'defer',
+        ]
     );
 }
 add_action('wp_enqueue_scripts', 'hacoled_scripts');
 
+/**
+ * The homepage renders product summaries itself and does not use WooCommerce
+ * blocks, cart actions or attribution tracking. Avoid loading those global
+ * assets on this route; they account for most of the blocking CSS/JS weight.
+ */
+function hacoled_front_page_asset_cleanup() {
+    if (!is_front_page()) {
+        return;
+    }
+
+    foreach ([
+        'wc-blocks-style',
+        'wc-blocks-vendors-style',
+        'wc-blocks-packages-style',
+        'woocommerce-blocktheme',
+        'wp-block-library',
+        'wp-block-library-theme',
+        'classic-theme-styles',
+        'global-styles',
+    ] as $style_handle) {
+        wp_dequeue_style($style_handle);
+    }
+
+    foreach ([
+        'wc-cart-fragments',
+        'wc-add-to-cart',
+        'woocommerce',
+        'jquery-blockui',
+        'js-cookie',
+        'sourcebuster-js',
+        'wc-order-attribution',
+        'jquery-migrate',
+        'jquery-core',
+        'jquery',
+    ] as $script_handle) {
+        wp_dequeue_script($script_handle);
+    }
+}
+add_action('wp_enqueue_scripts', 'hacoled_front_page_asset_cleanup', 100);
+add_action('wp_print_styles', 'hacoled_front_page_asset_cleanup', 100);
+add_action('wp_print_scripts', 'hacoled_front_page_asset_cleanup', 100);
+
+/**
+ * Add intrinsic dimensions to local homepage images that are authored as raw
+ * template markup. This prevents layout shifts without forcing fixed CSS sizes.
+ */
+function hacoled_front_page_add_image_dimensions($html) {
+    if (!is_string($html) || $html === '') {
+        return $html;
+    }
+
+    $theme_url = trailingslashit(get_template_directory_uri());
+    $theme_dir = trailingslashit(get_template_directory());
+    $uploads   = wp_get_upload_dir();
+
+    return preg_replace_callback('/<img\b[^>]*>/i', static function ($match) use ($theme_url, $theme_dir, $uploads) {
+        $tag = $match[0];
+        if (preg_match('/\bwidth=["\'][^"\']+["\']/i', $tag) && preg_match('/\bheight=["\'][^"\']+["\']/i', $tag)) {
+            return $tag;
+        }
+
+        $image_url = '';
+        foreach (['data-menu-src', 'data-src', 'src'] as $attribute) {
+            if (preg_match('/\b' . preg_quote($attribute, '/') . '=["\']([^"\']+)["\']/i', $tag, $url_match)) {
+                $candidate = html_entity_decode($url_match[1], ENT_QUOTES, 'UTF-8');
+                if (strpos($candidate, 'data:') !== 0) {
+                    $image_url = $candidate;
+                    break;
+                }
+            }
+        }
+
+        $image_path = '';
+        if ($image_url !== '' && strpos($image_url, $theme_url) === 0) {
+            $image_path = $theme_dir . ltrim(substr($image_url, strlen($theme_url)), '/');
+        } elseif (
+            $image_url !== ''
+            && !empty($uploads['baseurl'])
+            && !empty($uploads['basedir'])
+            && strpos($image_url, trailingslashit($uploads['baseurl'])) === 0
+        ) {
+            $image_path = trailingslashit($uploads['basedir']) . ltrim(substr($image_url, strlen(trailingslashit($uploads['baseurl']))), '/');
+        }
+
+        if ($image_path === '' || !is_file($image_path)) {
+            return $tag;
+        }
+
+        $cache_key = 'haco_img_sz_' . md5($image_path);
+        $size = get_transient($cache_key);
+        if (!is_array($size) || empty($size[0]) || empty($size[1])) {
+            $size_raw = @getimagesize($image_path);
+            if ($size_raw && !empty($size_raw[0]) && !empty($size_raw[1])) {
+                $size = [(int) $size_raw[0], (int) $size_raw[1]];
+                set_transient($cache_key, $size, WEEK_IN_SECONDS * 4); // Cache for 4 weeks
+            } else {
+                return $tag;
+            }
+        }
+
+        $attributes = ' width="' . $size[0] . '" height="' . $size[1] . '"';
+
+        if (
+            !preg_match('/\bsrcset=["\']/i', $tag)
+            && !preg_match('/\bdata-menu-src=["\']/i', $tag)
+            && strtolower(pathinfo($image_path, PATHINFO_EXTENSION)) === 'webp'
+            && (int) $size[0] > 320
+        ) {
+            $sources = [];
+            foreach ([320, 640, 768] as $candidate_width) {
+                $candidate_path = preg_replace('/\.webp$/i', '-' . $candidate_width . '.webp', $image_path);
+                if ($candidate_path && is_file($candidate_path)) {
+                    $candidate_url = preg_replace('/\.webp(?:\?.*)?$/i', '-' . $candidate_width . '.webp', $image_url);
+                    $sources[] = esc_url($candidate_url) . ' ' . $candidate_width . 'w';
+                }
+            }
+            $sources[] = esc_url($image_url) . ' ' . (int) $size[0] . 'w';
+
+            if (count($sources) > 1) {
+                $attributes .= ' srcset="' . implode(', ', $sources) . '"';
+                if (!preg_match('/\bsizes=["\']/i', $tag)) {
+                    $attributes .= ' sizes="(max-width: 767px) 100vw, 50vw"';
+                }
+            }
+        }
+
+        if (preg_match('/\/>\s*$/', $tag)) {
+            return preg_replace('/\s*\/>\s*$/', $attributes . ' />', $tag, 1);
+        }
+
+        return preg_replace('/>\s*$/', $attributes . '>', $tag, 1);
+    }, $html);
+}
+
+function hacoled_front_page_start_image_dimension_buffer() {
+    if (is_front_page()) {
+        ob_start('hacoled_front_page_add_image_dimensions');
+    }
+}
+add_action('template_redirect', 'hacoled_front_page_start_image_dimension_buffer', 1);
+
 // Filter to load Phosphor Icons stylesheet asynchronously
 add_filter('style_loader_tag', 'hacoled_async_styles', 10, 4);
 function hacoled_async_styles($tag, $handle, $href, $media) {
+    if (is_front_page() && in_array($handle, ['wc-blocks-style', 'wc-blocks-vendors-style', 'wc-blocks-packages-style'], true)) {
+        return '';
+    }
+
     if ('phosphor-icons' === $handle) {
         $tag = '<link rel="preload" as="style" href="' . esc_url($href) . '" />' . "\n";
-        $tag .= '<link rel="stylesheet" id="' . esc_attr($handle) . '-css" href="' . esc_url($href) . '" media="print" onload="this.media=\'all\'" />';
+        $tag .= '<link rel="stylesheet" id="' . esc_attr($handle) . '-css" href="' . esc_url($href) . '" media="all" />';
+    }
+
+    if (is_front_page() && 'hacoled-compiled-tailwind' === $handle) {
+        $tag = '<link rel="stylesheet" id="hacoled-compiled-tailwind-css" href="' . esc_url($href) . '" media="print" onload="this.media=\'all\'" data-hacoled-full-style />';
+        $tag .= '<noscript><link rel="stylesheet" href="' . esc_url($href) . '" /></noscript>';
     }
     return $tag;
 }
+
+// Preload critical fonts on front page to shorten Critical Request Chains and prevent layout shifts (FOUT)
+function hacoled_preload_critical_fonts() {
+    if (!is_front_page()) {
+        return;
+    }
+    $font_dir = get_template_directory_uri() . '/assets/fonts/';
+    ?>
+    <link rel="preload" href="<?php echo esc_url($font_dir . 'inter-vietnamese.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?php echo esc_url($font_dir . 'inter-latin.woff2'); ?>" as="font" type="font/woff2" crossorigin>
+    <?php
+}
+add_action('wp_head', 'hacoled_preload_critical_fonts', 2);
 
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 

@@ -205,7 +205,7 @@ $this->renderHeader($header_type ?? 'default');
           <?php _e('Chúng tôi cung cấp giải pháp màn hình hiển thị tích hợp trọn gói cho hội trường, phòng họp trực tuyến, biển hiệu quảng cáo tấm lớn ngoài trời với chi phí tối ưu và hỗ trợ bảo hành vàng 24/7.', 'hacoled'); ?>
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-          <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-500 hover:to-brand-gold text-primary-dark font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-gold to-yellow-500 hover:from-yellow-500 hover:to-brand-gold text-primary-dark font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
             <span><?php _e('Nhận tư vấn & Báo giá', 'hacoled'); ?></span>
             <i class="ph-bold ph-arrow-right text-[11px]"></i>
           </a>

@@ -27,7 +27,13 @@ class ProductController extends Controller {
      * Single Product Details page
      */
     public function detail() {
-        $this->render('catalog/product', [
+        if ($this->dispatchContentLayout(get_queried_object_id())) {
+            return;
+        }
+
+        $view = $this->resolveLayoutView(get_queried_object_id(), 'catalog/product');
+
+        $this->render($view, [
             'header_type' => 'default',
             'footer_type' => 'default'
         ]);

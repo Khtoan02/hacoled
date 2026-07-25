@@ -36,7 +36,7 @@ class TemplateController extends Controller {
             ];
         }
 
-        $this->render('common/page', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'common/page'), [
             'page'        => $page_data,
             'header_type' => 'default', // Standard solid header
             'footer_type' => 'default'
@@ -67,7 +67,7 @@ class TemplateController extends Controller {
             ]
         ];
 
-        $this->render('pages/about', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/about'), [
             'page'        => $page_data,
             'values'      => $values,
             'header_type' => 'default',
@@ -81,7 +81,7 @@ class TemplateController extends Controller {
     public function services() {
         $page_data = $this->get_current_page_data(__('Dịch vụ chuyên nghiệp', 'hacoled'));
 
-        $this->render('pages/services', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/services'), [
             'page'        => $page_data,
             'header_type' => 'default',
             'footer_type' => 'default'
@@ -94,7 +94,7 @@ class TemplateController extends Controller {
     public function contact() {
         $page_data = $this->get_current_page_data(__('Liên hệ HacoLED', 'hacoled'));
 
-        $this->render('pages/contact', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/contact'), [
             'page'        => $page_data,
             'header_type' => 'default',
             'footer_type' => 'default'
@@ -107,7 +107,7 @@ class TemplateController extends Controller {
     public function commitment() {
         $page_data = $this->get_current_page_data(__('Cam kết chất lượng', 'hacoled'));
 
-        $this->render('pages/commitment', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/commitment'), [
             'page'        => $page_data,
             'header_type' => 'default',
             'footer_type' => 'default'
@@ -120,7 +120,7 @@ class TemplateController extends Controller {
     public function careers() {
         $page_data = $this->get_current_page_data(__('Tuyển dụng HacoLED', 'hacoled'));
 
-        $this->render('pages/careers', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/careers'), [
             'page'        => $page_data,
             'header_type' => 'default',
             'footer_type' => 'default'
@@ -133,7 +133,7 @@ class TemplateController extends Controller {
     public function jobDetail() {
         $page_data = $this->get_current_page_data(__('Chi tiết tuyển dụng', 'hacoled'));
 
-        $this->render('pages/job-detail', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/job-detail'), [
             'page'        => $page_data,
             'header_type' => 'default',
             'footer_type' => 'default'
@@ -561,7 +561,7 @@ class TemplateController extends Controller {
             ];
         }
 
-        $this->render('pages/blog', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/blog'), [
             'page'        => $page_data,
             'sections'    => $sections,
             'header_type' => 'default',
@@ -714,7 +714,7 @@ class TemplateController extends Controller {
             ];
         }
 
-        $this->render('pages/projects', [
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/projects'), [
             'page'        => $page_data,
             'projects'    => $projects,
             'header_type' => 'default',

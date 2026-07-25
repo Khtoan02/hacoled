@@ -75,7 +75,7 @@ $price_html = $product->get_price_html();
                 </div>
                 
                 <!-- CTA Button -->
-                <a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" 
+                <a href="<?php echo esc_url( hacoled_managed_page_url( 'contact' ) ); ?>"
                    class="bg-[#D90429] hover:bg-[#b90323] text-white font-extrabold px-6 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all duration-300 text-[10.5px] uppercase tracking-wider shadow-md hover:-translate-y-0.5">
                     <i class="ph-bold ph-headset text-xs"></i> Nhận Báo Giá
                 </a>
@@ -203,7 +203,7 @@ $price_html = $product->get_price_html();
                             </div>
                         </div>
 
-                        <a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" 
+                        <a href="<?php echo esc_url( hacoled_managed_page_url( 'contact' ) ); ?>"
                            class="w-full sm:w-auto bg-[#D90429] hover:bg-[#b90323] text-white font-bold px-8 py-3.5 rounded-xl flex items-center justify-center gap-2.5 transition-all duration-300 shadow-[0_10px_20px_rgba(217,4,41,0.20)] hover:-translate-y-1 text-xs uppercase tracking-wider whitespace-nowrap">
                             <i class="ph-bold ph-headset text-sm opacity-90"></i> Nhận Báo Giá Ngay
                         </a>

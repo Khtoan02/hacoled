@@ -190,7 +190,7 @@ $this->renderHeader($header_type ?? 'default');
             <?php _e('Hãy để chúng tôi trở thành đối tác tin cậy của quý khách hàng và cùng nhau xây dựng một tương lai thành công và bền vững.', 'hacoled'); ?>
           </p>
           <div class="flex flex-wrap items-center gap-4 pt-3">
-            <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" class="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-gradient-to-r from-accent-gold to-yellow-500 text-primary-dark font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-md">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-gradient-to-r from-accent-gold to-yellow-500 text-primary-dark font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-md">
               <?php _e('Liên hệ ngay', 'hacoled'); ?>
               <i class="ph-bold ph-arrow-right text-[10px]"></i>
             </a>

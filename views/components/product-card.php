@@ -14,6 +14,7 @@ $category     = $category ?? __('Màn hình LED', 'hacoled');
 $price        = $price ?? __('Liên hệ', 'hacoled');
 $permalink    = $permalink ?? '#';
 $thumbnail    = $thumbnail ?? '';
+$image_alt    = $image_alt ?? trim($title . ' – ' . $category);
 $is_hot       = true; // default
 $reviews      = rand(10, 300); // placeholder or fetch if needed
 $in_stock     = true; // placeholder
@@ -21,25 +22,23 @@ $in_stock     = true; // placeholder
 ?>
 <div class="relative group w-full max-w-[400px] h-[310px] sm:h-[400px] md:h-[520px] rounded-[1.5rem] md:rounded-[2rem] transition-all duration-700 perspective-1000 mx-auto transform-gpu">
   
-  <!-- Lớp hào quang phía sau thẻ, tỏa sáng khi hover -->
-  <div class="absolute -inset-0.5 rounded-[1.5rem] md:rounded-[2rem] bg-gradient-to-br from-[#E3000F]/30 via-transparent to-[#D4AF37]/30 opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100 group-hover:duration-500 pointer-events-none will-change-[opacity]"></div>
-
   <!-- Background chính của thẻ -->
-  <div class="absolute inset-0 rounded-[1.5rem] md:rounded-[2rem] bg-white/60 backdrop-blur-2xl border border-white/80 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] transition-all duration-700 group-hover:border-white group-hover:bg-white/80 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] transform-gpu">
+  <div class="absolute inset-0 rounded-[1.5rem] md:rounded-[2rem] bg-white/60 backdrop-blur-2xl border border-white/80 overflow-hidden shadow-[0_10px_30px_rgba(227,0,15,0.06)] transition-all duration-700 group-hover:border-white group-hover:bg-white/95 group-hover:shadow-[0_16px_36px_rgba(227,0,15,0.22)] transform-gpu">
+    
+    <!-- Lớp điểm nhấn ánh sáng đỏ mượt phía sau thẻ khi hover -->
+    <div class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-[#E3000F]/22 via-[#D4AF37]/15 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"></div>
     
     <!-- Link ẩn bao trọn card -->
-    <a href="<?php echo esc_url($permalink); ?>" class="absolute inset-0 z-30" aria-label="<?php echo esc_attr($title); ?>"></a>
-
-    <!-- Điểm nhấn gradient nhẹ ở góc -->
-    <div class="absolute top-0 right-0 w-64 h-64 bg-[#E3000F]/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+    <a href="<?php echo esc_url($permalink); ?>" class="absolute inset-0 z-30" aria-label="<?php echo esc_attr($image_alt); ?>">
+      <span class="sr-only"><?php echo esc_html($image_alt); ?></span>
+    </a>
 
     <!-- Layout hiển thị hình ảnh và các tag nổi -->
     <div class="absolute inset-0 p-2 md:p-4 pb-[135px] sm:pb-[180px] md:pb-[220px] flex items-start justify-center pt-4 md:pt-10 z-10 pointer-events-none">
       <div class="relative w-full h-full flex items-center justify-center" style="transform: translateY(-8px) md:translateY(-13px);">
           <!-- Họa tiết trống đồng mờ nhạt phía sau sản phẩm -->
           <div class="absolute w-[140px] h-[140px] sm:w-[220px] sm:h-[220px] md:w-[320px] md:h-[320px] opacity-[0.10] group-hover:opacity-[0.20] transition-all duration-1000 ease-out group-hover:scale-105 group-hover:rotate-12 pointer-events-none" 
-               style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.png'); background-repeat: no-repeat; background-position: center; background-size: contain; filter: url(#to-gold-light);">
+               style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson-optimized.webp'); background-repeat: no-repeat; background-position: center; background-size: contain; filter: url(#to-gold-light);">
           </div>
         
         <!-- Wrapper cho Ảnh và Tag -->
@@ -47,8 +46,11 @@ $in_stock     = true; // placeholder
           <?php if (!empty($thumbnail)): ?>
             <img 
               src="<?php echo esc_url($thumbnail); ?>" 
-              alt="<?php echo esc_attr($title); ?>"
+              alt="<?php echo esc_attr($image_alt); ?>"
               class="relative z-10 w-full h-full object-contain filter drop-shadow-[0_10px_15px_rgba(0,0,0,0.12)] md:drop-shadow-[0_20px_30px_rgba(0,0,0,0.15)]"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 767px) 40vw, 25vw"
             />
           <?php else: ?>
             <div class="relative z-10 w-full h-full flex items-center justify-center bg-slate-100/50 rounded-full">
@@ -96,9 +98,9 @@ $in_stock     = true; // placeholder
                 <?php endfor; ?>
               </div>
 
-              <!-- Giá sản phẩm hiển thị cố định -->
+              <!-- Giá sản phẩm hiển thị cố định (Đã lọc ẩn text screen-reader) -->
               <div class="mt-1 md:mt-2 transition-all duration-300">
-                <div class="price-wrapper flex items-baseline gap-1.5 flex-wrap [&>del]:text-[9px] md:[&>del]:text-[11px] [&>del]:text-slate-400 [&>del]:line-through [&>del]:font-medium [&>ins]:no-underline text-xs md:text-base [&>ins]:text-xs md:[&>ins]:text-base [&>ins]:font-extrabold [&>ins]:text-[#E3000F] [&>ins]:leading-none [&>.amount]:text-xs md:[&>.amount]:text-base [&>.amount]:font-extrabold [&>.amount]:text-[#E3000F] [&>.amount]:leading-none">
+                <div class="price-wrapper flex items-baseline gap-1.5 flex-wrap [&>del]:text-[9px] md:[&>del]:text-[11px] [&>del]:text-slate-400 [&>del]:line-through [&>del]:font-medium [&>ins]:no-underline text-xs md:text-base [&>ins]:text-xs md:[&>ins]:text-base [&>ins]:font-extrabold [&>ins]:text-[#E3000F] [&>ins]:leading-none [&>.amount]:text-xs md:[&>.amount]:text-base [&>.amount]:font-extrabold [&>.amount]:text-[#E3000F] [&>.amount]:leading-none [&_.screen-reader-text]:hidden">
                   <?php echo wp_kses_post($price); ?>
                 </div>
               </div>

@@ -281,7 +281,7 @@ if ($sub_featured_2) {
             <span class="text-[9px] font-bold text-accent-gold uppercase tracking-wider block font-mono"><?php _e('LIÊN HỆ KHẢO SÁT & TƯ VẤN', 'hacoled'); ?></span>
             <h4 class="text-xs font-bold leading-normal uppercase"><?php _e('Bản vẽ 2D/3D & Báo giá chi tiết', 'hacoled'); ?></h4>
             <div class="flex flex-col gap-2">
-              <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-[10px] uppercase py-3 rounded-xl tracking-wider transition-all duration-300">
+              <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-[10px] uppercase py-3 rounded-xl tracking-wider transition-all duration-300">
                 <?php _e('Yêu cầu báo giá', 'hacoled'); ?>
               </a>
               <a href="tel:0342324488" class="flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-[10px] uppercase py-3 rounded-xl tracking-wider shadow-md transition-all duration-300">

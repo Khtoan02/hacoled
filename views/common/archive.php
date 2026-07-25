@@ -68,7 +68,7 @@ if ($popular_posts_query->have_posts()) {
       <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-accent-gold via-amber-300 to-accent-gold"></div>
       
       <!-- Dong Son circular pattern (subtle overlay) -->
-      <div class="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 w-[420px] h-[420px] opacity-[0.06] bg-dongson pointer-events-none" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.png'); filter: invert(1);"></div>
+      <div class="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 w-[420px] h-[420px] opacity-[0.06] bg-dongson pointer-events-none" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.webp'); filter: invert(1);"></div>
 
       <div class="max-w-4xl space-y-4 relative z-10">
         <div class="flex items-center gap-2">
@@ -258,7 +258,7 @@ if ($popular_posts_query->have_posts()) {
           </div>
           
           <div class="pt-4 relative z-10">
-            <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" 
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>"
                class="inline-flex items-center justify-center gap-2 bg-white hover:bg-accent-gold hover:text-slate-950 text-slate-900 font-black text-[10px] uppercase tracking-wider px-5 py-2.5 rounded-xl transition-all duration-300 w-full text-center">
               <?php _e('Yêu cầu báo giá ngay', 'hacoled'); ?>
               <i class="ph-bold ph-arrow-right"></i>

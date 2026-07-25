@@ -1,4 +1,4 @@
-    <script>
+    <script<?php echo wp_is_mobile() ? ' type="text/plain" data-hacoled-deferred-script' : ''; ?>>
     (function() {
         var COLOR_MAIN  = '#d32f2f';
         var COLOR_ALT   = '#dfb931';

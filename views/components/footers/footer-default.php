@@ -6,7 +6,7 @@
   
   <!-- Dong Son Bronze Drum watermark background -->
   <div class="absolute top-1/2 -translate-y-1/2 -right-[15%] w-[1300px] max-w-[150%] h-[1300px] bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
-       style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.20;">
+       style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.20;">
   </div>
 
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
@@ -46,7 +46,7 @@
       <div class="space-y-4">
         <a class="inline-block -mt-6 -mb-4" href="<?php echo esc_url(home_url('/')); ?>">
           <img class="w-[220px] h-auto object-contain transition-all duration-300 hover:scale-[1.02] rounded" 
-               src="<?php echo esc_url(home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png')); ?>" alt="HacoLED Logo" />
+               src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-haco.png'); ?>" alt="Logo HacoLED tại chân trang" loading="lazy" decoding="async" />
         </a>
         <p class="text-sm text-slate-200">
           <?php _e('Công ty CP Công Nghệ HACO Việt Nam - Đơn vị tiên phong cung cấp giải pháp màn hình LED và thiết bị công nghệ hiển thị cao cấp.', 'hacoled'); ?>
@@ -108,6 +108,19 @@
              href="https://www.linkedin.com/in/hacoled/" target="_blank" rel="noopener" aria-label="LinkedIn">
             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
           </a>
+        </div>
+
+        <!-- Compact share actions: separate from profile links for clear social intent. -->
+        <div class="pt-3" aria-label="Chia sẻ trang HacoLED">
+          <p class="mb-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Chia sẻ HacoLED</p>
+          <div class="flex flex-wrap gap-2">
+            <a class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-[11px] text-slate-300 transition-colors hover:border-accent-gold hover:text-accent-gold"
+               href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode(home_url('/')); ?>" target="_blank" rel="noopener noreferrer nofollow" aria-label="Chia sẻ HacoLED lên Facebook">Facebook</a>
+            <a class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-[11px] text-slate-300 transition-colors hover:border-accent-gold hover:text-accent-gold"
+               href="https://twitter.com/intent/tweet?url=<?php echo rawurlencode(home_url('/')); ?>&amp;text=<?php echo rawurlencode(get_bloginfo('name')); ?>" target="_blank" rel="noopener noreferrer nofollow" aria-label="Chia sẻ HacoLED lên X">X</a>
+            <a class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1.5 text-[11px] text-slate-300 transition-colors hover:border-accent-gold hover:text-accent-gold"
+               href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo rawurlencode(home_url('/')); ?>" target="_blank" rel="noopener noreferrer nofollow" aria-label="Chia sẻ HacoLED lên LinkedIn">LinkedIn</a>
+          </div>
         </div>
       </div>
 
@@ -201,7 +214,7 @@
         
         <ul class="space-y-3">
           <li>
-            <a class="flex items-center gap-2 text-sm text-slate-200 hover:text-accent-gold transition-colors" href="https://hacoled.com/gioi-thieu/">
+            <a class="flex items-center gap-2 text-sm text-slate-200 hover:text-accent-gold transition-colors" href="<?php echo esc_url(hacoled_managed_page_url('about')); ?>">
               <span class="w-1.5 h-1.5 bg-accent-gold/40 rounded-full"></span>
               <?php _e('Giới thiệu về HacoLED', 'hacoled'); ?>
             </a>
@@ -219,7 +232,7 @@
             </a>
           </li>
           <li>
-            <a class="flex items-center gap-2 text-sm text-slate-200 hover:text-accent-gold transition-colors" href="https://hacoled.com/lien-he/">
+            <a class="flex items-center gap-2 text-sm text-slate-200 hover:text-accent-gold transition-colors" href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>">
               <span class="w-1.5 h-1.5 bg-accent-gold/40 rounded-full"></span>
               <?php _e('Liên hệ với chúng tôi', 'hacoled'); ?>
             </a>
@@ -231,7 +244,7 @@
           <a class="inline-block hover:opacity-85 transition-opacity" 
              href="https://www.dmca.com/Protection/Status.aspx?ID=4a1eb724-aeb4-4217-a7c4-a41a8aa95f1b&amp;refurl=https://hacoled.com/" 
              target="_blank" rel="nofollow noopener noreferrer">
-            <img class="h-8 w-auto" src="<?php echo get_template_directory_uri(); ?>/assets/images/dmca-badge.png" alt="DMCA.com Protection Status" />
+            <img class="h-8 w-auto" src="<?php echo get_template_directory_uri(); ?>/assets/images/dmca-badge.webp" alt="DMCA.com Protection Status" />
           </a>
         </div>
       </div>
@@ -250,12 +263,12 @@
 
 <?php
 // Define local variables for mobile bar
-$footer_about_url    = home_url('/gioi-thieu/');
-$footer_services_url = home_url('/dich-vu/');
-$footer_contact_url  = home_url('/lien-he/');
-$footer_news_url     = home_url('/tin-tuc/');
-$footer_commitment_url = home_url('/cam-ket-chat-luong/');
-$footer_careers_url  = home_url('/tuyen-dung/');
+$footer_about_url      = hacoled_managed_page_url('about');
+$footer_services_url   = hacoled_managed_page_url('services');
+$footer_contact_url    = hacoled_managed_page_url('contact');
+$footer_news_url       = hacoled_managed_page_url('blog');
+$footer_commitment_url = hacoled_managed_page_url('commitment');
+$footer_careers_url    = hacoled_managed_page_url('careers');
 
 $footer_about_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/about.php'));
 if (!empty($footer_about_pages)) $footer_about_url = get_permalink($footer_about_pages[0]->ID);
@@ -303,6 +316,7 @@ $footer_jobs = get_posts($footer_job_args);
       
       <!-- Tab 1: Trang chủ -->
       <a href="<?php echo esc_url(home_url('/')); ?>" 
+         aria-label="Trang chủ HacoLED"
          class="flex items-center justify-center w-16 h-full transition-all duration-200"
          :class="activeDrawer === null && (window.location.pathname === '/' || window.location.pathname === '/index.php') ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
         <i class="text-[26px]" :class="activeDrawer === null && (window.location.pathname === '/' || window.location.pathname === '/index.php') ? 'ph-fill ph-house' : 'ph-bold ph-house'"></i>
@@ -310,6 +324,7 @@ $footer_jobs = get_posts($footer_job_args);
 
       <!-- Tab 2: Sản phẩm -->
       <button @click="activeDrawer = activeDrawer === 'products' ? null : 'products'" 
+              type="button" aria-label="Mở danh mục sản phẩm"
               class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
               :class="activeDrawer === 'products' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
         <i class="text-[26px]" :class="activeDrawer === 'products' ? 'ph-fill ph-package' : 'ph-bold ph-package'"></i>
@@ -317,6 +332,7 @@ $footer_jobs = get_posts($footer_job_args);
 
       <!-- Tab 3: Blog -->
       <button @click="activeDrawer = activeDrawer === 'blog' ? null : 'blog'" 
+              type="button" aria-label="Mở Tin tức và Blog"
               class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
               :class="activeDrawer === 'blog' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
         <i class="text-[26px]" :class="activeDrawer === 'blog' ? 'ph-fill ph-newspaper' : 'ph-bold ph-newspaper'"></i>
@@ -324,6 +340,7 @@ $footer_jobs = get_posts($footer_job_args);
 
       <!-- Tab 4: Info -->
       <button @click="activeDrawer = activeDrawer === 'info' ? null : 'info'" 
+              type="button" aria-label="Mở thông tin liên hệ"
               class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
               :class="activeDrawer === 'info' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
         <i class="text-[26px]" :class="activeDrawer === 'info' ? 'ph-fill ph-info' : 'ph-bold ph-info'"></i>
@@ -331,6 +348,7 @@ $footer_jobs = get_posts($footer_job_args);
 
       <!-- Tab 5: Menu -->
       <button @click="activeDrawer = activeDrawer === 'menu' ? null : 'menu'" 
+              type="button" aria-label="Mở menu điều hướng"
               class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
               :class="activeDrawer === 'menu' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
         <i class="text-[26px]" :class="activeDrawer === 'menu' ? 'ph-fill ph-list' : 'ph-bold ph-list'"></i>
@@ -351,7 +369,7 @@ $footer_jobs = get_posts($footer_job_args);
     
     <!-- Dong Son Bronze Drum watermark background -->
     <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
-         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+         style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
     </div>
 
     <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
@@ -359,7 +377,7 @@ $footer_jobs = get_posts($footer_job_args);
       <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
         <i class="ph-fill ph-package text-lg"></i> Danh Mục Sản Phẩm
       </h3>
-      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+      <button type="button" @click="activeDrawer = null" aria-label="Đóng danh mục sản phẩm" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
         <i class="ph-bold ph-x"></i>
       </button>
     </div>
@@ -430,7 +448,7 @@ $footer_jobs = get_posts($footer_job_args);
     
     <!-- Dong Son Bronze Drum watermark background -->
     <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
-         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+         style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
     </div>
 
     <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
@@ -438,7 +456,7 @@ $footer_jobs = get_posts($footer_job_args);
       <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
         <i class="ph-fill ph-article text-lg"></i> Tin Tức & Blog
       </h3>
-      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+      <button type="button" @click="activeDrawer = null" aria-label="Đóng Tin tức và Blog" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
         <i class="ph-bold ph-x"></i>
       </button>
     </div>
@@ -501,7 +519,7 @@ $footer_jobs = get_posts($footer_job_args);
     
     <!-- Dong Son Bronze Drum watermark background -->
     <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
-         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+         style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
     </div>
 
     <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
@@ -509,7 +527,7 @@ $footer_jobs = get_posts($footer_job_args);
       <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
         <i class="ph-fill ph-info text-lg"></i> Thông Tin Liên Hệ
       </h3>
-      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+      <button type="button" @click="activeDrawer = null" aria-label="Đóng thông tin liên hệ" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
         <i class="ph-bold ph-x"></i>
       </button>
     </div>
@@ -519,7 +537,7 @@ $footer_jobs = get_posts($footer_job_args);
       <div class="flex flex-col items-center text-center space-y-4 pb-5 border-b border-white/10">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="inline-block">
           <img class="w-[180px] h-auto object-contain rounded shadow-sm" 
-               src="<?php echo esc_url(home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png')); ?>" alt="HacoLED Logo" />
+               src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-haco.png'); ?>" alt="Logo HacoLED trong bảng liên hệ di động" loading="lazy" decoding="async" />
         </a>
         <p class="text-xs text-white/70 leading-relaxed max-w-xs">
           <?php _e('Công ty CP Công Nghệ HACO Việt Nam - Đơn vị tiên phong cung cấp giải pháp màn hình LED và thiết bị công nghệ hiển thị cao cấp.', 'hacoled'); ?>
@@ -620,7 +638,7 @@ $footer_jobs = get_posts($footer_job_args);
     
     <!-- Dong Son Bronze Drum watermark background -->
     <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen z-0" 
-         style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg/960px-Tr%E1%BB%91ng_%C4%91%E1%BB%93ng_%C4%90%C3%B4ng_S%C6%A1n.svg.png'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
+         style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%); opacity: 0.05;">
     </div>
 
     <div class="w-12 h-1.5 bg-white/20 rounded-full mx-auto my-3 shrink-0 cursor-pointer relative z-10" @click="activeDrawer = null"></div>
@@ -628,7 +646,7 @@ $footer_jobs = get_posts($footer_job_args);
       <h3 class="text-base font-extrabold uppercase tracking-wider text-[#fbbf24] flex items-center gap-2">
         <i class="ph-fill ph-list text-lg"></i> Menu Điều Hướng
       </h3>
-      <button @click="activeDrawer = null" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
+      <button type="button" @click="activeDrawer = null" aria-label="Đóng menu điều hướng" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors">
         <i class="ph-bold ph-x"></i>
       </button>
     </div>
@@ -637,7 +655,7 @@ $footer_jobs = get_posts($footer_job_args);
       <!-- Search Mobile -->
       <div class="pb-3 border-b border-white/10 mb-4">
         <form method="get" action="<?php echo esc_url(home_url('/')); ?>" class="relative">
-          <input type="search" name="s" placeholder="Tìm kiếm sản phẩm, dịch vụ..." class="w-full rounded-xl pl-10 pr-4 py-2.5 text-[13px] text-white placeholder-white/60 bg-white/5 border border-white/15 focus:outline-none focus:border-[#fbbf24] focus:bg-white/10 transition-all" />
+          <input type="search" name="s" autocomplete="off" aria-label="Tìm kiếm sản phẩm và dịch vụ" placeholder="Tìm kiếm sản phẩm, dịch vụ..." class="w-full rounded-xl pl-10 pr-4 py-2.5 text-[13px] text-white placeholder-white/60 bg-white/5 border border-white/15 focus:outline-none focus:border-[#fbbf24] focus:bg-white/10 transition-all" />
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-white/50">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.602 10.602z"/></svg>
           </span>
@@ -734,7 +752,7 @@ $footer_jobs = get_posts($footer_job_args);
               echo '<p class="text-xs text-white/40 py-2">Không có vị trí tuyển dụng mới...</p>';
           }
           ?>
-          <a href="<?php echo home_url('/tuyen-dung/'); ?>" class="block py-2 text-xs font-bold text-[#fbbf24] mt-1">Xem tất cả cơ hội tuyển dụng →</a>
+          <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" class="block py-2 text-xs font-bold text-[#fbbf24] mt-1">Xem tất cả cơ hội tuyển dụng →</a>
         </div>
       </div>
 
@@ -749,7 +767,7 @@ $footer_jobs = get_posts($footer_job_args);
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "HACOLED",
-  "image": "<?php echo esc_url(home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png')); ?>",
+  "image": "<?php echo esc_url(get_template_directory_uri() . '/assets/images/logo-haco.png'); ?>",
   "@id": "https://hacoled.com/#organization",
   "url": "https://hacoled.com/",
   "telephone": "0342324488",
@@ -762,6 +780,12 @@ $footer_jobs = get_posts($footer_job_args);
   },
   "taxID": "0108701064",
   "email": "kinhdoanh@hacoled.com",
+  "sameAs": [
+    "https://www.facebook.com/hacoled",
+    "https://x.com/HacoLed",
+    "https://www.youtube.com/@hacoled",
+    "https://www.linkedin.com/in/hacoled"
+  ],
   "contactPoint": [
     {
       "@type": "ContactPoint",

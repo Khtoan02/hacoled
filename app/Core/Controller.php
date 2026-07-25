@@ -6,6 +6,33 @@ namespace HacoLED\Theme\Core;
  */
 class Controller {
     /**
+     * Dispatch a universally assigned layout to its specialized controller.
+     */
+    protected function dispatchContentLayout($post_id) {
+        $action = LayoutRegistry::controllerActionFor($post_id);
+
+        if (!$action) {
+            return false;
+        }
+
+        $controller = new \HacoLED\Theme\Controllers\TemplateController();
+
+        if (!is_callable([$controller, $action])) {
+            return false;
+        }
+
+        $controller->{$action}();
+        return true;
+    }
+
+    /**
+     * Resolve a per-content layout while retaining a safe default view.
+     */
+    protected function resolveLayoutView($post_id, $default_view) {
+        return LayoutRegistry::resolve($post_id, $default_view);
+    }
+
+    /**
      * Render a view and extract variables
      * 
      * @param string $view Name of the view file (excluding .php extension)

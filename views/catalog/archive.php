@@ -34,7 +34,7 @@ $featured_projects = $featured_projects ?? [];
       
       <!-- Dong Son Drum chìm xoay chậm -->
       <div class="absolute z-0 pointer-events-none opacity-[0.05] right-[-100px] top-[-100px] w-[500px] h-[500px] bg-no-repeat bg-center bg-contain"
-           style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.png');">
+           style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.webp');">
       </div>
       
       <!-- Tech Grid overlay -->

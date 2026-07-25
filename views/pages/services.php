@@ -52,7 +52,7 @@ $this->renderHeader($header_type ?? 'default');
       <div class="lg:col-span-5 relative group gsap-reveal" data-direction="right" data-delay="0.3">
         <div class="absolute -inset-1 bg-gradient-to-r from-accent-red to-accent-gold rounded-3xl blur opacity-20 group-hover:opacity-35 transition-opacity"></div>
         <div class="relative w-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[16/10] shadow-lg">
-          <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-hero.png'); ?>" 
+          <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-hero.webp'); ?>" 
                alt="Hệ thống AV Pro HacoLED" 
                class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                fetchpriority="high"
@@ -85,7 +85,7 @@ $this->renderHeader($header_type ?? 'default');
         <!-- Indoor Class -->
         <div class="rounded-3xl bg-white border border-slate-200/80 shadow-md hover:border-accent-red/25 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group">
           <div class="relative aspect-[21/9] md:aspect-[16/7] overflow-hidden bg-slate-100 border-b border-slate-100">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-indoor.png'); ?>" 
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-indoor.webp'); ?>" 
                  alt="Màn hình LED trong nhà" 
                  class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
@@ -117,7 +117,7 @@ $this->renderHeader($header_type ?? 'default');
         <!-- Outdoor Class -->
         <div class="rounded-3xl bg-white border border-slate-200/80 shadow-md hover:border-accent-gold/25 hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group">
           <div class="relative aspect-[21/9] md:aspect-[16/7] overflow-hidden bg-slate-100 border-b border-slate-100">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-outdoor.png'); ?>" 
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-outdoor.webp'); ?>" 
                  alt="Màn hình LED ngoài trời" 
                  class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
@@ -263,7 +263,7 @@ $this->renderHeader($header_type ?? 'default');
                 </p>
               </div>
               <div class="w-full flex-grow flex items-center justify-center overflow-hidden rounded-2xl bg-slate-50 border border-slate-100 p-4">
-                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-blueprint.png'); ?>" 
+                <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-blueprint.webp'); ?>" 
                      alt="Bản vẽ kết cấu khung màn hình LED HacoLED" 
                      class="w-full max-h-[440px] object-contain rounded-lg">
               </div>
@@ -291,7 +291,7 @@ $this->renderHeader($header_type ?? 'default');
         <div class="lg:col-span-5 relative group gsap-reveal" data-direction="right" data-delay="0.2">
           <div class="absolute -inset-1 bg-gradient-to-r from-accent-gold to-yellow-500 rounded-3xl blur opacity-15 group-hover:opacity-30 transition-opacity"></div>
           <div class="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[16/10] shadow-lg">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-audio.png'); ?>" 
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-audio.webp'); ?>" 
                  alt="Hệ thống âm thanh đi kèm HacoLED" 
                  class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500">
           </div>
@@ -355,7 +355,7 @@ $this->renderHeader($header_type ?? 'default');
         <div class="lg:col-span-4 relative group gsap-reveal" data-direction="left" data-delay="0.2">
           <div class="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-400 rounded-3xl blur opacity-15 group-hover:opacity-35 transition-opacity"></div>
           <div class="relative w-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 aspect-[16/10] lg:aspect-[3/4] shadow-lg">
-            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-repair.png'); ?>" 
+            <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-repair.webp'); ?>" 
                  alt="Kỹ thuật viên sửa chữa màn hình LED" 
                  class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500">
           </div>
@@ -537,7 +537,7 @@ $this->renderHeader($header_type ?? 'default');
             <?php _e('Đội ngũ chuyên gia HacoLED luôn sẵn sàng hỗ trợ khảo sát mặt bằng thực địa tận nơi và lên bản vẽ thiết kế kỹ thuật hoàn toàn miễn phí. Cam kết cung cấp giải pháp trọn gói chất lượng cao nhất.', 'hacoled'); ?>
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <a href="<?php echo esc_url(home_url('/lien-he/')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
               <?php _e('Yêu cầu báo giá', 'hacoled'); ?>
               <i class="ph-bold ph-arrow-right text-[11px]"></i>
             </a>

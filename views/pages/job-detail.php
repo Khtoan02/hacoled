@@ -28,7 +28,7 @@
         </span>
         <span class="text-slate-400">/</span>
         <span>
-          <a href="<?php echo esc_url(home_url('/tuyen-dung/')); ?>" class="text-slate-500 hover:text-accent-gold transition-colors">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('careers')); ?>" class="text-slate-500 hover:text-accent-gold transition-colors">
             <?php _e('Tuyển dụng', 'hacoled'); ?>
           </a>
         </span>

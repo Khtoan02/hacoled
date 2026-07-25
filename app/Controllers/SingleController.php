@@ -11,6 +11,10 @@ class SingleController extends Controller {
      * Show single details page
      */
     public function show() {
+        if ($this->dispatchContentLayout(get_queried_object_id())) {
+            return;
+        }
+
         $post_data = [];
         if (have_posts()) {
             while (have_posts()) {
@@ -53,7 +57,9 @@ class SingleController extends Controller {
             ];
         }
 
-        $this->render('common/single', [
+        $view = $this->resolveLayoutView($post_data['id'], 'common/single');
+
+        $this->render($view, [
             'post'        => $post_data,
             'header_type' => 'default',
             'footer_type' => 'default'

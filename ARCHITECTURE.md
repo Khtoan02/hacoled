@@ -14,15 +14,17 @@ HacoLED is a classic WordPress theme with a lightweight MVC-style application la
 
 - `app/Core`: autoloading, controller rendering, and shared infrastructure.
 - `app/Controllers`: request-specific orchestration.
+- `app/Admin`: capability- and nonce-protected theme administration screens.
+- `app/Config`: centralized theme configuration such as managed page titles, slugs, and templates.
 - `app/Models`: normalized read access to WordPress and WooCommerce data.
 - `app/Repositories`: query collections used by controllers and catalog pages.
 - `app/Support`: native WordPress hooks and compatibility callbacks.
-- `views/pages`: complete page views.
+- `page-templates`: thin, selectable WordPress page-template entry files; each file contains a `Template Name` header and delegates to a controller.
+- `views/pages`: complete presentation views for custom pages; these files contain markup and are never selected directly by WordPress.
 - `views/common`: shared WordPress archive, page, and single views.
 - `views/components`: reusable UI fragments.
 - `views/catalog`: controller-owned shop, taxonomy, and product page views.
 - `woocommerce`: WooCommerce template overrides only.
-- `page-templates`: selectable custom WordPress page templates.
 - `src`: editable frontend source.
 - `assets`: compiled, deployable frontend assets.
 
@@ -51,9 +53,31 @@ HacoLED is a classic WordPress theme with a lightweight MVC-style application la
 - `404.php`: not-found response.
 - `page.php`, `single.php`, `archive.php`, `category.php`: native hierarchy entries.
 - `taxonomy-product_cat.php`: required WooCommerce taxonomy entry; it routes to `ProductController`.
-- `page-templates/*`: templates selected explicitly in the WordPress page editor.
-- Root `template-*.php` files are compatibility routers for assignments created before this structure; do not add new template headers to them.
+- `page-templates/*`: selectable route files discovered by WordPress. They must remain thin and call `TemplateController`.
+- `views/pages/*`: page markup rendered by `TemplateController`; these files must not contain `Template Name` headers.
+- Legacy root `template-*.php` assignments are migrated once by `app/Support/theme-upgrades.php` and must not be recreated.
 - Product templates route through `ProductController` and WooCommerce APIs.
+
+Managed page slug defaults live in `app/Config/pages.php`. Administrators can override them per site from **Appearance > Trang HacoLED**, save without applying, or synchronize the new slugs to existing pages. Overrides are stored in the `hacoled_managed_page_slugs` option; tracked page IDs prevent duplicates when a slug changes.
+
+## Per-content layouts
+
+Page, Post, Product, Job, and future post types share one universal catalog in the **Giao diện HacoLED** editor meta box. A layout can be assigned to exactly one content item globally. The selector shows the current layout and all unassigned layouts; layouts owned by another Page, Post, Product, or Job are omitted. The selected stable key is stored in `_hacoled_content_layout` and ownership is validated again on save.
+
+To add a layout:
+
+1. Create its presentation file under `views/`.
+2. Register its stable key, label, and description once in `app/Config/layouts.php`.
+3. Add a renderer: use a `controller_action` for a fully custom template flow, or a post-type implementation with `type = view`; native Page routers use `type = page_template`.
+4. Select it on the individual content edit screen.
+
+Never branch on hard-coded post or product IDs inside views or controllers.
+
+## Page template flow
+
+`page-templates/about.php` -> `TemplateController::about()` -> `views/pages/about.php`
+
+This split is intentional: WordPress needs a discoverable template entry, while the MVC presentation layer belongs in `views`.
 
 ## Update checklist
 

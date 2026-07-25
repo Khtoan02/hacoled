@@ -8,6 +8,10 @@ use HacoLED\Theme\Core\Controller;
  */
 class PageController extends Controller {
     public function show() {
+        if ($this->dispatchContentLayout(get_queried_object_id())) {
+            return;
+        }
+
         $page = [
             'id'        => 0,
             'title'     => __('Trang chi tiết', 'hacoled'),
@@ -25,7 +29,9 @@ class PageController extends Controller {
             ];
         }
 
-        $this->render('common/page', [
+        $view = $this->resolveLayoutView($page['id'], 'common/page');
+
+        $this->render($view, [
             'page'        => $page,
             'header_type' => 'default',
             'footer_type' => 'default',
