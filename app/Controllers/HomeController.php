@@ -27,7 +27,7 @@ class HomeController extends Controller {
             'designer_contact'  => 'https://facebook.com/khanhtoan678',
             'products'          => $products,
             'posts'             => $posts,
-            'header_type'       => 'transparent', // Can change to 'default' or custom header layout
+            'header_type'       => 'default', // Can change to 'default' or custom header layout
             'footer_type'       => 'default'       // Can change to 'minimal' or custom footer layout
         ]);
     }
