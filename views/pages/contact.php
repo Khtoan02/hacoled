@@ -219,7 +219,7 @@ $this->renderHeader($header_type ?? 'default');
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-accent-gold inline-block"></span><?php _e('Trụ sở / CN chính', 'hacoled'); ?></span>
             <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-accent-red inline-block"></span><?php _e('CN Kỹ thuật', 'hacoled'); ?></span>
           </div>
-          <span class="hidden sm:inline font-mono text-[9px] tracking-wider text-slate-500 uppercase"><?php _e('HACOLED TELEMETRY MAPPING OK', 'hacoled'); ?></span>
+          <span class="block font-mono text-[8px] sm:text-[9px] tracking-wider text-slate-500 uppercase text-right"><?php _e('HACOLED TELEMETRY MAPPING OK', 'hacoled'); ?></span>
         </div>
       </div>
     </div>

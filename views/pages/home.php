@@ -392,8 +392,7 @@ function haco_render_product_slides($categories) {
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,#4A0404_0%,#0A0000_70%)]"></div>
 
   <!-- Lớp 1: Ảnh nền mờ -->
-  <?php if (!wp_is_mobile()) : ?>
-  <div class="hidden lg:block absolute inset-0 z-0 opacity-[0.15] mix-blend-luminosity">
+  <div class="absolute inset-0 z-0 opacity-[0.08] sm:opacity-[0.12] lg:opacity-[0.15] mix-blend-luminosity">
       <img src="<?php echo esc_url(get_theme_mod('hacoled_hero_bg') ?: get_template_directory_uri() . '/assets/images/services-hero.webp'); ?>"
            alt="Đội ngũ HacoLED" class="w-full h-full object-cover" style="object-position: center 30%;"
            fetchpriority="high" decoding="async"
@@ -401,7 +400,6 @@ function haco_render_product_slides($categories) {
       <div class="absolute inset-0 bg-gradient-to-r from-[#0A0000] via-[#0A0000]/80 to-transparent"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-[#0A0000] via-transparent to-[#0A0000]/80"></div>
   </div>
-  <?php endif; ?>
 
   <!-- Lớp 2: Tech Grid -->
   <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:40px_40px] z-0 pointer-events-none"></div>
@@ -432,7 +430,7 @@ function haco_render_product_slides($categories) {
     </h1>
 
     <!-- Description -->
-    <p class="hidden md:block animate-fade-in-up delay-200 text-gray-300 text-[14px] md:text-lg font-light mb-6 md:mb-10 leading-relaxed max-w-xl">
+    <p class="block animate-fade-in-up delay-200 text-gray-300 text-[13px] sm:text-[14px] md:text-lg font-light mb-6 md:mb-10 leading-relaxed max-w-xl">
         Với hàng ngàn dự án toàn quốc, HacoLED cam kết kiến tạo không gian hiển thị đỉnh cao, kết hợp chất lượng tốt nhất với chi phí tối ưu.
     </p>
 
@@ -453,7 +451,7 @@ function haco_render_product_slides($categories) {
     </div>
 
     <!-- Value Pillars: Friendly, Fast, Full -->
-    <div class="hidden md:flex animate-fade-in-up delay-400 flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-12 mt-12 pt-10 border-t border-white/10 w-full max-w-2xl shrink-0">
+    <div class="grid grid-cols-1 sm:grid-cols-3 animate-fade-in-up delay-400 items-start sm:items-center gap-3 md:gap-8 mt-7 md:mt-12 pt-6 md:pt-10 border-t border-white/10 w-full max-w-2xl shrink-0">
         <!-- Friendly -->
         <div class="flex items-center gap-3 shrink-0">
             <div class="w-10 h-10 rounded-xl bg-brand-gold/10 border border-brand-gold/20 flex items-center justify-center text-brand-gold shrink-0">
@@ -488,8 +486,7 @@ function haco_render_product_slides($categories) {
           </div>
 
           <!-- CỘT PHẢI: GALLERY 3D COVERFLOW (Giống chi tiết sản phẩm) -->
-          <?php if (!wp_is_mobile()) : ?>
-          <div class="hidden lg:flex w-full lg:w-[52%] flex-col justify-center relative select-none animate-fade-in-up delay-400">
+          <div class="flex w-full lg:w-[52%] flex-col justify-center relative select-none animate-fade-in-up delay-400">
               <?php
               $hero_slides = array();
               $default_slides = array(
@@ -856,12 +853,12 @@ function haco_render_product_slides($categories) {
                             </div>
                             <h2 id="<?php echo esc_attr('san-pham-' . sanitize_title($section['label'])); ?>" class="text-xl md:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-brand-text mb-0"><?php echo esc_html($section['label']); ?></h2>
                         </div>
-                        <p class="text-brand-muted text-xs md:text-sm leading-relaxed mb-0 hidden md:block"><?php echo esc_html($section['desc']); ?></p>
+                        <p class="text-brand-muted text-xs md:text-sm leading-relaxed mt-2 md:mt-0 mb-0"><?php echo esc_html($section['desc']); ?></p>
                     </div>
                     <div>
                         <!-- View All: Icon only on mobile, text + icon on desktop -->
-                        <a href="<?php echo esc_url($section['link']); ?>" class="inline-flex items-center justify-center w-10 h-10 md:w-auto md:px-5 md:py-2.5 border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white rounded-full transition-all text-xs md:text-sm font-bold uppercase tracking-wider group shrink-0" aria-label="<?php echo esc_attr('Xem tất cả ' . $section['label']); ?>">
-                            <span class="hidden md:inline mr-1.5">Xem tất cả <?php echo esc_html($section['label']); ?></span>
+                        <a href="<?php echo esc_url($section['link']); ?>" class="inline-flex items-center justify-center min-h-10 px-3 md:px-5 md:py-2.5 border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white rounded-full transition-all text-[10px] md:text-sm font-bold uppercase tracking-wider group shrink-0" aria-label="<?php echo esc_attr('Xem tất cả ' . $section['label']); ?>">
+                            <span class="mr-1.5">Xem tất cả <span class="hidden sm:inline"><?php echo esc_html($section['label']); ?></span></span>
                             <i class="ph-bold ph-arrow-right text-sm md:text-base group-hover:translate-x-0.5 transition-transform"></i>
                         </a>
                     </div>
@@ -1455,7 +1452,6 @@ function haco_render_product_slides($categories) {
           <div class="absolute -right-[20%] -bottom-[35%] w-[1000px] h-[1000px] bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen opacity-[0.15] z-0" 
                style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson-optimized.webp'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);">
           </div>
-          <?php endif; ?>
           
           <div class="relative z-10">
               <!-- Header -->
@@ -1564,7 +1560,7 @@ function haco_render_product_slides($categories) {
                                     <span class="text-white/60 text-xs font-medium"><?php echo esc_html($evt_featured['date']); ?></span>
                                 </div>
                                 <h3 class="text-xl md:text-2xl lg:text-3xl font-extrabold text-white leading-tight mb-2 group-hover:text-[#fbbf24] transition-colors duration-300"><?php echo esc_html($evt_featured['title']); ?></h3>
-                                <p class="text-white/50 text-sm leading-relaxed line-clamp-2 hidden md:block"><?php echo esc_html($evt_featured['excerpt']); ?></p>
+                                <p class="text-white/50 text-xs md:text-sm leading-relaxed line-clamp-2"><?php echo esc_html($evt_featured['excerpt']); ?></p>
                                 <div class="mt-4 inline-flex items-center gap-1.5 text-[#fbbf24] text-xs font-bold uppercase tracking-wider group-hover:gap-3 transition-all duration-300">
                                     Chi tiết sự kiện <i class="ph-bold ph-arrow-right"></i>
                                 </div>
@@ -1587,7 +1583,7 @@ function haco_render_product_slides($categories) {
                                         <span class="text-gray-400 text-[10px] font-medium"><?php echo esc_html($item['date']); ?></span>
                                     </div>
                                     <h3 class="text-sm font-bold text-gray-900 leading-snug line-clamp-2 group-hover:text-[#b31217] transition-colors duration-200"><?php echo esc_html($item['title']); ?></h3>
-                                    <p class="text-xs text-gray-500 leading-relaxed line-clamp-1 mt-1 hidden md:block"><?php echo esc_html($item['excerpt']); ?></p>
+                                    <p class="text-xs text-gray-500 leading-relaxed line-clamp-2 md:line-clamp-1 mt-1"><?php echo esc_html($item['excerpt']); ?></p>
                                 </div>
                             </a>
                             <?php endfor; ?>
@@ -1774,7 +1770,7 @@ function haco_render_product_slides($categories) {
         </section>
 
     </main>
-    <script<?php echo wp_is_mobile() ? ' type="text/plain" data-hacoled-deferred-script' : ''; ?>>
+    <script>
         // 1. DỮ LIỆU DỰ ÁN VÀ BÁO CHÍ
         <?php
         $customizer_projects = array();
@@ -1995,7 +1991,7 @@ function haco_render_product_slides($categories) {
                         </div>` : ''}
                         <div class="absolute bottom-0 left-0 right-0 z-10 p-3 ${isHero ? 'md:p-5' : 'md:p-3'}">
                             <h3 class="font-heading ${titleSize} font-bold text-white leading-snug line-clamp-2 group-hover:text-brand-gold transition-colors duration-300">${p.title}</h3>
-                            ${isHero ? `<p class="text-white/50 text-xs mt-1 line-clamp-1 hidden md:block">${p.desc}</p>` : ''}
+                            ${isHero ? `<p class="text-white/50 text-xs mt-1 line-clamp-2 md:line-clamp-1">${p.desc}</p>` : ''}
                         </div>
                         <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             <span class="inline-flex items-center gap-1.5 bg-white/95 text-brand-red text-[11px] font-extrabold uppercase tracking-wider px-4 py-2 rounded-full shadow-xl backdrop-blur">

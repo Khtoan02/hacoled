@@ -56,6 +56,24 @@
     background: linear-gradient(180deg, #f8f6f5 0%, #f4f2f1 40%, #f7f5f4 70%, #faf9f8 100%);
   }
 
+  @media (max-width: 1023px) {
+    body {
+      /* Reserve room for the shared fixed mobile navigation on every page. */
+      padding-bottom: calc(4rem + env(safe-area-inset-bottom));
+      overflow-x: clip;
+    }
+
+    .haco-desktop-navigation {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .haco-mobile-navigation {
+      display: none !important;
+    }
+  }
+
   /* Title (Tiêu đề chính): weight 900 */
   h1, .hero-title, .section-title, .page-title, .site-title {
     font-family: var(--font-title);

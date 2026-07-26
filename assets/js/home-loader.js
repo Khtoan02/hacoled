@@ -47,4 +47,18 @@
       capture: true,
     });
   });
+
+  // Do not make complete styling or interactive sections depend on a user
+  // gesture. This short fallback keeps first paint light while guaranteeing
+  // that mobile visitors receive the same complete page as desktop.
+  const activatePage = () => {
+    activateStyles();
+    activateDeferredScripts();
+    loadBundle();
+  };
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(activatePage, { timeout: 1200 });
+  } else {
+    window.setTimeout(activatePage, 900);
+  }
 })();

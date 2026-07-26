@@ -70,20 +70,20 @@ $price_html = $product->get_price_html();
                 <!-- Row 1: Full Title + Brand Badge -->
                 <div class="flex items-center gap-2 sm:gap-3 min-w-0">
                     <span class="text-slate-900 font-bold text-xs sm:text-base lg:text-lg tracking-tight leading-snug truncate lg:whitespace-normal"><?php the_title(); ?></span>
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider shrink-0 shadow-xs hidden sm:inline-flex">
+                    <span class="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-[8px] sm:text-[10px] font-extrabold uppercase tracking-wider shrink-0 shadow-xs">
                         <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Chính Hãng
                     </span>
                 </div>
 
-                <!-- Row 2: Desktop Badges (CO/CQ, Bảo hành, Vẽ 3D) -->
-                <div class="hidden lg:flex items-center gap-2">
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-[11px] font-semibold">
+                <!-- Row 2: Trust badges, kept available at every viewport -->
+                <div class="flex items-center gap-1 lg:gap-2 overflow-x-auto no-scrollbar max-w-full">
+                    <span class="inline-flex items-center gap-1 px-1.5 lg:px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-[8px] sm:text-[9px] lg:text-[11px] font-semibold whitespace-nowrap">
                         <i class="ph-bold ph-shield-check text-emerald-600"></i> CO/CQ đầy đủ
                     </span>
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200/70 text-[11px] font-semibold">
+                    <span class="inline-flex items-center gap-1 px-1.5 lg:px-2 py-0.5 rounded-md bg-amber-50 text-amber-700 border border-amber-200/70 text-[8px] sm:text-[9px] lg:text-[11px] font-semibold whitespace-nowrap">
                         <i class="ph-bold ph-star text-amber-600"></i> Bảo hành 24–36T
                     </span>
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 border border-sky-200/70 text-[11px] font-semibold">
+                    <span class="inline-flex items-center gap-1 px-1.5 lg:px-2 py-0.5 rounded-md bg-sky-50 text-sky-700 border border-sky-200/70 text-[8px] sm:text-[9px] lg:text-[11px] font-semibold whitespace-nowrap">
                         <i class="ph-bold ph-package text-sky-600"></i> Thiết kế 3D Free
                     </span>
                 </div>

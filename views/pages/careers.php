@@ -62,7 +62,7 @@
         </div>
         
         <!-- Floating Stat -->
-        <div class="absolute -bottom-6 -left-6 p-5 rounded-2xl glass-card border border-white/60 shadow-xl bg-white/90 backdrop-blur-md hidden sm:block">
+        <div class="absolute bottom-3 left-3 sm:-bottom-6 sm:-left-6 p-3 sm:p-5 rounded-2xl glass-card border border-white/60 shadow-xl bg-white/90 backdrop-blur-md">
           <div class="text-3xl font-black text-brand-red font-mono">100+</div>
           <div class="text-xs font-bold text-slate-700 uppercase tracking-widest mt-1">Thành viên ưu tú</div>
         </div>

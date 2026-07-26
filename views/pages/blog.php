@@ -335,7 +335,7 @@ document.addEventListener('error', function(event) {
       <a href="<?php echo esc_url(home_url('/')); ?>" class="hover:text-brand-red transition-colors"><?php _e('Trang chủ', 'hacoled'); ?></a>
       <span class="text-slate-300">/</span>
       <span class="text-brand-text"><?php _e('HacoLED Journal', 'hacoled'); ?></span>
-      <span class="ml-auto hidden md:inline-flex items-center gap-2 rounded-full bg-white/80 border border-slate-200 px-3 py-1 text-slate-500 tracking-wider">
+      <span class="ml-auto inline-flex items-center gap-2 rounded-full bg-white/80 border border-slate-200 px-2 sm:px-3 py-1 text-slate-500 tracking-wider">
         <span class="w-1.5 h-1.5 rounded-full bg-brand-red animate-pulse"></span>
         <?php echo esc_html($date_label); ?>
       </span>
@@ -499,10 +499,10 @@ document.addEventListener('error', function(event) {
               </div>
               <div class="relative z-10 mt-3 md:mt-4">
                 <p class="text-xs md:text-sm font-black uppercase tracking-tight text-brand-text leading-tight transition-colors group-hover:text-brand-red"><?php echo esc_html($meta['short']); ?></p>
-                <p class="mt-2 hidden md:line-clamp-2 text-[11px] leading-relaxed text-brand-muted"><?php echo esc_html($meta['desc']); ?></p>
+                <p class="mt-2 line-clamp-2 text-[11px] leading-relaxed text-brand-muted"><?php echo esc_html($meta['desc']); ?></p>
               </div>
               <div class="relative z-10 mt-3 md:mt-4 flex items-center justify-between border-t border-slate-100 pt-2.5 md:pt-3">
-                <span class="hidden md:inline text-[9px] font-black uppercase tracking-wider text-slate-400"><?php echo esc_html($meta['label']); ?></span>
+                <span class="inline text-[9px] font-black uppercase tracking-wider text-slate-400"><?php echo esc_html($meta['label']); ?></span>
                 <span class="inline-flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition-all group-hover:border-brand-red group-hover:bg-brand-red group-hover:text-white">
                   <i class="ph-bold ph-arrow-down text-xs"></i>
                 </span>
@@ -540,7 +540,7 @@ document.addEventListener('error', function(event) {
           <?php foreach (array_slice($project_posts, 1, 3) as $idx => $post): ?>
             <?php $render_compact_story_item($post, $idx + 1); ?>
           <?php endforeach; ?>
-          <div class="hidden sm:block rounded-2xl border border-brand-red/15 bg-brand-red/5 p-4">
+          <div class="block rounded-2xl border border-brand-red/15 bg-brand-red/5 p-4">
             <p class="text-[9px] font-black uppercase tracking-[0.2em] text-brand-red"><?php _e('Dự án tiêu biểu', 'hacoled'); ?></p>
             <div class="mt-3 grid grid-cols-3 gap-2 text-center">
               <div class="rounded-xl bg-white/80 p-3"><span class="block text-lg font-black text-brand-red"><?php echo esc_html(count($sections['projects'] ?? [])); ?></span><span class="text-[8px] font-bold uppercase text-slate-400"><?php _e('hồ sơ', 'hacoled'); ?></span></div>
@@ -577,7 +577,7 @@ document.addEventListener('error', function(event) {
           <?php endforeach; ?>
         </div>
       </div>
-      <aside class="hidden xl:block xl:col-span-4 space-y-4 xl:self-start">
+      <aside class="block xl:col-span-4 space-y-4 xl:self-start">
         <div class="rounded-3xl haco-brand-panel text-white border border-brand-gold/20 p-5 md:p-6 shadow-xl relative overflow-hidden">
           <div class="absolute right-[-60px] top-[-60px] w-44 h-44 opacity-[0.08] bg-dongson" style="background-image:url('<?php echo esc_url($theme_uri . '/assets/images/dongson.png'); ?>')"></div>
           <div class="relative z-10 space-y-4">
@@ -636,7 +636,7 @@ document.addEventListener('error', function(event) {
             </div>
             <div class="divide-y divide-slate-100">
               <?php foreach (array_slice($posts, 1, 4) as $idx => $post): ?>
-                <div class="<?php echo esc_attr($idx >= 2 ? 'hidden sm:flex' : 'flex'); ?> p-3 md:p-4 items-center gap-3 md:gap-4 hover:bg-slate-50/80 transition-colors group">
+                <div class="flex p-3 md:p-4 items-center gap-3 md:gap-4 hover:bg-slate-50/80 transition-colors group">
                   <img src="<?php echo esc_url($post['thumbnail']); ?>" alt="<?php echo esc_attr($post['title']); ?>" class="w-16 h-12 md:w-20 md:h-16 rounded-xl object-cover bg-slate-100 shrink-0">
                   <div class="min-w-0 flex-1">
                     <h4 class="text-xs font-extrabold leading-snug line-clamp-2 text-brand-text group-hover:text-brand-red transition-colors">
@@ -671,7 +671,7 @@ document.addEventListener('error', function(event) {
             <?php endforeach; ?>
           </div>
         </div>
-        <aside class="hidden sm:block lg:col-span-4 lg:self-start lg:sticky lg:top-28 rounded-3xl border border-slate-200 bg-white/85 shadow-sm p-6 space-y-5">
+        <aside class="block lg:col-span-4 lg:self-start lg:sticky lg:top-28 rounded-3xl border border-slate-200 bg-white/85 shadow-sm p-6 space-y-5">
           <div>
             <p class="text-[9px] font-black uppercase tracking-[0.22em] text-brand-red font-mono"><?php _e('Bản tin kỹ thuật', 'hacoled'); ?></p>
             <h3 class="mt-2 text-2xl font-black uppercase tracking-tight"><?php _e('Thông số cần nhớ', 'hacoled'); ?></h3>
@@ -756,7 +756,7 @@ document.addEventListener('error', function(event) {
           </button>
         </div>
         <div class="relative z-10 mt-auto pt-5">
-          <div class="hidden sm:grid grid-cols-3 gap-2">
+          <div class="grid grid-cols-3 gap-2">
             <div class="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur"><span class="block text-xl font-black text-brand-gold"><?php echo esc_html(count($sections['events'] ?? [])); ?></span><span class="text-[8px] font-bold uppercase text-white/55"><?php _e('tin', 'hacoled'); ?></span></div>
             <div class="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur"><span class="block text-xl font-black text-white">AV</span><span class="text-[8px] font-bold uppercase text-white/55"><?php _e('team', 'hacoled'); ?></span></div>
             <div class="rounded-2xl border border-white/10 bg-white/10 p-3 backdrop-blur"><span class="block text-xl font-black text-brand-gold">Q&A</span><span class="text-[8px] font-bold uppercase text-white/55"><?php _e('đào tạo', 'hacoled'); ?></span></div>
@@ -769,7 +769,7 @@ document.addEventListener('error', function(event) {
       </div>
       <div class="lg:col-span-7 rounded-3xl border border-slate-200 bg-white/85 shadow-sm overflow-hidden divide-y divide-slate-100">
         <?php foreach ($event_posts as $idx => $post): ?>
-          <div class="<?php echo esc_attr($idx >= 3 ? 'hidden sm:flex' : 'flex'); ?> p-4 md:p-5 items-center gap-4 group hover:bg-slate-50 transition-colors">
+          <div class="flex p-4 md:p-5 items-center gap-4 group hover:bg-slate-50 transition-colors">
             <img src="<?php echo esc_url($post['thumbnail']); ?>" alt="<?php echo esc_attr($post['title']); ?>" class="w-24 h-20 rounded-2xl object-cover bg-slate-100 shrink-0">
             <div class="flex-1 min-w-0">
               <p class="text-[9px] font-black uppercase tracking-wider text-brand-red"><?php echo esc_html($post['date']); ?></p>
@@ -778,7 +778,7 @@ document.addEventListener('error', function(event) {
               </h3>
               <p class="text-[11px] text-brand-muted line-clamp-1 mt-1"><?php echo esc_html($post['excerpt']); ?></p>
             </div>
-            <button @click.prevent='activePost = <?php echo $post_json($post); ?>; showDrawer = true' class="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 hover:bg-brand-red hover:text-white hover:border-brand-red transition-all">
+            <button @click.prevent='activePost = <?php echo $post_json($post); ?>; showDrawer = true' class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 hover:bg-brand-red hover:text-white hover:border-brand-red transition-all">
               <i class="ph-bold ph-eye text-xs"></i>
             </button>
           </div>

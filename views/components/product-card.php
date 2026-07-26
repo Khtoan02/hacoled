@@ -107,8 +107,8 @@ $in_stock     = true; // placeholder
               </div>
 
               <!-- Animation mở rộng mô tả (Chỉ hiển thị trên màn hình lớn) -->
-              <div class="hidden md:grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grid-rows-[0fr] opacity-0 mt-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 group-hover:mt-2">
-                <p class="text-[11px] md:text-xs text-gray-600 font-medium leading-relaxed overflow-hidden line-clamp-3">
+              <div class="grid transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] grid-rows-[1fr] opacity-100 mt-1.5 md:grid-rows-[0fr] md:opacity-0 md:mt-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100 md:group-hover:mt-2">
+                <p class="text-[10px] md:text-xs text-gray-600 font-medium leading-relaxed overflow-hidden line-clamp-2 md:line-clamp-3">
                   <?php echo wp_kses_post($description ?: 'Giải pháp hiển thị tích hợp hoàn chỉnh.'); ?>
                 </p>
               </div>

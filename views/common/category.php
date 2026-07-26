@@ -145,7 +145,7 @@ if ($popular_posts_query->have_posts()) {
         endforeach; ?>
       </div>
       
-      <span class="hidden md:inline-block text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php _e('Tự động cập nhật', 'hacoled'); ?></span>
+      <span class="inline-block text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php _e('Tự động cập nhật', 'hacoled'); ?></span>
     </div>
 
     <!-- ============================================== -->

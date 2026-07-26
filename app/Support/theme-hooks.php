@@ -103,7 +103,10 @@ function hacoled_scripts() {
         if (wp_is_mobile()) {
             $homepage_css = preg_replace('/@font-face\{[^}]*\}/', '', $homepage_css);
         }
-        $homepage_css .= '.home main>section:not(#hero-section),.home footer{content-visibility:auto;contain-intrinsic-size:auto 900px}';
+        // Keep mobile sections in the normal render flow so content never
+        // appears blank while the visitor is scrolling. Desktop can retain
+        // the off-screen paint optimization.
+        $homepage_css .= '@media (min-width:768px){.home main>section:not(#hero-section),.home footer{content-visibility:auto;contain-intrinsic-size:auto 900px}}';
         $homepage_css = str_replace(
             ['../fonts/', '../images/', 'assets/fonts/', 'assets/images/'],
             [

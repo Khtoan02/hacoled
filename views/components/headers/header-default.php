@@ -111,7 +111,7 @@
     class="site-header fixed top-0 left-0 z-[200] w-full transition-transform duration-500 ease-out"
     :class="scrolled ? 'translate-y-[-1px] is-scrolled' : ''">
 
-    <div class="hidden lg:block">
+    <div class="haco-desktop-navigation hidden lg:block">
 
       <!-- ══ Sắc nét Gold Line ══ -->
       <div class="h-[4px] w-full relative z-20 haco-gold-line"></div>
@@ -712,7 +712,7 @@
   $footer_jobs = get_posts($footer_job_args);
   ?>
   <!-- Mobile Bottom Navigation & Drawers (lg:hidden) -->
-  <div x-data="{ activeDrawer: null }" class="lg:hidden">
+  <div x-data="{ activeDrawer: null }" class="haco-mobile-navigation lg:hidden">
 
       <!-- Backdrop Overlay -->
       <div x-show="activeDrawer" x-cloak @click="activeDrawer = null"
@@ -724,7 +724,7 @@
 
       <!-- Bottom Navigation Bar -->
       <nav aria-label="Mobile Navigation"
-        class="fixed bottom-0 left-0 right-0 z-[210] bg-gradient-to-t from-[#7a080c] to-[#990d12] border-t border-white/10 shadow-[0_-5px_25px_rgba(0,0,0,0.3)]"
+        class="haco-mobile-bottom-bar fixed bottom-0 left-0 right-0 z-[210] bg-gradient-to-t from-[#7a080c] to-[#990d12] border-t border-white/10 shadow-[0_-5px_25px_rgba(0,0,0,0.3)]"
         style="padding-bottom: env(safe-area-inset-bottom);">
         <div class="flex justify-around items-center h-16 px-2">
 
@@ -737,7 +737,7 @@
           </a>
 
           <!-- Tab 2: Sản phẩm -->
-          <button @click="activeDrawer = activeDrawer === 'products' ? null : 'products'"
+          <button aria-label="Sản phẩm" @click="activeDrawer = activeDrawer === 'products' ? null : 'products'"
             class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
             :class="activeDrawer === 'products' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
             <i class="text-[26px]"
@@ -745,7 +745,7 @@
           </button>
 
           <!-- Tab 3: Blog -->
-          <button @click="activeDrawer = activeDrawer === 'blog' ? null : 'blog'"
+          <button aria-label="Blog" @click="activeDrawer = activeDrawer === 'blog' ? null : 'blog'"
             class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
             :class="activeDrawer === 'blog' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
             <i class="text-[26px]"
@@ -753,14 +753,14 @@
           </button>
 
           <!-- Tab 4: Info -->
-          <button @click="activeDrawer = activeDrawer === 'info' ? null : 'info'"
+          <button aria-label="Thông tin" @click="activeDrawer = activeDrawer === 'info' ? null : 'info'"
             class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
             :class="activeDrawer === 'info' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
             <i class="text-[26px]" :class="activeDrawer === 'info' ? 'ph-fill ph-info' : 'ph-bold ph-info'"></i>
           </button>
 
           <!-- Tab 5: Menu -->
-          <button @click="activeDrawer = activeDrawer === 'menu' ? null : 'menu'"
+          <button aria-label="Menu" @click="activeDrawer = activeDrawer === 'menu' ? null : 'menu'"
             class="flex items-center justify-center w-16 h-full transition-all duration-200 outline-none"
             :class="activeDrawer === 'menu' ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
             <i class="text-[26px]" :class="activeDrawer === 'menu' ? 'ph-fill ph-list' : 'ph-bold ph-list'"></i>
