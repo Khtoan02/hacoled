@@ -29,117 +29,132 @@ $latest_articles = $latest_articles ?? [];
 
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
 
-    <!-- Category Hero Header (Perfectly matched with Home Hero visual) -->
-    <div class="relative overflow-hidden rounded-3xl bg-[#0A0000] text-white p-8 md:p-12 lg:p-14 mb-8 shadow-2xl border border-white/5">
-      <!-- Lớp 0: Dynamic Gradient Background overlay -->
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,#4A0404_0%,#0A0000_80%)]"></div>
-      
-      <!-- Lớp 1: Lưới điện tử Tech Grid -->
-      <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:40px_40px] z-0 pointer-events-none"></div>
+    <!-- Category Hero Header (Privileges Card Style: Red & Gold Trống Đồng) -->
+    <div class="sp-privileges-card relative rounded-3xl p-6 md:p-10 lg:p-12 mb-8 overflow-hidden shadow-2xl">
+      <!-- Gold mat inner frame -->
+      <div class="sp-priv-red-mat"></div>
 
-      <!-- Lớp 2: Dong Son Drum chìm xoay chậm -->
-      <div class="absolute z-0 pointer-events-none opacity-[0.06] animate-[spin_60s_linear_infinite]"
-           style="width: 800px; height: 800px; top: 50%; right: -200px; transform: translateY(-50%); background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.webp'); background-repeat: no-repeat; background-position: center; background-size: contain; filter: invert(0.8) sepia(1) saturate(3) hue-rotate(-20deg);">
+      <!-- Trống đồng Đông Sơn image pattern overlay (Gold metallic filter) -->
+      <div class="absolute -right-20 -bottom-20 w-[480px] h-[480px] md:w-[620px] md:h-[620px] pointer-events-none z-0 overflow-hidden opacity-25">
+        <div class="w-full h-full bg-no-repeat bg-center bg-contain animate-[spin_120s_linear_infinite]"
+             style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);"></div>
       </div>
-      
-      <!-- Lớp 3: Ambient Light glows -->
-      <div class="absolute top-0 -left-20 w-[400px] h-[400px] bg-red-600/20 rounded-full blur-[100px] pointer-events-none z-0"></div>
-      <div class="absolute -bottom-20 -right-10 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-      <!-- Lớp 4: Nội dung chính -->
+      <!-- Base background gradient -->
+      <div class="absolute inset-0 bg-gradient-to-br from-[#a8031d] via-[#d90429] to-[#65000f] -z-10"></div>
+      
+      <!-- Gold radial ambient glow -->
+      <div class="absolute inset-0 -z-10 opacity-40" style="background:radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.4), transparent 70%);"></div>
+      
+      <!-- Gold glow orbs -->
+      <div class="absolute -top-20 -right-10 w-80 h-80 bg-[#FFD700] rounded-full opacity-[0.16] blur-[70px] pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-10 w-64 h-64 bg-[#FFA500] rounded-full opacity-[0.12] blur-[60px] pointer-events-none"></div>
+      
+      <!-- Glossy sweep -->
+      <div class="absolute inset-0 sp-priv-gloss pointer-events-none"></div>
+      
+      <!-- Top specular hairline -->
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+
+      <!-- Content Container -->
       <div class="relative z-10 max-w-4xl">
         <!-- Breadcrumb (Clean & Minimal) -->
-        <nav class="text-[11px] md:text-xs text-slate-400 mb-6 flex flex-wrap items-center gap-2 font-medium uppercase tracking-wider">
+        <nav class="text-[11px] md:text-xs text-[#FFF3D1]/80 mb-5 flex flex-wrap items-center gap-2 font-medium uppercase tracking-wider">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="hover:text-white transition-colors">Trang chủ</a>
-          <i class="ph ph-caret-right text-[10px] text-slate-500"></i>
+          <i class="ph ph-caret-right text-[10px] text-[#FFD700]/70"></i>
           <?php
           if ( $current_term instanceof WP_Term ) {
               foreach ( $breadcrumbs as $breadcrumb ) {
                   echo '<a href="' . esc_url( $breadcrumb['url'] ) . '" class="hover:text-white transition-colors">' . esc_html( $breadcrumb['name'] ) . '</a>';
-                  echo '<i class="ph ph-caret-right text-[10px] text-slate-500"></i>';
+                  echo '<i class="ph ph-caret-right text-[10px] text-[#FFD700]/70"></i>';
               }
-              echo '<span class="text-white">' . esc_html($current_term->name) . '</span>';
+              echo '<span class="text-white font-bold">' . esc_html($current_term->name) . '</span>';
           } else {
-              echo '<span class="text-white">Danh mục sản phẩm</span>';
+              echo '<span class="text-white font-bold">Danh mục sản phẩm</span>';
           }
           ?>
         </nav>
         
-        <!-- Tagline badge -->
-        <div class="flex items-center gap-3 px-5 py-2.5 mb-6 w-fit relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
-            <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[#F5A623] to-[#D90429] rounded-l-full"></div>
-            <i class="ph-fill ph-sparkle text-[#F5A623] animate-pulse text-base"></i>
-            <span class="text-gray-200 text-xs font-bold uppercase tracking-[0.2em]">Giải pháp hiển thị chuyên nghiệp</span>
+        <!-- Header Badge & Icon -->
+        <div class="flex flex-wrap items-center gap-3 mb-5">
+          <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center text-[#3a1f05] shadow-lg shrink-0"
+               style="background:linear-gradient(135deg,#ffffff,#ffe89c 45%,#ffd700 70%,#d49214); box-shadow: 0 4px 14px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.8);">
+            <i class="ph-bold ph-monitor text-lg md:text-xl text-[#851800]"></i>
+          </div>
+          <div class="flex items-center gap-2 border border-[#FFD700]/35 bg-[#000000]/30 backdrop-blur-md rounded-full px-4 py-1.5 shadow-sm">
+            <i class="ph-fill ph-sparkle text-[#FFD700] animate-pulse text-sm"></i>
+            <span class="text-[#FFE8A3] text-[11px] md:text-xs font-extrabold uppercase tracking-[0.18em]">Giải pháp hiển thị chuyên nghiệp</span>
+          </div>
         </div>
 
-        <!-- H1 Title -->
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-5 drop-shadow-lg leading-[1.15]">
-          <span class="relative inline-block">
-              <span class="absolute -inset-1 bg-gradient-to-r from-[#F5A623] via-yellow-300 to-[#D90429] blur-lg opacity-30"></span>
-              <span class="relative text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-[#F5A623] to-yellow-500">
-                <?php echo esc_html( $category_name ); ?>
-              </span>
-          </span>
+        <!-- H1 Title (Metallic Gold) -->
+        <h1 class="sp-priv-gold-text text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-4 drop-shadow-md">
+          <?php echo esc_html( $category_name ); ?>
         </h1>
         
         <!-- Description -->
         <?php if ( ! empty( $description ) ) : ?>
-          <p class="text-base md:text-lg text-gray-300 line-clamp-3 leading-relaxed font-light max-w-2xl">
+          <p class="text-xs md:text-sm lg:text-base text-[#FFF3D1] line-clamp-3 leading-relaxed font-medium max-w-3xl drop-shadow-sm">
             <?php echo wp_strip_all_tags( $description ); ?>
           </p>
         <?php endif; ?>
 
+        <!-- Shimmering hairline divider -->
+        <div class="sp-priv-gold-hairline sp-priv-shimmer my-6"></div>
+
         <!-- Service Experience 3T & CTAs -->
-        <div class="mt-8 pt-8 border-t border-white/10 relative z-10">
-          <h3 class="text-xs md:text-sm font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#F5A623] to-yellow-200 mb-5 uppercase tracking-[0.15em] flex items-center gap-2">
-            <i class="ph-fill ph-seal-check text-[#F5A623]"></i>
+        <div class="relative z-10">
+          <h3 class="text-xs md:text-sm font-extrabold text-[#FFE8A3] mb-4 uppercase tracking-[0.15em] flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg flex items-center justify-center border border-[#FFD700]/40 bg-[#000000]/25 shadow-sm">
+              <i class="ph-bold ph-shield-check text-[#FFD700] text-xs"></i>
+            </span>
             Trải nghiệm dịch vụ 3T: Tận Tâm - Nhanh Chóng - Trọn Vẹn
           </h3>
           
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6">
             <!-- Tận Tâm -->
-            <div class="flex flex-col gap-2">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#D90429] to-red-600 flex items-center justify-center shrink-0 shadow-lg shadow-red-500/20 border border-red-400/20">
-                  <i class="ph-bold ph-heart text-white text-sm"></i>
-                </div>
-                <span class="font-extrabold text-white uppercase tracking-wider text-xs">Tận Tâm</span>
+            <div class="flex flex-col gap-1.5 rounded-xl p-3.5 border border-[#FFD700]/25 shadow-inner" style="background: rgba(0, 0, 0, 0.22);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-7 rounded-lg flex items-center justify-center border border-[#FFD700]/30 bg-[#000000]/30 shrink-0 shadow-sm">
+                  <i class="ph-bold ph-heart text-[#FFD700] text-xs"></i>
+                </span>
+                <span class="font-extrabold text-[#FFE8A3] uppercase tracking-wider text-xs">Tận Tâm</span>
               </div>
-              <p class="text-[11px] md:text-xs text-slate-300 leading-relaxed font-light md:pl-11">Lắng nghe và đồng hành bằng tâm huyết và hỗ trợ khách hàng hết mình.</p>
+              <p class="text-[11px] md:text-xs text-white/90 leading-relaxed font-medium">Lắng nghe và đồng hành bằng tâm huyết và hỗ trợ khách hàng hết mình.</p>
             </div>
             
             <!-- Nhanh Chóng -->
-            <div class="flex flex-col gap-2">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center shrink-0 shadow-lg shadow-yellow-500/20 border border-yellow-400/20">
-                  <i class="ph-bold ph-lightning text-white text-sm"></i>
-                </div>
-                <span class="font-extrabold text-white uppercase tracking-wider text-xs">Nhanh Chóng</span>
+            <div class="flex flex-col gap-1.5 rounded-xl p-3.5 border border-[#FFD700]/25 shadow-inner" style="background: rgba(0, 0, 0, 0.22);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-7 rounded-lg flex items-center justify-center border border-[#FFD700]/30 bg-[#000000]/30 shrink-0 shadow-sm">
+                  <i class="ph-bold ph-lightning text-[#FFD700] text-xs"></i>
+                </span>
+                <span class="font-extrabold text-[#FFE8A3] uppercase tracking-wider text-xs">Nhanh Chóng</span>
               </div>
-              <p class="text-[11px] md:text-xs text-slate-300 leading-relaxed font-light md:pl-11">Thời gian phản hồi nhanh nhất và luôn sẵn sàng hỗ trợ 24/7.</p>
+              <p class="text-[11px] md:text-xs text-white/90 leading-relaxed font-medium">Thời gian phản hồi nhanh nhất và luôn sẵn sàng hỗ trợ 24/7.</p>
             </div>
 
             <!-- Trọn Vẹn -->
-            <div class="flex flex-col gap-2">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shrink-0 shadow-lg shadow-green-500/20 border border-green-400/20">
-                  <i class="ph-bold ph-shield-check text-white text-sm"></i>
-                </div>
-                <span class="font-extrabold text-white uppercase tracking-wider text-xs">Trọn Vẹn</span>
+            <div class="flex flex-col gap-1.5 rounded-xl p-3.5 border border-[#FFD700]/25 shadow-inner" style="background: rgba(0, 0, 0, 0.22);">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-7 rounded-lg flex items-center justify-center border border-[#FFD700]/30 bg-[#000000]/30 shrink-0 shadow-sm">
+                  <i class="ph-bold ph-seal-check text-[#FFD700] text-xs"></i>
+                </span>
+                <span class="font-extrabold text-[#FFE8A3] uppercase tracking-wider text-xs">Trọn Vẹn</span>
               </div>
-              <p class="text-[11px] md:text-xs text-slate-300 leading-relaxed font-light md:pl-11">Cung cấp đầy đủ thủ tục pháp lý, chất lượng chuẩn mực đúng hợp đồng.</p>
+              <p class="text-[11px] md:text-xs text-white/90 leading-relaxed font-medium">Cung cấp đầy đủ thủ tục pháp lý, chất lượng chuẩn mực đúng hợp đồng.</p>
             </div>
           </div>
 
           <!-- CTAs -->
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="<?php echo esc_url(hacoled_managed_page_url('commitment')); ?>" class="group relative px-6 py-3 bg-gradient-to-r from-[#D90429] to-red-700 text-white text-[11px] font-extrabold uppercase tracking-widest rounded-full shadow-[0_8px_20px_rgba(217,4,41,0.3)] hover:shadow-[0_10px_25px_rgba(217,4,41,0.5)] overflow-hidden transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 border border-red-500/30">
-              <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700"></span>
+          <div class="flex flex-wrap items-center gap-3.5">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('commitment')); ?>" class="group relative px-6 py-3 bg-gradient-to-r from-[#FFD700] via-[#F5A623] to-[#D90429] text-[#2D0202] text-[11px] font-extrabold uppercase tracking-widest rounded-xl shadow-lg hover:shadow-red-500/30 overflow-hidden transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 border border-[#FFD700]/40">
+              <span class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700"></span>
               <i class="ph-bold ph-file-text text-sm"></i>
               Xem chi tiết cam kết
             </a>
-            <a href="tel:0932678910" class="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/20 text-white text-[11px] font-extrabold uppercase tracking-widest rounded-full backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-gold hover:text-brand-gold flex items-center gap-2">
-              <i class="ph-bold ph-phone-call text-sm"></i>
+            <a href="tel:0932678910" class="px-6 py-3 bg-black/40 hover:bg-black/60 border border-[#FFD700]/35 text-[#FFE8A3] hover:text-white text-[11px] font-extrabold uppercase tracking-widest rounded-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2 shadow-sm">
+              <i class="ph-bold ph-phone-call text-sm text-[#FFD700]"></i>
               Liên hệ ngay
             </a>
           </div>

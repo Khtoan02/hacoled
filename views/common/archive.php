@@ -61,28 +61,59 @@ if ($popular_posts_query->have_posts()) {
     </nav>
 
     <!-- ============================================== -->
-    <!-- HERO HEADER: LUXURY BRAND PROFILE -->
+    <!-- HERO HEADER: LUXURY BRAND PROFILE (Privileges Card Style) -->
     <!-- ============================================== -->
-    <div class="relative bg-gradient-to-br from-[#5a0c0c] via-[#8a0b10] to-[#200202] border border-red-950/80 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden text-white">
-      <!-- Gold accent stripe -->
-      <div class="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-accent-gold via-amber-300 to-accent-gold"></div>
-      
-      <!-- Dong Son circular pattern (subtle overlay) -->
-      <div class="absolute right-0 bottom-0 translate-x-1/4 translate-y-1/4 w-[420px] h-[420px] opacity-[0.06] bg-dongson pointer-events-none" style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.webp'); filter: invert(1);"></div>
+    <div class="sp-privileges-card relative rounded-3xl p-6 md:p-10 lg:p-12 mb-8 overflow-hidden shadow-2xl">
+      <!-- Gold mat inner frame -->
+      <div class="sp-priv-red-mat"></div>
 
-      <div class="max-w-4xl space-y-4 relative z-10">
-        <div class="flex items-center gap-2">
-          <span class="h-2 w-2 rounded-full bg-accent-gold animate-pulse"></span>
-          <span class="text-[10px] font-black text-accent-gold uppercase tracking-widest"><?php _e('Lưu trữ bài viết', 'hacoled'); ?></span>
-          <span class="text-white/20">|</span>
-          <span class="text-[10px] font-bold text-white/95 bg-white/10 border border-white/10 px-2.5 py-0.5 rounded-md font-mono"><?php echo sprintf(__('%d bài viết lưu trữ', 'hacoled'), count($posts)); ?></span>
+      <!-- Trống đồng Đông Sơn image pattern overlay (Gold metallic filter) -->
+      <div class="absolute -right-20 -bottom-20 w-[450px] h-[450px] md:w-[580px] md:h-[580px] pointer-events-none z-0 overflow-hidden opacity-25">
+        <div class="w-full h-full bg-no-repeat bg-center bg-contain animate-[spin_120s_linear_infinite]"
+             style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);"></div>
+      </div>
+
+      <!-- Base background gradient -->
+      <div class="absolute inset-0 bg-gradient-to-br from-[#a8031d] via-[#d90429] to-[#65000f] -z-10"></div>
+      
+      <!-- Gold radial ambient glow -->
+      <div class="absolute inset-0 -z-10 opacity-40" style="background:radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.4), transparent 70%);"></div>
+      
+      <!-- Gold glow orbs -->
+      <div class="absolute -top-20 -right-10 w-72 h-72 bg-[#FFD700] rounded-full opacity-[0.15] blur-[70px] pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-10 w-60 h-60 bg-[#FFA500] rounded-full opacity-[0.12] blur-[60px] pointer-events-none"></div>
+      
+      <!-- Glossy sweep -->
+      <div class="absolute inset-0 sp-priv-gloss pointer-events-none"></div>
+      
+      <!-- Top specular hairline -->
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+
+      <div class="relative z-10 max-w-4xl space-y-4">
+        <!-- Top Badge Bar -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-[#3a1f05] shadow-lg shrink-0"
+               style="background:linear-gradient(135deg,#ffffff,#ffe89c 45%,#ffd700 70%,#d49214); box-shadow: 0 4px 14px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.8);">
+            <i class="ph-bold ph-archive text-lg text-[#851800]"></i>
+          </div>
+          <div class="flex items-center gap-2 border border-[#FFD700]/30 bg-[#000000]/25 rounded-lg px-3 py-1 shadow-sm">
+            <span class="h-2 w-2 rounded-full bg-[#FFD700] animate-pulse"></span>
+            <span class="text-[11px] font-black text-[#FFE8A3] uppercase tracking-widest"><?php _e('Lưu trữ bài viết', 'hacoled'); ?></span>
+          </div>
+          <span class="text-white/20 hidden sm:inline">|</span>
+          <div class="border border-white/20 bg-white/10 px-3 py-1 rounded-lg backdrop-blur text-[11px] font-bold text-white/95 font-mono shadow-sm">
+            <i class="ph-bold ph-article text-[#FFD700] mr-1"></i>
+            <?php echo sprintf(__('%d bài viết lưu trữ', 'hacoled'), count($posts)); ?>
+          </div>
         </div>
+
+        <div class="sp-priv-gold-hairline sp-priv-shimmer my-2"></div>
         
-        <h1 class="text-3xl md:text-6xl font-black text-white tracking-tight leading-none drop-shadow-md">
+        <h1 class="sp-priv-gold-text text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight drop-shadow-md">
           <?php echo esc_html($title); ?>
         </h1>
         
-        <p class="text-white/85 text-xs md:text-sm leading-relaxed font-light max-w-3xl pt-1"><?php _e('Tổng hợp các tin tức, bài viết, chuyên đề và dự án đã triển khai bởi HacoLED.', 'hacoled'); ?></p>
+        <p class="text-[#FFF3D1] text-xs md:text-sm lg:text-base leading-relaxed font-medium max-w-3xl pt-1 drop-shadow-sm"><?php _e('Tổng hợp các tin tức, bài viết, chuyên đề và dự án đã triển khai bởi HacoLED.', 'hacoled'); ?></p>
       </div>
     </div>
 

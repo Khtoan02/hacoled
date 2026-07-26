@@ -27,35 +27,65 @@ $featured_projects = $featured_projects ?? [];
 
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
 
-    <!-- Category Hero Header (Perfectly matched with Home Hero visual) -->
-    <div class="relative overflow-hidden rounded-3xl bg-[#0A0000] text-white p-8 md:p-12 mb-8 shadow-xl border border-white/5">
-      <!-- Dynamic Gradient Background overlay -->
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,#4A0404_0%,#0A0000_80%)]"></div>
-      
-      <!-- Dong Son Drum chìm xoay chậm -->
-      <div class="absolute z-0 pointer-events-none opacity-[0.05] right-[-100px] top-[-100px] w-[500px] h-[500px] bg-no-repeat bg-center bg-contain"
-           style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson.webp');">
-      </div>
-      
-      <!-- Tech Grid overlay -->
-      <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px] z-0 pointer-events-none"></div>
+    <!-- Category Hero Header (Privileges Card Style: Red & Gold Trống Đồng) -->
+    <div class="sp-privileges-card relative rounded-3xl p-6 md:p-10 lg:p-12 mb-8 overflow-hidden shadow-2xl">
+      <!-- Gold mat inner frame -->
+      <div class="sp-priv-red-mat"></div>
 
-      <div class="relative z-10 max-w-3xl">
+      <!-- Trống đồng Đông Sơn image pattern overlay (Gold metallic filter) -->
+      <div class="absolute -right-20 -bottom-20 w-[480px] h-[480px] md:w-[620px] md:h-[620px] pointer-events-none z-0 overflow-hidden opacity-25">
+        <div class="w-full h-full bg-no-repeat bg-center bg-contain animate-[spin_120s_linear_infinite]"
+             style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);"></div>
+      </div>
+
+      <!-- Base background gradient -->
+      <div class="absolute inset-0 bg-gradient-to-br from-[#a8031d] via-[#d90429] to-[#65000f] -z-10"></div>
+      
+      <!-- Gold radial ambient glow -->
+      <div class="absolute inset-0 -z-10 opacity-40" style="background:radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.4), transparent 70%);"></div>
+      
+      <!-- Gold glow orbs -->
+      <div class="absolute -top-20 -right-10 w-80 h-80 bg-[#FFD700] rounded-full opacity-[0.16] blur-[70px] pointer-events-none"></div>
+      <div class="absolute -bottom-20 -left-10 w-64 h-64 bg-[#FFA500] rounded-full opacity-[0.12] blur-[60px] pointer-events-none"></div>
+      
+      <!-- Glossy sweep -->
+      <div class="absolute inset-0 sp-priv-gloss pointer-events-none"></div>
+      
+      <!-- Top specular hairline -->
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+
+      <!-- Content Container -->
+      <div class="relative z-10 max-w-4xl">
         <!-- Breadcrumb -->
-        <nav class="text-xs md:text-sm text-slate-300 mb-4 flex flex-wrap items-center gap-1.5">
+        <nav class="text-[11px] md:text-xs text-[#FFF3D1]/80 mb-5 flex flex-wrap items-center gap-2 font-medium uppercase tracking-wider">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="hover:text-white transition-colors">Trang chủ</a>
-          <i class="ph ph-caret-right text-[10px]"></i>
-          <span class="text-white font-semibold"><?php echo esc_html( $title ); ?></span>
+          <i class="ph ph-caret-right text-[10px] text-[#FFD700]/70"></i>
+          <span class="text-white font-bold"><?php echo esc_html( $title ); ?></span>
         </nav>
         
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-3">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500">
-            <?php echo esc_html( $title ); ?>
-          </span>
+        <!-- Header Badge & Icon -->
+        <div class="flex flex-wrap items-center gap-3 mb-5">
+          <div class="w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center text-[#3a1f05] shadow-lg shrink-0"
+               style="background:linear-gradient(135deg,#ffffff,#ffe89c 45%,#ffd700 70%,#d49214); box-shadow: 0 4px 14px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.8);">
+            <i class="ph-bold ph-storefront text-lg md:text-xl text-[#851800]"></i>
+          </div>
+          <div class="flex items-center gap-2 border border-[#FFD700]/35 bg-[#000000]/30 backdrop-blur-md rounded-full px-4 py-1.5 shadow-sm">
+            <i class="ph-fill ph-sparkle text-[#FFD700] animate-pulse text-sm"></i>
+            <span class="text-[#FFE8A3] text-[11px] md:text-xs font-extrabold uppercase tracking-[0.18em]">Sản phẩm chính hãng HacoLED</span>
+          </div>
+        </div>
+
+        <!-- H1 Title -->
+        <h1 class="sp-priv-gold-text text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-4 drop-shadow-md">
+          <?php echo esc_html( $title ); ?>
         </h1>
-        <p class="text-xs md:text-sm text-slate-300 leading-relaxed font-light">
-          Khám phá danh sách sản phẩm màn hình LED, cabin LED và giải pháp trình chiếu chất lượng cao chính hãng từ Hacoled.
+        
+        <p class="text-xs md:text-sm lg:text-base text-[#FFF3D1] leading-relaxed font-medium max-w-3xl drop-shadow-sm">
+          Khám phá danh sách sản phẩm màn hình LED, cabin LED và giải pháp trình chiếu chất lượng cao chính hãng từ HacoLED.
         </p>
+
+        <!-- Shimmering hairline divider -->
+        <div class="sp-priv-gold-hairline sp-priv-shimmer my-5"></div>
       </div>
     </div>
 
