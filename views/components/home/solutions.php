@@ -127,42 +127,69 @@
             gap: 0.65rem !important;
         }
     }
+
+    /* Refined depth and motion while preserving the original accordion */
+    .sol-expanding-card {
+        transform: translateZ(0);
+        will-change: flex-grow, transform;
+    }
+
+    .sol-expanding-card:hover,
+    .sol-expanding-card:focus-visible {
+        transform: translateY(-3px);
+    }
+
+    .sol-expanding-card:focus-visible {
+        outline: 2px solid #b31217;
+        outline-offset: 3px;
+    }
+
+    .sol-expanding-card.is-expanded {
+        box-shadow: 0 24px 55px -26px rgba(15, 23, 42, 0.8);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .sol-expanding-card,
+        .sol-expanding-card *,
+        .sol-expanding-card::before,
+        .sol-expanding-card::after {
+            transition-duration: 0.01ms !important;
+        }
+    }
 </style>
 
 <!-- ========================================== -->
 <!-- SECTION: GIẢI PHÁP MÀN HÌNH LED            -->
 <!-- ========================================== -->
-<section id="solutions" class="py-6 md:py-10 bg-transparent relative z-10">
+<section id="solutions" class="py-8 sm:py-10 md:py-14 lg:py-16 bg-transparent relative z-10" aria-labelledby="giai-phap-toan-dien">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- ─── Synchronized Section Header ─── -->
-        <div class="text-center max-w-3xl mx-auto mb-4 md:mb-5 fade-up">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 mb-2 shadow-sm">
-                <i class="ph-fill ph-sparkle text-[#b31217] text-xs md:text-sm"></i>
-                <span class="text-[#b31217] text-[10px] md:text-xs font-extrabold uppercase tracking-widest whitespace-nowrap">GIẢI PHÁP MÀN HÌNH LED</span>
+        <div class="text-center max-w-4xl mx-auto mb-7 md:mb-9 fade-up">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-200/80 mb-3 shadow-sm">
+                <i class="ph-fill ph-sparkle text-[#b31217] text-sm"></i>
+                <span class="text-[#b31217] text-[11px] md:text-xs font-black uppercase tracking-[0.16em] whitespace-nowrap">Giải pháp màn hình LED</span>
             </div>
-            
-            <!-- Synchronized H2 Heading Size with Homepage -->
-            <h2 id="giai-phap-toan-dien" class="text-xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-slate-800 mb-2">
-                Giải Pháp Hiển Thị <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#b31217] to-[#e11d48]">Cho Mọi Không Gian</span>
+
+            <h2 id="giai-phap-toan-dien" class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-[-0.035em] text-slate-800 leading-[1.04] mb-4">
+                Giải pháp hiển thị <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#b31217] to-[#e11d48]">cho mọi không gian</span>
             </h2>
-            
-            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto px-2 font-normal hidden sm:block">
+
+            <p class="text-slate-600 text-sm md:text-base leading-relaxed max-w-3xl mx-auto">
                 Cung cấp các giải pháp màn hình LED tối ưu, đáp ứng đa dạng nhu cầu từ hội trường, phòng họp đến sân khấu, studio và nhiều không gian khác.
             </p>
 
-            <!-- Compact Action Toolbar -->
-            <div class="flex items-center justify-center gap-3 mt-3">
-                <button type="button" onclick="openHacoledCalcModal()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-[#b31217] text-white text-xs font-bold transition-all shadow-md active:scale-95">
-                    <i class="ph-bold ph-calculator text-[#fbbf24] text-sm"></i>
+            <div class="flex items-center justify-center mt-5">
+                <button type="button" onclick="openHacoledCalcModal()" class="inline-flex items-center justify-center gap-2.5 min-h-10 px-5 py-2.5 rounded-full bg-slate-900 hover:bg-[#b31217] text-white text-xs md:text-sm font-bold transition-all duration-300 shadow-lg shadow-slate-900/10 hover:-translate-y-0.5 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b31217] focus-visible:ring-offset-2">
+                    <i class="ph-bold ph-calculator text-[#fbbf24] text-base"></i>
                     <span>Công cụ Tính Pixel & Size</span>
                 </button>
             </div>
         </div>
 
         <!-- ─── SECTION 1: Dynamic Expanding Gallery (5 Image Cards - Compact Height) ─── -->
-        <div class="w-full relative mb-3.5 md:mb-4">
-            <div id="solImageAccordion" class="sol-accordion-wrapper flex w-full md:h-[320px] lg:h-[340px] gap-2.5">
+        <div class="w-full relative mb-4 md:mb-5">
+            <div id="solImageAccordion" class="sol-accordion-wrapper flex w-full md:h-[350px] lg:h-[380px] gap-2.5 lg:gap-3">
                 <!-- Rendered via JS below -->
             </div>
         </div>
@@ -480,13 +507,15 @@
             const isExpanded = item.id === expandedId;
             const expandedClass = isExpanded ? 'is-expanded' : '';
 
-            const card = document.createElement('div');
-            card.className = `sol-expanding-card ${expandedClass} relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl border border-slate-200/80 group`;
+            const card = document.createElement('button');
+            card.type = 'button';
+            card.className = `sol-expanding-card ${expandedClass} relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl border border-slate-200/80 group text-left`;
             card.setAttribute('data-id', item.id);
+            card.setAttribute('aria-label', `Xem chi tiết ${item.title}`);
 
             card.innerHTML = `
                 <img src="${item.image}" alt="${item.title}" class="card-bg-img" loading="lazy">
-                
+
                 <!-- Vertical Title Preview for Collapsed State (Desktop) -->
                 <div class="card-collapsed-title hidden md:flex absolute inset-0 items-center justify-center pointer-events-none z-10 pb-10">
                     <span class="text-white font-black text-xs lg:text-sm tracking-widest uppercase whitespace-nowrap -rotate-90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
@@ -505,7 +534,7 @@
                                 <h3 class="font-black text-xs sm:text-base lg:text-lg text-white drop-shadow mb-0.5">${item.title}</h3>
                                 <p class="text-[11px] sm:text-xs text-white/85 leading-snug drop-shadow line-clamp-2">${item.description}</p>
                                 <div class="mt-1.5 flex items-center gap-1.5">
-                                    <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-extrabold text-[#fbbf24] hover:underline">
+                                    <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-extrabold text-[#fbbf24]">
                                         <span>Xem giải pháp</span> <i class="ph-bold ph-arrow-right"></i>
                                     </span>
                                 </div>
@@ -515,8 +544,13 @@
                 </div>
             `;
 
-            // Hover event to expand
+            // Preserve the original hover-to-expand interaction.
             card.addEventListener('mouseenter', () => {
+                document.querySelectorAll('.sol-expanding-card').forEach(c => c.classList.remove('is-expanded'));
+                card.classList.add('is-expanded');
+            });
+
+            card.addEventListener('focus', () => {
                 document.querySelectorAll('.sol-expanding-card').forEach(c => c.classList.remove('is-expanded'));
                 card.classList.add('is-expanded');
             });
@@ -531,16 +565,21 @@
 
         // 2. Render Row 2 Icon Cards (5 cards)
         iconItems.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'bg-white border border-slate-200/90 hover:border-[#b31217]/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group rounded-xl p-3 flex items-center gap-3 cursor-pointer h-full';
+            const card = document.createElement('button');
+            card.type = 'button';
+            card.className = 'bg-white border border-slate-200/90 hover:border-[#b31217]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group rounded-2xl p-4 flex items-start gap-3.5 cursor-pointer h-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2';
+            card.setAttribute('aria-label', `Xem chi tiết ${item.title}`);
             
             card.innerHTML = `
-                <div class="w-10 h-10 rounded-xl bg-rose-50 text-[#b31217] border border-rose-100 flex items-center justify-center text-lg shrink-0 group-hover:bg-[#b31217] group-hover:text-white transition-colors shadow-sm">
+                <div class="w-11 h-11 rounded-xl bg-rose-50 text-[#b31217] border border-rose-100 flex items-center justify-center text-lg shrink-0 group-hover:bg-[#b31217] group-hover:text-white transition-colors shadow-sm">
                     <i class="ph-fill ${item.badgeIcon}"></i>
                 </div>
                 <div class="flex flex-col flex-1 min-w-0">
-                    <h3 class="font-extrabold text-xs lg:text-[13px] text-slate-900 leading-snug line-clamp-2 group-hover:text-[#b31217] transition-colors">${item.title}</h3>
-                    <p class="text-[10px] sm:text-[11px] text-slate-500 leading-tight line-clamp-2 mt-0.5">${item.description}</p>
+                    <div class="flex items-start justify-between gap-2">
+                        <h3 class="font-black text-sm text-slate-900 leading-snug line-clamp-2 group-hover:text-[#b31217] transition-colors">${item.title}</h3>
+                        <i class="ph-bold ph-arrow-up-right text-slate-300 group-hover:text-[#b31217] transition-colors mt-0.5"></i>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed line-clamp-2 mt-1">${item.description}</p>
                 </div>
             `;
 

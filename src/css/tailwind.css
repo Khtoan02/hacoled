@@ -1,3 +1,4 @@
+@import "../../assets/css/fonts.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -25,6 +26,15 @@
 
 @layer base {
   :root {
+    /* Multi-Role Font System variables (Testing Chakra Petch) */
+    --font-body: 'Chakra Petch', sans-serif;
+    --font-heading: 'Chakra Petch', sans-serif;
+    --font-title: 'Chakra Petch', sans-serif;
+    --font-display: 'Chakra Petch', sans-serif;
+    --font-link: 'Chakra Petch', sans-serif;
+    --font-caption: 'Chakra Petch', sans-serif;
+    --font-mono: 'Chakra Petch', monospace;
+
     --haco-red: #B31217;
     --haco-red-hot: #E60000;
     --haco-red-deep: #8A0B10;
@@ -39,10 +49,44 @@
   }
 
   body {
-    @apply text-slate-800 font-sans antialiased selection:bg-accent-gold selection:text-white;
+    font-family: var(--font-body);
+    font-weight: 200;
+    @apply text-slate-800 antialiased selection:bg-accent-gold selection:text-white;
     scroll-behavior: smooth;
     background: linear-gradient(180deg, #f8f6f5 0%, #f4f2f1 40%, #f7f5f4 70%, #faf9f8 100%);
   }
+
+  /* Title (Tiêu đề chính): weight 900 */
+  h1, .hero-title, .section-title, .page-title, .site-title {
+    font-family: var(--font-title);
+    font-weight: 900;
+  }
+
+  /* Heading (Tiêu đề phụ/phân đoạn): weight 600 */
+  h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  /* Link: weight 200, màu đỏ */
+  a {
+    font-family: var(--font-link);
+    font-weight: 200;
+    color: #b31217;
+  }
+
+  /* SKU & Monospace: weight 200, in hoa */
+  code, pre, .sku-code, .sku {
+    font-family: var(--font-mono);
+    font-weight: 200;
+    text-transform: uppercase;
+  }
+
+  small, .caption, .badge {
+    font-family: var(--font-caption);
+    font-weight: 200;
+  }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: #f4f2f1; }
   ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full border border-[#f4f2f1] hover:bg-slate-400 transition-colors; }

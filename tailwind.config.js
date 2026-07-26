@@ -45,7 +45,12 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'Outfit', 'sans-serif'],
+        sans: ['var(--font-body)', 'Inter', 'sans-serif'],
+        body: ['var(--font-body)', 'Inter', 'sans-serif'],
+        heading: ['var(--font-heading)', 'Outfit', 'sans-serif'],
+        display: ['var(--font-display)', 'Outfit', 'sans-serif'],
+        caption: ['var(--font-caption)', 'Inter', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
         'glow-red': '0 0 15px rgba(239, 68, 68, 0.4)',

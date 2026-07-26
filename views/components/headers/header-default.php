@@ -7,13 +7,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@200;300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
   <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@200;300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" media="print" onload="this.media='all'">
   <noscript>
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@200;300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet">
   </noscript>
 
@@ -671,47 +671,48 @@
 
       </div> <!-- End Monolithic Wrapper -->
     </div> <!-- End Desktop Header Wrapper -->
+  </header>
 
-    <?php
-    // Define local variables for mobile bar
-    $footer_about_url = home_url('/gioi-thieu/');
-    $footer_services_url = home_url('/dich-vu/');
-    $footer_contact_url = home_url('/lien-he/');
-    $footer_news_url = home_url('/tin-tuc/');
-    $footer_commitment_url = home_url('/cam-ket-chat-luong/');
-    $footer_careers_url = home_url('/tuyen-dung/');
+  <?php
+  // Define local variables for mobile bar
+  $footer_about_url = home_url('/gioi-thieu/');
+  $footer_services_url = home_url('/dich-vu/');
+  $footer_contact_url = home_url('/lien-he/');
+  $footer_news_url = home_url('/tin-tuc/');
+  $footer_commitment_url = home_url('/cam-ket-chat-luong/');
+  $footer_careers_url = home_url('/tuyen-dung/');
 
-    $footer_about_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-about.php'));
-    if (!empty($footer_about_pages))
-      $footer_about_url = get_permalink($footer_about_pages[0]->ID);
+  $footer_about_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-about.php'));
+  if (!empty($footer_about_pages))
+    $footer_about_url = get_permalink($footer_about_pages[0]->ID);
 
-    $footer_services_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-services.php'));
-    if (!empty($footer_services_pages))
-      $footer_services_url = get_permalink($footer_services_pages[0]->ID);
+  $footer_services_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-services.php'));
+  if (!empty($footer_services_pages))
+    $footer_services_url = get_permalink($footer_services_pages[0]->ID);
 
-    $footer_contact_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-contact.php'));
-    if (!empty($footer_contact_pages))
-      $footer_contact_url = get_permalink($footer_contact_pages[0]->ID);
+  $footer_contact_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-contact.php'));
+  if (!empty($footer_contact_pages))
+    $footer_contact_url = get_permalink($footer_contact_pages[0]->ID);
 
-    $footer_commitment_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-commitment.php'));
-    if (!empty($footer_commitment_pages))
-      $footer_commitment_url = get_permalink($footer_commitment_pages[0]->ID);
+  $footer_commitment_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-commitment.php'));
+  if (!empty($footer_commitment_pages))
+    $footer_commitment_url = get_permalink($footer_commitment_pages[0]->ID);
 
-    $footer_careers_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-careers.php'));
-    if (!empty($footer_careers_pages))
-      $footer_careers_url = get_permalink($footer_careers_pages[0]->ID);
+  $footer_careers_pages = get_pages(array('meta_key' => '_wp_page_template', 'meta_value' => 'template-careers.php'));
+  if (!empty($footer_careers_pages))
+    $footer_careers_url = get_permalink($footer_careers_pages[0]->ID);
 
-    $footer_job_args = array(
-      'post_type' => 'job',
-      'posts_per_page' => 5,
-      'post_status' => 'publish',
-      'orderby' => 'date',
-      'order' => 'DESC'
-    );
-    $footer_jobs = get_posts($footer_job_args);
-    ?>
-    <!-- Mobile Bottom Navigation & Drawers (lg:hidden) -->
-    <div x-data="{ activeDrawer: null }" class="lg:hidden">
+  $footer_job_args = array(
+    'post_type' => 'job',
+    'posts_per_page' => 5,
+    'post_status' => 'publish',
+    'orderby' => 'date',
+    'order' => 'DESC'
+  );
+  $footer_jobs = get_posts($footer_job_args);
+  ?>
+  <!-- Mobile Bottom Navigation & Drawers (lg:hidden) -->
+  <div x-data="{ activeDrawer: null }" class="lg:hidden">
 
       <!-- Backdrop Overlay -->
       <div x-show="activeDrawer" x-cloak @click="activeDrawer = null"
@@ -1103,7 +1104,11 @@
 
           </div>
 
-          <div class="pt-3 border-t border-white/10 text-center">
+          <div class="pt-4 border-t border-white/10 text-center flex flex-col gap-2.5">
+            <a href="<?php echo esc_url($footer_contact_url); ?>"
+               class="w-full py-2.5 bg-[#D90429] hover:bg-[#b90323] text-white font-bold rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-md">
+              <i class="ph-bold ph-envelope-simple text-sm"></i> Trang Liên Hệ Chi Tiết
+            </a>
             <span class="text-[11px] text-white/50"><strong>MST:</strong> 0108701064</span>
           </div>
 
@@ -1150,30 +1155,26 @@
             </form>
           </div>
 
-          <!-- Primary Pages List with Accordions -->
-          <div class="space-y-2 text-left">
+          <!-- Primary Pages List with Accordions (Single-Open Mode) -->
+          <div class="space-y-1.5 text-left" x-data="{ activeAccordion: null }">
             <?php if (hacoled_header_menu_enabled('home')): ?><a
                 href="<?php echo esc_url(hacoled_header_menu_url('home')); ?>"
                 class="block px-3 py-2.5 text-sm font-bold text-white/90 hover:bg-white/5 rounded-xl transition-all"><?php echo esc_html(hacoled_header_menu_label('home')); ?></a><?php endif; ?>
             <?php
-            foreach (['about', 'led', 'videowall', 'solutions', 'audio', 'projects'] as $mobile_menu_key) {
-              hacoled_render_mobile_header_menu($header_menu_configs[$mobile_menu_key] ?? []);
+            foreach (['about', 'solutions', 'audio', 'projects'] as $mobile_menu_key) {
+              hacoled_render_mobile_header_menu($header_menu_configs[$mobile_menu_key] ?? [], $mobile_menu_key);
             }
             ?>
             <?php if (hacoled_header_menu_enabled('services')): ?><a
                 href="<?php echo esc_url(hacoled_header_menu_url('services')); ?>"
                 class="block px-3 py-2.5 text-sm font-bold text-white/90 hover:bg-white/5 rounded-xl transition-all"><?php echo esc_html(hacoled_header_menu_label('services')); ?></a><?php endif; ?>
-            <?php hacoled_render_mobile_header_menu($header_menu_configs['news'] ?? []); ?>
-            <?php if (hacoled_header_menu_enabled('contact')): ?><a
-                href="<?php echo esc_url(hacoled_header_menu_url('contact')); ?>"
-                class="block px-3 py-2.5 text-sm font-bold text-[#fbbf24] hover:bg-white/5 rounded-xl transition-all"><?php echo esc_html(hacoled_header_menu_label('contact')); ?></a><?php endif; ?>
           </div>
 
         </div>
       </div>
 
     </div>
-  </header>
+  </div>
 
   <!-- Drum pattern auto-center script -->
   <script>

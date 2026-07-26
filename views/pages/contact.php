@@ -188,7 +188,7 @@ $this->renderHeader($header_type ?? 'default');
             <circle r="18" fill="rgba(251,191,36,0.15)" class="animate-ping" />
             <circle r="8" fill="#fbbf24" class="shadow-glow-gold" />
             <circle r="3" fill="#3f0707" />
-            <text x="15" y="4" fill="#ffffff" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1">HA NOI (HQ)</text>
+            <text x="15" y="4" fill="#ffffff" font-size="10" font-weight="bold" font-family="inherit" letter-spacing="1">HA NOI (HQ)</text>
           </g>
 
           <!-- Location Pin: Da Nang CN (430, 200) -->
@@ -196,7 +196,7 @@ $this->renderHeader($header_type ?? 'default');
             <circle r="14" fill="rgba(251,191,36,0.15)" class="animate-ping" style="animation-delay: 1s;" />
             <circle r="6" fill="#fbbf24" />
             <circle r="2" fill="#3f0707" />
-            <text x="15" y="4" fill="#cbd5e1" font-size="9" font-weight="bold" font-family="sans-serif" letter-spacing="1">CN DA NANG</text>
+            <text x="15" y="4" fill="#cbd5e1" font-size="9" font-weight="bold" font-family="inherit" letter-spacing="1">CN DA NANG</text>
           </g>
 
           <!-- Location Pin: HCMC CN (450, 320) -->
@@ -204,13 +204,13 @@ $this->renderHeader($header_type ?? 'default');
             <circle r="18" fill="rgba(239,68,68,0.15)" class="animate-ping" style="animation-delay: 2s;" />
             <circle r="8" fill="#ef4444" class="shadow-glow-red" />
             <circle r="3" fill="#3f0707" />
-            <text x="15" y="4" fill="#ffffff" font-size="10" font-weight="bold" font-family="sans-serif" letter-spacing="1">CN HO CHI MINH</text>
+            <text x="15" y="4" fill="#ffffff" font-size="10" font-weight="bold" font-family="inherit" letter-spacing="1">CN HO CHI MINH</text>
           </g>
 
           <!-- Location Pin: Tay Nguyen Station (410, 270) -->
           <g transform="translate(410, 270)">
             <circle r="5" fill="#e11d48" opacity="0.8" />
-            <text x="-95" y="4" fill="#94a3b8" font-size="8" font-family="sans-serif">TAY NGUYEN STATION</text>
+            <text x="-95" y="4" fill="#94a3b8" font-size="8" font-family="inherit">TAY NGUYEN STATION</text>
           </g>
         </svg>
 

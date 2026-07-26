@@ -359,7 +359,6 @@ function haco_render_product_slides($categories) {
 
   .animate-fade-in-up { animation: none; opacity: 1; transform: none; }
   .delay-100, .delay-200, .delay-300, .delay-400 { animation-delay: 0ms; }
-  #hero-section { font-family: Arial, Helvetica, sans-serif; }
   @keyframes heroFadeInUp { to { opacity: 1; transform: translateY(0); } }
 
   .animate-spin-slow { animation: spinSlow 60s linear infinite; }
@@ -934,181 +933,457 @@ function haco_render_product_slides($categories) {
         <!-- ========================================== -->
         <!-- SECTION 7 & 8: UY TÍN & CAM KẾT          -->
         <!-- ========================================== -->
-        <section class="py-0 md:py-20 relative overflow-hidden bg-transparent">
-            <div class="max-w-[1440px] mx-auto px-0 md:px-4 lg:px-8">
+        <section class="py-10 sm:py-12 md:py-16 lg:py-20 relative overflow-hidden bg-transparent" aria-labelledby="uy-tin-hacoled">
+            <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+                <?php $partners = ['Viettel', 'FPT', 'EVN', 'Vingroup', 'Masterise', 'BRG']; ?>
+
+                <!-- Section heading -->
+                <div class="grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end gap-6 mb-8 md:mb-10">
+                    <div class="max-w-4xl">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/20 mb-4">
+                            <i class="ph-fill ph-medal text-brand-red text-sm"></i>
+                            <span class="text-brand-red text-[11px] md:text-xs font-black uppercase tracking-[0.16em]">Năng lực & Uy tín</span>
+                        </div>
+                        <h2 id="uy-tin-hacoled" class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-[-0.035em] text-brand-text leading-[1.04] mb-4">
+                            Uy tín <span class="text-brand-red">tạo nên thương hiệu</span>
+                        </h2>
+                        <p class="max-w-3xl text-sm md:text-base text-brand-muted leading-relaxed">
+                            Đối tác của <strong class="text-brand-text">Viettel, FPT, EVN, Vingroup, Masterise, BRG</strong> và hàng trăm tập đoàn hàng đầu Việt Nam.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap lg:justify-end gap-2 max-w-xl" aria-label="Đối tác tiêu biểu">
+                        <?php foreach ($partners as $partner): ?>
+                            <span class="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-[11px] md:text-xs font-bold text-slate-600 shadow-sm">
+                                <?php echo esc_html($partner); ?>
+                            </span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
 
                 <!-- ══════════════════════════════════════════════════ -->
-                <!--  Full-bleed Split Card                            -->
-                <!--  LEFT 40%: Dark-red content  |  RIGHT 60%: Grid  -->
+                <!--  Luxury Split Showcase Card                       -->
                 <!-- ══════════════════════════════════════════════════ -->
-                <div class="relative rounded-none md:rounded-3xl overflow-hidden"
-                     style="box-shadow: 0 32px 80px -16px rgba(90,12,12,0.4), 0 0 0 1px rgba(0,0,0,0.06);">
+                <div class="relative">
 
-                    <div class="flex flex-col lg:flex-row-reverse min-h-0 lg:min-h-[580px]">
+                    <!-- Top Gold Gradient Accent Line -->
+                    <div class="hidden"></div>
 
-                        <!-- ─────────────────────────────────── -->
-                        <!--  RIGHT (Top on mobile): Bento Gallery (60%) -->
-                        <!--  4-col × 3-row mosaic, no padding  -->
-                        <!-- ─────────────────────────────────── -->
-                        <div class="w-full lg:flex-1 h-[160px] sm:h-[180px] lg:h-auto relative overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.61fr)_minmax(380px,0.39fr)] gap-5 lg:gap-6 lg:h-[500px] xl:h-[520px]">
 
-                            <!--
-                                GRID MAP (4 cols × 3 rows = 12 cells):
-                                ┌──────────┬──────┬──────┐
-                                │  A (2×2) │  B   │  C   │
-                                │          ├──────┼──────┤
-                                │          │  D   │  E   │
-                                ├──────┬───┼──────┴──────┤
-                                │  F   │ G │   H (2×1)   │
-                                └──────┴───┴─────────────┘
-                            -->
-                            <div class="hacoled-prestige-grid" style="width:100%;height:100%;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:3px;background:#1a0303;">
+                        <!-- ─────────────────────────────── -->
+                        <!--  LEFT: Content, Partner Chips & 3F -->
+                        <!-- ─────────────────────────────── -->
+                        <div class="lg:order-2 relative overflow-hidden rounded-[24px] lg:rounded-[28px] px-6 py-7 sm:px-8 sm:py-8 lg:px-8 lg:py-7 xl:px-9 xl:py-8 flex flex-col justify-between bg-gradient-to-br from-[#b41018] via-[#8b080e] to-[#5d0307] shadow-[0_22px_55px_-28px_rgba(126,7,13,0.8)] border border-[#79080d]">
 
-                                <!-- A: 2×2 Hero -->
-                                <div style="grid-column:1/3;grid-row:1/3;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_a') ?: get_template_directory_uri() . '/assets/images/services-hero.webp'); ?>" alt="Dự án tiêu biểu"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94);"
-                                         >
-                                    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);pointer-events:none;"></div>
-                                    <div style="position:absolute;bottom:0.75rem;left:0.75rem;lg:bottom:1.25rem;lg:left:1.25rem;display:flex;align-items:center;gap:0.3rem;pointer-events:none;">
-                                        <div style="width:5px;height:5px;border-radius:50%;background:#d4af37;box-shadow:0 0 8px #d4af37;"></div>
-                                        <span style="font-size:0.55rem;lg:font-size:0.68rem;font-weight:700;color:#fff;letter-spacing:0.15em;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,0.8);">Dự án tiêu biểu</span>
+                            <!-- Dong Son Drum Watermark -->
+                            <div class="absolute top-1/2 -translate-y-1/2 right-[-130px] w-[520px] h-[520px] lg:w-[620px] lg:h-[620px] bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen opacity-[0.13] z-0"
+                                 style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson-optimized.webp'); filter: invert(80%) sepia(30%) saturate(1400%) hue-rotate(345deg) brightness(110%);">
+                            </div>
+
+                            <!-- Ambient Glow Accents -->
+                            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff07_1px,transparent_1px),linear-gradient(to_bottom,#ffffff07_1px,transparent_1px)] bg-[size:36px_36px] pointer-events-none z-0"></div>
+                            <div class="absolute -top-24 -left-24 w-72 h-72 bg-red-400/20 rounded-full blur-3xl pointer-events-none z-0"></div>
+                            <div class="absolute -bottom-24 right-0 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl pointer-events-none z-0"></div>
+
+                            <!-- Top Content Block -->
+                            <div class="relative z-10">
+
+                                <!-- Eyebrow Badge -->
+                                <div class="hidden inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-white/50 backdrop-blur-md mb-3">
+                                    <i class="ph-fill ph-medal text-amber-300 text-xs sm:text-sm"></i>
+                                    <span class="text-amber-300 text-[11px] sm:text-xs font-black uppercase tracking-widest whitespace-nowrap">Năng Lực & Uy Tín</span>
+                                </div>
+
+                                <!-- Main Heading -->
+                                <h3 class="hidden text-[30px] sm:text-4xl lg:text-[36px] xl:text-[40px] font-black uppercase tracking-[-0.03em] text-white mb-3 leading-[1.02]">
+                                    Uy Tín<br class="hidden sm:block">
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ffe57f] via-[#fbbf24] to-[#fff8e1] drop-shadow-sm">Tạo Nên Thương Hiệu</span>
+                                </h3>
+
+                                <!-- Partner Chips Row -->
+                                <div class="hidden mb-4 pl-3 border-l-2 border-amber-300/70">
+                                    <p class="text-xs sm:text-[13px] text-white/80 leading-relaxed mb-2">Đối tác của <strong class="text-white">Viettel, FPT, EVN, Vingroup, Masterise, BRG</strong> và hàng trăm tập đoàn hàng đầu Việt Nam.</p>
+                                    <div class="flex flex-wrap gap-1.5" aria-label="Đối tác tiêu biểu">
+                                        <?php
+                                        $partners = ['Viettel', 'FPT', 'EVN', 'Vingroup', 'Masterise', 'BRG'];
+                                        foreach ($partners as $partner):
+                                        ?>
+                                            <span class="px-2.5 py-1 rounded-full bg-black/20 border border-white/15 text-[10px] sm:text-[11px] font-bold text-white/75 backdrop-blur-md">
+                                                <?php echo $partner; ?>
+                                            </span>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
 
-                                <!-- B: 1×1 -->
-                                <div style="grid-column:3;grid-row:1;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_b') ?: get_template_directory_uri() . '/assets/images/home-solution-led.webp'); ?>" alt="Dự án 2"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease;"
-                                         >
+                                <div class="mb-5">
+                                    <p class="text-amber-300 text-[11px] font-black uppercase tracking-[0.18em] mb-2">Chuẩn dịch vụ HacoLED</p>
+                                    <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Cam kết phục vụ 3F</h3>
+                                    <p class="text-xs sm:text-sm text-white/70 mt-1.5 leading-relaxed">Đồng hành xuyên suốt từ tư vấn, triển khai đến bảo hành vận hành.</p>
                                 </div>
 
-                                <!-- C: 1×1 -->
-                                <div style="grid-column:4;grid-row:1;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_c') ?: get_template_directory_uri() . '/assets/images/home-solution-videowall.webp'); ?>" alt="Dự án 3"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease;"
-                                         >
-                                    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,175,55,0.1),transparent 60%);pointer-events:none;"></div>
-                                </div>
+                                <!-- 3F Feature Glass Cards -->
+                                <div class="space-y-2">
 
-                                <!-- D: 1×1 -->
-                                <div style="grid-column:3;grid-row:2;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_d') ?: get_template_directory_uri() . '/assets/images/home-solution-audio.webp'); ?>" alt="Dự án 4"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease;"
-                                         >
-                                </div>
+                                    <div class="group flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.07] backdrop-blur-xl border border-white/15 hover:border-amber-300/55 hover:bg-white/[0.11] transition-all duration-300">
+                                        <div class="w-10 h-10 shrink-0 rounded-lg bg-amber-300 text-[#6c080d] flex items-center justify-center shadow-[0_6px_18px_rgba(251,191,36,0.2)] group-hover:-translate-y-0.5 transition-transform duration-300">
+                                            <i class="ph-fill ph-users text-lg sm:text-xl"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                            <p class="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#fbbf24] transition-colors">Friendly</p>
+                                                <i class="ph-bold ph-check-circle text-xs text-amber-400/60 group-hover:text-amber-400 transition-colors"></i>
+                                            </div>
+                                            <p class="text-xs sm:text-[13px] text-white/75 leading-snug mt-0.5">Đội ngũ tận tâm, nhiệt tình, hỗ trợ kỹ thuật 24/7.</p>
+                                        </div>
+                                    </div>
 
-                                <!-- E: 1×1 -->
-                                <div style="grid-column:4;grid-row:2;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_e') ?: get_template_directory_uri() . '/assets/images/services-indoor.webp'); ?>" alt="Dự án 5"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease;"
-                                         >
-                                </div>
+                                    <div class="group flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.07] backdrop-blur-xl border border-white/15 hover:border-amber-300/55 hover:bg-white/[0.11] transition-all duration-300">
+                                        <div class="w-10 h-10 shrink-0 rounded-lg bg-amber-300 text-[#6c080d] flex items-center justify-center shadow-[0_6px_18px_rgba(251,191,36,0.2)] group-hover:-translate-y-0.5 transition-transform duration-300">
+                                            <i class="ph-fill ph-lightning text-lg sm:text-xl"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                            <p class="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#fbbf24] transition-colors">Fast</p>
+                                                <i class="ph-bold ph-check-circle text-xs text-amber-400/60 group-hover:text-amber-400 transition-colors"></i>
+                                            </div>
+                                            <p class="text-xs sm:text-[13px] text-white/75 leading-snug mt-0.5">Phản hồi tức thì, xử lý & khắc phục sự cố tốc độ.</p>
+                                        </div>
+                                    </div>
 
-                                <!-- F: 1×1 -->
-                                <div style="grid-column:1;grid-row:3;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_f') ?: get_template_directory_uri() . '/assets/images/services-outdoor.webp'); ?>" alt="Dự án 6"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease;"
-                                         >
-                                </div>
+                                    <div class="group flex items-center gap-3.5 p-3 rounded-xl bg-white/[0.07] backdrop-blur-xl border border-white/15 hover:border-amber-300/55 hover:bg-white/[0.11] transition-all duration-300">
+                                        <div class="w-10 h-10 shrink-0 rounded-lg bg-amber-300 text-[#6c080d] flex items-center justify-center shadow-[0_6px_18px_rgba(251,191,36,0.2)] group-hover:-translate-y-0.5 transition-transform duration-300">
+                                            <i class="ph-fill ph-shield-check text-lg sm:text-xl"></i>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                            <p class="text-sm sm:text-base font-bold text-white tracking-wide group-hover:text-[#fbbf24] transition-colors">Full</p>
+                                                <i class="ph-bold ph-check-circle text-xs text-amber-400/60 group-hover:text-amber-400 transition-colors"></i>
+                                            </div>
+                                            <p class="text-xs sm:text-[13px] text-white/75 leading-snug mt-0.5">Dịch vụ trọn gói, pháp lý chuẩn mực, bảo hành lâu dài.</p>
+                                        </div>
+                                    </div>
 
-                                <!-- G: 1×1 -->
-                                <div style="grid-column:2;grid-row:3;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_g') ?: get_template_directory_uri() . '/assets/images/services-audio.webp'); ?>" alt="Dự án 7"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease;"
-                                         >
-                                </div>
+                                </div><!-- /3F Glass Cards -->
+                            </div>
 
-                                <!-- H: 2×1 wide — gold tint -->
-                                <div style="grid-column:3/5;grid-row:3;position:relative;overflow:hidden;cursor:pointer;">
-                                    <img loading="lazy" decoding="async" sizes="30vw" src="<?php echo esc_url(get_theme_mod('hacoled_prestige_img_h') ?: get_template_directory_uri() . '/assets/images/services-blueprint.webp'); ?>" alt="Dự án 8"
-                                         style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.8s ease;"
-                                         >
-                                    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(212,175,55,0.06),transparent);pointer-events:none;"></div>
+                            <!-- Bottom Metrics Counter Bar -->
+                            <div class="relative z-10 mt-4 pt-3 border-t border-white/15">
+                                <div class="grid grid-cols-3 gap-2 text-center">
+                                    <div class="py-2 px-1 rounded-xl bg-black/15 border border-white/10">
+                                        <p class="text-base sm:text-xl font-extrabold text-amber-300 leading-none">10+</p>
+                                        <p class="text-[9px] sm:text-[10px] font-bold text-white/70 uppercase tracking-wider mt-1">Năm Uy Tín</p>
+                                    </div>
+                                    <div class="py-2 px-1 rounded-xl bg-black/15 border border-white/10">
+                                        <p class="text-base sm:text-xl font-extrabold text-amber-300 leading-none">1,500+</p>
+                                        <p class="text-[9px] sm:text-[10px] font-bold text-white/70 uppercase tracking-wider mt-1">Dự Án LED</p>
+                                    </div>
+                                    <div class="py-2 px-1 rounded-xl bg-black/15 border border-white/10">
+                                        <p class="text-base sm:text-xl font-extrabold text-amber-300 leading-none">24 T.</p>
+                                        <p class="text-[9px] sm:text-[10px] font-bold text-white/70 uppercase tracking-wider mt-1">Bảo Hành Vàng</p>
+                                    </div>
                                 </div>
+                            </div>
 
+                        </div><!-- /LEFT -->
+
+                        <!-- ─────────────────────────────────── -->
+                        <!--  RIGHT: Rounded Bento Media Gallery -->
+                        <!-- ─────────────────────────────────── -->
+                        <div class="lg:order-1 w-full h-[360px] sm:h-[440px] lg:h-full relative overflow-hidden rounded-[24px] lg:rounded-[28px] bg-[#160607] p-2 sm:p-2.5 shadow-[0_22px_55px_-28px_rgba(15,23,42,0.7)] border border-slate-900/20">
+                            <?php
+                            $prestige_images = [
+                                0 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_a') ?: get_template_directory_uri() . '/assets/images/services-hero.webp',
+                                    'caption' => 'Dự án tiêu biểu - Thi công màn hình LED cao cấp',
+                                    'grid'    => 'grid-column:1/3;grid-row:1/3;',
+                                    'is_hero' => true
+                                ],
+                                1 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_b') ?: get_template_directory_uri() . '/assets/images/home-solution-led.webp',
+                                    'caption' => 'Giải pháp màn hình LED phòng họp & hội trường',
+                                    'grid'    => 'grid-column:3;grid-row:1;',
+                                    'is_hero' => false
+                                ],
+                                2 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_c') ?: get_template_directory_uri() . '/assets/images/home-solution-videowall.webp',
+                                    'caption' => 'Màn hình ghép Video Wall hiện đại',
+                                    'grid'    => 'grid-column:4;grid-row:1;',
+                                    'is_hero' => false
+                                ],
+                                3 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_d') ?: get_template_directory_uri() . '/assets/images/home-solution-audio.webp',
+                                    'caption' => 'Hệ thống điều khiển & âm thanh ánh sáng',
+                                    'grid'    => 'grid-column:3;grid-row:2;',
+                                    'is_hero' => false
+                                ],
+                                4 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_e') ?: get_template_directory_uri() . '/assets/images/services-indoor.webp',
+                                    'caption' => 'Lắp đặt màn hình LED trong nhà (Indoor)',
+                                    'grid'    => 'grid-column:4;grid-row:2;',
+                                    'is_hero' => false
+                                ],
+                                5 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_f') ?: get_template_directory_uri() . '/assets/images/services-outdoor.webp',
+                                    'caption' => 'Thi công màn hình LED ngoài trời (Outdoor) cỡ lớn',
+                                    'grid'    => 'grid-column:1;grid-row:3;',
+                                    'is_hero' => false
+                                ],
+                                6 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_g') ?: get_template_directory_uri() . '/assets/images/services-audio.webp',
+                                    'caption' => 'Sân khấu & sự kiện quy mô lớn',
+                                    'grid'    => 'grid-column:2;grid-row:3;',
+                                    'is_hero' => false
+                                ],
+                                7 => [
+                                    'url'     => get_theme_mod('hacoled_prestige_img_h') ?: get_template_directory_uri() . '/assets/images/services-blueprint.webp',
+                                    'caption' => 'Bản vẽ kỹ thuật & thi công trọn gói chuẩn mực',
+                                    'grid'    => 'grid-column:3/5;grid-row:3;',
+                                    'is_hero' => false
+                                ],
+                            ];
+                            ?>
+
+                            <div class="hacoled-prestige-grid h-full w-full grid grid-cols-4 grid-rows-2 gap-2 sm:gap-2.5">
+                                <?php foreach ($prestige_images as $idx => $img): ?>
+                                    <?php if ($idx > 4) continue; ?>
+                                    <button type="button"
+                                         onclick="openPrestigeLightbox(<?php echo $idx; ?>)"
+                                         aria-label="<?php echo esc_attr($img['caption']); ?>"
+                                         style="<?php echo $img['grid']; ?>"
+                                         class="group relative overflow-hidden rounded-lg sm:rounded-xl cursor-zoom-in select-none bg-slate-900 border border-white/10 hover:border-[#fbbf24]/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fbbf24] focus-visible:ring-offset-2 focus-visible:ring-offset-[#160607] transition-all duration-300 shadow-md">
+
+                                        <!-- Image -->
+                                        <img loading="lazy" decoding="async" sizes="(max-width: 1024px) 50vw, 30vw"
+                                             src="<?php echo esc_url($img['url']); ?>"
+                                             alt="<?php echo esc_attr($img['caption']); ?>"
+                                             class="w-full h-full object-cover block transition-transform duration-700 ease-out group-hover:scale-110">
+
+                                        <!-- Hover Gradient Overlay & Zoom Icon -->
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
+                                            <div class="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md border border-white/60 text-white flex items-center justify-center transform scale-75 group-hover:scale-100 group-focus-visible:scale-100 transition-all duration-300 shadow-2xl">
+                                                <i class="ph-bold ph-arrows-out-simple text-lg"></i>
+                                            </div>
+                                        </div>
+
+                                        <?php if ($img['is_hero']): ?>
+                                            <!-- Hero Badge -->
+                                            <div class="absolute bottom-2.5 left-2.5 sm:bottom-3.5 sm:left-3.5 flex items-center gap-2 pointer-events-none z-10">
+                                                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-[#fbbf24]/50 shadow-lg">
+                                                    <span class="w-2 h-2 rounded-full bg-[#fbbf24] shadow-[0_0_8px_#fbbf24] animate-pulse"></span>
+                                                    <span class="text-[9px] sm:text-xs font-black text-white uppercase tracking-wider">Dự án tiêu biểu</span>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if ($idx === 7): ?>
+                                            <!-- Blueprint Special Badge Overlay -->
+                                            <div class="absolute inset-0 bg-gradient-to-r from-[#d4af37]/20 via-transparent to-black/40 pointer-events-none"></div>
+                                            <div class="absolute bottom-2 left-2 pointer-events-none z-10">
+                                                <span class="px-2 py-0.5 rounded bg-black/70 backdrop-blur border border-amber-400/40 text-[9px] font-bold text-amber-300 uppercase tracking-widest">
+                                                    Chuẩn Kỹ Thuật
+                                                </span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </button>
+                                <?php endforeach; ?>
                             </div><!-- /grid -->
                         </div><!-- /RIGHT -->
-
-                        <!-- ─────────────────────────────── -->
-                        <!--  LEFT (Bottom on mobile): Text details -->
-                        <!-- ─────────────────────────────── -->
-                        <div class="w-full lg:w-[40%] shrink-0 relative overflow-hidden p-4 sm:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-[#b31217] to-[#8a0b10]">
-
-                            <!-- Dong Son Drum watermark -->
-                            <div class="absolute top-1/2 -translate-y-1/2 -right-[30%] w-[800px] h-[800px] bg-no-repeat bg-contain bg-center pointer-events-none mix-blend-screen opacity-[0.12] z-0" 
-                                 style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson-optimized.webp'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);">
-                            </div>
-
-                            <!-- Background decorations -->
-                            <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;"></div>
-                            <div style="position:absolute;top:-120px;left:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(220,60,60,0.22) 0%,transparent 65%);filter:blur(30px);pointer-events:none;"></div>
-                            <div style="position:absolute;bottom:-80px;right:-40px;width:260px;height:260px;background:radial-gradient(circle,rgba(212,175,55,0.1) 0%,transparent 65%);filter:blur(40px);pointer-events:none;"></div>
-
-                            <!-- Content -->
-                            <div style="position:relative;z-index:2;">
-
-                                <!-- Eyebrow -->
-                                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur border border-[#fbbf24]/30 mb-3">
-                                    <i class="ph-fill ph-medal text-[#fbbf24] text-xs md:text-lg"></i>
-                                    <span class="text-white text-[10px] md:text-xs font-bold uppercase tracking-widest whitespace-nowrap">Năng Lực & Uy Tín</span>
-                                </div>
-
-                                <!-- Heading -->
-                                <h2 id="uy-tin-hacoled" class="text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white mb-3 leading-tight">
-                                    Uy Tín<br class="hidden md:block">
-                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#fbbf24] to-[#fffbeb]">Tạo Nên Thương Hiệu</span>
-                                </h2>
-
-                                <!-- Desc -->
-                                <p class="text-[11px] md:text-sm leading-relaxed mb-2.5 md:mb-6 pl-2.5 border-l-2 border-[#d4af37]" style="color:rgba(255,255,255,0.6);">
-                                    Đối tác của <strong style="color:#fff;font-weight:600;">Viettel, FPT, EVN, Vingroup, Masterise, BRG</strong> và hàng trăm tập đoàn hàng đầu Việt Nam.
-                                </p>
-
-                                <!-- Divider -->
-                                <div class="hidden sm:block h-[1px] bg-gradient-to-r from-white/10 to-transparent my-3"></div>
-
-                                <!-- 3F Rows -->
-                                <div class="flex flex-col gap-1 md:gap-2.5">
-
-                                    <div class="flex items-start gap-2.5 p-2 md:p-3 rounded-xl border border-white/10 bg-white/10 backdrop-blur-md transition-all duration-300 hover:bg-white/15 hover:border-[#fbbf24]/40">
-                                        <div class="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#d4af37]/15 to-[#d4af37]/5 flex items-center justify-center border border-[#d4af37]/20">
-                                            <i class="ph-fill ph-users text-xs md:text-lg" style="color:#d4af37;"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs md:text-sm font-bold text-white leading-none">Friendly</p>
-                                            <p class="text-[10px] md:text-[11px] text-white/70 leading-relaxed mt-0.5">Đội ngũ tận tâm, nhiệt tình, hỗ trợ 24/7.</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-start gap-2.5 p-2 md:p-3 rounded-xl border border-white/10 bg-white/10 backdrop-blur-md transition-all duration-300 hover:bg-white/15 hover:border-[#fbbf24]/40">
-                                        <div class="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#d4af37]/15 to-[#d4af37]/5 flex items-center justify-center border border-[#d4af37]/20">
-                                            <i class="ph-fill ph-lightning text-xs md:text-lg" style="color:#d4af37;"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs md:text-sm font-bold text-white leading-none">Fast</p>
-                                            <p class="text-[10px] md:text-[11px] text-white/70 leading-relaxed mt-0.5">Phản hồi tức thì, xử lý mọi yêu cầu nhanh chóng.</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="flex items-start gap-2.5 p-2 md:p-3 rounded-xl border border-white/10 bg-white/10 backdrop-blur-md transition-all duration-300 hover:bg-white/15 hover:border-[#fbbf24]/40">
-                                        <div class="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 rounded-lg bg-gradient-to-br from-[#d4af37]/15 to-[#d4af37]/5 flex items-center justify-center border border-[#d4af37]/20">
-                                            <i class="ph-fill ph-shield-check text-xs md:text-lg" style="color:#d4af37;"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs md:text-sm font-bold text-white leading-none">Full</p>
-                                            <p class="text-[10px] md:text-[11px] text-white/70 leading-relaxed mt-0.5">Dịch vụ trọn gói, pháp lý minh bạch, cam kết lâu dài.</p>
-                                        </div>
-                                    </div>
-
-                                </div><!-- /3F -->
-                            </div>
-                        </div><!-- /LEFT -->
 
                     </div><!-- /split flex -->
                 </div><!-- /card -->
             </div><!-- /container -->
         </section>
+
+        <!-- ========================================== -->
+        <!-- PRESTIGE LIGHTBOX POPUP MODAL               -->
+        <!-- ========================================== -->
+        <div id="hacoledPrestigeLightbox"
+             class="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center p-3 sm:p-6 select-none"
+             onclick="closePrestigeLightbox()"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="prestigeLightboxTitle"
+             aria-hidden="true">
+
+            <!-- Close Button -->
+            <button type="button"
+                    onclick="closePrestigeLightbox()"
+                    class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-[#b31217] text-white flex items-center justify-center transition-all duration-200 backdrop-blur-md border border-white/20 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 z-30 shadow-lg cursor-pointer"
+                    aria-label="Đóng hình ảnh">
+                <i class="ph-bold ph-x text-xl"></i>
+            </button>
+
+            <!-- Navigation Prev -->
+            <button type="button"
+                    onclick="event.stopPropagation(); prevPrestigeImage();"
+                    class="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/10 hover:bg-[#b31217] text-white flex items-center justify-center transition-all duration-200 backdrop-blur-md border border-white/20 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 z-30 shadow-lg cursor-pointer group"
+                    aria-label="Hình trước">
+                <i class="ph-bold ph-caret-left text-2xl group-hover:-translate-x-0.5 transition-transform"></i>
+            </button>
+
+            <!-- Navigation Next -->
+            <button type="button"
+                    onclick="event.stopPropagation(); nextPrestigeImage();"
+                    class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/10 hover:bg-[#b31217] text-white flex items-center justify-center transition-all duration-200 backdrop-blur-md border border-white/20 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 z-30 shadow-lg cursor-pointer group"
+                    aria-label="Hình kế tiếp">
+                <i class="ph-bold ph-caret-right text-2xl group-hover:translate-x-0.5 transition-transform"></i>
+            </button>
+
+            <!-- Main Image & Information Container -->
+            <div class="relative max-w-6xl w-full flex flex-col items-center justify-center z-20" onclick="event.stopPropagation()">
+
+                <!-- Main Image Wrapper -->
+                <div class="relative overflow-hidden rounded-xl sm:rounded-2xl border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] bg-black/80 flex items-center justify-center max-h-[78vh] w-full">
+                    <img id="prestigeLightboxImg"
+                         src=""
+                         alt=""
+                         class="max-h-[78vh] w-auto max-w-full object-contain transition-all duration-300 scale-95 opacity-0">
+                </div>
+
+                <!-- Footer Info Bar -->
+                <div class="mt-4 flex flex-col sm:flex-row items-center justify-between w-full gap-2 px-3 text-white">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#fbbf24] shadow-[0_0_10px_#fbbf24] animate-pulse"></span>
+                        <span id="prestigeLightboxTitle" class="text-sm sm:text-base font-semibold text-white/90 drop-shadow"></span>
+                    </div>
+                    <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-bold text-[#fbbf24] tracking-wider">
+                        <span id="prestigeLightboxCounter">1 / 8</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function() {
+                const prestigeImagesData = <?php echo wp_json_encode(array_values($prestige_images)); ?>;
+                let currentPrestigeIndex = 0;
+                let previousPrestigeFocus = null;
+                let prestigeTouchStartX = 0;
+
+                window.openPrestigeLightbox = function(index) {
+                    currentPrestigeIndex = index;
+                    const lightbox = document.getElementById('hacoledPrestigeLightbox');
+                    const img = document.getElementById('prestigeLightboxImg');
+                    const title = document.getElementById('prestigeLightboxTitle');
+                    const counter = document.getElementById('prestigeLightboxCounter');
+
+                    if (!lightbox || !img || !prestigeImagesData[index]) return;
+                    previousPrestigeFocus = document.activeElement;
+
+                    // Update Image Src & Metadata
+                    img.src = prestigeImagesData[index].url;
+                    img.alt = prestigeImagesData[index].caption;
+                    if (title) title.textContent = prestigeImagesData[index].caption;
+                    if (counter) counter.textContent = (index + 1) + ' / ' + prestigeImagesData.length;
+
+                    // Show Modal
+                    lightbox.classList.remove('opacity-0', 'pointer-events-none');
+                    lightbox.classList.add('opacity-100', 'pointer-events-auto');
+                    lightbox.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                    const closeButton = lightbox.querySelector('button[aria-label="Đóng hình ảnh"]');
+                    if (closeButton) closeButton.focus();
+
+                    // Animate Image In
+                    setTimeout(() => {
+                        img.classList.remove('scale-95', 'opacity-0');
+                        img.classList.add('scale-100', 'opacity-100');
+                    }, 50);
+                };
+
+                window.closePrestigeLightbox = function() {
+                    const lightbox = document.getElementById('hacoledPrestigeLightbox');
+                    const img = document.getElementById('prestigeLightboxImg');
+
+                    if (!lightbox) return;
+
+                    if (img) {
+                        img.classList.remove('scale-100', 'opacity-100');
+                        img.classList.add('scale-95', 'opacity-0');
+                    }
+
+                    setTimeout(() => {
+                        lightbox.classList.remove('opacity-100', 'pointer-events-auto');
+                        lightbox.classList.add('opacity-0', 'pointer-events-none');
+                        lightbox.setAttribute('aria-hidden', 'true');
+                        document.body.style.overflow = '';
+                        if (previousPrestigeFocus && typeof previousPrestigeFocus.focus === 'function') {
+                            previousPrestigeFocus.focus();
+                        }
+                    }, 200);
+                };
+
+                window.prevPrestigeImage = function() {
+                    currentPrestigeIndex = (currentPrestigeIndex - 1 + prestigeImagesData.length) % prestigeImagesData.length;
+                    updatePrestigeLightboxContent();
+                };
+
+                window.nextPrestigeImage = function() {
+                    currentPrestigeIndex = (currentPrestigeIndex + 1) % prestigeImagesData.length;
+                    updatePrestigeLightboxContent();
+                };
+
+                function updatePrestigeLightboxContent() {
+                    const img = document.getElementById('prestigeLightboxImg');
+                    const title = document.getElementById('prestigeLightboxTitle');
+                    const counter = document.getElementById('prestigeLightboxCounter');
+
+                    if (!img || !prestigeImagesData[currentPrestigeIndex]) return;
+
+                    img.classList.remove('scale-100', 'opacity-100');
+                    img.classList.add('scale-95', 'opacity-0');
+
+                    setTimeout(() => {
+                        img.src = prestigeImagesData[currentPrestigeIndex].url;
+                        img.alt = prestigeImagesData[currentPrestigeIndex].caption;
+                        if (title) title.textContent = prestigeImagesData[currentPrestigeIndex].caption;
+                        if (counter) counter.textContent = (currentPrestigeIndex + 1) + ' / ' + prestigeImagesData.length;
+
+                        img.classList.remove('scale-95', 'opacity-0');
+                        img.classList.add('scale-100', 'opacity-100');
+                    }, 150);
+                }
+
+                // Keyboard Navigation (ESC, Left, Right)
+                document.addEventListener('keydown', function(e) {
+                    const lightbox = document.getElementById('hacoledPrestigeLightbox');
+                    if (!lightbox || lightbox.classList.contains('opacity-0')) return;
+
+                    if (e.key === 'Escape') {
+                        closePrestigeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        prevPrestigeImage();
+                    } else if (e.key === 'ArrowRight') {
+                        nextPrestigeImage();
+                    } else if (e.key === 'Tab') {
+                        const focusable = Array.from(lightbox.querySelectorAll('button'));
+                        if (!focusable.length) return;
+                        const first = focusable[0];
+                        const last = focusable[focusable.length - 1];
+                        if (e.shiftKey && document.activeElement === first) {
+                            e.preventDefault();
+                            last.focus();
+                        } else if (!e.shiftKey && document.activeElement === last) {
+                            e.preventDefault();
+                            first.focus();
+                        }
+                    }
+                });
+
+                const lightbox = document.getElementById('hacoledPrestigeLightbox');
+                if (lightbox) {
+                    lightbox.addEventListener('touchstart', function(e) {
+                        prestigeTouchStartX = e.changedTouches[0].clientX;
+                    }, { passive: true });
+                    lightbox.addEventListener('touchend', function(e) {
+                        const deltaX = e.changedTouches[0].clientX - prestigeTouchStartX;
+                        if (Math.abs(deltaX) < 50) return;
+                        deltaX > 0 ? prevPrestigeImage() : nextPrestigeImage();
+                    }, { passive: true });
+                }
+            })();
+        </script>
 
 
         <!-- ========================================== -->

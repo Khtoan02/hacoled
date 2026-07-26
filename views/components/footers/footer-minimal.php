@@ -1,3 +1,10 @@
+<?php
+$custom_logo_id = get_theme_mod('custom_logo');
+$footer_logo    = $custom_logo_id ? wp_get_attachment_image_url($custom_logo_id, 'full') : home_url('/wp-content/uploads/2026/06/HacoLED-Logo-Moi.png');
+if (empty($footer_logo)) {
+    $footer_logo = get_template_directory_uri() . '/assets/images/logo-haco.png';
+}
+?>
 <!-- Minimal Footer Module (HacoLED Brand Maroon Theme) -->
 <footer class="bg-primary text-slate-400 border-t-2 border-accent-gold py-8 text-xs font-sans z-10 relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -5,9 +12,9 @@
       
       <!-- Left: Logo & Copyright -->
       <div class="flex items-center gap-3">
-        <a class="inline-block" href="https://hacoled.com/">
-          <img class="h-6 w-auto object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.15)]" 
-               src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-haco.png" alt="HacoLED Logo" />
+        <a class="inline-block" href="<?php echo esc_url(home_url('/')); ?>">
+          <img class="h-8 w-auto object-contain transition-all duration-300" 
+               src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?> Logo" />
         </a>
         <span class="text-accent-border">|</span>
         <p>&copy; <?php echo date('Y'); ?> HacoLED. All Rights Reserved.</p>

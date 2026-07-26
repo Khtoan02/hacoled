@@ -39,21 +39,21 @@ $price_html = $product->get_price_html();
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'single-product-container relative z-10', $product ); ?>
      x-data="{ 
          showStickyBar: false, 
-         headerHeight: 70,
+         headerHeight: 0,
          updateHeaderHeight() {
              let hdr = document.getElementById('site-header');
              if (hdr) {
-                 this.headerHeight = Math.round(hdr.getBoundingClientRect().height);
+                 this.headerHeight = Math.max(0, Math.round(hdr.getBoundingClientRect().bottom));
              }
          }
      }"
-     x-init="updateHeaderHeight(); window.addEventListener('resize', () => updateHeaderHeight())"
+     x-init="updateHeaderHeight(); window.addEventListener('resize', () => updateHeaderHeight()); $nextTick(() => updateHeaderHeight()); window.addEventListener('load', () => updateHeaderHeight())"
      @scroll.window="
          updateHeaderHeight();
-         showStickyBar = (window.scrollY > 450);
+         showStickyBar = (window.scrollY > (window.innerWidth < 768 ? 380 : 450));
      ">
 
-    <!-- STICKY PRODUCT SUB-HEADER (Executive Solid White Style) -->
+    <!-- STICKY PRODUCT SUB-HEADER (Executive Solid White Style - Desktop & Mobile) -->
     <div x-show="showStickyBar"
          x-transition:enter="transition ease-out duration-300 transform"
          x-transition:enter-start="-translate-y-full opacity-0"
@@ -61,22 +61,22 @@ $price_html = $product->get_price_html();
          x-transition:leave="transition ease-in duration-200 transform"
          x-transition:leave-start="translate-y-0 opacity-100"
          x-transition:leave-end="-translate-y-full opacity-0"
-         :style="{ top: (headerHeight - 1) + 'px' }"
-         class="fixed left-0 w-full bg-white border-b border-gray-200 z-[210] shadow-md hidden lg:block"
+         :style="{ top: (headerHeight > 0 ? (headerHeight - 1) + 'px' : '0px') }"
+         class="fixed left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-200/90 z-[180] shadow-md transition-[top] duration-150 ease-out block"
          x-cloak>
-        <div class="max-w-[1440px] mx-auto px-6 lg:px-10 py-3.5 flex items-center justify-between gap-6">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 py-2 sm:py-2.5 lg:py-3.5 flex items-center justify-between gap-3 sm:gap-6">
             <!-- Left Side: Title & Badges Below Title -->
-            <div class="flex flex-col gap-1.5 justify-center min-w-0">
+            <div class="flex flex-col gap-0.5 sm:gap-1.5 justify-center min-w-0 flex-1 lg:flex-none">
                 <!-- Row 1: Full Title + Brand Badge -->
-                <div class="flex items-center gap-3">
-                    <span class="text-slate-900 font-bold text-base lg:text-lg tracking-tight leading-snug"><?php the_title(); ?></span>
-                    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-[10px] font-extrabold uppercase tracking-wider shrink-0 shadow-xs">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <span class="text-slate-900 font-bold text-xs sm:text-base lg:text-lg tracking-tight leading-snug truncate lg:whitespace-normal"><?php the_title(); ?></span>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-50 border border-red-200 text-red-600 text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider shrink-0 shadow-xs hidden sm:inline-flex">
                         <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> Chính Hãng
                     </span>
                 </div>
 
-                <!-- Row 2: Badges (CO/CQ, Bảo hành, Vẽ 3D) sitting under title -->
-                <div class="flex items-center gap-2">
+                <!-- Row 2: Desktop Badges (CO/CQ, Bảo hành, Vẽ 3D) -->
+                <div class="hidden lg:flex items-center gap-2">
                     <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200/70 text-[11px] font-semibold">
                         <i class="ph-bold ph-shield-check text-emerald-600"></i> CO/CQ đầy đủ
                     </span>
@@ -87,12 +87,19 @@ $price_html = $product->get_price_html();
                         <i class="ph-bold ph-package text-sky-600"></i> Thiết kế 3D Free
                     </span>
                 </div>
+
+                <!-- Mobile Sub-row: Price on Mobile -->
+                <div class="flex lg:hidden items-center gap-1.5 text-xs font-bold text-[#D90429]">
+                    <div class="sp-sticky-price-inline text-xs font-extrabold text-[#D90429] flex items-baseline gap-1">
+                        <?php echo ! empty( $price_html ) ? $price_html : '<span class="text-xs font-extrabold text-[#D90429]">Liên hệ</span>'; ?>
+                    </div>
+                </div>
             </div>
             
             <!-- Right Side: Regular Price (Giá Gốc) + Selling Price (Giá Bán) + CTA -->
-            <div class="flex items-center gap-6 xl:gap-8 shrink-0">
-                <!-- Price Display (Giác gốc + Giá bán, balanced size) -->
-                <div class="flex items-baseline gap-2">
+            <div class="flex items-center gap-3 sm:gap-6 xl:gap-8 shrink-0">
+                <!-- Price Display (Desktop Only) -->
+                <div class="hidden lg:flex items-baseline gap-2">
                     <div class="sp-sticky-price-inline flex items-baseline gap-2">
                         <?php echo ! empty( $price_html ) ? $price_html : '<span class="text-base lg:text-lg font-bold text-slate-900 tracking-tight">Liên hệ</span>'; ?>
                     </div>
@@ -100,8 +107,10 @@ $price_html = $product->get_price_html();
                 
                 <!-- CTA Button -->
                 <a href="<?php echo esc_url( hacoled_managed_page_url( 'contact' ) ); ?>"
-                   class="bg-[#D90429] hover:bg-[#b90323] text-white font-bold px-7 py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all duration-300 text-xs lg:text-sm uppercase tracking-wider shadow-md hover:-translate-y-0.5 whitespace-nowrap">
-                    <i class="ph-bold ph-headset text-base"></i> Nhận Báo Giá Ngay
+                   class="bg-[#D90429] hover:bg-[#b90323] text-white font-bold px-3.5 sm:px-7 py-1.5 sm:py-2 lg:py-2.5 rounded-lg lg:rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 text-[11px] sm:text-xs lg:text-sm uppercase tracking-wider shadow-md hover:-translate-y-0.5 whitespace-nowrap">
+                    <i class="ph-bold ph-headset text-sm lg:text-base"></i>
+                    <span class="hidden sm:inline">Nhận Báo Giá Ngay</span>
+                    <span class="inline sm:hidden">Nhận báo giá</span>
                 </a>
             </div>
         </div>
@@ -145,109 +154,8 @@ $price_html = $product->get_price_html();
                         </div>
                     </div>
 
-                    <!-- PRIVILEGES CARD — Premium Vibrant Red & Gold (Trống Đồng Đông Sơn) -->
-                    <div class="sp-privileges-card relative rounded-2xl p-5 md:p-6 lg:p-7 mb-6 overflow-hidden">
-                        <!-- Gold mat inner frame -->
-                        <div class="sp-priv-red-mat"></div>
-
-                        <!-- Trống đồng Đông Sơn image pattern (header brand asset) -->
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
-                            <div class="w-[440px] h-[440px] md:w-[540px] md:h-[540px] bg-no-repeat bg-center bg-contain opacity-20"
-                                 style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson-optimized.webp'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);"></div>
-                        </div>
-
-                        <!-- Base background gradient -->
-                        <div class="absolute inset-0 bg-gradient-to-br from-[#a8031d] via-[#d90429] to-[#65000f] -z-10"></div>
-                        <!-- Gold radial ambient glow -->
-                        <div class="absolute inset-0 -z-10 opacity-30" style="background:radial-gradient(ellipse at 50% 0%, rgba(255,215,0,.35), transparent 65%);"></div>
-                        <!-- Gold glow orbs -->
-                        <div class="absolute -top-16 -right-10 w-56 h-56 bg-[#FFD700] rounded-full opacity-[0.12] blur-[60px] pointer-events-none"></div>
-                        <div class="absolute -bottom-16 -left-10 w-44 h-44 bg-[#FFA500] rounded-full opacity-[0.10] blur-[50px] pointer-events-none"></div>
-                        <!-- Glossy sweep -->
-                        <div class="absolute inset-0 sp-priv-gloss pointer-events-none"></div>
-                        <!-- Top specular hairline -->
-                        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
-
-                        <!-- Header -->
-                        <div class="flex items-center gap-3.5 mb-2 relative z-10">
-                            <div class="w-11 h-11 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-[#3a1f05] shadow-lg shrink-0"
-                                 style="background:linear-gradient(135deg,#ffffff,#ffe89c 45%,#ffd700 70%,#d49214); box-shadow: 0 4px 14px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.8);">
-                                <i class="ph-bold ph-crown text-xl text-[#851800]"></i>
-                            </div>
-                            <div>
-                                <h3 class="sp-priv-gold-text font-extrabold text-base md:text-lg tracking-[0.1em] uppercase">Đặc Quyền Dịch Vụ</h3>
-                                <p class="text-[11px] md:text-xs text-[#FFF3D1] font-semibold mt-0.5 tracking-wide">Dẫn dầu thị trường </p>
-                            </div>
-                        </div>
-                        <div class="sp-priv-gold-hairline sp-priv-shimmer mb-5 relative z-10"></div>
-
-                        <!-- 2 Columns -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 relative z-10">
-                            <!-- Cam kết vàng -->
-                            <div>
-                                <h4 class="text-xs lg:text-sm font-bold text-[#FFE8A3] uppercase tracking-wider mb-3 flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg flex items-center justify-center border border-[#FFD700]/40 bg-[#000000]/20 shadow-sm">
-                                        <i class="ph-bold ph-shield-check text-[#FFD700] text-sm"></i>
-                                    </span>
-                                    Cam kết vàng
-                                </h4>
-                                <ul class="space-y-2.5">
-                                    <li class="flex items-start gap-2.5 text-white/95 hover:text-white transition-colors">
-                                        <i class="ph-bold ph-check-circle text-[#FFD700] text-base mt-0.5 flex-shrink-0"></i>
-                                        <span class="text-sm leading-snug font-medium">Hàng chính hãng 100% (CO/CQ)</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5 text-white/95 hover:text-white transition-colors">
-                                        <i class="ph-bold ph-check-circle text-[#FFD700] text-base mt-0.5 flex-shrink-0"></i>
-                                        <span class="text-sm leading-snug font-medium">Nguồn gốc xuất xứ rõ ràng</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5 text-white/95 hover:text-white transition-colors">
-                                        <i class="ph-bold ph-check-circle text-[#FFD700] text-base mt-0.5 flex-shrink-0"></i>
-                                        <span class="text-sm leading-snug font-medium">Giá cạnh tranh nhất thị trường</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- Ưu đãi lớn -->
-                            <div class="md:pl-6 md:border-l md:border-[#FFD700]/25">
-                                <h4 class="text-xs lg:text-sm font-bold text-[#FFE8A3] uppercase tracking-wider mb-3 flex items-center gap-2.5">
-                                    <span class="w-7 h-7 rounded-lg flex items-center justify-center border border-[#FFD700]/40 bg-[#000000]/20 shadow-sm">
-                                        <i class="ph-bold ph-gift text-[#FFD700] text-sm"></i>
-                                    </span>
-                                    Ưu đãi lớn
-                                </h4>
-                                <ul class="space-y-2.5">
-                                    <li class="flex items-start gap-2.5 text-white/95 hover:text-white transition-colors">
-                                        <i class="ph-bold ph-star text-[#FFD700] text-base mt-0.5 flex-shrink-0"></i>
-                                        <span class="text-sm leading-snug font-medium">Bảo hành chính hãng 24 – 36 tháng</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5 text-white/95 hover:text-white transition-colors">
-                                        <i class="ph-bold ph-star text-[#FFD700] text-base mt-0.5 flex-shrink-0"></i>
-                                        <span class="text-sm leading-snug font-medium">Tư vấn kỹ thuật MIỄN PHÍ 24/7</span>
-                                    </li>
-                                    <li class="flex items-start gap-2.5 text-white/95 hover:text-white transition-colors">
-                                        <i class="ph-bold ph-star text-[#FFD700] text-base mt-0.5 flex-shrink-0"></i>
-                                        <span class="text-sm leading-snug font-medium">Khảo sát hiện trạng &amp; vẽ 3D miễn phí</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Trọn bộ thiết bị -->
-                        <div class="mt-5 pt-4 relative z-10">
-                            <div class="sp-priv-gold-hairline mb-3.5"></div>
-                            <h4 class="text-xs lg:text-sm font-bold text-[#FFE8A3] uppercase tracking-wider mb-2 flex items-center gap-2.5">
-                                <span class="w-7 h-7 rounded-lg flex items-center justify-center border border-[#FFD700]/40 bg-[#000000]/20 shadow-sm">
-                                    <i class="ph-bold ph-package text-[#FFD700] text-sm"></i>
-                                </span>
-                                Trọn bộ thiết bị
-                            </h4>
-                            <div class="rounded-xl p-3 lg:p-3.5 border border-[#FFD700]/30 shadow-inner" style="background: rgba(0, 0, 0, 0.22);">
-                                <p class="text-xs lg:text-sm text-white/90 leading-relaxed font-medium">
-                                    Module LED nhập khẩu cao cấp, Video Processor chuyên dụng, Khung nhôm định hình, Nguồn &amp; cáp tín hiệu đồng bộ.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- PRIVILEGES CARD COMPONENT -->
+                    <?php get_template_part( 'views/components/privileges-card' ); ?>
 
                     <!-- CTA & Price Row (Price Left, CTA Right) -->
                     <div class="flex flex-col sm:flex-row items-center justify-between gap-5 mt-5 w-full">

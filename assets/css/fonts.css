@@ -1,4 +1,45 @@
-/* Self-hosted variable fonts remove the Google Fonts connection chain. */
+/* Multi-Role Font System (Centralized Configuration) */
+:root {
+  --font-body: 'Chakra Petch', sans-serif;
+  --font-heading: 'Chakra Petch', sans-serif;
+  --font-title: 'Chakra Petch', sans-serif;
+  --font-display: 'Chakra Petch', sans-serif;
+  --font-link: 'Chakra Petch', sans-serif;
+  --font-caption: 'Chakra Petch', sans-serif;
+  --font-mono: 'Chakra Petch', monospace;
+}
+
+/* Self-hosted Chakra Petch */
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 200 300;
+  font-display: swap;
+  src: url("../fonts/ChakraPetch-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ChakraPetch-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/ChakraPetch-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+  src: url("../fonts/ChakraPetch-Bold.ttf") format("truetype");
+}
+
+/* Self-hosted variable fonts */
 @font-face {
   font-family: "Inter";
   font-style: normal;

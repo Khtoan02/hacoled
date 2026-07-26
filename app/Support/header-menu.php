@@ -123,7 +123,7 @@ function hacoled_render_header_dropdown_items(array $items) {
 /**
  * Render the same Admin-managed structure as a compact mobile accordion.
  */
-function hacoled_render_mobile_header_menu(array $menu) {
+function hacoled_render_mobile_header_menu(array $menu, $menu_key = '') {
     if (empty($menu['enabled'])) {
         return;
     }
@@ -133,19 +133,29 @@ function hacoled_render_mobile_header_menu(array $menu) {
         ? ($menu['columns'] ?? [])
         : [['title' => '', 'items' => $menu['items'] ?? []]];
 
-    echo '<div x-data="{ open: false }">';
-    echo '<button type="button" @click="open = !open" :aria-expanded="open.toString()" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-[14px] font-semibold hover:bg-white/10 focus:outline-none">';
-    echo '<span>' . esc_html($menu['label'] ?? '') . '</span>';
-    echo '<svg class="w-4 h-4 text-white/70 transition-transform" :class="open ? \'rotate-180 text-[#fbbf24]\' : \'\'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>';
-    echo '</button>';
-    echo '<div x-show="open" x-cloak class="pl-6 pr-2 pb-2 mt-1 border-l border-white/20 ml-2 space-y-1 max-h-[350px] overflow-y-auto">';
+    if (!empty($menu_key)) {
+        $escaped_key = esc_attr($menu_key);
+        echo '<div>';
+        echo '<button type="button" @click="activeAccordion = (activeAccordion === \'' . $escaped_key . '\' ? null : \'' . $escaped_key . '\')" :aria-expanded="(activeAccordion === \'' . $escaped_key . '\').toString()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-[14px] font-semibold hover:bg-white/10 focus:outline-none transition-colors">';
+        echo '<span>' . esc_html($menu['label'] ?? '') . '</span>';
+        echo '<svg class="w-4 h-4 text-white/70 transition-transform duration-200" :class="activeAccordion === \'' . $escaped_key . '\' ? \'rotate-180 text-[#fbbf24]\' : \'\'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>';
+        echo '</button>';
+        echo '<div x-show="activeAccordion === \'' . $escaped_key . '\'" x-cloak class="pl-6 pr-2 pb-2 mt-1 border-l border-white/20 ml-2 space-y-1 max-h-[350px] overflow-y-auto">';
+    } else {
+        echo '<div x-data="{ open: false }">';
+        echo '<button type="button" @click="open = !open" :aria-expanded="open.toString()" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-[14px] font-semibold hover:bg-white/10 focus:outline-none transition-colors">';
+        echo '<span>' . esc_html($menu['label'] ?? '') . '</span>';
+        echo '<svg class="w-4 h-4 text-white/70 transition-transform duration-200" :class="open ? \'rotate-180 text-[#fbbf24]\' : \'\'" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>';
+        echo '</button>';
+        echo '<div x-show="open" x-cloak class="pl-6 pr-2 pb-2 mt-1 border-l border-white/20 ml-2 space-y-1 max-h-[350px] overflow-y-auto">';
+    }
 
     foreach ($groups as $group) {
         if (!empty($group['title'])) {
             echo '<p class="pt-3 pb-1 text-[10px] font-bold uppercase tracking-widest text-[#fbbf24]">' . esc_html($group['title']) . '</p>';
         }
         foreach ($group['items'] ?? [] as $item) {
-            echo '<a href="' . esc_url($item['url'] ?? '') . '" class="block py-1.5 text-[13px] text-white/80 hover:text-white">' . esc_html($item['label'] ?? '') . '</a>';
+            echo '<a href="' . esc_url($item['url'] ?? '') . '" class="block py-1.5 text-[13px] text-white/80 hover:text-white transition-colors">' . esc_html($item['label'] ?? '') . '</a>';
         }
     }
 
