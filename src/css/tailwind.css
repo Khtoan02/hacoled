@@ -84,6 +84,20 @@
     font-family: var(--font-caption);
   }
 
+  /* WooCommerce Product & Category Loop Reset */
+  .products, ul.products {
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  .products .product,
+  .products .product-category,
+  li.product,
+  li.product-category {
+    list-style: none !important;
+    list-style-type: none !important;
+  }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: #f4f2f1; }
   ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full border border-[#f4f2f1] hover:bg-slate-400 transition-colors; }
