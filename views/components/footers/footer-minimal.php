@@ -60,7 +60,6 @@ if (empty($footer_logo)) {
     </defs>
   </svg>
 
-<?php get_template_part('views/components/tech-bg-script'); ?>
 <?php wp_footer(); ?>
 </body>
 </html>

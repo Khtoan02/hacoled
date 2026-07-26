@@ -21,7 +21,7 @@ $featured_projects = $featured_projects ?? [];
 $latest_articles = $latest_articles ?? [];
 ?>
 
-<main class="relative bg-[#FAFAFA] bg-tech-grid pt-28 md:pt-64 pb-20 min-h-[70vh] overflow-hidden" data-tech-bg="circuit">
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[70vh] overflow-hidden">
   
   <!-- Ambient Light glows (Theme design system) -->
   <div class="absolute top-20 left-10 w-[400px] h-[400px] bg-red-600/5 rounded-full blur-[120px] pointer-events-none z-0"></div>

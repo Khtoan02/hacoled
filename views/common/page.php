@@ -11,7 +11,7 @@
 $this->renderHeader($header_type ?? 'default');
 ?>
 
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[70vh] overflow-hidden" data-tech-bg="circuit">
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[70vh] overflow-hidden">
   
   <!-- Subtle back lights -->
   <div class="absolute top-[20%] left-[-10%] w-[350px] h-[350px] rounded-full bg-accent-red/5 blur-[100px] pointer-events-none"></div>

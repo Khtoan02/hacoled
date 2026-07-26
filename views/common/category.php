@@ -46,7 +46,7 @@ if ($popular_posts_query->have_posts()) {
 }
 ?>
 
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-24 overflow-hidden min-h-[95vh] bg-tech-grid">
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-24 overflow-hidden min-h-[95vh]">
   
   <!-- Glowing Premium Orbs (Background Art) -->
   <div class="absolute top-12 left-1/4 w-[500px] h-[500px] bg-accent-red/5 filter blur-[120px] rounded-full pointer-events-none z-0"></div>
