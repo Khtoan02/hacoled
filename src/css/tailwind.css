@@ -50,7 +50,7 @@
 
   body {
     font-family: var(--font-body);
-    font-weight: 200;
+    font-weight: 400;
     @apply text-slate-800 antialiased selection:bg-accent-gold selection:text-white;
     scroll-behavior: smooth;
     background: linear-gradient(180deg, #f8f6f5 0%, #f4f2f1 40%, #f7f5f4 70%, #faf9f8 100%);
@@ -62,29 +62,26 @@
     font-weight: 900;
   }
 
-  /* Heading (Tiêu đề phụ/phân đoạn): weight 600 */
+  /* Heading (Tiêu đề phụ/phân đoạn): weight 600/700 */
   h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 600;
   }
 
-  /* Link: weight 200, màu đỏ */
+  /* Thẻ liên kết: Kế thừa font và màu sắc tự nhiên của container */
   a {
     font-family: var(--font-link);
-    font-weight: 200;
-    color: #b31217;
+    color: inherit;
   }
 
-  /* SKU & Monospace: weight 200, in hoa */
+  /* SKU & Monospace: in hoa */
   code, pre, .sku-code, .sku {
     font-family: var(--font-mono);
-    font-weight: 200;
     text-transform: uppercase;
   }
 
   small, .caption, .badge {
     font-family: var(--font-caption);
-    font-weight: 200;
   }
 
   ::-webkit-scrollbar { width: 8px; }
