@@ -289,8 +289,8 @@
               </a>
 
               <!-- GIỚI THIỆU (DROPDOWN) -->
-              <div class="relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="relative group/navitem" x-data="hacoledNavMenu('about')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('about')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
@@ -383,8 +383,8 @@
               </div>
 
               <!-- ── MÀN HÌNH LED (MEGA MENU TẠP CHÍ + ẢNH MỚI) ── -->
-              <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="navitem-relative group/navitem" x-data="hacoledNavMenu('led')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('led')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
@@ -415,8 +415,8 @@
               </div>
 
               <!-- ── MÀN HÌNH GHÉP (MINI MEGA MENU) ── -->
-              <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="navitem-relative group/navitem" x-data="hacoledNavMenu('videowall')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('videowall')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
@@ -447,8 +447,8 @@
               </div>
 
               <!-- ── GIẢI PHÁP (GRID LƯỚI HÌNH ẢNH CỰC ĐỈNH) ── -->
-              <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="navitem-relative group/navitem" x-data="hacoledNavMenu('solutions')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('solutions')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
@@ -479,8 +479,8 @@
               </div>
 
               <!-- ── ÂM THANH (BỔ SUNG VISUAL CARD BÊN PHẢI) ── -->
-              <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="navitem-relative group/navitem" x-data="hacoledNavMenu('audio')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('audio')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
@@ -511,8 +511,8 @@
               </div>
 
               <!-- ── DỰ ÁN (CHUYỂN THÀNH MỘT LIST & ẢNH ĐẠI DIỆN LỚN) ── -->
-              <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="navitem-relative group/navitem" x-data="hacoledNavMenu('projects')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('projects')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
@@ -556,8 +556,8 @@
               </a>
 
               <!-- ── TIN TỨC & BLOG (Dropdown Drop) ── -->
-              <div class="inline-block group/navitem relative" x-data="{ open: false }" @mouseenter="open = true"
-                @mouseleave="open = false">
+              <div class="inline-block group/navitem relative" x-data="hacoledNavMenu('news')" @mouseenter="openMenu()"
+                @mouseleave="scheduleClose()">
                 <a href="<?php echo esc_url(hacoled_header_menu_url('news')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
