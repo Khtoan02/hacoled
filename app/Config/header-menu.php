@@ -22,6 +22,7 @@ return [
         'label' => 'Về HacoLED',
         'enabled' => true,
         'kind' => 'dropdown',
+        'url' => home_url('/gioi-thieu/'),
         'items' => [
             ['label' => 'Giới thiệu chung', 'url' => hacoled_managed_page_url('about'), 'icon' => 'info', 'tone' => 'red'],
             ['label' => 'Cam kết chất lượng', 'url' => hacoled_managed_page_url('commitment'), 'icon' => 'shield', 'tone' => 'gold'],
@@ -33,6 +34,7 @@ return [
         'label' => 'Màn Hình LED',
         'enabled' => true,
         'kind' => 'mega',
+        'url' => home_url('/man-hinh-led/'),
         'columns' => [
             [
                 'title' => 'LED Trong Nhà',
@@ -70,6 +72,7 @@ return [
         'label' => 'Màn Hình Ghép',
         'enabled' => true,
         'kind' => 'mega',
+        'url' => home_url('/man-hinh-ghep/'),
         'columns' => [
             [
                 'title' => 'Màn Hình Ghép Videowall',
@@ -89,6 +92,7 @@ return [
         'label' => 'Giải Pháp',
         'enabled' => true,
         'kind' => 'mega',
+        'url' => home_url('/giai-phap/'),
         'columns' => [
             [
                 'title' => 'Giải Pháp Màn Hình LED',
@@ -114,6 +118,7 @@ return [
         'label' => 'Âm Thanh',
         'enabled' => true,
         'kind' => 'mega',
+        'url' => home_url('/am-thanh/'),
         'columns' => [
             [
                 'title' => 'DBAcoustic',
@@ -160,6 +165,7 @@ return [
         'label' => 'Dự án đã thực hiện',
         'enabled' => true,
         'kind' => 'mega',
+        'url' => home_url('/du-an-da-thuc-hien/'),
         'columns' => [
             [
                 'title' => 'Hồ Sơ Năng Lực',
@@ -187,6 +193,7 @@ return [
         'label' => 'Tin Tức & Blog',
         'enabled' => true,
         'kind' => 'dropdown',
+        'url' => home_url('/tin-tuc-su-kien/'),
         'items' => [
             ['label' => 'Blog về màn hình LED', 'url' => $category_url('blog-man-hinh-led'), 'icon' => 'monitor', 'tone' => 'red'],
             ['label' => 'Blog về âm thanh', 'url' => $category_url('blog-am-thanh'), 'icon' => 'speaker', 'tone' => 'gold'],

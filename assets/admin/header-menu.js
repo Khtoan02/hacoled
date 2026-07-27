@@ -34,12 +34,13 @@
     var kind = panel.dataset.menuKind;
     var menu = {
       label: value(panel, '.hacoled-general-card input[name$="[label]"]'),
+      url: value(panel, '.hacoled-general-card input[name$="[url]"]'),
       enabled: !!panel.querySelector('.hacoled-switch input:checked'),
       kind: kind
     };
 
     if (kind === 'link') {
-      menu.url = value(panel, '.hacoled-general-card input[name$="[url]"]');
+      // url already collected above
     } else if (kind === 'dropdown') {
       menu.items = collectItems(panel.querySelector('.hacoled-items'), true);
     } else {

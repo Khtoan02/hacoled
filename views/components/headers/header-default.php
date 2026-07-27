@@ -283,7 +283,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round"
                     d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
-                Trang Chủ
+                <?php echo esc_html(hacoled_header_menu_label('home')); ?>
                 <span
                   class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#fbbf24] transition-all duration-300 group-hover:w-full"></span>
               </a>
@@ -291,14 +291,14 @@
               <!-- GIỚI THIỆU (DROPDOWN) -->
               <div class="relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('about')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                   </svg>
-                  Về HacoLED
+                  <?php echo esc_html(hacoled_header_menu_label('about')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -307,7 +307,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <!-- Dropdown Menu -->
                 <div x-show="open" x-cloak @click.away="open = false"
@@ -385,14 +385,14 @@
               <!-- ── MÀN HÌNH LED (MEGA MENU TẠP CHÍ + ẢNH MỚI) ── -->
               <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('led')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M6 20.25h12m-7.5-3v3m3-3v3m-10.125-3h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125z" />
                   </svg>
-                  Màn Hình LED
+                  <?php echo esc_html(hacoled_header_menu_label('led')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -401,7 +401,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <!-- Menu Nội Dung + Ảnh Dự Án Lớn -->
                 <div x-show="open" x-cloak @click.away="open = false"
@@ -417,14 +417,14 @@
               <!-- ── MÀN HÌNH GHÉP (MINI MEGA MENU) ── -->
               <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('videowall')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 002.25-2.25V6a2.25 2.25 0 00-2.25-2.25H6A2.25 2.25 0 003.75 6v2.25A2.25 2.25 0 006 10.5zm0 9.75h2.25A2.25 2.25 0 0010.5 18v-2.25a2.25 2.25 0 00-2.25-2.25H6a2.25 2.25 0 00-2.25 2.25V18A2.25 2.25 0 006 20.25zm9.75-9.75H18a2.25 2.25 0 002.25-2.25V6A2.25 2.25 0 0018 3.75h-2.25A2.25 2.25 0 0013.5 6v2.25a2.25 2.25 0 002.25 2.25z" />
                   </svg>
-                  Màn Hình Ghép
+                  <?php echo esc_html(hacoled_header_menu_label('videowall')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -433,7 +433,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <!-- Menu Nội Dung + Ảnh Dự Án Lớn -->
                 <div x-show="open" x-cloak @click.away="open = false"
@@ -449,14 +449,14 @@
               <!-- ── GIẢI PHÁP (GRID LƯỚI HÌNH ẢNH CỰC ĐỈNH) ── -->
               <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('solutions')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.82 1.508-2.316a7.5 7.5 0 10-7.516 0c.85.496 1.508 1.333 1.508 2.316V18" />
                   </svg>
-                  Giải Pháp
+                  <?php echo esc_html(hacoled_header_menu_label('solutions')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -465,7 +465,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <!-- Menu Nội Dung + Ảnh Dự Án Lớn -->
                 <div x-show="open" x-cloak @click.away="open = false"
@@ -481,14 +481,14 @@
               <!-- ── ÂM THANH (BỔ SUNG VISUAL CARD BÊN PHẢI) ── -->
               <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('audio')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
                   </svg>
-                  Âm Thanh
+                  <?php echo esc_html(hacoled_header_menu_label('audio')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -497,7 +497,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <!-- Menu Nội Dung + Ảnh Dự Án Lớn -->
                 <div x-show="open" x-cloak @click.away="open = false"
@@ -513,14 +513,14 @@
               <!-- ── DỰ ÁN (CHUYỂN THÀNH MỘT LIST & ẢNH ĐẠI DIỆN LỚN) ── -->
               <div class="navitem-relative group/navitem" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('projects')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                   </svg>
-                  Dự án đã thực hiện
+                  <?php echo esc_html(hacoled_header_menu_label('projects')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -529,7 +529,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <!-- Menu Nội Dung + Ảnh Dự Án Lớn -->
                 <div x-show="open" x-cloak @click.away="open = false"
@@ -550,7 +550,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round"
                     d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.827M11.42 15.17l2.492-3.396M11.42 15.17l-3.396 2.492m0-5.888l5.888-5.888a2.652 2.652 0 00-3.75-3.75l-5.888 5.888m7.5 7.5l-3.396 2.492m-5.888-5.888L2.25 17.25A2.652 2.652 0 006 21l5.827-5.877" />
                 </svg>
-                Dịch Vụ
+                <?php echo esc_html(hacoled_header_menu_label('services')); ?>
                 <span
                   class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#fbbf24] transition-all duration-300 group-hover:w-full"></span>
               </a>
@@ -558,14 +558,14 @@
               <!-- ── TIN TỨC & BLOG (Dropdown Drop) ── -->
               <div class="inline-block group/navitem relative" x-data="{ open: false }" @mouseenter="open = true"
                 @mouseleave="open = false">
-                <button @click="open = !open" :class="scrolled ? 'py-4' : 'py-2'"
+                <a href="<?php echo esc_url(hacoled_header_menu_url('news')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                   class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                   <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                     stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round"
                       d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                   </svg>
-                  Tin Tức & Blog
+                  <?php echo esc_html(hacoled_header_menu_label('news')); ?>
                   <svg class="w-3 h-3 text-white/50 transition-transform"
                     :class="open ? 'rotate-180 text-[#fbbf24]' : 'group-hover:text-[#fbbf24]'" fill="none"
                     stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -574,7 +574,7 @@
                   <span
                     class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-[#fbbf24] transition-all duration-300"
                     :class="open ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-                </button>
+                </a>
 
                 <div x-show="open" x-cloak @click.away="open = false"
                   x-transition:enter="transition ease-out duration-200"
@@ -650,8 +650,7 @@
 
 
 
-              <!-- LIÊN HỆ -->
-              <a href="<?php echo esc_url($contact_url); ?>" :class="scrolled ? 'py-4' : 'py-2'"
+              <a href="<?php echo esc_url(hacoled_header_menu_url('contact')); ?>" :class="scrolled ? 'py-4' : 'py-2'"
                 class="group relative font-display font-medium text-white/95 flex items-center gap-1.5 transition-colors hover:text-[#fbbf24] whitespace-nowrap text-[13px] xl:text-[14px]">
                 <svg class="w-3.5 h-3.5 opacity-70 group-hover:opacity-100 transition-opacity" fill="none"
                   stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -659,7 +658,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round"
                     d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
-                Liên Hệ
+                <?php echo esc_html(hacoled_header_menu_label('contact')); ?>
                 <span
                   class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#fbbf24] transition-all duration-300 group-hover:w-full"></span>
               </a>

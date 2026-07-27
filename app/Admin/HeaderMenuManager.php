@@ -121,9 +121,12 @@ class HeaderMenuManager {
                 'kind' => $kind,
             ];
 
+            $url = esc_url_raw($menu['url'] ?? ($default['url'] ?? ''));
+            if ($url !== '') {
+                $clean[$key]['url'] = $url;
+            }
+
             if ($kind === 'link') {
-                $url = esc_url_raw($menu['url'] ?? $default['url']);
-                $clean[$key]['url'] = $url !== '' ? $url : $default['url'];
                 continue;
             }
 
@@ -318,12 +321,10 @@ class HeaderMenuManager {
                 <span><?php esc_html_e('Tên hiển thị trên thanh menu', 'hacoled'); ?></span>
                 <input type="text" name="menus[<?php echo esc_attr($key); ?>][label]" value="<?php echo esc_attr($menu['label']); ?>" required>
             </label>
-            <?php if ($menu['kind'] === 'link') : ?>
                 <label class="hacoled-field hacoled-field-wide" style="margin-top:14px">
                     <span><?php esc_html_e('Liên kết đích', 'hacoled'); ?></span>
-                    <input type="url" list="hacoled-link-suggestions" name="menus[<?php echo esc_attr($key); ?>][url]" value="<?php echo esc_attr($menu['url'] ?? ''); ?>" required>
+                    <input type="url" list="hacoled-link-suggestions" name="menus[<?php echo esc_attr($key); ?>][url]" value="<?php echo esc_attr($menu['url'] ?? ''); ?>" <?php echo $menu['kind'] === 'link' ? 'required' : ''; ?>>
                 </label>
-            <?php endif; ?>
         </div>
 
         <?php if ($menu['kind'] === 'link') { return; } ?>

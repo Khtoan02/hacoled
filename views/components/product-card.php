@@ -37,12 +37,12 @@ $in_stock     = true; // placeholder
     <div class="absolute left-1 md:left-2 right-1 md:right-2 top-2 sm:top-[14px] md:top-4 bottom-[135px] sm:bottom-[180px] md:bottom-[220px] flex items-center justify-center z-10 pointer-events-none">
       <div class="relative w-full h-full flex items-center justify-center -translate-y-2 md:-translate-y-[13px]">
           <!-- Họa tiết trống đồng mờ nhạt phía sau sản phẩm -->
-          <div class="absolute w-[140px] h-[140px] sm:w-[220px] sm:h-[220px] md:w-[320px] md:h-[320px] opacity-[0.10] group-hover:opacity-[0.20] transition-all duration-1000 ease-out group-hover:scale-105 group-hover:rotate-12 pointer-events-none" 
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140px] h-[140px] sm:w-[220px] sm:h-[220px] md:w-[320px] md:h-[320px] opacity-[0.10] group-hover:opacity-[0.20] transition-all duration-1000 ease-out group-hover:scale-105 group-hover:rotate-12 pointer-events-none" 
                style="background-image: url('<?php echo get_template_directory_uri(); ?>/assets/images/dongson-optimized.webp'); background-repeat: no-repeat; background-position: center; background-size: contain; filter: url(#to-gold-light);">
           </div>
         
         <!-- Wrapper cho Ảnh và Tag -->
-        <div class="relative w-full h-full transition-all duration-700 ease-out transform group-hover:-translate-y-4 md:group-hover:-translate-y-6 group-hover:scale-90 origin-bottom">
+        <div class="relative w-[92%] h-[92%] md:w-[86%] md:h-[86%] transition-all duration-700 ease-out transform group-hover:-translate-y-4 md:group-hover:-translate-y-6 group-hover:scale-90 origin-center">
           <?php if (!empty($thumbnail)): ?>
             <img 
               src="<?php echo esc_url($thumbnail); ?>" 
