@@ -87,7 +87,7 @@ $in_stock     = true; // placeholder
           </div>
 
           <div class="flex items-start justify-between gap-2 md:gap-4 mt-0.5">
-            <div class="flex-1">
+            <div class="flex-1 min-w-0">
               <h3 class="text-xs md:text-lg font-bold text-gray-900 leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#E3000F] group-hover:to-[#ff4d4d] transition-all duration-300 line-clamp-2">
                 <?php echo esc_html($title); ?>
               </h3>
@@ -99,9 +99,9 @@ $in_stock     = true; // placeholder
                 <?php endfor; ?>
               </div>
 
-              <!-- Giá sản phẩm hiển thị cố định (Đã lọc ẩn text screen-reader) -->
-              <div class="mt-1 md:mt-2 transition-all duration-300">
-                <div class="price-wrapper flex items-baseline gap-1.5 flex-wrap [&>del]:text-[9px] md:[&>del]:text-[11px] [&>del]:text-slate-400 [&>del]:line-through [&>del]:font-medium [&>ins]:no-underline text-xs md:text-base [&>ins]:text-xs md:[&>ins]:text-base [&>ins]:font-extrabold [&>ins]:text-[#E3000F] [&>ins]:leading-none [&>.amount]:text-xs md:[&>.amount]:text-base [&>.amount]:font-extrabold [&>.amount]:text-[#E3000F] [&>.amount]:leading-none [&_.screen-reader-text]:hidden">
+              <!-- Giá sản phẩm hiển thị cố định nằm trên 1 hàng (Đã lọc ẩn text screen-reader) -->
+              <div class="mt-1 md:mt-2 transition-all duration-300 w-full overflow-hidden">
+                <div class="price-wrapper flex items-baseline gap-1 flex-nowrap whitespace-nowrap overflow-hidden text-ellipsis text-[11px] sm:text-xs md:text-sm lg:text-base [&>del]:text-[9px] md:[&>del]:text-[11px] [&>del]:text-slate-400 [&>del]:line-through [&>del]:font-medium [&>ins]:no-underline [&>ins]:text-[11px] sm:[&>ins]:text-xs md:[&>ins]:text-sm lg:[&>ins]:text-base [&>ins]:font-extrabold [&>ins]:text-[#E3000F] [&>ins]:leading-none [&>.amount]:text-[11px] sm:[&>.amount]:text-xs md:[&>.amount]:text-sm lg:[&>.amount]:text-base [&>.amount]:font-extrabold [&>.amount]:text-[#E3000F] [&>.amount]:leading-none [&_.screen-reader-text]:hidden">
                   <?php echo wp_kses_post($price); ?>
                 </div>
               </div>
