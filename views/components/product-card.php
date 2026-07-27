@@ -34,7 +34,7 @@ $in_stock     = true; // placeholder
     </a>
 
     <!-- Layout hiển thị hình ảnh và các tag nổi -->
-    <div class="absolute inset-0 px-1 md:px-2 pb-[135px] sm:pb-[180px] md:pb-[220px] flex items-start justify-center pt-2 sm:pt-[14px] md:pt-4 z-10 pointer-events-none">
+    <div class="absolute left-1 md:left-2 right-1 md:right-2 top-2 sm:top-[14px] md:top-4 bottom-[135px] sm:bottom-[180px] md:bottom-[220px] flex items-center justify-center z-10 pointer-events-none">
       <div class="relative w-full h-full flex items-center justify-center -translate-y-2 md:-translate-y-[13px]">
           <!-- Họa tiết trống đồng mờ nhạt phía sau sản phẩm -->
           <div class="absolute w-[140px] h-[140px] sm:w-[220px] sm:h-[220px] md:w-[320px] md:h-[320px] opacity-[0.10] group-hover:opacity-[0.20] transition-all duration-1000 ease-out group-hover:scale-105 group-hover:rotate-12 pointer-events-none" 
