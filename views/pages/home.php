@@ -150,7 +150,6 @@ for ($i = 1; $i <= 6; $i++) {
     }
 }
 $press_data = $final_press_data;
-}
 ?>
     <!-- Preload only the first visible hero image. -->
     <?php
