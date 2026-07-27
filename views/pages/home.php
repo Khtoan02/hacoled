@@ -860,8 +860,8 @@ function haco_render_product_slides($categories) {
                             $partner_logos = array_filter(explode(',', $partner_logos_raw));
                             foreach ($partner_logos as $logo_url): ?>
                             <div class="swiper-slide px-2">
-                                <div class="aspect-square w-16 md:w-24 lg:w-28 mx-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:border-brand-red/30 hover:shadow-[0_8px_30px_rgba(204,0,0,0.1)] hover:-translate-y-1 p-2 md:p-3 overflow-hidden">
-                                    <img src="<?php echo esc_url($logo_url); ?>" alt="Partner Logo" class="max-w-full max-h-full object-contain" loading="lazy">
+                                <div class="aspect-square w-24 md:w-36 lg:w-44 mx-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:border-brand-red/30 hover:shadow-[0_8px_30px_rgba(204,0,0,0.1)] hover:-translate-y-1 p-3 overflow-hidden">
+                                    <img src="<?php echo esc_url($logo_url); ?>" alt="Partner Logo" class="max-w-[85%] max-h-[85%] object-contain" loading="lazy">
                                 </div>
                             </div>
                             <?php endforeach;
@@ -869,8 +869,8 @@ function haco_render_product_slides($categories) {
                             $partners = ['Samsung', 'LG', 'Panasonic', 'Sony', 'BOE', 'Novastar', 'Kystar', 'Absen'];
                             foreach($partners as $partner): ?>
                             <div class="swiper-slide px-2">
-                                <div class="aspect-square w-16 md:w-24 lg:w-28 mx-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:border-brand-red/30 hover:shadow-[0_8px_30px_rgba(204,0,0,0.1)] hover:-translate-y-1 p-2 md:p-3 overflow-hidden">
-                                    <span class="text-gray-400 font-black text-[10px] md:text-sm tracking-widest uppercase text-center"><?php echo $partner; ?></span>
+                                <div class="aspect-square w-24 md:w-36 lg:w-44 mx-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:border-brand-red/30 hover:shadow-[0_8px_30px_rgba(204,0,0,0.1)] hover:-translate-y-1 p-3 overflow-hidden">
+                                    <span class="text-gray-400 font-black text-xs md:text-sm tracking-widest uppercase text-center"><?php echo $partner; ?></span>
                                 </div>
                             </div>
                             <?php endforeach;
