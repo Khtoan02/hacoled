@@ -61,79 +61,95 @@ if ($query_press->have_posts()) {
     wp_reset_postdata();
 }
 
-if (empty($press_data)) {
-    $press_data = array();
-    $default_press = array(
-        array(
-            'source' => "BÁO THÁI NGUYÊN",
-            'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
-            'logoDark' => false,
-            'title' => "Lắp đặt màn hình LED ngoài trời - Giải pháp quảng cáo thu lợi tiền tỷ.",
-            'img' => get_template_directory_uri() . "/assets/images/home-solution-led.webp",
-            'url' => "http://baothainguyen.vn/thong-tin-quang-cao/202307/lap-dat-man-hinh-led-ngoai-troi-giai-phap-quang-cao-thu-loi-tien-ty-9874a80"
-        ),
-        array(
-            'source' => "TECH Z",
-            'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
-            'logoDark' => true,
-            'title' => "HACOLED - Đơn vị cung cấp màn hình LED quảng cáo hàng đầu Việt Nam.",
-            'img' => get_template_directory_uri() . "/assets/images/home-solution-videowall.webp",
-            'url' => "http://techz.vn/143-621-6-hacoled-don-vi-cung-cap-man-hinh-led-quang-cao-hang-dau-viet-nam-ylt531513.html"
-        ),
-        array(
-            'source' => "BÁO TUYÊN QUANG",
-            'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
-            'logoDark' => false,
-            'title' => "Màn hình LED hội trường - Công nghệ đột phá trong trải nghiệm sự kiện.",
-            'img' => get_template_directory_uri() . "/assets/images/home-solution-audio.webp",
-            'url' => "http://baotuyenquang.com.vn/man-hinh-led-hoi-truong-cong-nghe-dot-pha-trong-trai-nghiem-su-kien-177097.html"
-        ),
-        array(
-            'source' => "VIỆT STOCK",
-            'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
-            'logoDark' => false,
-            'title' => "HACOLED - Đơn vị thi công màn hình LED uy tín, hỗ trợ bảo hành 24 tháng.",
-            'img' => get_template_directory_uri() . "/assets/images/services-indoor.webp",
-            'url' => "http://vietstock.vn/2024/02/hacoled-don-vi-thi-cong-man-hinh-led-uy-tin-ho-tro-bao-hanh-24-thang-4511-1158530.htm"
-        ),
-        array(
-            'source' => "BÁO TÂY NINH",
-            'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
-            'logoDark' => false,
-            'title' => "Màn hình LED sân khấu nên lắp đặt đơn vị nào uy tín, giá rẻ?",
-            'img' => get_template_directory_uri() . "/assets/images/services-outdoor.webp",
-            'url' => "http://baotayninh.vn/-man-hinh-led-san-khau-nen-lap-dat-don-vi-nao-uy-tin-gia-re-a160671.html"
-        ),
-        array(
-            'source' => "BÁO QUẢNG NAM",
-            'logo' => get_template_directory_uri() . "/assets/images/logobqn.png",
-            'logoDark' => false,
-            'title' => "HACOLED - Đơn vị thi công màn hình LED số 1 Hà Nội và Sài Gòn.",
-            'img' => get_template_directory_uri() . "/assets/images/services-hero.webp",
-            'url' => "http://baoquangnam.vn/hacoled-don-vi-thi-cong-man-hinh-led-so-1-ha-noi-va-sai-gon-3050735.html"
-        )
-    );
+$default_press = array(
+    array(
+        'source' => "BÁO THÁI NGUYÊN",
+        'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
+        'logoDark' => false,
+        'title' => "Lắp đặt màn hình LED ngoài trời - Giải pháp quảng cáo thu lợi tiền tỷ.",
+        'img' => get_template_directory_uri() . "/assets/images/home-solution-led.webp",
+        'url' => "http://baothainguyen.vn/thong-tin-quang-cao/202307/lap-dat-man-hinh-led-ngoai-troi-giai-phap-quang-cao-thu-loi-tien-ty-9874a80"
+    ),
+    array(
+        'source' => "TECH Z",
+        'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
+        'logoDark' => true,
+        'title' => "HACOLED - Đơn vị cung cấp màn hình LED quảng cáo hàng đầu Việt Nam.",
+        'img' => get_template_directory_uri() . "/assets/images/home-solution-videowall.webp",
+        'url' => "http://techz.vn/143-621-6-hacoled-don-vi-cung-cap-man-hinh-led-quang-cao-hang-dau-viet-nam-ylt531513.html"
+    ),
+    array(
+        'source' => "BÁO TUYÊN QUANG",
+        'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
+        'logoDark' => false,
+        'title' => "Màn hình LED hội trường - Công nghệ đột phá trong trải nghiệm sự kiện.",
+        'img' => get_template_directory_uri() . "/assets/images/home-solution-audio.webp",
+        'url' => "http://baotuyenquang.com.vn/man-hinh-led-hoi-truong-cong-nghe-dot-pha-trong-trai-nghiem-su-kien-177097.html"
+    ),
+    array(
+        'source' => "VIỆT STOCK",
+        'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
+        'logoDark' => false,
+        'title' => "HACOLED - Đơn vị thi công màn hình LED uy tín, hỗ trợ bảo hành 24 tháng.",
+        'img' => get_template_directory_uri() . "/assets/images/services-indoor.webp",
+        'url' => "http://vietstock.vn/2024/02/hacoled-don-vi-thi-cong-man-hinh-led-uy-tin-ho-tro-bao-hanh-24-thang-4511-1158530.htm"
+    ),
+    array(
+        'source' => "BÁO TÂY NINH",
+        'logo' => get_template_directory_uri() . "/assets/images/logo-haco.png",
+        'logoDark' => false,
+        'title' => "Màn hình LED sân khấu nên lắp đặt đơn vị nào uy tín, giá rẻ?",
+        'img' => get_template_directory_uri() . "/assets/images/services-outdoor.webp",
+        'url' => "http://baotayninh.vn/-man-hinh-led-san-khau-nen-lap-dat-don-vi-nao-uy-tin-gia-re-a160671.html"
+    ),
+    array(
+        'source' => "BÁO QUẢNG NAM",
+        'logo' => get_template_directory_uri() . "/assets/images/logobqn.png",
+        'logoDark' => false,
+        'title' => "HACOLED - Đơn vị thi công màn hình LED số 1 Hà Nội và Sài Gòn.",
+        'img' => get_template_directory_uri() . "/assets/images/services-hero.webp",
+        'url' => "http://baoquangnam.vn/hacoled-don-vi-thi-cong-man-hinh-led-so-1-ha-noi-va-sai-gon-3050735.html"
+    )
+);
 
-    for ($i = 1; $i <= 6; $i++) {
-        $source = get_theme_mod("hacoled_press_{$i}_source");
-        $logo   = get_theme_mod("hacoled_press_{$i}_logo");
-        $title  = get_theme_mod("hacoled_press_{$i}_title");
-        $url    = get_theme_mod("hacoled_press_{$i}_url");
-        $img    = get_theme_mod("hacoled_press_{$i}_img");
+$press_posts = $press_data; // Lưu lại kết quả truy vấn vào mảng tạm
+$final_press_data = array();
+
+for ($i = 1; $i <= 6; $i++) {
+    $source = get_theme_mod("hacoled_press_{$i}_source");
+    $logo   = get_theme_mod("hacoled_press_{$i}_logo");
+    $title  = get_theme_mod("hacoled_press_{$i}_title");
+    $url    = get_theme_mod("hacoled_press_{$i}_url");
+    $img    = get_theme_mod("hacoled_press_{$i}_img");
+    
+    // Nếu user có nhập bất kỳ field nào trong Customizer -> Ưu tiên dùng Customizer
+    if (!empty($source) || !empty($logo) || !empty($title) || !empty($url) || !empty($img)) {
         
-        if (!empty($source) || !empty($logo) || !empty($title) || !empty($url) || !empty($img)) {
-            $press_data[] = array(
-                'source'   => $source ?: $default_press[$i-1]['source'],
-                'logo'     => $logo ?: $default_press[$i-1]['logo'],
-                'logoDark' => get_theme_mod("hacoled_press_{$i}_logo_dark", $default_press[$i-1]['logoDark']),
-                'title'    => $title ?: $default_press[$i-1]['title'],
-                'img'      => $img ?: $default_press[$i-1]['img'],
-                'url'      => $url ?: $default_press[$i-1]['url']
-            );
-        } else {
-            $press_data[] = $default_press[$i-1];
-        }
+        // Fallback: Nếu 1 field trống thì lấy từ WP_Query (nếu có), nếu không có WP_Query thì lấy từ default
+        $fallback_source = isset($press_posts[$i-1]) ? $press_posts[$i-1]['source'] : $default_press[$i-1]['source'];
+        $fallback_logo = isset($press_posts[$i-1]) ? $press_posts[$i-1]['logo'] : $default_press[$i-1]['logo'];
+        $fallback_logoDark = isset($press_posts[$i-1]) ? $press_posts[$i-1]['logoDark'] : $default_press[$i-1]['logoDark'];
+        $fallback_title = isset($press_posts[$i-1]) ? $press_posts[$i-1]['title'] : $default_press[$i-1]['title'];
+        $fallback_img = isset($press_posts[$i-1]) ? $press_posts[$i-1]['img'] : $default_press[$i-1]['img'];
+        $fallback_url = isset($press_posts[$i-1]) ? $press_posts[$i-1]['url'] : $default_press[$i-1]['url'];
+
+        $final_press_data[] = array(
+            'source'   => $source ?: $fallback_source,
+            'logo'     => $logo ?: $fallback_logo,
+            'logoDark' => get_theme_mod("hacoled_press_{$i}_logo_dark", $fallback_logoDark),
+            'title'    => $title ?: $fallback_title,
+            'img'      => $img ?: $fallback_img,
+            'url'      => $url ?: $fallback_url
+        );
+    } else if (isset($press_posts[$i-1])) {
+        // Nếu không config gì ở slot này, và WP_Query có bài -> Dùng bài WP_Query
+        $final_press_data[] = $press_posts[$i-1];
+    } else {
+        // Nếu cả Customizer và WP_Query đều trống -> Dùng Default
+        $final_press_data[] = $default_press[$i-1];
     }
+}
+$press_data = $final_press_data;
 }
 ?>
     <!-- Preload only the first visible hero image. -->
