@@ -166,19 +166,32 @@ class TemplateController extends Controller {
                         $cat_names[] = $cat->name;
                     }
                 }
-                $content = get_the_content();
-                $words = str_word_count(strip_tags(strip_shortcodes($content)));
-                $reading_time_min = ceil($words / 200);
+                $content = trim(wp_strip_all_tags(strip_shortcodes(get_the_content())));
+                $words = $content === ''
+                    ? 0
+                    : count(preg_split('/\s+/u', $content, -1, PREG_SPLIT_NO_EMPTY));
+                $reading_time_min = (int) ceil($words / 200);
                 $reading_time = max(1, $reading_time_min) . ' ' . __('phút đọc', 'hacoled');
+                $thumbnail_id = get_post_thumbnail_id(get_the_ID());
+                $thumbnail_alt = $thumbnail_id
+                    ? trim((string) get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true))
+                    : '';
+
+                $excerpt = trim((string) get_the_excerpt());
+                if ($excerpt === '') {
+                    $excerpt = wp_trim_words($content, 32, '…');
+                }
 
                 $posts[] = [
                     'id'           => get_the_ID(),
                     'title'        => get_the_title(),
-                    'excerpt'      => get_the_excerpt(),
+                    'excerpt'      => $excerpt,
                     'permalink'    => get_permalink(),
                     'date'         => get_the_date(),
                     'author'       => get_the_author(),
                     'thumbnail'    => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
+                    'thumbnail_alt' => $thumbnail_alt ?: get_the_title(),
+                    'thumbnail_srcset' => $thumbnail_id ? (wp_get_attachment_image_srcset($thumbnail_id, 'large') ?: '') : '',
                     'category'     => implode(', ', $cat_names) ?: __('Tin tức', 'hacoled'),
                     'reading_time' => $reading_time
                 ];

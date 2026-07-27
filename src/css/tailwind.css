@@ -1511,7 +1511,7 @@ figure.alignnone,
 .product-description-content img,
 .category-description img,
 .wp-block-image img,
-article img {
+.entry-content article img {
   max-width: 100% !important;
   height: auto !important;
   display: block;

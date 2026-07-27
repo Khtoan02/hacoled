@@ -20,43 +20,93 @@ function hacoled_home_social_image() {
     return get_template_directory_uri() . '/assets/images/home-solution-led.webp';
 }
 
+function hacoled_is_blog_hub() {
+    if (is_category()) {
+        $term_id = get_queried_object_id();
+        return is_category('tin-tuc') || get_term_meta($term_id, 'category_template', true) === 'blog';
+    }
+
+    if (!is_page()) {
+        return false;
+    }
+
+    $page_id = get_queried_object_id();
+
+    return get_page_template_slug($page_id) === 'page-templates/blog.php'
+        || get_post_meta($page_id, '_hacoled_content_layout', true) === 'blog';
+}
+
+function hacoled_blog_seo_title() {
+    return 'Tin tức màn hình LED, âm thanh & dự án | HacoLED';
+}
+
+function hacoled_blog_seo_description() {
+    return 'Cập nhật dự án HacoLED, kiến thức màn hình LED, âm thanh hội trường, hướng dẫn kỹ thuật và kinh nghiệm chọn giải pháp AV phù hợp.';
+}
+
+function hacoled_blog_social_image() {
+    if (is_page() && has_post_thumbnail(get_queried_object_id())) {
+        return get_the_post_thumbnail_url(get_queried_object_id(), 'large');
+    }
+
+    return get_template_directory_uri() . '/assets/images/home-solution-led.webp';
+}
+
 function hacoled_filter_home_document_title($title) {
-    return is_front_page() ? hacoled_home_seo_title() : $title;
+    if (is_front_page()) {
+        return hacoled_home_seo_title();
+    }
+
+    return hacoled_is_blog_hub() ? hacoled_blog_seo_title() : $title;
 }
 add_filter('pre_get_document_title', 'hacoled_filter_home_document_title', 20);
 add_filter('rank_math/frontend/title', 'hacoled_filter_home_document_title', 20);
 
 function hacoled_filter_home_description($description) {
-    if (!is_front_page()) {
-        return $description;
+    if (is_front_page()) {
+        return trim((string) $description) !== ''
+            ? $description
+            : hacoled_home_seo_description();
     }
 
-    return trim((string) $description) !== ''
-        ? $description
-        : hacoled_home_seo_description();
+    if (hacoled_is_blog_hub()) {
+        return trim((string) $description) !== ''
+            ? $description
+            : hacoled_blog_seo_description();
+    }
+
+    return $description;
 }
 add_filter('rank_math/frontend/description', 'hacoled_filter_home_description', 20);
 add_filter('rank_math/opengraph/facebook/og_description', 'hacoled_filter_home_description', 20);
 add_filter('rank_math/opengraph/twitter/twitter_description', 'hacoled_filter_home_description', 20);
 
 function hacoled_filter_home_social_title($title) {
-    return is_front_page() ? hacoled_home_seo_title() : $title;
+    if (is_front_page()) {
+        return hacoled_home_seo_title();
+    }
+
+    return hacoled_is_blog_hub() ? hacoled_blog_seo_title() : $title;
 }
 add_filter('rank_math/opengraph/facebook/og_title', 'hacoled_filter_home_social_title', 20);
 add_filter('rank_math/opengraph/twitter/twitter_title', 'hacoled_filter_home_social_title', 20);
 
 function hacoled_filter_home_social_image($image) {
-    if (!is_front_page() || trim((string) $image) !== '') {
+    if (trim((string) $image) !== '') {
         return $image;
     }
 
-    return hacoled_home_social_image();
+    if (is_front_page()) {
+        return hacoled_home_social_image();
+    }
+
+    return hacoled_is_blog_hub() ? hacoled_blog_social_image() : $image;
 }
 add_filter('rank_math/opengraph/facebook/image', 'hacoled_filter_home_social_image', 20);
 add_filter('rank_math/opengraph/twitter/image', 'hacoled_filter_home_social_image', 20);
 
 function hacoled_filter_twitter_card_type($type) {
-    return is_front_page() ? 'summary_large_image' : $type;
+    return is_front_page() || hacoled_is_blog_hub() ? 'summary_large_image' : $type;
 }
 add_filter('rank_math/opengraph/twitter/card_type', 'hacoled_filter_twitter_card_type', 20);
 
@@ -69,14 +119,24 @@ function hacoled_output_head_basics() {
         echo '<link rel="apple-touch-icon" href="' . esc_url($icon) . '">' . "\n";
     }
 
-    if (defined('RANK_MATH_VERSION') || !is_front_page()) {
+    if (defined('RANK_MATH_VERSION')) {
         return;
     }
 
-    $title = hacoled_home_seo_title();
-    $description = hacoled_home_seo_description();
-    $image = hacoled_home_social_image();
-    $url = home_url('/');
+    if (is_front_page()) {
+        $title = hacoled_home_seo_title();
+        $description = hacoled_home_seo_description();
+        $image = hacoled_home_social_image();
+        $url = home_url('/');
+    } elseif (hacoled_is_blog_hub()) {
+        $title = hacoled_blog_seo_title();
+        $description = hacoled_blog_seo_description();
+        $image = hacoled_blog_social_image();
+        $url = hacoled_managed_page_url('blog');
+    } else {
+        return;
+    }
+
     $site_name = get_bloginfo('name');
 
     echo '<meta name="description" content="' . esc_attr($description) . '">' . "\n";
@@ -165,6 +225,34 @@ function hacoled_output_home_structured_data() {
     }
 }
 add_action('wp_head', 'hacoled_output_home_structured_data', 30);
+
+function hacoled_output_blog_structured_data() {
+    if (!hacoled_is_blog_hub()) {
+        return;
+    }
+
+    $schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'BreadcrumbList',
+        'itemListElement' => [
+            [
+                '@type' => 'ListItem',
+                'position' => 1,
+                'name' => 'Trang chủ',
+                'item' => home_url('/'),
+            ],
+            [
+                '@type' => 'ListItem',
+                'position' => 2,
+                'name' => 'Tin tức và kiến thức',
+                'item' => hacoled_managed_page_url('blog'),
+            ],
+        ],
+    ];
+
+    echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
+}
+add_action('wp_head', 'hacoled_output_blog_structured_data', 31);
 
 function hacoled_serve_llms_txt() {
     $path = (string) parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
