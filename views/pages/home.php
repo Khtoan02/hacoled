@@ -117,14 +117,18 @@ if (empty($press_data)) {
     for ($i = 1; $i <= 6; $i++) {
         $source = get_theme_mod("hacoled_press_{$i}_source");
         $logo   = get_theme_mod("hacoled_press_{$i}_logo");
-        if (!empty($source) || !empty($logo)) {
+        $title  = get_theme_mod("hacoled_press_{$i}_title");
+        $url    = get_theme_mod("hacoled_press_{$i}_url");
+        $img    = get_theme_mod("hacoled_press_{$i}_img");
+        
+        if (!empty($source) || !empty($logo) || !empty($title) || !empty($url) || !empty($img)) {
             $press_data[] = array(
                 'source'   => $source ?: $default_press[$i-1]['source'],
                 'logo'     => $logo ?: $default_press[$i-1]['logo'],
                 'logoDark' => get_theme_mod("hacoled_press_{$i}_logo_dark", $default_press[$i-1]['logoDark']),
-                'title'    => get_theme_mod("hacoled_press_{$i}_title") ?: $default_press[$i-1]['title'],
-                'img'      => get_theme_mod("hacoled_press_{$i}_img") ?: $default_press[$i-1]['img'],
-                'url'      => get_theme_mod("hacoled_press_{$i}_url") ?: $default_press[$i-1]['url']
+                'title'    => $title ?: $default_press[$i-1]['title'],
+                'img'      => $img ?: $default_press[$i-1]['img'],
+                'url'      => $url ?: $default_press[$i-1]['url']
             );
         } else {
             $press_data[] = $default_press[$i-1];
@@ -855,8 +859,8 @@ function haco_render_product_slides($categories) {
                         if (!empty($partner_logos_raw)) {
                             $partner_logos = array_filter(explode(',', $partner_logos_raw));
                             foreach ($partner_logos as $logo_url): ?>
-                            <div class="swiper-slide px-1 md:px-2">
-                                <div class="h-10 md:h-16 max-w-[100px] md:max-w-[160px] mx-auto bg-gray-50/50 border border-gray-100 rounded-lg md:rounded-xl flex items-center justify-center grayscale hover:grayscale-0 hover:bg-white hover:border-brand-red/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-2">
+                            <div class="swiper-slide px-2">
+                                <div class="aspect-square w-16 md:w-24 lg:w-28 mx-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:border-brand-red/30 hover:shadow-[0_8px_30px_rgba(204,0,0,0.1)] hover:-translate-y-1 p-2 md:p-3 overflow-hidden">
                                     <img src="<?php echo esc_url($logo_url); ?>" alt="Partner Logo" class="max-w-full max-h-full object-contain" loading="lazy">
                                 </div>
                             </div>
@@ -864,9 +868,9 @@ function haco_render_product_slides($categories) {
                         } else {
                             $partners = ['Samsung', 'LG', 'Panasonic', 'Sony', 'BOE', 'Novastar', 'Kystar', 'Absen'];
                             foreach($partners as $partner): ?>
-                            <div class="swiper-slide px-1 md:px-2">
-                                <div class="h-10 md:h-16 max-w-[100px] md:max-w-[160px] mx-auto bg-gray-50/50 border border-gray-100 rounded-lg md:rounded-xl flex items-center justify-center grayscale hover:grayscale-0 hover:bg-white hover:border-brand-red/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                                    <span class="text-gray-400 font-black text-xs md:text-lg tracking-widest uppercase"><?php echo $partner; ?></span>
+                            <div class="swiper-slide px-2">
+                                <div class="aspect-square w-16 md:w-24 lg:w-28 mx-auto bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-300 hover:border-brand-red/30 hover:shadow-[0_8px_30px_rgba(204,0,0,0.1)] hover:-translate-y-1 p-2 md:p-3 overflow-hidden">
+                                    <span class="text-gray-400 font-black text-[10px] md:text-sm tracking-widest uppercase text-center"><?php echo $partner; ?></span>
                                 </div>
                             </div>
                             <?php endforeach;
