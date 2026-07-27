@@ -13,13 +13,60 @@ class LedScreenModel extends Model {
      * @return array<int, array<string, mixed>>
      */
     public static function get_products($limit = 8) {
-        $query = new WP_Query([
+        // 1. Get featured products ordered by menu_order ASC, then modified date DESC
+        $featured_ids = get_posts([
             'post_type'      => 'product',
             'posts_per_page' => absint($limit),
             'post_status'    => 'publish',
-            'orderby'        => 'menu_order',
-            'order'          => 'ASC',
+            'orderby'        => [
+                'menu_order' => 'ASC',
+                'modified'   => 'DESC',
+            ],
+            'fields'         => 'ids',
+            'tax_query'      => [
+                [
+                    'taxonomy' => 'product_visibility',
+                    'field'    => 'name',
+                    'terms'    => 'featured',
+                    'operator' => 'IN',
+                ],
+            ],
         ]);
+
+        // 2. Get remaining regular products ordered by menu_order ASC, then modified date DESC
+        $needed = absint($limit) - count($featured_ids);
+        $regular_ids = [];
+        if ($needed > 0) {
+            $regular_ids = get_posts([
+                'post_type'      => 'product',
+                'posts_per_page' => $needed,
+                'post_status'    => 'publish',
+                'post__not_in'   => $featured_ids,
+                'orderby'        => [
+                    'menu_order' => 'ASC',
+                    'modified'   => 'DESC',
+                ],
+                'fields'         => 'ids',
+            ]);
+        }
+
+        $all_ids = array_merge($featured_ids, $regular_ids);
+
+        $query = !empty($all_ids)
+            ? new WP_Query([
+                'post_type'      => 'product',
+                'post__in'       => $all_ids,
+                'orderby'        => 'post__in',
+                'posts_per_page' => count($all_ids),
+                'post_status'    => 'publish',
+            ])
+            : new WP_Query([
+                'post_type'      => 'product',
+                'posts_per_page' => absint($limit),
+                'post_status'    => 'publish',
+                'orderby'        => 'modified',
+                'order'          => 'DESC',
+            ]);
 
         $products = [];
 

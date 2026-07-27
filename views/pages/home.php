@@ -181,6 +181,106 @@ if (empty($press_data)) {
     </script>
 
 <?php
+/**
+ * Query products for homepage: prioritizes Featured (starred) products first,
+ * and sorts all products by last modified date DESC (ngày cập nhật mới nhất).
+ *
+ * @param array|string $categories Category slug or array of category slugs.
+ * @param int $limit Maximum number of products to fetch.
+ * @return WP_Query
+ */
+function haco_get_home_products_query($categories = array(), $limit = 8) {
+    $limit = absint($limit);
+    $cat_slugs = array_filter((array) $categories);
+
+    // 1. Query featured products (ordered by menu_order ASC, then modified date DESC)
+    $featured_args = array(
+        'post_type'      => 'product',
+        'posts_per_page' => $limit,
+        'post_status'    => 'publish',
+        'orderby'        => array(
+            'menu_order' => 'ASC',
+            'modified'   => 'DESC',
+        ),
+        'fields'         => 'ids',
+        'tax_query'      => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'product_visibility',
+                'field'    => 'name',
+                'terms'    => 'featured',
+                'operator' => 'IN',
+            ),
+        ),
+    );
+
+    if (!empty($cat_slugs)) {
+        $featured_args['tax_query'][] = array(
+            'taxonomy'         => 'product_cat',
+            'field'            => 'slug',
+            'terms'            => $cat_slugs,
+            'operator'         => 'IN',
+            'include_children' => true,
+        );
+    }
+
+    $featured_ids = get_posts($featured_args);
+
+    // 2. Query remaining regular products (ordered by menu_order ASC, then modified date DESC)
+    $needed = $limit - count($featured_ids);
+    $regular_ids = array();
+
+    if ($needed > 0) {
+        $regular_args = array(
+            'post_type'      => 'product',
+            'posts_per_page' => $needed,
+            'post_status'    => 'publish',
+            'orderby'        => array(
+                'menu_order' => 'ASC',
+                'modified'   => 'DESC',
+            ),
+            'fields'         => 'ids',
+        );
+
+        if (!empty($featured_ids)) {
+            $regular_args['post__not_in'] = $featured_ids;
+        }
+
+        if (!empty($cat_slugs)) {
+            $regular_args['tax_query'] = array(
+                array(
+                    'taxonomy'         => 'product_cat',
+                    'field'            => 'slug',
+                    'terms'            => $cat_slugs,
+                    'operator'         => 'IN',
+                    'include_children' => true,
+                ),
+            );
+        }
+
+        $regular_ids = get_posts($regular_args);
+    }
+
+    $all_ids = array_merge($featured_ids, $regular_ids);
+
+    if (!empty($all_ids)) {
+        return new WP_Query(array(
+            'post_type'      => 'product',
+            'post__in'       => $all_ids,
+            'orderby'        => 'post__in',
+            'posts_per_page' => count($all_ids),
+            'post_status'    => 'publish',
+        ));
+    }
+
+    // Smart fallback if specific category has no products: fetch shop-wide (featured first, then modified DESC)
+    if (!empty($cat_slugs)) {
+        return haco_get_home_products_query(array(), $limit);
+    }
+
+    return new WP_Query(array('post_type' => 'product', 'posts_per_page' => 0));
+}
+
 // HELPER FUNCTION: Render Product Slides from WooCommerce Categories
 function haco_render_product_slides($categories) {
     if ( ! class_exists( 'WooCommerce' ) ) {
@@ -188,21 +288,7 @@ function haco_render_product_slides($categories) {
         return;
     }
     
-    $args = array(
-        'post_type' => 'product',
-        'posts_per_page' => 12,
-        'post_status' => 'publish',
-        'tax_query' => array(
-  array(
-      'taxonomy' => 'product_cat',
-      'field'    => 'slug',
-      'terms'    => $categories,
-      'operator' => 'IN',
-      'include_children' => true
-  )
-        )
-    );
-    $query = new WP_Query($args);
+    $query = haco_get_home_products_query($categories, 12);
     if ($query->have_posts()) {
         while ($query->have_posts()) {
   $query->the_post();
@@ -814,32 +900,7 @@ function haco_render_product_slides($categories) {
         );
 
         foreach ($product_sections as $sec_idx => $section) :
-            $args = array(
-                'post_type'      => 'product',
-                'posts_per_page' => $section['limit'],
-                'post_status'    => 'publish',
-                'tax_query'      => array(
-                    array(
-                        'taxonomy'         => 'product_cat',
-                        'field'            => 'slug',
-                        'terms'            => $section['slugs'],
-                        'operator'         => 'IN',
-                        'include_children' => true,
-                    ),
-                ),
-            );
-            $product_query = new WP_Query($args);
-            if (!$product_query->have_posts()) {
-                // Smart fallback: If specific category slug has no products, fetch latest WooCommerce products
-                $fallback_args = array(
-                    'post_type'      => 'product',
-                    'posts_per_page' => $section['limit'],
-                    'post_status'    => 'publish',
-                    'orderby'        => 'date',
-                    'order'          => 'DESC',
-                );
-                $product_query = new WP_Query($fallback_args);
-            }
+            $product_query = haco_get_home_products_query($section['slugs'], $section['limit']);
         ?>
         <section id="category-<?php echo esc_attr($section['slugs'][0]); ?>" class="py-6 md:py-20 relative overflow-visible" style="background: transparent;">
             <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
