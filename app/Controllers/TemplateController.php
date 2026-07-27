@@ -195,14 +195,14 @@ class TemplateController extends Controller {
         $page_data = $this->get_current_page_data(__('Tin tức & Blog HacoLED', 'hacoled'));
         
         $categories_slugs = [
-            'press'    => 'bao-chi-noi-ve-hacoled',
-            'audio'    => 'blog-am-thanh',
-            'led'      => 'blog-man-hinh-led',
-            'tech'     => 'huong-dan-ky-thuat',
-            'events'   => 'su-kien-hacoled',
-            'news'     => 'tin-tuc',
-            'jobs'     => 'tuyen-dung',
-            'projects' => 'du-an'
+            'press'    => get_theme_mod('hacoled_blog_cat_press', 'bao-chi-noi-ve-hacoled'),
+            'audio'    => get_theme_mod('hacoled_blog_cat_audio', 'blog-am-thanh'),
+            'led'      => get_theme_mod('hacoled_blog_cat_led', 'blog-man-hinh-led'),
+            'tech'     => get_theme_mod('hacoled_blog_cat_tech', 'huong-dan-ky-thuat'),
+            'events'   => get_theme_mod('hacoled_blog_cat_events', 'su-kien-hacoled'),
+            'news'     => get_theme_mod('hacoled_blog_cat_news', 'tin-tuc'),
+            'jobs'     => get_theme_mod('hacoled_blog_cat_jobs', 'tuyen-dung'),
+            'projects' => get_theme_mod('hacoled_blog_cat_projects', 'du-an')
         ];
         
         $sections = [];
@@ -638,7 +638,15 @@ class TemplateController extends Controller {
                 ]
             ];
 
-        $sections = $mock_sections;
+        $sections = [];
+        foreach ($categories_slugs as $key => $slug) {
+            $real_posts = $this->get_posts_by_category($slug, 6);
+            if (!empty($real_posts)) {
+                $sections[$key] = $real_posts;
+            } else {
+                $sections[$key] = $mock_sections[$key] ?? [];
+            }
+        }
 
         $this->render($this->resolveLayoutView($page_data['id'], 'pages/blog'), [
             'page'        => $page_data,

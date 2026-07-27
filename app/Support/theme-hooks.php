@@ -751,6 +751,43 @@ function hacoled_customize_register($wp_customize) {
         'section'     => 'hacoled_events_section',
         'type'        => 'text',
     ]);
+
+    // Panel for Blog Page Configuration
+    $wp_customize->add_panel('hacoled_blog_panel', [
+        'title'       => __('Trang Tin tức & Blog', 'hacoled'),
+        'description' => __('Cấu hình các chuyên mục trên Trang Tin tức', 'hacoled'),
+        'priority'    => 35,
+    ]);
+
+    $wp_customize->add_section('hacoled_blog_categories_section', [
+        'title'    => __('Slug các chuyên mục', 'hacoled'),
+        'panel'    => 'hacoled_blog_panel',
+        'priority' => 10,
+    ]);
+
+    $blog_sections = [
+        'press'    => ['Báo chí nói về HacoLED', 'bao-chi-noi-ve-hacoled'],
+        'audio'    => ['Blog âm thanh', 'blog-am-thanh'],
+        'led'      => ['Blog màn hình LED', 'blog-man-hinh-led'],
+        'tech'     => ['Hướng dẫn kỹ thuật', 'huong-dan-ky-thuat'],
+        'events'   => ['Sự kiện HacoLED', 'su-kien-hacoled'],
+        'news'     => ['Kinh nghiệm & Tin tức', 'tin-tuc'],
+        'jobs'     => ['Tuyển dụng', 'tuyen-dung'],
+        'projects' => ['Dự án tiêu biểu', 'du-an'],
+    ];
+
+    foreach ($blog_sections as $key => $data) {
+        $wp_customize->add_setting("hacoled_blog_cat_{$key}", [
+            'default'           => $data[1],
+            'sanitize_callback' => 'sanitize_title',
+        ]);
+        $wp_customize->add_control("hacoled_blog_cat_{$key}", [
+            'label'       => sprintf(__('Slug: %s', 'hacoled'), $data[0]),
+            'description' => sprintf(__('Mặc định: %s', 'hacoled'), $data[1]),
+            'section'     => 'hacoled_blog_categories_section',
+            'type'        => 'text',
+        ]);
+    }
 }
 add_action('customize_register', 'hacoled_customize_register');
 
