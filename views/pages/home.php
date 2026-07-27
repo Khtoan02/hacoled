@@ -851,14 +851,26 @@ function haco_render_product_slides($categories) {
                 <div class="swiper partner-slider fade-up">
                     <div class="swiper-wrapper items-center">
                         <?php 
-                        $partners = ['Samsung', 'LG', 'Panasonic', 'Sony', 'BOE', 'Novastar', 'Kystar', 'Absen'];
-                        foreach($partners as $partner): ?>
-                        <div class="swiper-slide px-1 md:px-2">
-                            <div class="h-10 md:h-16 max-w-[100px] md:max-w-[160px] mx-auto bg-gray-50/50 border border-gray-100 rounded-lg md:rounded-xl flex items-center justify-center grayscale hover:grayscale-0 hover:bg-white hover:border-brand-red/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-                                <span class="text-gray-400 font-black text-xs md:text-lg tracking-widest uppercase"><?php echo $partner; ?></span>
+                        $partner_logos_raw = get_theme_mod('hacoled_partner_logos');
+                        if (!empty($partner_logos_raw)) {
+                            $partner_logos = array_filter(explode(',', $partner_logos_raw));
+                            foreach ($partner_logos as $logo_url): ?>
+                            <div class="swiper-slide px-1 md:px-2">
+                                <div class="h-10 md:h-16 max-w-[100px] md:max-w-[160px] mx-auto bg-gray-50/50 border border-gray-100 rounded-lg md:rounded-xl flex items-center justify-center grayscale hover:grayscale-0 hover:bg-white hover:border-brand-red/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 p-2">
+                                    <img src="<?php echo esc_url($logo_url); ?>" alt="Partner Logo" class="max-w-full max-h-full object-contain" loading="lazy">
+                                </div>
                             </div>
-                        </div>
-                        <?php endforeach; ?>
+                            <?php endforeach;
+                        } else {
+                            $partners = ['Samsung', 'LG', 'Panasonic', 'Sony', 'BOE', 'Novastar', 'Kystar', 'Absen'];
+                            foreach($partners as $partner): ?>
+                            <div class="swiper-slide px-1 md:px-2">
+                                <div class="h-10 md:h-16 max-w-[100px] md:max-w-[160px] mx-auto bg-gray-50/50 border border-gray-100 rounded-lg md:rounded-xl flex items-center justify-center grayscale hover:grayscale-0 hover:bg-white hover:border-brand-red/20 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+                                    <span class="text-gray-400 font-black text-xs md:text-lg tracking-widest uppercase"><?php echo $partner; ?></span>
+                                </div>
+                            </div>
+                            <?php endforeach;
+                        } ?>
                     </div>
                 </div>
             </div>
@@ -993,7 +1005,10 @@ function haco_render_product_slides($categories) {
         <!-- ========================================== -->
         <section class="py-10 sm:py-12 md:py-16 lg:py-20 relative overflow-hidden bg-transparent" aria-labelledby="uy-tin-hacoled">
             <div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-                <?php $partners = ['Viettel', 'FPT', 'EVN', 'Vingroup', 'Masterise', 'BRG']; ?>
+                <?php
+                $strategic_partners_raw = get_theme_mod('hacoled_strategic_partners_text', 'Viettel, FPT, EVN, Vingroup, Masterise, BRG');
+                $partners = array_filter(array_map('trim', explode(',', $strategic_partners_raw)));
+                ?>
 
                 <!-- Section heading -->
                 <div class="grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end gap-6 mb-8 md:mb-10">
@@ -1006,7 +1021,7 @@ function haco_render_product_slides($categories) {
                             Uy tín <span class="text-brand-red">tạo nên thương hiệu</span>
                         </h2>
                         <p class="max-w-3xl text-sm md:text-base text-brand-muted leading-relaxed">
-                            Đối tác của <strong class="text-brand-text">Viettel, FPT, EVN, Vingroup, Masterise, BRG</strong> và hàng trăm tập đoàn hàng đầu Việt Nam.
+                            Đối tác của <strong class="text-brand-text"><?php echo esc_html($strategic_partners_raw); ?></strong> và hàng trăm tập đoàn hàng đầu Việt Nam.
                         </p>
                     </div>
 
@@ -1061,14 +1076,14 @@ function haco_render_product_slides($categories) {
 
                                 <!-- Partner Chips Row -->
                                 <div class="hidden mb-4 pl-3 border-l-2 border-amber-300/70">
-                                    <p class="text-xs sm:text-[13px] text-white/80 leading-relaxed mb-2">Đối tác của <strong class="text-white">Viettel, FPT, EVN, Vingroup, Masterise, BRG</strong> và hàng trăm tập đoàn hàng đầu Việt Nam.</p>
+                                    <p class="text-xs sm:text-[13px] text-white/80 leading-relaxed mb-2">Đối tác của <strong class="text-white"><?php echo esc_html($strategic_partners_raw); ?></strong> và hàng trăm tập đoàn hàng đầu Việt Nam.</p>
                                     <div class="flex flex-wrap gap-1.5" aria-label="Đối tác tiêu biểu">
                                         <?php
-                                        $partners = ['Viettel', 'FPT', 'EVN', 'Vingroup', 'Masterise', 'BRG'];
+                                        // $partners đã được định nghĩa ở phía trên
                                         foreach ($partners as $partner):
                                         ?>
                                             <span class="px-2.5 py-1 rounded-full bg-black/20 border border-white/15 text-[10px] sm:text-[11px] font-bold text-white/75 backdrop-blur-md">
-                                                <?php echo $partner; ?>
+                                                <?php echo esc_html($partner); ?>
                                             </span>
                                         <?php endforeach; ?>
                                     </div>

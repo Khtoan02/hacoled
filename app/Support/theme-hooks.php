@@ -587,29 +587,6 @@ function hacoled_customize_register($wp_customize) {
         ]));
     }
 
-    // Section 2: Solutions
-    $wp_customize->add_section('hacoled_solutions_section', [
-        'title'    => __('2. Giải pháp cốt lõi', 'hacoled'),
-        'panel'    => 'hacoled_homepage_panel',
-        'priority' => 20,
-    ]);
-
-    $solutions_keys = [
-        'led'       => __('Màn hình LED', 'hacoled'),
-        'videowall' => __('Màn hình ghép', 'hacoled'),
-        'audio'     => __('Âm thanh & Ánh sáng', 'hacoled'),
-    ];
-    foreach ($solutions_keys as $key => $label) {
-        $wp_customize->add_setting("hacoled_solutions_{$key}_img", [
-            'default'           => '',
-            'sanitize_callback' => 'esc_url_raw',
-        ]);
-        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "hacoled_solutions_{$key}_img", [
-            'label'    => sprintf(__('Ảnh nền cho %s', 'hacoled'), $label),
-            'section'  => 'hacoled_solutions_section',
-            'settings' => "hacoled_solutions_{$key}_img",
-        ]));
-    }
 
     // Section 3: Featured Projects
     $wp_customize->add_section('hacoled_projects_section', [
@@ -751,6 +728,37 @@ function hacoled_customize_register($wp_customize) {
         'section'     => 'hacoled_events_section',
         'type'        => 'text',
     ]);
+
+    // Section 6: Đối tác chiến lược & Khách hàng
+    $wp_customize->add_section('hacoled_partners_section', [
+        'title'    => __('6. Logo Đối tác & Khách hàng', 'hacoled'),
+        'panel'    => 'hacoled_homepage_panel',
+        'priority' => 60,
+    ]);
+
+    // Strategic Partners Chips
+    $wp_customize->add_setting('hacoled_strategic_partners_text', [
+        'default'           => 'Viettel, FPT, EVN, Vingroup, Masterise, BRG',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control('hacoled_strategic_partners_text', [
+        'label'       => __('Tên các Đối tác chiến lược', 'hacoled'),
+        'description' => __('Nhập tên các đối tác, phân cách bằng dấu phẩy (vd: Viettel, FPT, EVN...)', 'hacoled'),
+        'section'     => 'hacoled_partners_section',
+        'type'        => 'text',
+    ]);
+
+    // Multi-select Partner Logos Gallery
+    $wp_customize->add_setting('hacoled_partner_logos', [
+        'default'           => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ]);
+    $wp_customize->add_control(new Hacoled_Customize_Gallery_Control($wp_customize, 'hacoled_partner_logos', [
+        'label'       => __('Logo Đối tác (Slider)', 'hacoled'),
+        'description' => __('Bấm chọn nhiều ảnh (Giữ Ctrl/Cmd) để hiển thị ở Slider đối tác. Lưu ý: Nên dùng ảnh có nền trong suốt (PNG/WebP). Nếu để trống sẽ hiển thị chữ mặc định (Samsung, LG...).', 'hacoled'),
+        'section'     => 'hacoled_partners_section',
+        'settings'    => 'hacoled_partner_logos',
+    ]));
 
     // Panel for Blog Page Configuration
     $wp_customize->add_panel('hacoled_blog_panel', [
