@@ -796,6 +796,51 @@ function hacoled_customize_register($wp_customize) {
             'type'        => 'text',
         ]);
     }
+
+    // Section: Tracking & Scripts
+    $wp_customize->add_section('hacoled_scripts_section', [
+        'title'    => __('Theo dõi & Scripts', 'hacoled'),
+        'priority' => 200,
+    ]);
+
+    // Header Scripts
+    $wp_customize->add_setting('hacoled_header_scripts', [
+        'default'           => '',
+        'sanitize_callback' => 'hacoled_sanitize_raw_html',
+    ]);
+    $wp_customize->add_control('hacoled_header_scripts', [
+        'label'       => __('Scripts trong <head>', 'hacoled'),
+        'description' => __('Chèn các mã theo dõi như Google Analytics, Google Tag Manager (phần head), Facebook Pixel, v.v.', 'hacoled'),
+        'section'     => 'hacoled_scripts_section',
+        'type'        => 'textarea',
+        'input_attrs' => ['rows' => 10],
+    ]);
+
+    // Body Scripts (wp_body_open)
+    $wp_customize->add_setting('hacoled_body_scripts', [
+        'default'           => '',
+        'sanitize_callback' => 'hacoled_sanitize_raw_html',
+    ]);
+    $wp_customize->add_control('hacoled_body_scripts', [
+        'label'       => __('Scripts ngay sau <body>', 'hacoled'),
+        'description' => __('Chèn mã Google Tag Manager (phần noscript) hoặc các script cần chạy ngay khi mở body.', 'hacoled'),
+        'section'     => 'hacoled_scripts_section',
+        'type'        => 'textarea',
+        'input_attrs' => ['rows' => 10],
+    ]);
+
+    // Footer Scripts
+    $wp_customize->add_setting('hacoled_footer_scripts', [
+        'default'           => '',
+        'sanitize_callback' => 'hacoled_sanitize_raw_html',
+    ]);
+    $wp_customize->add_control('hacoled_footer_scripts', [
+        'label'       => __('Scripts trước thẻ </body> (Footer)', 'hacoled'),
+        'description' => __('Chèn các mã script theo dõi, chat widget (Zalo, Tawk.to, Messenger) cần tải ở cuối trang.', 'hacoled'),
+        'section'     => 'hacoled_scripts_section',
+        'type'        => 'textarea',
+        'input_attrs' => ['rows' => 10],
+    ]);
 }
 add_action('customize_register', 'hacoled_customize_register');
 
@@ -840,4 +885,42 @@ function hacoled_save_category_template_meta($term_id) {
 }
 add_action('created_category', 'hacoled_save_category_template_meta', 10, 2);
 add_action('edited_category', 'hacoled_save_category_template_meta', 10, 2);
+
+// Sanitize Raw HTML/JS tracking scripts
+function hacoled_sanitize_raw_html($value) {
+    if (current_user_can('unfiltered_html')) {
+        return $value;
+    }
+    return wp_kses_post($value);
+}
+
+// Hook to output header scripts
+add_action('wp_head', function() {
+    $scripts = get_theme_mod('hacoled_header_scripts');
+    if (!empty($scripts)) {
+        echo "\n<!-- Start HacoLED Header Scripts -->\n";
+        echo $scripts;
+        echo "\n<!-- End HacoLED Header Scripts -->\n";
+    }
+}, 100);
+
+// Hook to output body scripts
+add_action('wp_body_open', function() {
+    $scripts = get_theme_mod('hacoled_body_scripts');
+    if (!empty($scripts)) {
+        echo "\n<!-- Start HacoLED Body Scripts -->\n";
+        echo $scripts;
+        echo "\n<!-- End HacoLED Body Scripts -->\n";
+    }
+}, 100);
+
+// Hook to output footer scripts
+add_action('wp_footer', function() {
+    $scripts = get_theme_mod('hacoled_footer_scripts');
+    if (!empty($scripts)) {
+        echo "\n<!-- Start HacoLED Footer Scripts -->\n";
+        echo $scripts;
+        echo "\n<!-- End HacoLED Footer Scripts -->\n";
+    }
+}, 100);
 
