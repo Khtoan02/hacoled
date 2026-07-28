@@ -888,10 +888,7 @@ add_action('edited_category', 'hacoled_save_category_template_meta', 10, 2);
 
 // Sanitize Raw HTML/JS tracking scripts
 function hacoled_sanitize_raw_html($value) {
-    if (current_user_can('unfiltered_html')) {
-        return $value;
-    }
-    return wp_kses_post($value);
+    return $value;
 }
 
 // Hook to output header scripts
