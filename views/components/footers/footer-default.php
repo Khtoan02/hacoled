@@ -204,14 +204,14 @@ if (empty($footer_logo)) {
           </li>
           <li>
             <a class="group flex items-center gap-2 text-xs sm:text-sm text-white/90 hover:text-[#FFD700] transition-colors font-medium" 
-               href="<?php echo esc_url(home_url('/du-an/')); ?>">
+               href="<?php echo esc_url(hacoled_managed_page_url('projects')); ?>">
               <i class="ph-bold ph-caret-right text-[#FFD700] text-xs transition-transform group-hover:translate-x-1"></i>
               <span><?php _e('Dự án đã triển khai', 'hacoled'); ?></span>
             </a>
           </li>
           <li>
             <a class="group flex items-center gap-2 text-xs sm:text-sm text-white/90 hover:text-[#FFD700] transition-colors font-medium" 
-               href="<?php echo esc_url(home_url('/tin-tuc/')); ?>">
+               href="<?php echo esc_url(hacoled_managed_page_url('blog')); ?>">
               <i class="ph-bold ph-caret-right text-[#FFD700] text-xs transition-transform group-hover:translate-x-1"></i>
               <span><?php _e('Blog / Tin tức công nghệ', 'hacoled'); ?></span>
             </a>

@@ -46,9 +46,10 @@ class CatalogRepository {
     }
 
     public function featuredProjects($limit = 3) {
+        $category_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
         return $this->posts([
             'post_type' => ['post', 'page'], 'posts_per_page' => absint($limit),
-            'category_name' => 'du-an', 'post_status' => 'publish',
+            'category_name' => $category_slug, 'post_status' => 'publish',
         ], 'thumbnail');
     }
 

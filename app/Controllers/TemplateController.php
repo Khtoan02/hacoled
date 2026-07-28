@@ -675,11 +675,13 @@ class TemplateController extends Controller {
     public function projects() {
         $page_data = $this->get_current_page_data(__('Dự án tiêu biểu HacoLED', 'hacoled'));
 
+        $projects_cat_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
+
         // Query standard WP posts belonging to project category or custom query
         $args = [
             'post_type'      => 'post',
             'posts_per_page' => -1, // get all projects
-            'category_name'  => 'du-an',
+            'category_name'  => $projects_cat_slug,
             'post_status'    => 'publish',
             'orderby'        => 'date',
             'order'          => 'DESC'
@@ -687,7 +689,7 @@ class TemplateController extends Controller {
 
         $query = new \WP_Query($args);
         
-        // If category 'du-an' doesn't exist, search generally or fall back
+        // If category doesn't exist, search generally or fall back
         if (!$query->have_posts()) {
             $args['category_name'] = 'projects';
             $query = new \WP_Query($args);

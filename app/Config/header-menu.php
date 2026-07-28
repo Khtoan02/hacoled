@@ -66,7 +66,7 @@ return [
                 ]
             ],
         ],
-        'visual' => ['image' => $assets . 'showcase-led.webp', 'fallback' => $assets . 'services-hero.webp', 'alt' => 'Giải pháp Màn hình LED P1.53 Phòng Khánh Tiết EVN', 'badge' => 'Dự án nổi bật', 'title' => 'Giải pháp Màn hình LED P1.53 Phòng Khánh Tiết EVN', 'cta' => 'Xem dự án ngay', 'url' => home_url('/du-an-da-thuc-hien/')],
+        'visual' => ['image' => $assets . 'showcase-led.webp', 'fallback' => $assets . 'services-hero.webp', 'alt' => 'Giải pháp Màn hình LED P1.53 Phòng Khánh Tiết EVN', 'badge' => 'Dự án nổi bật', 'title' => 'Giải pháp Màn hình LED P1.53 Phòng Khánh Tiết EVN', 'cta' => 'Xem dự án ngay', 'url' => hacoled_managed_page_url('projects')],
     ],
     'videowall' => [
         'label' => 'Màn Hình Ghép',
@@ -165,7 +165,7 @@ return [
         'label' => 'Dự án đã thực hiện',
         'enabled' => true,
         'kind' => 'mega',
-        'url' => home_url('/du-an-da-thuc-hien/'),
+        'url' => hacoled_managed_page_url('projects'),
         'columns' => [
             [
                 'title' => 'Hồ Sơ Năng Lực',

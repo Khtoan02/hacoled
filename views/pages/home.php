@@ -1967,8 +1967,9 @@ function haco_render_product_slides($categories) {
                 $query_projects->the_post();
                 $cats = get_the_category();
                 $cat_names = array();
+                $projects_cat_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
                 foreach ($cats as $c) {
-                    if ($c->slug !== 'du-an' && $c->slug !== 'projects') {
+                    if ($c->slug !== 'du-an' && $c->slug !== 'projects' && $c->slug !== $projects_cat_slug) {
                         $cat_names[] = $c->name;
                     }
                 }
