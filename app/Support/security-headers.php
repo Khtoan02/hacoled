@@ -22,13 +22,13 @@ function hacoled_send_security_headers() {
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: camera=(), geolocation=(), microphone=()');
 
-    $policy = "default-src 'self'; "
-        . "script-src 'self' 'unsafe-inline' 'unsafe-eval'; "
-        . "style-src 'self' 'unsafe-inline'; "
+    $policy = "default-src 'self' https:; "
+        . "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; "
+        . "style-src 'self' 'unsafe-inline' https:; "
         . "img-src 'self' data: https:; "
-        . "font-src 'self' data:; "
-        . "connect-src 'self'; worker-src 'self' blob:; "
-        . "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com; "
+        . "font-src 'self' data: https:; "
+        . "connect-src 'self' https:; worker-src 'self' blob: https:; "
+        . "frame-src 'self' https:; "
         . "object-src 'none'; base-uri 'self'; form-action 'self' https:; frame-ancestors 'self'";
     header('Content-Security-Policy: ' . $policy);
 
