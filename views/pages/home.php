@@ -1517,7 +1517,12 @@ function haco_render_product_slides($categories) {
                 </div>
 
                 <div class="text-center mt-10 fade-up">
-                    <a href="<?php echo esc_url(hacoled_managed_page_url('projects')); ?>" class="inline-flex items-center gap-2 border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white px-5 py-2.5 md:px-8 md:py-3 font-bold uppercase tracking-wider rounded-full transition-all text-xs md:text-sm group">
+                    <?php
+                    $projects_cat_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
+                    $projects_cat = get_category_by_slug($projects_cat_slug);
+                    $projects_url = $projects_cat ? get_category_link($projects_cat->term_id) : hacoled_managed_page_url('projects');
+                    ?>
+                    <a href="<?php echo esc_url($projects_url); ?>" class="inline-flex items-center gap-2 border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-white px-5 py-2.5 md:px-8 md:py-3 font-bold uppercase tracking-wider rounded-full transition-all text-xs md:text-sm group">
                         Xem tất cả dự án <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
