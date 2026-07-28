@@ -906,7 +906,7 @@ function haco_render_product_slides($categories) {
                 'label'  => 'Màn hình LED',
                 'desc'   => 'Giải pháp hiển thị đỉnh cao với công nghệ LED tiên tiến, mang lại hình ảnh sắc nét và rực rỡ cho mọi không gian, từ hội trường đến sân khấu ngoài trời.',
                 'icon'   => 'ph-fill ph-monitor-play',
-                'link'   => home_url('/danh-muc-san-pham/man-hinh-led/'),
+                'link'   => home_url('/man-hinh-led/'),
                 'limit'  => 8,
                 'cols'   => 'lg:grid-cols-4'
             ),
@@ -915,7 +915,7 @@ function haco_render_product_slides($categories) {
                 'label'  => 'Âm thanh & Ánh sáng',
                 'desc'   => 'Hệ thống âm thanh ánh sáng chuyên nghiệp, tối ưu hóa trải nghiệm nghe nhìn cho các sự kiện, hội trường, phòng hát với các thương hiệu quốc tế.',
                 'icon'   => 'ph-fill ph-speaker-hifi',
-                'link'   => home_url('/danh-muc-san-pham/am-thanh/'),
+                'link'   => home_url('/am-thanh/'),
                 'limit'  => 8,
                 'cols'   => 'lg:grid-cols-4'
             ),
@@ -924,7 +924,7 @@ function haco_render_product_slides($categories) {
                 'label'  => 'Màn hình ghép',
                 'desc'   => 'Màn hình ghép viền siêu mỏng, hoạt động bền bỉ 24/7, phù hợp cho các phòng điều hành, phòng họp trực tuyến và trung tâm thương mại hiện đại.',
                 'icon'   => 'ph-fill ph-squares-four',
-                'link'   => home_url('/danh-muc-san-pham/man-hinh-ghep/'),
+                'link'   => home_url('/man-hinh-ghep/'),
                 'limit'  => 8,
                 'cols'   => 'lg:grid-cols-4'
             ),
