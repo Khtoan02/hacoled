@@ -131,6 +131,46 @@
         </div>
 
         <!-- ══ BREAKING NEWS TICKER (Top Header Bar — inside red wrapper) ══ -->
+        <?php
+        $ticker_posts_query = new WP_Query([
+            'post_type'           => 'post',
+            'posts_per_page'      => 6,
+            'post_status'         => 'publish',
+            'orderby'             => 'date',
+            'order'               => 'DESC',
+            'ignore_sticky_posts' => true,
+        ]);
+        $ticker_items = [];
+        if ($ticker_posts_query->have_posts()) {
+            while ($ticker_posts_query->have_posts()) {
+                $ticker_posts_query->the_post();
+                $cats = get_the_category();
+                $cat_name = !empty($cats) ? $cats[0]->name : __('Tin mới', 'hacoled');
+                $ticker_items[] = [
+                    'title'     => get_the_title(),
+                    'permalink' => get_permalink(),
+                    'category'  => $cat_name,
+                ];
+            }
+            wp_reset_postdata();
+        }
+
+        if (empty($ticker_items)) {
+            $ticker_items = [
+                ['title' => __('Lắp đặt màn hình LED P1.5 trong nhà hiện đại', 'hacoled'), 'permalink' => hacoled_managed_page_url('projects'), 'category' => __('Dự án', 'hacoled')],
+                ['title' => __('HacoLED vinh danh Thương hiệu AV Pro Xuất sắc', 'hacoled'), 'permalink' => hacoled_managed_page_url('blog'), 'category' => __('Báo chí', 'hacoled')],
+                ['title' => __('Tuyển dụng Kỹ sư lắp đặt màn hình LED & Âm thanh', 'hacoled'), 'permalink' => hacoled_managed_page_url('careers'), 'category' => __('Tuyển dụng', 'hacoled')],
+            ];
+        }
+
+        $display_ticker = $ticker_items;
+        if (count($display_ticker) < 6) {
+            $display_ticker = array_merge($display_ticker, $display_ticker);
+            if (count($display_ticker) < 6) {
+                $display_ticker = array_merge($display_ticker, $display_ticker);
+            }
+        }
+        ?>
         <div class="w-full relative z-10 py-1.5 border-b border-white/10" x-show="!scrolled"
           x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 max-h-10"
           x-transition:leave-end="opacity-0 max-h-0">
@@ -146,12 +186,11 @@
                 Mới</span>
               <div class="relative w-full overflow-hidden h-4">
                 <div class="absolute whitespace-nowrap animate-marquee flex gap-12 text-white/80">
-                  <span>🔥 Dự án tiêu biểu: Lắp đặt 150m² màn hình LED P1.5 tại CT Cổ Phần Đầu Tư FORTUNE</span>
-                  <span>🔥 Báo chí: VnExpress vinh danh HacoLED là Thương hiệu AV Pro Xuất sắc nhất năm 2025</span>
-                  <span>🔥 Tuyển dụng gấp: Kỹ sư lắp đặt màn hình LED & Âm thanh ánh sáng tại HN & HCM</span>
-                  <span>🔥 Dự án tiêu biểu: Lắp đặt 150m² màn hình LED P1.5 tại CT Cổ Phần Đầu Tư FORTUNE</span>
-                  <span>🔥 Báo chí: VnExpress vinh danh HacoLED là Thương hiệu AV Pro Xuất sắc nhất năm 2025</span>
-                  <span>🔥 Tuyển dụng gấp: Kỹ sư lắp đặt màn hình LED & Âm thanh ánh sáng tại HN & HCM</span>
+                  <?php foreach ($display_ticker as $item): ?>
+                    <a href="<?php echo esc_url($item['permalink']); ?>" class="hover:text-[#fbbf24] transition-colors inline-flex items-center gap-1.5">
+                      <span>🔥 <strong class="text-white font-bold">[<?php echo esc_html($item['category']); ?>]</strong> <?php echo esc_html($item['title']); ?></span>
+                    </a>
+                  <?php endforeach; ?>
                 </div>
               </div>
             </div>
