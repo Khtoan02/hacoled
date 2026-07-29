@@ -11,13 +11,19 @@
 
 $this->renderHeader($header_type ?? 'default');
 
-// Define category list for navigation filters
-$categories_filter = [
-    'blog-man-hinh-led'  => ['label' => __('Blog Màn Hình LED', 'hacoled'), 'icon' => 'ph-monitor'],
-    'blog-am-thanh'      => ['label' => __('Blog Âm Thanh', 'hacoled'), 'icon' => 'ph-speaker-high'],
-    'huong-dan-ky-thuat' => ['label' => __('Hướng dẫn kỹ thuật', 'hacoled'), 'icon' => 'ph-wrench'],
-    'tin-tuc'            => ['label' => __('Tin Tức & Sự Kiện', 'hacoled'), 'icon' => 'ph-newspaper'],
-];
+// Query child categories for sub-navigation
+$current_cat_id = get_queried_object_id();
+$exclude_ids = [];
+$uncat = get_category_by_slug('uncategorized');
+if ($uncat) $exclude_ids[] = $uncat->term_id;
+$chua_phan_loai = get_category_by_slug('chua-phan-loai');
+if ($chua_phan_loai) $exclude_ids[] = $chua_phan_loai->term_id;
+
+$child_cats = get_categories([
+    'parent'     => $current_cat_id,
+    'hide_empty' => false,
+    'exclude'    => $exclude_ids,
+]);
 
 // Split posts into Featured and List
 $current_page = max(1, get_query_var('paged'));
@@ -131,28 +137,25 @@ if ($popular_posts_query->have_posts()) {
     </div>
 
     <!-- ============================================== -->
-    <!-- SUB-NAV / INTERACTIVE TAB BAR (TGDD & Medium Style) -->
+    <!-- SUB-NAV / INTERACTIVE TAB BAR (Child Categories) -->
     <!-- ============================================== -->
+    <?php if (!empty($child_cats)): ?>
     <div class="w-full border-b border-slate-200/80 pb-1 flex items-center justify-between gap-4 overflow-x-auto scrollbar-none">
       <div class="flex items-center gap-3">
-        <?php foreach ($categories_filter as $slug => $data): 
-          $cat_obj = get_category_by_slug($slug);
-          if ($cat_obj):
-            $cat_link = get_category_link($cat_obj->term_id);
-            $is_active = ($category_name === $cat_obj->name);
+        <?php foreach ($child_cats as $child_cat): 
+          $cat_link = get_category_link($child_cat->term_id);
         ?>
           <a href="<?php echo esc_url($cat_link); ?>" 
-             class="group flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl border transition-all duration-300 whitespace-nowrap <?php echo $is_active ? 'bg-accent-red text-white border-accent-red shadow-lg shadow-accent-red/20' : 'bg-white text-slate-600 border-slate-250 hover:bg-slate-50 hover:text-slate-900'; ?>">
-            <i class="ph-bold <?php echo $data['icon']; ?> <?php echo $is_active ? 'text-white' : 'text-slate-400 group-hover:text-accent-red'; ?> text-sm transition-colors"></i>
-            <?php echo esc_html($data['label']); ?>
+             class="group flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-650 hover:bg-slate-50 hover:text-accent-red hover:border-accent-red hover:shadow-lg hover:shadow-accent-red/5 transition-all duration-300 whitespace-nowrap">
+            <i class="ph-bold ph-caret-right text-slate-400 group-hover:text-accent-red text-xs transition-colors"></i>
+            <?php echo esc_html($child_cat->name); ?>
           </a>
-        <?php 
-          endif;
-        endforeach; ?>
+        <?php endforeach; ?>
       </div>
       
-      <span class="inline-block text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php _e('Tự động cập nhật', 'hacoled'); ?></span>
+      <span class="inline-block text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php _e('Chuyên mục con', 'hacoled'); ?></span>
     </div>
+    <?php endif; ?>
 
     <!-- ============================================== -->
     <!-- MAIN GRID SECTION (2 COLUMNS: CONTENT VS SIDEBAR) -->
@@ -292,6 +295,45 @@ if ($popular_posts_query->have_posts()) {
 
       <!-- RIGHT SIDEBAR COLUMN (4 cols - min-w-0 - sticky) -->
       <div class="lg:col-span-4 min-w-0 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
+        
+        <!-- Sibling Categories Widget (Same Level) -->
+        <?php
+        $current_cat = get_queried_object();
+        $parent_id = ($current_cat && isset($current_cat->parent)) ? $current_cat->parent : 0;
+        
+        $sibling_cats = get_categories([
+            'parent'     => $parent_id,
+            'hide_empty' => false,
+            'exclude'    => $exclude_ids,
+        ]);
+
+        if (count($sibling_cats) > 1):
+        ?>
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4">
+          <h3 class="text-xs font-black text-slate-900 uppercase tracking-widest border-b border-slate-100 pb-3 flex items-center gap-2">
+            <i class="ph-bold ph-circles-three text-accent-red text-sm"></i>
+            <?php 
+            if ($parent_id > 0) {
+                $parent_cat = get_term($parent_id, 'category');
+                echo sprintf(__('Chuyên mục cùng cấp (%s)', 'hacoled'), $parent_cat ? $parent_cat->name : '');
+            } else {
+                _e('Chuyên mục cùng cấp', 'hacoled');
+            }
+            ?>
+          </h3>
+          <div class="flex flex-col gap-2">
+            <?php foreach ($sibling_cats as $sub_cat): 
+              $is_active = ($current_cat && $current_cat->term_id === $sub_cat->term_id);
+            ?>
+              <a href="<?php echo esc_url(get_category_link($sub_cat->term_id)); ?>" 
+                 class="flex items-center justify-between text-xs font-bold px-4 py-2.5 rounded-xl transition-all duration-300 <?php echo $is_active ? 'bg-accent-red text-white shadow-lg shadow-accent-red/10 border border-accent-red' : 'bg-slate-50 text-slate-650 hover:bg-slate-100 hover:text-slate-900 border border-slate-200/60'; ?>">
+                <span class="truncate"><?php echo esc_html($sub_cat->name); ?></span>
+                <span class="text-[10px] font-mono opacity-80 px-2 py-0.5 rounded <?php echo $is_active ? 'bg-white/25 text-white' : 'bg-black/5 text-slate-550'; ?>"><?php echo esc_html($sub_cat->count); ?></span>
+              </a>
+            <?php endforeach; ?>
+          </div>
+        </div>
+        <?php endif; ?>
         
         <!-- Popular Articles Widget (Trending style) -->
         <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-5">
