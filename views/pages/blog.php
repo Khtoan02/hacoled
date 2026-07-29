@@ -4,6 +4,7 @@
  *
  * @var array  $page
  * @var array  $sections Keys: led, audio, tech, projects, press, news, events, jobs
+ * @var array  $categories_slugs
  * @var string $header_type
  * @var string $footer_type
  */
@@ -323,6 +324,10 @@ $render_card = static function ($post, $meta, $wide = false) use ($normalize_pos
         $section_posts = $sections[$section_key] ?? [];
         $posts = array_slice(array_map($normalize_post, $section_posts), 0, 3);
         $tone = $tone_classes[$meta['tone']];
+        
+        $cat_slug = $categories_slugs[$section_key] ?? '';
+        $cat_obj = get_category_by_slug($cat_slug);
+        $cat_url = $cat_obj ? get_category_link($cat_obj->term_id) : '';
         ?>
         <section id="<?php echo esc_attr($meta['anchor']); ?>" class="scroll-mt-36 border-t border-slate-200 py-10 md:py-12" aria-labelledby="<?php echo esc_attr($meta['anchor']); ?>-heading">
           <div class="mb-6 flex flex-col gap-4 md:mb-8 md:flex-row md:items-end md:justify-between">
@@ -332,15 +337,25 @@ $render_card = static function ($post, $meta, $wide = false) use ($normalize_pos
                 <i class="<?php echo esc_attr($meta['icon']); ?> text-lg" aria-hidden="true"></i>
               </span>
               <div class="min-w-0">
-                <h2 id="<?php echo esc_attr($meta['anchor']); ?>-heading" class="text-xl font-black tracking-tight text-brand-text md:text-2xl">
-                  <?php echo esc_html($meta['label']); ?>
+                <h2 id="<?php echo esc_attr($meta['anchor']); ?>-heading" class="text-xl font-black tracking-tight text-brand-text md:text-2xl hover:text-brand-red transition-colors">
+                  <?php if (!empty($cat_url)): ?>
+                    <a href="<?php echo esc_url($cat_url); ?>"><?php echo esc_html($meta['label']); ?></a>
+                  <?php else: ?>
+                    <?php echo esc_html($meta['label']); ?>
+                  <?php endif; ?>
                 </h2>
                 <p class="mt-1 max-w-2xl text-xs leading-relaxed text-brand-muted md:text-sm"><?php echo esc_html($meta['desc']); ?></p>
               </div>
             </div>
-            <span class="inline-flex self-start rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-wider md:self-auto <?php echo esc_attr($tone['soft']); ?>">
-              <?php echo esc_html(sprintf(_n('%d bài viết', '%d bài viết', count($section_posts), 'hacoled'), count($section_posts))); ?>
-            </span>
+            <?php if (!empty($cat_url)): ?>
+              <a href="<?php echo esc_url($cat_url); ?>" class="inline-flex self-start rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-wider md:self-auto <?php echo esc_attr($tone['soft']); ?> hover:bg-brand-red hover:text-white hover:border-brand-red transition-all duration-300">
+                <?php echo esc_html(sprintf(_n('%d bài viết', '%d bài viết', count($section_posts), 'hacoled'), count($section_posts))); ?>
+              </a>
+            <?php else: ?>
+              <span class="inline-flex self-start rounded-full border px-3 py-1.5 text-[9px] font-black uppercase tracking-wider md:self-auto <?php echo esc_attr($tone['soft']); ?>">
+                <?php echo esc_html(sprintf(_n('%d bài viết', '%d bài viết', count($section_posts), 'hacoled'), count($section_posts))); ?>
+              </span>
+            <?php endif; ?>
           </div>
 
           <?php if ($posts): ?>
@@ -355,6 +370,16 @@ $render_card = static function ($post, $meta, $wide = false) use ($normalize_pos
                 <?php $render_card($post, $meta, $post_count === 1); ?>
               <?php endforeach; ?>
             </div>
+            
+            <?php if (!empty($cat_url) && count($section_posts) > 3): ?>
+              <div class="mt-8 flex justify-center">
+                <a href="<?php echo esc_url($cat_url); ?>" 
+                   class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-[10px] font-black uppercase tracking-wider text-slate-700 shadow-sm hover:border-brand-red/30 hover:bg-slate-50 hover:text-brand-red hover:shadow-md hover:shadow-brand-red/5 transition-all duration-300">
+                  <?php echo sprintf(__('Xem tất cả bài viết về %s', 'hacoled'), $meta['short']); ?>
+                  <i class="ph-bold ph-caret-right text-xs" aria-hidden="true"></i>
+                </a>
+              </div>
+            <?php endif; ?>
           <?php else: ?>
             <div class="rounded-2xl border border-dashed border-slate-300 bg-white/60 px-6 py-10 text-center">
               <i class="<?php echo esc_attr($meta['icon']); ?> mx-auto text-2xl text-slate-300" aria-hidden="true"></i>

@@ -20,8 +20,14 @@ $categories_filter = [
 ];
 
 // Split posts into Featured and List
-$featured_post = !empty($posts) ? $posts[0] : null;
-$list_posts = !empty($posts) ? array_slice($posts, 1) : [];
+$current_page = max(1, get_query_var('paged'));
+if ($current_page === 1) {
+    $featured_post = !empty($posts) ? $posts[0] : null;
+    $list_posts = !empty($posts) ? array_slice($posts, 1) : [];
+} else {
+    $featured_post = null;
+    $list_posts = $posts;
+}
 
 // Sidebar query for popular posts (recent posts)
 $popular_posts_query = new WP_Query([
@@ -106,7 +112,7 @@ if ($popular_posts_query->have_posts()) {
           <span class="text-white/20 hidden sm:inline">|</span>
           <div class="border border-white/20 bg-white/10 px-3 py-1 rounded-lg backdrop-blur text-[11px] font-bold text-white/95 font-mono shadow-sm">
             <i class="ph-bold ph-article text-[#FFD700] mr-1"></i>
-            <?php echo sprintf(__('%d bài viết đã xuất bản', 'hacoled'), count($posts)); ?>
+            <?php echo sprintf(__('%d bài viết đã xuất bản', 'hacoled'), $GLOBALS['wp_query']->found_posts); ?>
           </div>
         </div>
 
@@ -244,6 +250,43 @@ if ($popular_posts_query->have_posts()) {
             </div>
           <?php endif; ?>
         </div>
+
+        <!-- Pagination -->
+        <?php
+        global $wp_query;
+        $total_pages = $wp_query->max_num_pages;
+        if ($total_pages > 1) {
+            $current_page = max(1, get_query_var('paged'));
+            $pages = paginate_links([
+                'base'      => str_replace(999999999, '%#%', esc_url(get_pagenum_link(999999999))),
+                'format'    => '?paged=%#%',
+                'current'   => $current_page,
+                'total'     => $total_pages,
+                'type'      => 'array',
+                'prev_next' => true,
+                'prev_text' => '<i class="ph-bold ph-caret-left mr-1"></i> ' . __('Trang trước', 'hacoled'),
+                'next_text' => __('Trang sau', 'hacoled') . ' <i class="ph-bold ph-caret-right ml-1"></i>',
+            ]);
+            if (is_array($pages)) {
+                echo '<nav aria-label="Pagination" class="flex flex-wrap justify-center items-center gap-2 pt-10 border-t border-slate-200/60 mt-12">';
+                foreach ($pages as $page) {
+                    if (strpos($page, 'current') !== false) {
+                        $page = str_replace('page-numbers current', 'px-4 py-2.5 rounded-xl bg-accent-red text-white font-bold text-xs shadow-md shadow-accent-red/20 border border-accent-red select-none', $page);
+                    } elseif (strpos($page, 'dots') !== false) {
+                        $page = str_replace('page-numbers dots', 'px-3 py-2 text-slate-400 font-bold text-xs select-none', $page);
+                    } elseif (strpos($page, 'prev') !== false) {
+                        $page = str_replace(['prev page-numbers', 'page-numbers prev'], 'inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-accent-red hover:border-accent-red hover:shadow-lg hover:shadow-accent-red/5 font-bold text-xs transition-all duration-300 mr-2', $page);
+                    } elseif (strpos($page, 'next') !== false) {
+                        $page = str_replace(['next page-numbers', 'page-numbers next'], 'inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-accent-red hover:border-accent-red hover:shadow-lg hover:shadow-accent-red/5 font-bold text-xs transition-all duration-300 ml-2', $page);
+                    } else {
+                        $page = str_replace('page-numbers', 'px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-accent-red hover:border-accent-red hover:shadow-lg hover:shadow-accent-red/5 font-bold text-xs transition-all duration-300', $page);
+                    }
+                    echo $page;
+                }
+                echo '</nav>';
+            }
+        }
+        ?>
 
       </div>
 

@@ -662,10 +662,11 @@ class TemplateController extends Controller {
         }
 
         $this->render($this->resolveLayoutView($page_data['id'], 'pages/blog'), [
-            'page'        => $page_data,
-            'sections'    => $sections,
-            'header_type' => 'default',
-            'footer_type' => 'default'
+            'page'             => $page_data,
+            'sections'         => $sections,
+            'categories_slugs' => $categories_slugs,
+            'header_type'      => 'default',
+            'footer_type'      => 'default'
         ]);
     }
 
