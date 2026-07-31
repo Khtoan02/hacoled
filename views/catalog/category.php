@@ -365,6 +365,37 @@ $latest_articles = $latest_articles ?? [];
           ?>
         </div>
 
+        <!-- FAQ Section -->
+        <?php if (!empty($faq['items'])): ?>
+          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
+            <div class="flex flex-col gap-2 mb-6">
+              <h3 class="text-xl font-black text-slate-900">
+                <?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?>
+              </h3>
+              <?php if (!empty($faq['intro'])): ?>
+                <p class="text-sm text-slate-600 leading-7">
+                  <?php echo wp_kses_post($faq['intro']); ?>
+                </p>
+              <?php endif; ?>
+            </div>
+
+            <div class="space-y-3">
+              <?php foreach ($faq['items'] as $index => $faqItem): ?>
+                <details class="group rounded-2xl border border-slate-200 bg-slate-50/70 p-4 transition-all duration-300 open:border-[#D90429]/30 open:bg-white"
+                  <?php echo $index === 0 ? 'open' : ''; ?>>
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-bold text-slate-800 [&_::-webkit-details-marker]:hidden">
+                    <span><?php echo esc_html($faqItem['question']); ?></span>
+                    <i class="ph-bold ph-plus text-slate-500 transition-transform duration-300 group-open:rotate-45"></i>
+                  </summary>
+                  <div class="pt-4 text-sm leading-7 text-slate-600 prose prose-sm max-w-none">
+                    <?php echo wp_kses_post($faqItem['answer']); ?>
+                  </div>
+                </details>
+              <?php endforeach; ?>
+            </div>
+          </section>
+        <?php endif; ?>
+
         <!-- SEO Category Description at the Bottom (TGDD Style) -->
         <?php if (!empty($description)): ?>
           <div class="seo-content-block bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8 relative"

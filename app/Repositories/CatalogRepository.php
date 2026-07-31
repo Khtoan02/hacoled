@@ -72,6 +72,42 @@ class CatalogRepository {
         return $shop ? $shop->post_content : '';
     }
 
+    public function categoryFaq($term) {
+        if (!$term instanceof WP_Term) {
+            return ['title' => '', 'intro' => '', 'items' => []];
+        }
+
+        $items = get_term_meta($term->term_id, 'product_cat_faq_items', true);
+        if (!is_array($items)) {
+            $items = [];
+        }
+
+        $faqItems = [];
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $question = isset($item['question']) ? sanitize_text_field($item['question']) : '';
+            $answer = isset($item['answer']) ? wp_kses_post($item['answer']) : '';
+
+            if ($question === '' && $answer === '') {
+                continue;
+            }
+
+            $faqItems[] = [
+                'question' => $question,
+                'answer' => $answer,
+            ];
+        }
+
+        return [
+            'title' => get_term_meta($term->term_id, 'product_cat_faq_title', true) ?: '',
+            'intro' => get_term_meta($term->term_id, 'product_cat_faq_intro', true) ?: '',
+            'items' => $faqItems,
+        ];
+    }
+
     private function normalizeTerms($terms) {
         if (empty($terms) || is_wp_error($terms)) {
             return [];

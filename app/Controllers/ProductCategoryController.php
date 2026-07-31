@@ -22,6 +22,7 @@ class ProductCategoryController extends Controller {
             'breadcrumbs'           => $catalog->breadcrumbs($term),
             'featured_projects'     => $catalog->featuredProjects(),
             'latest_articles'       => $catalog->latestArticles(),
+            'faq'                   => $catalog->categoryFaq($term),
             'header_type'           => 'default',
             'footer_type'           => 'default',
         ]);

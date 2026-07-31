@@ -886,6 +886,171 @@ function hacoled_save_category_template_meta($term_id) {
 add_action('created_category', 'hacoled_save_category_template_meta', 10, 2);
 add_action('edited_category', 'hacoled_save_category_template_meta', 10, 2);
 
+// 8. PRODUCT CATEGORY FAQ META FIELDS
+function hacoled_product_cat_faq_fields_markup($term = null, $is_edit = false) {
+    $faq_title = '';
+    $faq_intro = '';
+    $faq_items = [];
+
+    if ($term instanceof WP_Term) {
+        $faq_title = get_term_meta($term->term_id, 'product_cat_faq_title', true) ?: '';
+        $faq_intro = get_term_meta($term->term_id, 'product_cat_faq_intro', true) ?: '';
+        $faq_items = get_term_meta($term->term_id, 'product_cat_faq_items', true);
+        if (!is_array($faq_items)) {
+            $faq_items = [];
+        }
+    }
+
+    if (empty($faq_items)) {
+        $faq_items = [['question' => '', 'answer' => '']];
+    }
+
+    $wrapper_start = $is_edit ? '<tr class="form-field term-group-wrap"><th scope="row"><label for="product_cat_faq_title">' . esc_html__('FAQ danh mục sản phẩm', 'hacoled') . '</label></th><td>' : '<div class="form-field term-group"><label for="product_cat_faq_title">' . esc_html__('FAQ danh mục sản phẩm', 'hacoled') . '</label>';
+    $wrapper_end = $is_edit ? '</td></tr>' : '</div>';
+
+    ob_start();
+    echo $wrapper_start;
+    ?>
+    <div class="hacoled-product-cat-faq-wrapper" style="max-width: 760px;">
+        <p class="description" style="margin-top:0; margin-bottom:12px;"><?php esc_html_e('Thêm các câu hỏi thường gặp cho danh mục này để hiển thị ở trang danh mục sản phẩm.', 'hacoled'); ?></p>
+
+        <div style="margin-bottom: 12px;">
+            <label for="product_cat_faq_title" style="display:block; margin-bottom:6px; font-weight:600;"><?php esc_html_e('Tiêu đề phần FAQ', 'hacoled'); ?></label>
+            <input type="text" name="product_cat_faq_title" id="product_cat_faq_title" value="<?php echo esc_attr($faq_title); ?>" class="regular-text" />
+        </div>
+
+        <div style="margin-bottom: 12px;">
+            <label for="product_cat_faq_intro" style="display:block; margin-bottom:6px; font-weight:600;"><?php esc_html_e('Mô tả ngắn phía trên FAQ', 'hacoled'); ?></label>
+            <textarea name="product_cat_faq_intro" id="product_cat_faq_intro" rows="3" class="large-text"><?php echo esc_textarea($faq_intro); ?></textarea>
+        </div>
+
+        <div style="margin-bottom: 12px;">
+            <label style="display:block; margin-bottom:8px; font-weight:600;"><?php esc_html_e('Danh sách FAQ', 'hacoled'); ?></label>
+            <div id="hacoled-product-cat-faq-list">
+                <?php foreach ($faq_items as $index => $item): ?>
+                    <div class="hacoled-product-cat-faq-item" style="border:1px solid #d0d7de; padding:12px; margin-bottom:10px; border-radius:8px; background:#fff;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px;">
+                            <strong><?php echo esc_html(sprintf(__('FAQ %d', 'hacoled'), $index + 1)); ?></strong>
+                            <button type="button" class="button-link-delete hacoled-remove-faq-item"><?php esc_html_e('Xóa', 'hacoled'); ?></button>
+                        </div>
+                        <div style="margin-bottom:8px;">
+                            <label style="display:block; margin-bottom:6px; font-weight:600;"><?php esc_html_e('Câu hỏi', 'hacoled'); ?></label>
+                            <input type="text" name="product_cat_faq_items[<?php echo intval($index); ?>][question]" value="<?php echo esc_attr($item['question'] ?? ''); ?>" class="regular-text" />
+                        </div>
+                        <div>
+                            <label style="display:block; margin-bottom:6px; font-weight:600;"><?php esc_html_e('Câu trả lời', 'hacoled'); ?></label>
+                            <textarea name="product_cat_faq_items[<?php echo intval($index); ?>][answer]" rows="4" class="large-text"><?php echo esc_textarea($item['answer'] ?? ''); ?></textarea>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <p style="margin-top:8px;"><button type="button" class="button button-secondary" id="hacoled-add-product-cat-faq"><?php esc_html_e('Thêm FAQ', 'hacoled'); ?></button></p>
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        const list = document.getElementById('hacoled-product-cat-faq-list');
+        const addButton = document.getElementById('hacoled-add-product-cat-faq');
+        if (!list || !addButton) {
+            return;
+        }
+
+        function renumberItems() {
+            const items = list.querySelectorAll('.hacoled-product-cat-faq-item');
+            items.forEach(function (item, index) {
+                const title = item.querySelector('strong');
+                if (title) {
+                    title.textContent = 'FAQ ' + (index + 1);
+                }
+                const questionInput = item.querySelector('input[type="text"]');
+                const answerInput = item.querySelector('textarea');
+                if (questionInput) {
+                    questionInput.name = 'product_cat_faq_items[' + index + '][question]';
+                }
+                if (answerInput) {
+                    answerInput.name = 'product_cat_faq_items[' + index + '][answer]';
+                }
+            });
+        }
+
+        addButton.addEventListener('click', function () {
+            const items = list.querySelectorAll('.hacoled-product-cat-faq-item');
+            const index = items.length;
+            const item = document.createElement('div');
+            item.className = 'hacoled-product-cat-faq-item';
+            item.style.cssText = 'border:1px solid #d0d7de; padding:12px; margin-bottom:10px; border-radius:8px; background:#fff;';
+            item.innerHTML = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:8px;"><strong>FAQ ' + (index + 1) + '</strong><button type="button" class="button-link-delete hacoled-remove-faq-item">Xóa</button></div><div style="margin-bottom:8px;"><label style="display:block; margin-bottom:6px; font-weight:600;">Câu hỏi</label><input type="text" name="product_cat_faq_items[' + index + '][question]" class="regular-text" /></div><div><label style="display:block; margin-bottom:6px; font-weight:600;">Câu trả lời</label><textarea name="product_cat_faq_items[' + index + '][answer]" rows="4" class="large-text"></textarea></div>';
+            list.appendChild(item);
+        });
+
+        list.addEventListener('click', function (event) {
+            if (event.target.classList.contains('hacoled-remove-faq-item')) {
+                event.target.closest('.hacoled-product-cat-faq-item').remove();
+                renumberItems();
+            }
+        });
+    })();
+    </script>
+    <?php
+    echo $wrapper_end;
+    return ob_get_clean();
+}
+
+function hacoled_add_product_cat_faq_fields() {
+    echo hacoled_product_cat_faq_fields_markup(null, false);
+}
+
+function hacoled_edit_product_cat_faq_fields($term) {
+    echo hacoled_product_cat_faq_fields_markup($term, true);
+}
+
+function hacoled_save_product_cat_faq_meta($term_id, $tt_id = 0, $taxonomy = '') {
+    if ($taxonomy !== 'product_cat') {
+        return;
+    }
+
+    if (isset($_POST['product_cat_faq_title'])) {
+        update_term_meta($term_id, 'product_cat_faq_title', sanitize_text_field(wp_unslash($_POST['product_cat_faq_title'])));
+    }
+
+    if (isset($_POST['product_cat_faq_intro'])) {
+        update_term_meta($term_id, 'product_cat_faq_intro', sanitize_textarea_field(wp_unslash($_POST['product_cat_faq_intro'])));
+    }
+
+    $faq_items = [];
+    if (isset($_POST['product_cat_faq_items']) && is_array($_POST['product_cat_faq_items'])) {
+        foreach ($_POST['product_cat_faq_items'] as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $question = isset($item['question']) ? sanitize_text_field(wp_unslash($item['question'])) : '';
+            $answer = isset($item['answer']) ? wp_kses_post(wp_unslash($item['answer'])) : '';
+
+            if ($question === '' && $answer === '') {
+                continue;
+            }
+
+            $faq_items[] = [
+                'question' => $question,
+                'answer' => $answer,
+            ];
+        }
+    }
+
+    if (!empty($faq_items)) {
+        update_term_meta($term_id, 'product_cat_faq_items', $faq_items);
+    } else {
+        delete_term_meta($term_id, 'product_cat_faq_items');
+    }
+}
+
+add_action('product_cat_add_form_fields', 'hacoled_add_product_cat_faq_fields', 20);
+add_action('product_cat_edit_form_fields', 'hacoled_edit_product_cat_faq_fields', 20);
+add_action('created_term', 'hacoled_save_product_cat_faq_meta', 10, 3);
+add_action('edited_term', 'hacoled_save_product_cat_faq_meta', 10, 3);
+
 // Sanitize Raw HTML/JS tracking scripts
 function hacoled_sanitize_raw_html($value) {
     return $value;
