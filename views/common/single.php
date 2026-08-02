@@ -11,7 +11,7 @@
 $this->renderHeader($header_type ?? 'default');
 ?>
 
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[85vh] overflow-hidden"
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[85vh] overflow-visible"
       x-data="{ percent: 0 }" @scroll.window="percent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100">
   
   <!-- Reading Progress Bar -->
@@ -20,10 +20,10 @@ $this->renderHeader($header_type ?? 'default');
   </div>
   
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
       
-      <!-- MAIN CONTENT COLUMN (70%) -->
-      <div class="lg:col-span-2 min-w-0 bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+      <!-- MAIN CONTENT COLUMN (75%) -->
+      <div class="lg:col-span-9 min-w-0 bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
         
         <!-- Top Metadata & Back Link -->
         <div class="flex items-center justify-between text-xs text-slate-500 font-semibold tracking-wider pb-4 border-b border-slate-100">
@@ -160,8 +160,9 @@ $this->renderHeader($header_type ?? 'default');
 
       </div>
 
-      <!-- SIDEBAR COLUMN (30%) -->
-      <div class="space-y-8">
+      <!-- SIDEBAR COLUMN (25%) -->
+      <div class="lg:col-span-3 self-stretch">
+        <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full pb-12">
         
         <!-- Sidebar Widget: Table of Contents -->
         <div x-data="{ headings: null }" x-init="
@@ -397,29 +398,11 @@ $this->renderHeader($header_type ?? 'default');
         ]);
         ?>
 
-        <!-- Sidebar Widget: Tech Consulting CTA -->
-        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#4A0505] to-primary p-6 border border-white/10 text-white shadow-xl shadow-red-950/15 group">
-          <div class="absolute -right-12 -bottom-12 w-36 h-36 bg-accent-gold/10 rounded-full blur-2xl pointer-events-none group-hover:scale-110 transition-transform duration-500"></div>
-          <div class="relative z-10 space-y-4">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-accent-gold/90 text-[9px] font-extrabold text-primary-dark tracking-wider uppercase font-mono">
-              <?php _e('TƯ VẤN THI CÔNG', 'hacoled'); ?>
-            </span>
-            <h3 class="text-sm font-extrabold leading-snug uppercase">
-              <?php _e('Giải pháp màn hình LED & AV Pro', 'hacoled'); ?>
-            </h3>
-            <p class="text-[10px] text-slate-350 leading-relaxed font-light">
-              <?php _e('Khảo sát thực địa và thiết kế phối cảnh 3D màn hình LED, âm thanh phòng họp hoàn toàn miễn phí.', 'hacoled'); ?>
-            </p>
-            <div class="pt-2">
-              <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-accent-gold to-yellow-500 hover:from-yellow-500 hover:to-accent-gold text-primary-dark font-extrabold text-[10px] uppercase tracking-wider py-3 rounded-xl shadow-lg transition-all duration-300">
-                <span><?php _e('Liên hệ khảo sát ngay', 'hacoled'); ?></span>
-                <i class="ph-bold ph-arrow-right text-[9px]"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+        <!-- Sidebar Widget: Hotline Contact -->
+        <?php $this->renderComponent('widgets/hotline'); ?>
 
       </div>
+    </div>
 
     </div>
   </div>

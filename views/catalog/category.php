@@ -307,37 +307,7 @@ $latest_articles = $latest_articles ?? [];
         </div>
 
         <!-- Widget 3: Dự án tiêu biểu mới -->
-        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-          <h3 class="text-sm font-bold text-gray-900 pb-3 border-b border-gray-100 mb-4 flex items-center gap-2">
-            <i class="ph-bold ph-monitor text-[#D90429]"></i>
-            Dự án mới thi công
-          </h3>
-          <div class="space-y-4">
-            <?php
-            if ($featured_projects):
-              foreach ($featured_projects as $project):
-                ?>
-                <div class="flex items-center gap-3 group">
-                  <a href="<?php echo esc_url($project['url']); ?>"
-                    class="w-14 h-10 rounded overflow-hidden flex-shrink-0 bg-gray-50">
-                    <?php if ($project['thumbnail']): ?><img src="<?php echo esc_url($project['thumbnail']); ?>" alt=""
-                        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"><?php endif; ?>
-                  </a>
-                  <div class="min-w-0 flex-1">
-                    <a href="<?php echo esc_url($project['url']); ?>"
-                      class="text-[11px] font-bold text-gray-800 hover:text-[#D90429] transition-colors line-clamp-2 leading-tight">
-                      <?php echo esc_html($project['title']); ?>
-                    </a>
-                  </div>
-                </div>
-                <?php
-              endforeach;
-            else:
-              echo '<p class="text-xs text-gray-400">Không có dự án mới.</p>';
-            endif;
-            ?>
-          </div>
-        </div>
+        <?php $this->renderComponent('widgets/recent-projects'); ?>
 
       </div>
     </div>
