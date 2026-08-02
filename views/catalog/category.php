@@ -223,6 +223,9 @@ $latest_articles = $latest_articles ?? [];
       <div class="lg:col-span-3 self-stretch">
         <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full">
 
+          <!-- Sidebar Widget: Hotline Contact -->
+          <?php $this->renderComponent('widgets/hotline'); ?>
+
         <!-- Widget 1: Subcategories/Siblings Links List (Giải Pháp Hiển Thị Chuyên Biệt) -->
         <?php if (!empty($navigation_categories)): ?>
           <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">

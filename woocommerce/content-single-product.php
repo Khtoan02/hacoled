@@ -485,6 +485,9 @@ $price_html = $product->get_price_html();
             <div class="lg:col-span-3 self-stretch">
                 <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full">
                 
+                <!-- Sidebar Widget: Hotline Contact -->
+                <?php $this->renderComponent('widgets/hotline'); ?>
+
                 <!-- Widget 1: Sản phẩm cùng danh mục -->
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
                     <h3 class="text-sm font-bold text-gray-900 pb-3 border-b border-gray-100 mb-4 flex items-center gap-2">

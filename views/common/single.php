@@ -251,6 +251,9 @@ $this->renderHeader($header_type ?? 'default');
       <div class="lg:col-span-3 self-stretch">
         <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full pb-12">
         
+        <!-- Sidebar Widget: Hotline Contact -->
+        <?php $this->renderComponent('widgets/hotline'); ?>
+
         <!-- Sidebar Widget: Table of Contents -->
         <div x-data="{ headings: null }" x-init="
           setTimeout(() => {
@@ -356,8 +359,7 @@ $this->renderHeader($header_type ?? 'default');
         ]);
         ?>
 
-        <!-- Sidebar Widget: Hotline Contact -->
-        <?php $this->renderComponent('widgets/hotline'); ?>
+
 
       </div>
     </div>
