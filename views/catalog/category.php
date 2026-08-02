@@ -21,7 +21,7 @@ $featured_projects = $featured_projects ?? [];
 $latest_articles = $latest_articles ?? [];
 ?>
 
-<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[70vh] overflow-hidden">
+<main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[70vh] overflow-visible">
 
   <!-- Ambient Light glows (Theme design system) -->
   <div
@@ -221,7 +221,8 @@ $latest_articles = $latest_articles ?? [];
 
       <!-- Left Sidebar Column (1/4 - 3 Cols) -->
       <div class="lg:col-span-3 lg:relative">
-        <div class="space-y-6 lg:fixed lg:top-32 lg:w-[calc(25%-2rem)] lg:max-w-[320px] lg:min-w-[260px] lg:z-20">
+        <div class="space-y-6 lg:fixed lg:top-32 lg:z-20"
+          style="left: max(1rem, calc((100vw - 1440px) / 2 + 1rem)); width: min(320px, calc(25% - 2rem)); max-width: 320px; min-width: 260px;">
 
         <!-- Widget 1: Subcategories/Siblings Links List (Giải Pháp Hiển Thị Chuyên Biệt) -->
         <?php if (!empty($navigation_categories)): ?>
