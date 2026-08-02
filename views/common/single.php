@@ -261,7 +261,7 @@ $this->renderHeader($header_type ?? 'default');
             activeId: '',
             init() {
               setTimeout(() => {
-                const els = Array.from(document.querySelectorAll('article h2, article h3'));
+                const els = Array.from(document.querySelectorAll('article.prose-custom h2, article.prose-custom h3'));
                 this.headings = els.map((el, i) => {
                   if (!el.id) el.id = 'heading-' + i;
                   return { text: el.innerText, id: el.id, level: el.tagName.toLowerCase() };
