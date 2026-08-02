@@ -1006,7 +1006,7 @@ function hacoled_edit_product_cat_faq_fields($term) {
 }
 
 function hacoled_save_product_cat_faq_meta($term_id, $tt_id = 0, $taxonomy = '') {
-    if ($taxonomy !== 'product_cat') {
+    if ($taxonomy !== 'product_cat' && $taxonomy !== '') {
         return;
     }
 
@@ -1048,6 +1048,8 @@ function hacoled_save_product_cat_faq_meta($term_id, $tt_id = 0, $taxonomy = '')
 
 add_action('product_cat_add_form_fields', 'hacoled_add_product_cat_faq_fields', 20);
 add_action('product_cat_edit_form_fields', 'hacoled_edit_product_cat_faq_fields', 20);
+add_action('created_product_cat', 'hacoled_save_product_cat_faq_meta', 10, 2);
+add_action('edited_product_cat', 'hacoled_save_product_cat_faq_meta', 10, 2);
 add_action('created_term', 'hacoled_save_product_cat_faq_meta', 10, 3);
 add_action('edited_term', 'hacoled_save_product_cat_faq_meta', 10, 3);
 

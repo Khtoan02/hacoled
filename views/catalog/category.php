@@ -220,7 +220,8 @@ $latest_articles = $latest_articles ?? [];
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <!-- Left Sidebar Column (1/4 - 3 Cols) -->
-      <div class="lg:col-span-3 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
+      <div class="lg:col-span-3 lg:relative">
+        <div class="space-y-6 lg:fixed lg:top-32 lg:w-[calc(25%-2rem)] lg:max-w-[320px]">
 
         <!-- Widget 1: Subcategories/Siblings Links List (Giải Pháp Hiển Thị Chuyên Biệt) -->
         <?php if (!empty($navigation_categories)): ?>
@@ -338,10 +339,11 @@ $latest_articles = $latest_articles ?? [];
           </div>
         </div>
 
+        </div>
       </div>
 
       <!-- Right Main Column: Product List & SEO Content (3/4 - 9 Cols) -->
-      <div class="lg:col-span-9 space-y-10">
+      <div class="lg:col-span-9 lg:col-start-4 space-y-10">
 
         <!-- WooCommerce Product Loop Container -->
         <div class="woocommerce-content-container relative z-20">
@@ -364,37 +366,6 @@ $latest_articles = $latest_articles ?? [];
           }
           ?>
         </div>
-
-        <!-- FAQ Section -->
-        <?php if (!empty($faq['items'])): ?>
-          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
-            <div class="flex flex-col gap-2 mb-6">
-              <h3 class="text-xl font-black text-slate-900">
-                <?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?>
-              </h3>
-              <?php if (!empty($faq['intro'])): ?>
-                <p class="text-sm text-slate-600 leading-7">
-                  <?php echo wp_kses_post($faq['intro']); ?>
-                </p>
-              <?php endif; ?>
-            </div>
-
-            <div class="space-y-3">
-              <?php foreach ($faq['items'] as $index => $faqItem): ?>
-                <details class="group rounded-2xl border border-slate-200 bg-slate-50/70 p-4 transition-all duration-300 open:border-[#D90429]/30 open:bg-white"
-                  <?php echo $index === 0 ? 'open' : ''; ?>>
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-bold text-slate-800 [&_::-webkit-details-marker]:hidden">
-                    <span><?php echo esc_html($faqItem['question']); ?></span>
-                    <i class="ph-bold ph-plus text-slate-500 transition-transform duration-300 group-open:rotate-45"></i>
-                  </summary>
-                  <div class="pt-4 text-sm leading-7 text-slate-600 prose prose-sm max-w-none">
-                    <?php echo wp_kses_post($faqItem['answer']); ?>
-                  </div>
-                </details>
-              <?php endforeach; ?>
-            </div>
-          </section>
-        <?php endif; ?>
 
         <!-- SEO Category Description at the Bottom (TGDD Style) -->
         <?php if (!empty($description)): ?>
@@ -423,6 +394,37 @@ $latest_articles = $latest_articles ?? [];
               </button>
             </div>
           </div>
+        <?php endif; ?>
+
+        <!-- FAQ Section -->
+        <?php if (!empty($faq['title']) || !empty($faq['intro']) || !empty($faq['items'])): ?>
+          <section class="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 md:p-8">
+            <div class="flex flex-col gap-2 mb-6">
+              <h3 class="text-xl font-black text-slate-900">
+                <?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?>
+              </h3>
+              <?php if (!empty($faq['intro'])): ?>
+                <p class="text-sm text-slate-600 leading-7">
+                  <?php echo wp_kses_post($faq['intro']); ?>
+                </p>
+              <?php endif; ?>
+            </div>
+
+            <div class="space-y-3">
+              <?php foreach ($faq['items'] as $index => $faqItem): ?>
+                <details class="group rounded-2xl border border-slate-200 bg-slate-50/70 p-4 transition-all duration-300 open:border-[#D90429]/30 open:bg-white"
+                  <?php echo $index === 0 ? 'open' : ''; ?>>
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-bold text-slate-800 [&_::-webkit-details-marker]:hidden">
+                    <span><?php echo esc_html($faqItem['question']); ?></span>
+                    <i class="ph-bold ph-plus text-slate-500 transition-transform duration-300 group-open:rotate-45"></i>
+                  </summary>
+                  <div class="pt-4 text-sm leading-7 text-slate-600 prose prose-sm max-w-none">
+                    <?php echo wp_kses_post($faqItem['answer']); ?>
+                  </div>
+                </details>
+              <?php endforeach; ?>
+            </div>
+          </section>
         <?php endif; ?>
 
       </div>
