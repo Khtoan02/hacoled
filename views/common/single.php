@@ -207,7 +207,7 @@ $this->renderHeader($header_type ?? 'default');
                   <?php foreach ($faq['items'] as $index => $faqItem): ?>
                     <details class="group rounded-2xl border border-slate-150 bg-slate-50/20 px-6 py-4.5 transition-all duration-300 hover:border-slate-300 hover:bg-slate-50/50 open:border-[#D90429]/30 open:bg-white open:shadow-[0_12px_30px_rgba(217,4,41,0.04)]"
                       <?php echo $index === 0 ? 'open' : ''; ?>>
-                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-xs sm:text-[13px] font-extrabold text-slate-800 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-xs sm:text-[13px] font-extrabold text-slate-800 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden focus:outline-none outline-none">
                         <span><?php echo esc_html($faqItem['question']); ?></span>
                         <span class="w-7 h-7 rounded-full bg-white border border-slate-200/80 flex items-center justify-center transition-all duration-300 group-hover:border-slate-350 group-open:bg-red-50 group-open:border-red-100/80 shrink-0 shadow-sm">
                           <i class="ph-bold ph-caret-down text-slate-450 transition-transform duration-300 group-open:text-[#D90429] group-open:rotate-180 text-xs"></i>

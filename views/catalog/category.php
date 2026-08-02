@@ -463,7 +463,7 @@ $latest_articles = $latest_articles ?? [];
               <?php foreach ($faq['items'] as $index => $faqItem): ?>
                 <details class="group rounded-2xl border border-slate-200/80 bg-slate-50/40 p-5 md:p-6 transition-all duration-300 open:border-[#D90429]/30 open:bg-white open:shadow-[0_15px_30px_rgba(217,4,41,0.03)]"
                   <?php echo $index === 0 ? 'open' : ''; ?>>
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm md:text-base font-heading font-extrabold text-slate-800 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-sm md:text-base font-heading font-extrabold text-slate-800 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden focus:outline-none outline-none">
                     <span><?php echo esc_html($faqItem['question']); ?></span>
                     <i class="ph-bold ph-caret-down text-slate-500 transition-transform duration-300 group-open:text-[#D90429] group-open:rotate-180 text-sm md:text-base"></i>
                   </summary>
