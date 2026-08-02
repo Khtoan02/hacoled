@@ -310,8 +310,17 @@ $price_html = $product->get_price_html();
                     <!-- Tab 1: Info content (Alpine.js Read-More with Lightbox & FAQ) -->
                     <div x-show="activeTab === 'info'" 
                          x-transition:enter="transition ease-out duration-200" 
-                         x-data="{ expanded: false, showButton: false, lightboxOpen: false, lightboxImage: '', checkHeight() { this.showButton = this.$refs.content ? this.$refs.content.scrollHeight > 280 : false; } }" 
-                         x-init="checkHeight(); $nextTick(() => checkHeight()); window.addEventListener('load', () => checkHeight()); if (window.ResizeObserver && $refs.content) { new ResizeObserver(() => checkHeight()).observe($refs.content); }"
+                         x-data="{ expanded: false, showButton: false, lightboxOpen: false, lightboxImage: '' }" 
+                         x-init="
+                           $nextTick(() => { 
+                             showButton = $refs.content ? $refs.content.scrollHeight > 280 : false; 
+                           });
+                           if (window.ResizeObserver) {
+                             new ResizeObserver(() => {
+                               showButton = $refs.content ? $refs.content.scrollHeight > 280 : false;
+                             }).observe($refs.content);
+                           }
+                         "
                          style="overflow-anchor: none;"
                          class="relative">
                         
