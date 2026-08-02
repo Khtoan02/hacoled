@@ -53,15 +53,17 @@ class CatalogRepository {
         ], 'thumbnail');
     }
 
-    public function latestArticles($limit = 3) {
+    public function latestArticles($limit = 4) {
+        $limit = max(1, absint($limit));
+
         $items = $this->posts([
-            'post_type' => 'post', 'posts_per_page' => absint($limit),
+            'post_type' => 'post', 'posts_per_page' => $limit,
             'category_name' => 'blog,tin-tuc,news', 'post_status' => 'publish',
             'ignore_sticky_posts' => true,
         ], 'large');
 
         return $items ?: $this->posts([
-            'post_type' => 'post', 'posts_per_page' => absint($limit),
+            'post_type' => 'post', 'posts_per_page' => $limit,
             'post_status' => 'publish', 'ignore_sticky_posts' => true,
         ], 'large');
     }

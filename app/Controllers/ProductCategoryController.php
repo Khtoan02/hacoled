@@ -21,7 +21,7 @@ class ProductCategoryController extends Controller {
             'navigation_categories' => $catalog->categoryNavigation($term),
             'breadcrumbs'           => $catalog->breadcrumbs($term),
             'featured_projects'     => $catalog->featuredProjects(),
-            'latest_articles'       => $catalog->latestArticles(),
+            'latest_articles'       => $catalog->latestArticles(4),
             'faq'                   => $catalog->categoryFaq($term),
             'header_type'           => 'default',
             'footer_type'           => 'default',

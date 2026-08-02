@@ -445,15 +445,16 @@ $latest_articles = $latest_articles ?? [];
           Xem tất cả bài viết <i class="ph-bold ph-caret-right"></i>
         </a>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         <?php
-        if ($latest_articles):
+        $articles = array_slice((array) $latest_articles, 0, 4);
+        if (!empty($articles)):
           $idx = 0;
-          foreach ($latest_articles as $article):
+          foreach ($articles as $article):
             $idx++;
             $thumbnail = $article['thumbnail'] ?: get_template_directory_uri() . '/assets/images/services-hero.webp';
-            $badges = ['Tư vấn', 'Dự án', 'Kiến thức'];
-            $badge = $badges[$idx % 3];
+            $badges = ['Tư vấn', 'Dự án', 'Kiến thức', 'Mẹo'];
+            $badge = $badges[($idx - 1) % 4];
             ?>
             <a href="<?php echo esc_url($article['url']); ?>"
               class="group bg-white rounded-2xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-500 p-3 flex flex-col justify-start">
