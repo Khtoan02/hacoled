@@ -283,12 +283,11 @@ $price_html = $product->get_price_html();
         </div>
     </section>
 
-    <!-- SECTION 2: TABS & SIDEBAR (2/3 vs 1/3) -->
     <div class="max-w-[1440px] w-full mx-auto px-0">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-8 border-t border-gray-200/80" x-data="{ activeTab: 'info' }">
             
-            <!-- Left: Product Tabs (2/3 - 8 Cols) -->
-            <div class="lg:col-span-8 min-w-0 space-y-6">
+            <!-- Left: Product Tabs (3/4 - 9 Cols) -->
+            <div class="lg:col-span-9 min-w-0 space-y-6">
                 
                 <!-- Tab Headers -->
                 <div class="flex border-b border-gray-200 bg-white rounded-t-xl p-2 gap-2">
@@ -308,15 +307,63 @@ $price_html = $product->get_price_html();
 
                 <!-- Tab Contents -->
                 <div class="bg-white rounded-b-xl border-x border-b border-gray-100 shadow-sm p-6 lg:p-8">
-                    <!-- Tab 1: Info content (Alpine.js Read-More) -->
+                    <!-- Tab 1: Info content (Alpine.js Read-More with Lightbox & FAQ) -->
                     <div x-show="activeTab === 'info'" 
                          x-transition:enter="transition ease-out duration-200" 
-                         x-data="{ expanded: false, showButton: false, checkHeight() { this.showButton = this.$refs.content ? this.$refs.content.scrollHeight > 280 : false; } }" 
+                         x-data="{ expanded: false, showButton: false, lightboxOpen: false, lightboxImage: '', checkHeight() { this.showButton = this.$refs.content ? this.$refs.content.scrollHeight > 280 : false; } }" 
                          x-init="checkHeight(); $nextTick(() => checkHeight()); window.addEventListener('load', () => checkHeight()); if (window.ResizeObserver && $refs.content) { new ResizeObserver(() => checkHeight()).observe($refs.content); }"
                          style="overflow-anchor: none;"
                          class="relative">
+                        
+                        <style>
+                          /* Polish Product Description Images & Prevent skewing */
+                          .sp-excerpt-block img,
+                          .prose img {
+                            display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            max-width: 100%;
+                            height: auto !important; /* Force proportional height */
+                            border-radius: 12px;
+                            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                            cursor: zoom-in;
+                            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+                          }
+                          .sp-excerpt-block img:hover,
+                          .prose img:hover {
+                            transform: scale(1.015);
+                            opacity: 0.95;
+                          }
+                          /* Style for WordPress image captions */
+                          .prose .wp-caption {
+                            max-width: 100% !important;
+                            margin: 1.5rem auto !important;
+                            text-align: center;
+                            background-color: #f8fafc;
+                            padding: 8px;
+                            border-radius: 14px;
+                            border: 1px solid #f1f5f9;
+                          }
+                          .prose .wp-caption img {
+                            margin-bottom: 6px;
+                          }
+                          .prose .wp-caption-text {
+                            font-size: 12px !important;
+                            color: #64748b !important;
+                            margin: 4px 0 0 0 !important;
+                            font-style: italic;
+                            line-height: 1.5;
+                          }
+                        </style>
+
                         <div x-ref="content" 
                              :class="expanded ? '' : 'max-h-[280px] overflow-hidden'" 
+                             @click="
+                               if ($event.target.tagName === 'IMG') {
+                                 lightboxImage = $event.target.src;
+                                 lightboxOpen = true;
+                               }
+                             "
                              class="prose prose-slate prose-sm text-gray-600 text-sm leading-relaxed max-w-none transition-all duration-300 relative">
                             <?php the_content(); ?>
                             
@@ -335,6 +382,78 @@ $price_html = $product->get_price_html();
                                 <i class="ph-bold" :class="expanded ? 'ph-caret-up' : 'ph-caret-down'"></i>
                             </button>
                         </div>
+
+                        <!-- Lightbox Modal -->
+                        <div x-show="lightboxOpen" 
+                          x-transition:enter="transition ease-out duration-300"
+                          x-transition:enter-start="opacity-0" 
+                          x-transition:enter-end="opacity-100"
+                          x-transition:leave="transition ease-in duration-200"
+                          x-transition:leave-start="opacity-100" 
+                          x-transition:leave-end="opacity-0"
+                          x-cloak 
+                          class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md p-4" 
+                          @click="lightboxOpen = false" 
+                          @keydown.escape.window="lightboxOpen = false">
+                          
+                          <!-- Close button -->
+                          <button class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl focus:outline-none transition-colors" @click="lightboxOpen = false">
+                            <i class="ph-bold ph-x"></i>
+                          </button>
+                          
+                          <!-- Image container with scale transition -->
+                          <div class="relative max-w-full max-h-full flex items-center justify-center"
+                            x-show="lightboxOpen"
+                            x-transition:enter="transition ease-out duration-300 transform"
+                            x-transition:enter-start="scale-95"
+                            x-transition:enter-end="scale-100"
+                            x-transition:leave="transition ease-in duration-200 transform"
+                            x-transition:leave-start="scale-100"
+                            x-transition:leave-end="scale-95">
+                            <img :src="lightboxImage" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-white/10" @click.stop />
+                          </div>
+                        </div>
+
+                        <!-- Product Category FAQ Section -->
+                        <?php
+                        $product_terms = get_the_terms( get_the_ID(), 'product_cat' );
+                        $faq = ['title' => '', 'intro' => '', 'items' => []];
+                        if ( ! empty( $product_terms ) && ! is_wp_error( $product_terms ) ) {
+                            $primary_term = $product_terms[0];
+                            $catalog_repo = new \HacoLED\Theme\Repositories\CatalogRepository();
+                            $faq = $catalog_repo->categoryFaq( $primary_term );
+                        }
+                        if ( ! empty( $faq['items'] ) ) :
+                        ?>
+                          <div class="mt-12 pt-8 border-t border-slate-100">
+                            <div class="flex flex-col gap-2 mb-6">
+                              <h3 class="text-lg md:text-xl font-heading font-extrabold text-slate-900 tracking-tight">
+                                <?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp về sản phẩm', 'hacoled')); ?>
+                              </h3>
+                              <?php if (!empty($faq['intro'])): ?>
+                                <p class="text-xs md:text-sm text-slate-500 leading-relaxed max-w-3xl mt-1">
+                                  <?php echo wp_kses_post($faq['intro']); ?>
+                                </p>
+                              <?php endif; ?>
+                            </div>
+
+                            <div class="space-y-4" x-data="{ openFaq: 0 }">
+                              <?php foreach ($faq['items'] as $faq_idx => $faqItem): ?>
+                                <details class="group rounded-2xl border border-slate-200/80 bg-slate-50/40 p-4 transition-all duration-300 open:border-[#D90429]/30 open:bg-white open:shadow-[0_15px_30px_rgba(217,4,41,0.03)]"
+                                  :open="openFaq === <?php echo $faq_idx; ?>"
+                                  @toggle="if ($event.target.open) openFaq = <?php echo $faq_idx; ?>">
+                                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-xs md:text-sm font-heading font-extrabold text-slate-800 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden">
+                                    <span><?php echo esc_html($faqItem['question']); ?></span>
+                                    <i class="ph-bold ph-caret-down text-slate-500 transition-transform duration-300 group-open:text-[#D90429] group-open:rotate-180 text-xs md:text-sm"></i>
+                                  </summary>
+                                  <div class="border-t border-slate-100 mt-3 pt-3 text-[12px] md:text-xs leading-relaxed text-slate-600 prose prose-slate max-w-none">
+                                    <?php echo wp_kses_post($faqItem['answer']); ?>
+                                  </div>
+                                </details>
+                              <?php endforeach; ?>
+                            </div>
+                          </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Tab 2: Specs content -->
@@ -353,8 +472,9 @@ $price_html = $product->get_price_html();
                 </div>
             </div>
 
-            <!-- Right: Sidebar Widgets (1/3 - 4 Cols) -->
-            <div class="lg:col-span-4 min-w-0 space-y-6 lg:sticky lg:top-[120px] lg:self-start">
+            <!-- Right: Sidebar Widgets (1/4 - 3 Cols) -->
+            <div class="lg:col-span-3 self-stretch">
+                <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full">
                 
                 <!-- Widget 1: Sản phẩm cùng danh mục -->
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
@@ -483,7 +603,6 @@ $price_html = $product->get_price_html();
                         ?>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
