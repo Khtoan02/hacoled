@@ -167,6 +167,48 @@ $this->renderHeader($header_type ?? 'default');
               <img :src="lightboxImage" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-white/10" @click.stop />
             </div>
           </div>
+
+          <!-- Post Category FAQ Section -->
+          <?php
+          $catalog_repo = new \HacoLED\Theme\Repositories\CatalogRepository();
+          $faq = ['title' => '', 'intro' => '', 'items' => []];
+          $post_id = $post['id'] ?? get_the_ID();
+          $post_terms = wp_get_post_terms( $post_id, 'category' );
+          if ( ! empty( $post_terms ) && ! is_wp_error( $post_terms ) ) {
+              $primary_term = $post_terms[0];
+              $faq = $catalog_repo->categoryFaq( $primary_term );
+          }
+          if ( ! empty( $faq['items'] ) ) :
+          ?>
+              <div class="mt-12 pt-8 border-t border-slate-100" x-data="{ activeFaq: null }">
+                <h3 class="text-sm font-bold text-gray-900 pb-3 border-b border-gray-100 mb-6 flex items-center gap-2">
+                  <i class="ph-bold ph-question text-[#D90429]"></i>
+                  <span><?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?></span>
+                </h3>
+                <?php if (!empty($faq['intro'])): ?>
+                  <p class="text-xs text-gray-500 mb-4"><?php echo wp_kses_post($faq['intro']); ?></p>
+                <?php endif; ?>
+                <div class="space-y-3">
+                  <?php foreach ($faq['items'] as $index => $faqItem): ?>
+                    <div class="border border-slate-100 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+                      <button @click="activeFaq === <?php echo $index; ?> ? activeFaq = null : activeFaq = <?php echo $index; ?>"
+                              class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-bold text-xs text-slate-800 hover:text-[#D90429] transition-colors focus:outline-none">
+                        <span><?php echo esc_html($faqItem['question']); ?></span>
+                        <i class="ph-bold text-[#D90429] transition-transform duration-300"
+                           :class="activeFaq === <?php echo $index; ?> ? 'ph-minus rotate-180' : 'ph-plus'"></i>
+                      </button>
+                      <div x-show="activeFaq === <?php echo $index; ?>"
+                           x-collapse
+                           x-cloak
+                           class="px-5 pb-4 text-xs text-slate-500 leading-relaxed border-t border-slate-50/50 pt-3">
+                        <?php echo wp_kses_post($faqItem['answer']); ?>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              </div>
+          <?php endif; ?>
+
         </div>
 
         <!-- Article Footer: Social Share -->
