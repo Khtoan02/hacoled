@@ -243,52 +243,7 @@ $this->renderHeader($header_type ?? 'default');
           </div>
         </div>
 
-        <!-- Related Posts Section -->
-        <?php
-        if ($post['id'] > 0):
-          $categories = wp_get_post_categories($post['id']);
-          if (!empty($categories)):
-            $related_args = [
-                'category__in'   => $categories,
-                'post__not_in'   => [$post['id']],
-                'posts_per_page' => 4,
-                'orderby'        => 'rand'
-            ];
-            $related_query = new \WP_Query($related_args);
-            if ($related_query->have_posts()):
-          ?>
-            <div class="pt-10 border-t border-slate-100 mt-10 space-y-6">
-              <h3 class="text-xs font-black text-slate-900 uppercase tracking-widest flex items-center gap-2 border-b border-slate-100 pb-3">
-                <span class="w-2.5 h-2.5 rounded-full bg-accent-red animate-pulse"></span>
-                <?php _e('Bài viết liên quan', 'hacoled'); ?>
-              </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <?php 
-                while ($related_query->have_posts()): 
-                  $related_query->the_post();
-                  $rel_categories = get_the_category();
-                  $rel_cat_name = !empty($rel_categories) ? $rel_categories[0]->name : __('Tin tức', 'hacoled');
-                  $post_item = [
-                      'id'        => get_the_ID(),
-                      'title'     => get_the_title(),
-                      'excerpt'   => get_the_excerpt(),
-                      'permalink' => get_permalink(),
-                      'date'      => get_the_date(),
-                      'author'    => get_the_author(),
-                      'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
-                      'category'  => $rel_cat_name
-                  ];
-                  $this->renderComponent('blog-card', $post_item);
-                endwhile; 
-                ?>
-              </div>
-            </div>
-          <?php 
-            wp_reset_postdata();
-            endif;
-          endif;
-        endif;
-        ?>
+
 
       </div>
 
@@ -408,6 +363,53 @@ $this->renderHeader($header_type ?? 'default');
     </div>
 
     </div>
+
+    <!-- Related Posts Section (Full Width 1440px) -->
+    <?php
+    if ($post['id'] > 0):
+      $categories = wp_get_post_categories($post['id']);
+      if (!empty($categories)):
+        $related_args = [
+            'category__in'   => $categories,
+            'post__not_in'   => [$post['id']],
+            'posts_per_page' => 4,
+            'orderby'        => 'rand'
+        ];
+        $related_query = new \WP_Query($related_args);
+        if ($related_query->have_posts()):
+      ?>
+        <div class="mt-16 pt-12 border-t border-gray-200/80 space-y-6">
+          <h3 class="text-xs font-black text-slate-900 uppercase tracking-widest flex items-center gap-2 pb-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-accent-red animate-pulse"></span>
+            <?php _e('Bài viết liên quan', 'hacoled'); ?>
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <?php 
+            while ($related_query->have_posts()): 
+              $related_query->the_post();
+              $rel_categories = get_the_category();
+              $rel_cat_name = !empty($rel_categories) ? $rel_categories[0]->name : __('Tin tức', 'hacoled');
+              $post_item = [
+                  'id'        => get_the_ID(),
+                  'title'     => get_the_title(),
+                  'excerpt'   => get_the_excerpt(),
+                  'permalink' => get_permalink(),
+                  'date'      => get_the_date(),
+                  'author'    => get_the_author(),
+                  'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
+                  'category'  => $rel_cat_name
+              ];
+              $this->renderComponent('blog-card', $post_item);
+            endwhile; 
+            ?>
+          </div>
+        </div>
+      <?php 
+        wp_reset_postdata();
+        endif;
+      endif;
+    endif;
+    ?>
   </div>
 </main>
 
