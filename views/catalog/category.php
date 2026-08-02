@@ -219,8 +219,8 @@ $latest_articles = $latest_articles ?? [];
     <!-- SECTION 3: Layout - Left Sidebar (1/4) & Right Main Content (3/4) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-      <!-- Left Sidebar Column (1/3 - 4 Cols) -->
-      <div class="lg:col-span-4 self-stretch">
+      <!-- Left Sidebar Column (1/4 - 3 Cols) -->
+      <div class="lg:col-span-3 self-stretch">
         <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full">
 
         <!-- Widget 1: Subcategories/Siblings Links List (Giải Pháp Hiển Thị Chuyên Biệt) -->
@@ -342,8 +342,8 @@ $latest_articles = $latest_articles ?? [];
       </div>
     </div>
 
-      <!-- Right Main Column: Product List & SEO Content (2/3 - 8 Cols) -->
-      <div class="lg:col-span-8 lg:col-start-5 space-y-10">
+      <!-- Right Main Column: Product List & SEO Content (3/4 - 9 Cols) -->
+      <div class="lg:col-span-9 lg:col-start-4 space-y-10">
 
         <!-- WooCommerce Product Loop Container -->
         <div class="woocommerce-content-container relative z-20">
