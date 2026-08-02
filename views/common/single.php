@@ -262,7 +262,7 @@ $this->renderHeader($header_type ?? 'default');
                 <span class="w-2.5 h-2.5 rounded-full bg-accent-red animate-pulse"></span>
                 <?php _e('Bài viết liên quan', 'hacoled'); ?>
               </h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <?php 
                 while ($related_query->have_posts()): 
                   $related_query->the_post();
