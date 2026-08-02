@@ -192,8 +192,8 @@ $this->renderHeader($header_type ?? 'default');
           }
           if ( ! empty( $faq['items'] ) ) :
           ?>
-              <div class="mt-12 pt-8 border-t border-slate-100 space-y-4">
-                <div class="flex flex-col gap-1 mb-6">
+              <div class="mt-12 pt-8 border-t border-slate-100 space-y-5">
+                <div class="flex flex-col gap-1 mb-5">
                   <h3 class="text-sm font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
                     <i class="ph-bold ph-question text-[#D90429] text-base"></i>
                     <span><?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?></span>
@@ -203,15 +203,17 @@ $this->renderHeader($header_type ?? 'default');
                   <?php endif; ?>
                 </div>
                 
-                <div class="space-y-4">
+                <div class="space-y-3.5">
                   <?php foreach ($faq['items'] as $index => $faqItem): ?>
-                    <details class="group rounded-2xl border border-slate-200/80 bg-slate-50/40 p-5 transition-all duration-300 open:border-[#D90429]/30 open:bg-white open:shadow-[0_15px_30px_rgba(217,4,41,0.03)]"
+                    <details class="group rounded-2xl border border-slate-150 bg-slate-50/20 px-6 py-4.5 transition-all duration-300 hover:border-slate-300 hover:bg-slate-50/50 open:border-[#D90429]/30 open:bg-white open:shadow-[0_12px_30px_rgba(217,4,41,0.04)]"
                       <?php echo $index === 0 ? 'open' : ''; ?>>
-                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-xs font-bold text-slate-850 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden">
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-xs sm:text-[13px] font-extrabold text-slate-800 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden">
                         <span><?php echo esc_html($faqItem['question']); ?></span>
-                        <i class="ph-bold ph-caret-down text-slate-500 transition-transform duration-300 group-open:text-[#D90429] group-open:rotate-180 text-xs"></i>
+                        <span class="w-7 h-7 rounded-full bg-white border border-slate-200/80 flex items-center justify-center transition-all duration-300 group-hover:border-slate-350 group-open:bg-red-50 group-open:border-red-100/80 shrink-0 shadow-sm">
+                          <i class="ph-bold ph-caret-down text-slate-450 transition-transform duration-300 group-open:text-[#D90429] group-open:rotate-180 text-xs"></i>
+                        </span>
                       </summary>
-                      <div class="border-t border-slate-100 mt-4 pt-4 text-[11px] leading-relaxed text-slate-600 prose prose-slate max-w-none">
+                      <div class="border-t border-slate-100/80 mt-3.5 pt-3.5 text-xs leading-relaxed text-slate-600 prose prose-slate max-w-none">
                         <?php echo wp_kses_post($faqItem['answer']); ?>
                       </div>
                     </details>
