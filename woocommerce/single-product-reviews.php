@@ -81,65 +81,186 @@ foreach($comments as $comment) {
     </noscript>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-6">
-        <!-- Left Column: Rating Summary & Breakdown -->
-        <div class="lg:col-span-4 bg-slate-50/60 rounded-2xl p-5 border border-slate-100 h-fit lg:sticky lg:top-24 flex flex-col items-center justify-center text-center">
-            <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">Đánh giá trung bình</h3>
-            <div class="text-4xl font-black text-slate-900 leading-none mb-2">
-                <?php echo number_format( $average, 1 ); ?>
-            </div>
+        <!-- Left Column: Summary & Write Review Form -->
+        <div class="lg:col-span-4 space-y-4 lg:sticky lg:top-24 h-fit">
             
-            <!-- Stars -->
-            <div class="flex items-center gap-0.5 mb-1.5">
-                <?php
-                $full_stars = floor($average);
-                $half_star = ($average - $full_stars) >= 0.5 ? 1 : 0;
-                $empty_stars = 5 - $full_stars - $half_star;
-
-                for ($i = 0; $i < $full_stars; $i++) {
-                    echo '<i class="ph-fill ph-star text-base text-amber-500"></i>';
-                }
-                if ($half_star) {
-                    echo '<i class="ph-fill ph-star-half text-base text-amber-500"></i>';
-                }
-                for ($i = 0; $i < $empty_stars; $i++) {
-                    echo '<i class="ph-bold ph-star text-base text-slate-200"></i>';
-                }
-                ?>
-            </div>
-            
-            <p class="text-[11px] text-slate-400 font-medium mb-4">
-                Dựa trên <?php echo esc_html( $count ); ?> đánh giá từ khách hàng
-            </p>
-            
-            <!-- Interactive breakdown progress bars -->
-            <div class="w-full space-y-1.5 text-[11px]">
-                <?php
-                for($i = 5; $i >= 1; $i--) {
-                    $percentage = $count > 0 ? round(($rates[$i] / $count) * 100) : 0;
-                    ?>
-                    <button @click="selectStarFilter(<?php echo $i; ?>)" 
-                            class="w-full flex items-center gap-2 text-left p-1 rounded-lg hover:bg-slate-100 transition-colors group focus:outline-none"
-                            :class="selectedStar === <?php echo $i; ?> ? 'bg-slate-100/80 font-bold ring-1 ring-slate-200' : ''">
-                        <span class="w-3 text-right font-semibold text-slate-600 group-hover:text-[#D90429]"><?php echo $i; ?></span>
-                        <i class="ph-fill ph-star text-amber-500 text-xs"></i>
-                        <div class="flex-1 h-1.5 bg-slate-200/85 rounded-full overflow-hidden">
-                            <div class="h-full bg-amber-500 rounded-full group-hover:bg-[#D90429] transition-colors" style="width: <?php echo $percentage; ?>%"></div>
-                        </div>
-                        <span class="w-8 text-right text-slate-400 font-medium group-hover:text-slate-650" :class="selectedStar === <?php echo $i; ?> ? 'text-[#D90429] font-bold' : ''">
-                            <?php echo $rates[$i]; ?>
-                        </span>
-                    </button>
+            <!-- Sub-Box 1: Rating Summary & Breakdown -->
+            <div class="bg-slate-50/60 rounded-2xl p-5 border border-slate-100 flex flex-col items-center justify-center text-center">
+                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">Đánh giá trung bình</h3>
+                <div class="text-4xl font-black text-slate-900 leading-none mb-2">
+                    <?php echo number_format( $average, 1 ); ?>
+                </div>
+                
+                <!-- Stars -->
+                <div class="flex items-center gap-0.5 mb-1.5">
                     <?php
-                }
-                ?>
+                    $full_stars = floor($average);
+                    $half_star = ($average - $full_stars) >= 0.5 ? 1 : 0;
+                    $empty_stars = 5 - $full_stars - $half_star;
+
+                    for ($i = 0; $i < $full_stars; $i++) {
+                        echo '<i class="ph-fill ph-star text-base text-amber-500"></i>';
+                    }
+                    if ($half_star) {
+                        echo '<i class="ph-fill ph-star-half text-base text-amber-500"></i>';
+                    }
+                    for ($i = 0; $i < $empty_stars; $i++) {
+                        echo '<i class="ph-bold ph-star text-base text-slate-200"></i>';
+                    }
+                    ?>
+                </div>
+                
+                <p class="text-[11px] text-slate-400 font-medium mb-4">
+                    Dựa trên <?php echo esc_html( $count ); ?> đánh giá từ khách hàng
+                </p>
+                
+                <!-- Interactive breakdown progress bars -->
+                <div class="w-full space-y-1.5 text-[11px]">
+                    <?php
+                    for($i = 5; $i >= 1; $i--) {
+                        $percentage = $count > 0 ? round(($rates[$i] / $count) * 100) : 0;
+                        ?>
+                        <button @click="selectStarFilter(<?php echo $i; ?>)" 
+                                class="w-full flex items-center gap-2 text-left p-1 rounded-lg hover:bg-slate-100 transition-colors group focus:outline-none"
+                                :class="selectedStar === <?php echo $i; ?> ? 'bg-slate-100/80 font-bold ring-1 ring-slate-200' : ''">
+                            <span class="w-3 text-right font-semibold text-slate-600 group-hover:text-[#D90429]"><?php echo $i; ?></span>
+                            <i class="ph-fill ph-star text-amber-500 text-xs"></i>
+                            <div class="flex-1 h-1.5 bg-slate-200/85 rounded-full overflow-hidden">
+                                <div class="h-full bg-amber-500 rounded-full group-hover:bg-[#D90429] transition-colors" style="width: <?php echo $percentage; ?>%"></div>
+                            </div>
+                            <span class="w-8 text-right text-slate-400 font-medium group-hover:text-slate-650" :class="selectedStar === <?php echo $i; ?> ? 'text-[#D90429] font-bold' : ''">
+                                <?php echo $rates[$i]; ?>
+                            </span>
+                        </button>
+                        <?php
+                    }
+                    ?>
+                </div>
+                
+                <!-- Clear Filter Button -->
+                <button x-show="selectedStar !== null" 
+                        @click="selectedStar = null" 
+                        class="mt-3.5 text-[11px] font-semibold text-[#D90429] hover:underline flex items-center gap-1">
+                    <i class="ph-bold ph-x-circle"></i> Xóa bộ lọc
+                </button>
             </div>
-            
-            <!-- Clear Filter Button -->
-            <button x-show="selectedStar !== null" 
-                    @click="selectedStar = null" 
-                    class="mt-3.5 text-[11px] font-semibold text-[#D90429] hover:underline flex items-center gap-1">
-                <i class="ph-bold ph-x-circle"></i> Xóa bộ lọc
-            </button>
+
+            <!-- Sub-Box 2: Review Form Section (Collapsible & Compact) -->
+            <?php if ( get_option( 'woocommerce_review_rating_verification_required' ) === 'no' || wc_customer_bought_product( '', get_current_user_id(), $product->get_id() ) ) : ?>
+                <div id="review_form_wrapper" x-data="{ showForm: false, rating: 5, hoverRating: 0 }">
+                    
+                    <!-- Toggle Button to Open Form -->
+                    <div x-show="!showForm" class="flex justify-start">
+                        <button @click="showForm = true" class="w-full inline-flex items-center justify-center gap-2 bg-[#D90429] hover:bg-[#b90323] text-white font-bold px-5 py-3 rounded-xl shadow-md transition-all duration-300 text-xs uppercase tracking-wider">
+                            <i class="ph-bold ph-pencil-line text-sm"></i> Viết đánh giá của bạn
+                        </button>
+                    </div>
+
+                    <!-- Collapsible Form -->
+                    <div x-show="showForm" x-transition class="w-full bg-slate-50/60 border border-slate-200/80 rounded-2xl p-5 shadow-xs">
+                        <div class="flex items-center justify-between border-b border-slate-200/60 pb-3 mb-4">
+                            <h3 class="text-xs md:text-sm font-bold text-slate-900 flex items-center gap-2">
+                                <i class="ph-bold ph-pencil-line text-[#D90429]"></i>
+                                <span>Viết đánh giá của bạn</span>
+                            </h3>
+                            <button @click="showForm = false" class="text-slate-400 hover:text-slate-650 transition-colors text-xs font-semibold flex items-center gap-1">
+                                <i class="ph-bold ph-x"></i> Hủy
+                            </button>
+                        </div>
+                        
+                        <?php
+                        $commenter    = wp_get_current_commenter();
+                        $name_email_required = (bool) get_option( 'require_name_email', 1 );
+                        
+                        // Form setup
+                        ob_start();
+                        ?>
+                        <form action="<?php echo esc_url( site_url( '/wp-comments-post.php' ) ); ?>" method="post" id="commentform" class="space-y-4">
+                            
+                            <!-- Star Rating Interactive Selector -->
+                            <?php if ( wc_review_ratings_enabled() ) : ?>
+                                <div class="space-y-1">
+                                    <label class="block text-xs font-bold text-slate-700">Đánh giá của bạn <span class="text-red-500">*</span></label>
+                                    <div class="flex items-center gap-1">
+                                        <template x-for="i in 5">
+                                            <button type="button" 
+                                                    @click="rating = i" 
+                                                    @mouseenter="hoverRating = i" 
+                                                    @mouseleave="hoverRating = 0"
+                                                    class="p-0.5 focus:outline-none transition-transform hover:scale-110">
+                                                <i class="ph-fill ph-star text-xl transition-colors duration-150"
+                                                   :class="(hoverRating ? i <= hoverRating : i <= rating) ? 'text-amber-500' : 'text-slate-200'"></i>
+                                            </button>
+                                        </template>
+                                    </div>
+                                    <!-- Hidden input for standard form submission -->
+                                    <input type="hidden" name="rating" :value="rating" required />
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="space-y-3">
+                                <!-- Author -->
+                                <div class="space-y-1">
+                                    <label for="author" class="block text-xs font-bold text-slate-700">Họ và tên <?php echo $name_email_required ? '<span class="text-red-500">*</span>' : ''; ?></label>
+                                    <input id="author" name="author" type="text" value="<?php echo esc_attr($commenter['comment_author']); ?>" <?php echo $name_email_required ? 'required' : ''; ?>
+                                           class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#D90429] focus:ring-2 focus:ring-red-100 transition-all placeholder-slate-400" placeholder="Nguyễn Văn A" />
+                                </div>
+                                
+                                <!-- Email -->
+                                <div class="space-y-1">
+                                    <label for="email" class="block text-xs font-bold text-slate-700">Địa chỉ email <?php echo $name_email_required ? '<span class="text-red-500">*</span>' : ''; ?></label>
+                                    <input id="email" name="email" type="email" value="<?php echo esc_attr($commenter['comment_author_email']); ?>" <?php echo $name_email_required ? 'required' : ''; ?>
+                                           class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#D90429] focus:ring-2 focus:ring-red-100 transition-all placeholder-slate-400" placeholder="name@example.com" />
+                                </div>
+                            </div>
+
+                            <!-- Comment textarea -->
+                            <div class="space-y-1">
+                                <label for="comment" class="block text-xs font-bold text-slate-700">Nội dung đánh giá <span class="text-red-500">*</span></label>
+                                <textarea id="comment" name="comment" rows="4" required
+                                          class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#D90429] focus:ring-2 focus:ring-red-100 transition-all placeholder-slate-400" placeholder="Chia sẻ trải nghiệm thực tế của bạn về sản phẩm này..."></textarea>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="pt-1 flex gap-2.5">
+                                <button type="submit" name="submit" id="submit" 
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2.5 bg-[#D90429] hover:bg-[#b90323] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:-translate-y-0.5 transition-all duration-200">
+                                    Gửi đi
+                                </button>
+                                <button type="button" @click="showForm = false"
+                                        class="flex-1 inline-flex items-center justify-center px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-200">
+                                    Hủy
+                                </button>
+                            </div>
+
+                            <?php comment_id_fields(); ?>
+                            <?php do_action( 'comment_form', $product->get_id() ); ?>
+                        </form>
+                        <?php
+                        $form_html = ob_get_clean();
+                        
+                        // Render form using comment_form overrides
+                        comment_form( array(
+                            'title_reply'          => '',
+                            'title_reply_before'   => '',
+                            'title_reply_after'    => '',
+                            'format'               => 'html5',
+                            'class_form'           => 'hidden', // Hide the default form output of comment_form()
+                        ));
+                        
+                        // Echo our beautiful custom form
+                        echo $form_html;
+                        ?>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-center gap-3">
+                    <i class="ph-bold ph-warning-circle text-xl text-amber-600"></i>
+                    <p class="text-xs text-amber-800">
+                        <?php esc_html_e( 'Only logged in customers who have purchased this product may leave a review.', 'woocommerce' ); ?>
+                    </p>
+                </div>
+            <?php endif; ?>
         </div>
 
         <!-- Right Column: Review List & Call to Action -->
@@ -216,123 +337,4 @@ foreach($comments as $comment) {
             </div>
         </div>
     </div>
-
-    <!-- Review Form Section (Collapsible & Compact) -->
-    <?php if ( get_option( 'woocommerce_review_rating_verification_required' ) === 'no' || wc_customer_bought_product( '', get_current_user_id(), $product->get_id() ) ) : ?>
-        <div id="review_form_wrapper" class="border-t border-slate-100 pt-6 mt-6" x-data="{ showForm: false, rating: 5, hoverRating: 0 }">
-            
-            <!-- Toggle Button to Open Form -->
-            <div x-show="!showForm" class="flex justify-start">
-                <button @click="showForm = true" class="inline-flex items-center gap-2 bg-[#D90429] hover:bg-[#b90323] text-white font-bold px-5 py-2.5 rounded-xl shadow-md transition-all duration-300 text-xs uppercase tracking-wider">
-                    <i class="ph-bold ph-pencil-line text-sm"></i> Viết đánh giá của bạn
-                </button>
-            </div>
-
-            <!-- Collapsible Form -->
-            <div x-show="showForm" x-transition class="max-w-2xl bg-slate-50/50 border border-slate-200/80 rounded-2xl p-5 md:p-6 shadow-xs">
-                <div class="flex items-center justify-between border-b border-slate-200/60 pb-3 mb-4">
-                    <h3 class="text-xs md:text-sm font-bold text-slate-900 flex items-center gap-2">
-                        <i class="ph-bold ph-pencil-line text-[#D90429]"></i>
-                        <span>Viết đánh giá của bạn</span>
-                    </h3>
-                    <button @click="showForm = false" class="text-slate-400 hover:text-slate-650 transition-colors text-xs font-semibold flex items-center gap-1">
-                        <i class="ph-bold ph-x"></i> Hủy
-                    </button>
-                </div>
-                
-                <?php
-                $commenter    = wp_get_current_commenter();
-                $name_email_required = (bool) get_option( 'require_name_email', 1 );
-                
-                // Form setup
-                ob_start();
-                ?>
-                <form action="<?php echo esc_url( site_url( '/wp-comments-post.php' ) ); ?>" method="post" id="commentform" class="space-y-4">
-                    
-                    <!-- Star Rating Interactive Selector -->
-                    <?php if ( wc_review_ratings_enabled() ) : ?>
-                        <div class="space-y-1">
-                            <label class="block text-xs font-bold text-slate-700">Đánh giá của bạn <span class="text-red-500">*</span></label>
-                            <div class="flex items-center gap-1">
-                                <template x-for="i in 5">
-                                    <button type="button" 
-                                            @click="rating = i" 
-                                            @mouseenter="hoverRating = i" 
-                                            @mouseleave="hoverRating = 0"
-                                            class="p-0.5 focus:outline-none transition-transform hover:scale-110">
-                                        <i class="ph-fill ph-star text-2xl transition-colors duration-150"
-                                           :class="(hoverRating ? i <= hoverRating : i <= rating) ? 'text-amber-500' : 'text-slate-200'"></i>
-                                    </button>
-                                </template>
-                            </div>
-                            <!-- Hidden input for standard form submission -->
-                            <input type="hidden" name="rating" :value="rating" required />
-                        </div>
-                    <?php endif; ?>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Author -->
-                        <div class="space-y-1">
-                            <label for="author" class="block text-xs font-bold text-slate-700">Họ và tên <?php echo $name_email_required ? '<span class="text-red-500">*</span>' : ''; ?></label>
-                            <input id="author" name="author" type="text" value="<?php echo esc_attr($commenter['comment_author']); ?>" <?php echo $name_email_required ? 'required' : ''; ?>
-                                   class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#D90429] focus:ring-2 focus:ring-red-100 transition-all placeholder-slate-400" placeholder="Nguyễn Văn A" />
-                        </div>
-                        
-                        <!-- Email -->
-                        <div class="space-y-1">
-                            <label for="email" class="block text-xs font-bold text-slate-700">Địa chỉ email <?php echo $name_email_required ? '<span class="text-red-500">*</span>' : ''; ?></label>
-                            <input id="email" name="email" type="email" value="<?php echo esc_attr($commenter['comment_author_email']); ?>" <?php echo $name_email_required ? 'required' : ''; ?>
-                                   class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#D90429] focus:ring-2 focus:ring-red-100 transition-all placeholder-slate-400" placeholder="name@example.com" />
-                        </div>
-                    </div>
-
-                    <!-- Comment textarea -->
-                    <div class="space-y-1">
-                        <label for="comment" class="block text-xs font-bold text-slate-700">Nội dung đánh giá <span class="text-red-500">*</span></label>
-                        <textarea id="comment" name="comment" rows="4" required
-                                  class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-[#D90429] focus:ring-2 focus:ring-red-100 transition-all placeholder-slate-400" placeholder="Chia sẻ trải nghiệm thực tế của bạn về sản phẩm này..."></textarea>
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="pt-1 flex gap-3">
-                        <button type="submit" name="submit" id="submit" 
-                                class="inline-flex items-center justify-center px-5 py-2.5 bg-[#D90429] hover:bg-[#b90323] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:-translate-y-0.5 transition-all duration-200">
-                            Gửi đánh giá
-                        </button>
-                        <button type="button" @click="showForm = false"
-                                class="inline-flex items-center justify-center px-5 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-200">
-                            Hủy
-                        </button>
-                    </div>
-
-                    <?php comment_id_fields(); ?>
-                    <?php do_action( 'comment_form', $product->get_id() ); ?>
-                </form>
-                <?php
-                $form_html = ob_get_clean();
-                
-                // Render form using comment_form overrides
-                comment_form( array(
-                    'title_reply'          => '',
-                    'title_reply_before'   => '',
-                    'title_reply_after'    => '',
-                    'format'               => 'html5',
-                    'class_form'           => 'hidden', // Hide the default form output of comment_form()
-                ));
-                
-                // Echo our beautiful custom form
-                echo $form_html;
-                ?>
-            </div>
-        </div>
-    <?php else : ?>
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mt-8 flex items-center gap-3">
-            <i class="ph-bold ph-warning-circle text-xl text-amber-600"></i>
-            <p class="text-sm text-amber-800">
-                <?php esc_html_e( 'Only logged in customers who have purchased this product may leave a review.', 'woocommerce' ); ?>
-            </p>
-        </div>
-    <?php endif; ?>
-    
-    <div class="clear"></div>
 </div>
