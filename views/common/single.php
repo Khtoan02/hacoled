@@ -255,15 +255,30 @@ $this->renderHeader($header_type ?? 'default');
         <?php $this->renderComponent('widgets/hotline'); ?>
 
         <!-- Sidebar Widget: Table of Contents -->
-        <div x-data="{ headings: null }" x-init="
-          setTimeout(() => {
-            const items = Array.from(document.querySelectorAll('article h2, article h3')).map((el, i) => {
-              if (!el.id) el.id = 'heading-' + i;
-              return { text: el.innerText, id: el.id, level: el.tagName.toLowerCase() };
-            });
-            headings = items;
-          }, 100);
-        " class="rounded-2xl bg-white border border-slate-200/80 p-6 space-y-4 shadow-sm">
+        <div x-data="{ 
+            headings: [], 
+            activeId: '',
+            init() {
+              setTimeout(() => {
+                const els = Array.from(document.querySelectorAll('article h2, article h3'));
+                this.headings = els.map((el, i) => {
+                  if (!el.id) el.id = 'heading-' + i;
+                  return { text: el.innerText, id: el.id, level: el.tagName.toLowerCase() };
+                });
+                
+                // Track active heading during scroll
+                const observer = new IntersectionObserver((entries) => {
+                  entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                      this.activeId = entry.target.id;
+                    }
+                  });
+                }, { rootMargin: '-100px 0px -60% 0px' });
+                
+                els.forEach(el => observer.observe(el));
+              }, 200);
+            }
+        }" class="rounded-2xl bg-white border border-slate-200/80 p-6 space-y-4 shadow-sm">
           <div class="relative pb-3 border-b border-slate-100">
             <!-- Thin elegant red accent line for brand identity -->
             <div class="absolute bottom-0 left-0 w-12 h-[2px] bg-accent-red"></div>
@@ -272,13 +287,25 @@ $this->renderHeader($header_type ?? 'default');
             </h3>
           </div>
           
-          <div class="text-xs text-slate-650 leading-relaxed">
-            <!-- TOC List -->
-            <ul x-show="headings !== null && headings.length > 0" class="space-y-3" x-cloak>
+          <div class="text-xs text-slate-650 leading-relaxed pl-1">
+            <!-- TOC Timeline List -->
+            <ul x-show="headings.length > 0" class="relative pl-3 border-l-2 border-slate-100 space-y-3" x-cloak>
               <template x-for="h in headings" :key="h.id">
-                <li :class="h.level === 'h3' ? 'pl-4' : ''">
-                  <a :href="'#' + h.id" class="hover:text-accent-red transition-colors flex items-start gap-2 group text-slate-700">
-                    <span class="text-slate-400 group-hover:text-accent-red transition-colors">•</span>
+                <li class="relative transition-all duration-200"
+                    :class="h.level === 'h3' ? 'pl-4' : ''">
+                  <!-- Timeline Node Dot -->
+                  <span class="absolute -left-[17px] top-[7px] w-2 h-2 rounded-full border-2 border-white transition-all duration-300"
+                        :class="activeId === h.id ? 'bg-[#D90429] scale-125 shadow-md shadow-red-200 z-10' : 'bg-slate-300'"></span>
+                  
+                  <a :href="'#' + h.id" 
+                     @click.prevent="
+                       const el = document.getElementById(h.id);
+                       if (el) {
+                         window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 150, behavior: 'smooth' });
+                       }
+                     "
+                     class="block hover:text-[#D90429] transition-colors leading-relaxed"
+                     :class="activeId === h.id ? 'text-[#D90429] font-black text-[11.5px]' : (h.level === 'h2' ? 'text-slate-800 font-bold text-[11px]' : 'text-slate-500 font-medium text-[10.5px]')">
                     <span x-text="h.text" class="line-clamp-2"></span>
                   </a>
                 </li>
@@ -286,7 +313,7 @@ $this->renderHeader($header_type ?? 'default');
             </ul>
             
             <!-- Fallback placeholder when no headings -->
-            <div x-show="headings !== null && headings.length === 0" class="space-y-2 py-1 text-slate-500 font-light" x-cloak>
+            <div x-show="headings.length === 0" class="space-y-2 py-1 text-slate-500 font-light" x-cloak>
               <p><?php _e('Bài viết đang cập nhật mục lục chi tiết. Vui lòng cuộn xuống để theo dõi toàn bộ nội dung.', 'hacoled'); ?></p>
               <div class="flex items-center gap-1.5 text-accent-red font-semibold text-[10px] uppercase tracking-wider mt-3">
                 <span><?php _e('Xem chi tiết bên dưới', 'hacoled'); ?></span>
