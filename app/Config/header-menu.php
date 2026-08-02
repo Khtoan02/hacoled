@@ -88,6 +88,32 @@ return [
         ],
         'visual' => ['image' => $assets . 'showcase-led.webp', 'fallback' => '', 'alt' => 'Viền ghép siêu mỏng, không giới hạn không gian', 'badge' => 'Videowall', 'title' => 'Viền ghép siêu mỏng, không giới hạn không gian', 'cta' => 'Tìm hiểu thêm', 'url' => home_url('/man-hinh-ghep/')],
     ],
+    'led_trang_tri' => [
+        'label' => 'LED Trang Trí Tòa Nhà',
+        'enabled' => true,
+        'kind' => 'mega',
+        'url' => home_url('/led-trang-tri-toa-nha/'),
+        'columns' => [
+            [
+                'title' => 'LED Trang Trí',
+                'icon' => 'sparkles',
+                'tone' => 'red',
+                'item_columns' => 1,
+                'items' => [
+                    ['label' => 'LED trang trí tòa nhà', 'url' => home_url('/led-trang-tri-toa-nha/')],
+                ],
+            ]
+        ],
+        'visual' => [
+            'image' => $assets . 'showcase-led.webp',
+            'fallback' => '',
+            'alt' => 'Giải pháp LED trang trí tòa nhà nghệ thuật',
+            'badge' => 'LED Trang Trí',
+            'title' => 'Giải pháp LED trang trí tòa nhà nghệ thuật',
+            'cta' => 'Tìm hiểu thêm',
+            'url' => home_url('/led-trang-tri-toa-nha/'),
+        ],
+    ],
     'solutions' => [
         'label' => 'Giải Pháp',
         'enabled' => true,
