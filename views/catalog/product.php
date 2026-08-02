@@ -18,7 +18,7 @@ $this->renderHeader($header_type ?? 'default');
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<main class="relative bg-[#FAFAFA] pt-36 lg:pt-64 pb-20 min-h-[80vh] overflow-hidden">
+<main class="relative bg-[#FAFAFA] pt-36 lg:pt-64 pb-20 min-h-[80vh] overflow-visible">
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
 
     <!-- WooCommerce before main content hooks (breadcrumbs, alerts) -->
