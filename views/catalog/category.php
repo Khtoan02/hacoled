@@ -220,7 +220,8 @@ $latest_articles = $latest_articles ?? [];
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
       <!-- Left Sidebar Column (1/4 - 3 Cols) -->
-      <div class="lg:col-span-3 lg:sticky lg:top-32 lg:z-20 space-y-6">
+      <div class="lg:col-span-3 self-stretch">
+        <div class="space-y-6 lg:sticky lg:top-32 lg:z-20">
 
         <!-- Widget 1: Subcategories/Siblings Links List (Giải Pháp Hiển Thị Chuyên Biệt) -->
         <?php if (!empty($navigation_categories)): ?>
@@ -339,6 +340,7 @@ $latest_articles = $latest_articles ?? [];
         </div>
 
       </div>
+    </div>
 
       <!-- Right Main Column: Product List & SEO Content (3/4 - 9 Cols) -->
       <div class="lg:col-span-9 lg:col-start-4 space-y-10">
