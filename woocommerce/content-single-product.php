@@ -542,6 +542,13 @@ $price_html = $product->get_price_html();
                             'posts_per_page' => 3,
                             'category_name'  => 'du-an-tieu-bieu-moi',
                         ) );
+                        if ( !$projects_query->have_posts() ) {
+                            $projects_query = new WP_Query( array(
+                                'post_type'      => 'post',
+                                'posts_per_page' => 3,
+                                'category_name'  => 'projects,du-an,hang-muc-da-thi-cong',
+                            ) );
+                        }
                         if ( $projects_query->have_posts() ) :
                             while ( $projects_query->have_posts() ) : $projects_query->the_post();
                                 ?>
