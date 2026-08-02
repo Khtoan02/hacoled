@@ -12,7 +12,7 @@ $this->renderHeader($header_type ?? 'default');
 ?>
 
 <main class="relative bg-[#FAFAFA] pt-28 md:pt-64 pb-20 min-h-[85vh] overflow-visible"
-      x-data="{ percent: 0 }" @scroll.window="percent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100">
+      x-data="{ percent: 0, lightboxOpen: false, lightboxImage: '' }" @scroll.window="percent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100">
   
   <!-- Reading Progress Bar -->
   <div class="fixed top-0 left-0 right-0 h-[3px] bg-slate-200/50 z-[999] pointer-events-none">
@@ -85,7 +85,7 @@ $this->renderHeader($header_type ?? 'default');
         </div>
 
         <!-- Full HTML Post Body -->
-        <div x-data="{ lightboxOpen: false, lightboxImage: '' }">
+        <div>
           <style>
             /* Polish Article Images & Prevent skewing */
             .prose-custom img {
