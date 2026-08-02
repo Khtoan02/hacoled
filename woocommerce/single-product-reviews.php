@@ -81,91 +81,16 @@ foreach($comments as $comment) {
     </noscript>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-6">
-        <!-- Left Column: Summary & Write Review Form -->
-        <div class="lg:col-span-4 space-y-4 lg:sticky lg:top-24 h-fit">
-            
-            <!-- Sub-Box 1: Rating Summary & Breakdown -->
-            <div class="bg-slate-50/60 rounded-2xl p-5 border border-slate-100 flex flex-col items-center justify-center text-center">
-                <h3 class="text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">Đánh giá trung bình</h3>
-                <div class="text-4xl font-black text-slate-900 leading-none mb-2">
-                    <?php echo number_format( $average, 1 ); ?>
-                </div>
-                
-                <!-- Stars -->
-                <div class="flex items-center gap-0.5 mb-1.5">
-                    <?php
-                    $full_stars = floor($average);
-                    $half_star = ($average - $full_stars) >= 0.5 ? 1 : 0;
-                    $empty_stars = 5 - $full_stars - $half_star;
-
-                    for ($i = 0; $i < $full_stars; $i++) {
-                        echo '<i class="ph-fill ph-star text-base text-amber-500"></i>';
-                    }
-                    if ($half_star) {
-                        echo '<i class="ph-fill ph-star-half text-base text-amber-500"></i>';
-                    }
-                    for ($i = 0; $i < $empty_stars; $i++) {
-                        echo '<i class="ph-bold ph-star text-base text-slate-200"></i>';
-                    }
-                    ?>
-                </div>
-                
-                <p class="text-[11px] text-slate-400 font-medium mb-4">
-                    Dựa trên <?php echo esc_html( $count ); ?> đánh giá từ khách hàng
-                </p>
-                
-                <!-- Interactive breakdown progress bars -->
-                <div class="w-full space-y-1.5 text-[11px]">
-                    <?php
-                    for($i = 5; $i >= 1; $i--) {
-                        $percentage = $count > 0 ? round(($rates[$i] / $count) * 100) : 0;
-                        ?>
-                        <button @click="selectStarFilter(<?php echo $i; ?>)" 
-                                class="w-full flex items-center gap-2 text-left p-1 rounded-lg hover:bg-slate-100 transition-colors group focus:outline-none"
-                                :class="selectedStar === <?php echo $i; ?> ? 'bg-slate-100/80 font-bold ring-1 ring-slate-200' : ''">
-                            <span class="w-3 text-right font-semibold text-slate-600 group-hover:text-[#D90429]"><?php echo $i; ?></span>
-                            <i class="ph-fill ph-star text-amber-500 text-xs"></i>
-                            <div class="flex-1 h-1.5 bg-slate-200/85 rounded-full overflow-hidden">
-                                <div class="h-full bg-amber-500 rounded-full group-hover:bg-[#D90429] transition-colors" style="width: <?php echo $percentage; ?>%"></div>
-                            </div>
-                            <span class="w-8 text-right text-slate-400 font-medium group-hover:text-slate-650" :class="selectedStar === <?php echo $i; ?> ? 'text-[#D90429] font-bold' : ''">
-                                <?php echo $rates[$i]; ?>
-                            </span>
-                        </button>
-                        <?php
-                    }
-                    ?>
-                </div>
-                
-                <!-- Clear Filter Button -->
-                <button x-show="selectedStar !== null" 
-                        @click="selectedStar = null" 
-                        class="mt-3.5 text-[11px] font-semibold text-[#D90429] hover:underline flex items-center gap-1">
-                    <i class="ph-bold ph-x-circle"></i> Xóa bộ lọc
-                </button>
-            </div>
-
-            <!-- Sub-Box 2: Review Form Section (Collapsible & Compact) -->
+        <!-- Left Column: Write Review Form (Always Visible) -->
+        <div class="lg:col-span-4 lg:sticky lg:top-24 h-fit">
             <?php if ( get_option( 'woocommerce_review_rating_verification_required' ) === 'no' || wc_customer_bought_product( '', get_current_user_id(), $product->get_id() ) ) : ?>
-                <div id="review_form_wrapper" x-data="{ showForm: false, rating: 5, hoverRating: 0 }">
-                    
-                    <!-- Toggle Button to Open Form -->
-                    <div x-show="!showForm" class="flex justify-start">
-                        <button @click="showForm = true" class="w-full inline-flex items-center justify-center gap-2 bg-[#D90429] hover:bg-[#b90323] text-white font-bold px-5 py-3 rounded-xl shadow-md transition-all duration-300 text-xs uppercase tracking-wider">
-                            <i class="ph-bold ph-pencil-line text-sm"></i> Viết đánh giá của bạn
-                        </button>
-                    </div>
-
-                    <!-- Collapsible Form -->
-                    <div x-show="showForm" x-transition class="w-full bg-slate-50/60 border border-slate-200/80 rounded-2xl p-5 shadow-xs">
-                        <div class="flex items-center justify-between border-b border-slate-200/60 pb-3 mb-4">
+                <div id="review_form_wrapper" x-data="{ rating: 5, hoverRating: 0 }">
+                    <div class="w-full bg-slate-50/60 border border-slate-200/80 rounded-2xl p-5 shadow-xs">
+                        <div class="border-b border-slate-200/60 pb-3 mb-4">
                             <h3 class="text-xs md:text-sm font-bold text-slate-900 flex items-center gap-2">
                                 <i class="ph-bold ph-pencil-line text-[#D90429]"></i>
                                 <span>Viết đánh giá của bạn</span>
                             </h3>
-                            <button @click="showForm = false" class="text-slate-400 hover:text-slate-650 transition-colors text-xs font-semibold flex items-center gap-1">
-                                <i class="ph-bold ph-x"></i> Hủy
-                            </button>
                         </div>
                         
                         <?php
@@ -188,7 +113,7 @@ foreach($comments as $comment) {
                                                     @mouseenter="hoverRating = i" 
                                                     @mouseleave="hoverRating = 0"
                                                     class="p-0.5 focus:outline-none transition-transform hover:scale-110">
-                                                <i class="ph-fill ph-star text-xl transition-colors duration-150"
+                                                <i class="ph-fill ph-star text-2xl transition-colors duration-150"
                                                    :class="(hoverRating ? i <= hoverRating : i <= rating) ? 'text-amber-500' : 'text-slate-200'"></i>
                                             </button>
                                         </template>
@@ -222,14 +147,10 @@ foreach($comments as $comment) {
                             </div>
 
                             <!-- Submit -->
-                            <div class="pt-1 flex gap-2.5">
+                            <div class="pt-1">
                                 <button type="submit" name="submit" id="submit" 
-                                        class="flex-1 inline-flex items-center justify-center px-4 py-2.5 bg-[#D90429] hover:bg-[#b90323] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:-translate-y-0.5 transition-all duration-200">
-                                    Gửi đi
-                                </button>
-                                <button type="button" @click="showForm = false"
-                                        class="flex-1 inline-flex items-center justify-center px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-200">
-                                    Hủy
+                                        class="w-full inline-flex items-center justify-center px-5 py-2.5 bg-[#D90429] hover:bg-[#b90323] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md hover:-translate-y-0.5 transition-all duration-200">
+                                    Gửi đánh giá
                                 </button>
                             </div>
 
@@ -263,9 +184,37 @@ foreach($comments as $comment) {
             <?php endif; ?>
         </div>
 
-        <!-- Right Column: Review List & Call to Action -->
+        <!-- Right Column: Review List & Single-Line Summary -->
         <div class="lg:col-span-8 flex flex-col justify-between">
             <div id="comments" class="space-y-4">
+                
+                <!-- Single-Line Rating Summary -->
+                <div class="flex flex-wrap items-center gap-2 text-xs text-slate-700 bg-slate-50/50 rounded-xl px-4 py-3 border border-slate-100/80 mb-2">
+                    <span class="font-bold text-slate-400 uppercase text-[10px] tracking-wider mr-1">Đánh giá chung:</span>
+                    <div class="flex items-center gap-1">
+                        <span class="text-sm font-black text-slate-900 leading-none"><?php echo number_format($average, 1); ?></span>
+                        <span class="text-slate-400">/ 5.0</span>
+                    </div>
+                    <div class="flex items-center gap-0.5">
+                        <?php
+                        $full_stars = floor($average);
+                        $half_star = ($average - $full_stars) >= 0.5 ? 1 : 0;
+                        $empty_stars = 5 - $full_stars - $half_star;
+                        for ($i = 0; $i < $full_stars; $i++) {
+                            echo '<i class="ph-fill ph-star text-amber-500 text-xs"></i>';
+                        }
+                        if ($half_star) {
+                            echo '<i class="ph-fill ph-star-half text-amber-500 text-xs"></i>';
+                        }
+                        for ($i = 0; $i < $empty_stars; $i++) {
+                            echo '<i class="ph-bold ph-star text-slate-200 text-xs"></i>';
+                        }
+                        ?>
+                    </div>
+                    <span class="text-slate-300 mx-1">|</span>
+                    <span class="text-slate-500 font-medium"><?php echo esc_html($count); ?> đánh giá từ khách hàng</span>
+                </div>
+
                 <!-- Filter Tabs for quick desktop view -->
                 <div class="flex flex-wrap items-center gap-1.5 border-b border-slate-100 pb-3">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1.5">Lọc theo:</span>
