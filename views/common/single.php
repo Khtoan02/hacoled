@@ -251,7 +251,7 @@ $this->renderHeader($header_type ?? 'default');
             $related_args = [
                 'category__in'   => $categories,
                 'post__not_in'   => [$post['id']],
-                'posts_per_page' => 2,
+                'posts_per_page' => 4,
                 'orderby'        => 'rand'
             ];
             $related_query = new \WP_Query($related_args);
@@ -338,136 +338,7 @@ $this->renderHeader($header_type ?? 'default');
           </div>
         </div>
 
-        <!-- Sidebar Widget: Latest Articles by Category -->
-        <?php 
-        ob_start();
-        
-        $current_cats = ($post['id'] > 0) ? wp_get_post_categories($post['id']) : [];
-        $latest_posts = [];
-        
-        // 1. Fetch category-specific articles
-        if (!empty($current_cats)) {
-            $cat_args = [
-                'post_type'      => 'post',
-                'posts_per_page' => 4,
-                'post__not_in'   => [$post['id'] > 0 ? $post['id'] : 0],
-                'category__in'   => $current_cats,
-                'post_status'    => 'publish',
-                'orderby'        => 'date',
-                'order'          => 'DESC'
-            ];
-            $cat_query = new \WP_Query($cat_args);
-            if ($cat_query->have_posts()) {
-                while ($cat_query->have_posts()) {
-                    $cat_query->the_post();
-                    $latest_posts[] = [
-                        'id'        => get_the_ID(),
-                        'title'     => get_the_title(),
-                        'permalink' => get_permalink(),
-                        'date'      => get_the_date(),
-                        'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'medium') ?: ''
-                    ];
-                }
-                wp_reset_postdata();
-            }
-        }
-        
-        // 2. Fallback to general latest articles if less than 4 found
-        if (count($latest_posts) < 4) {
-            $exclude_ids = [$post['id'] > 0 ? $post['id'] : 0];
-            foreach ($latest_posts as $lp) {
-                $exclude_ids[] = $lp['id'];
-            }
-            
-            $general_args = [
-                'post_type'      => 'post',
-                'posts_per_page' => 4 - count($latest_posts),
-                'post__not_in'   => $exclude_ids,
-                'post_status'    => 'publish',
-                'orderby'        => 'date',
-                'order'          => 'DESC'
-            ];
-            $general_query = new \WP_Query($general_args);
-            if ($general_query->have_posts()) {
-                while ($general_query->have_posts()) {
-                    $general_query->the_post();
-                    $latest_posts[] = [
-                        'id'        => get_the_ID(),
-                        'title'     => get_the_title(),
-                        'permalink' => get_permalink(),
-                        'date'      => get_the_date(),
-                        'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'medium') ?: ''
-                    ];
-                }
-                wp_reset_postdata();
-            }
-        }
-        
-        // 3. Fallback to premium mock posts if database is empty (ensures UI is never blank)
-        if (empty($latest_posts)) {
-            $latest_posts = [
-                [
-                    'id'        => 1,
-                    'title'     => __('Màn hình LED COB là gì? Tương lai của hiển thị nét cao', 'hacoled'),
-                    'permalink' => '#',
-                    'date'      => date('d/m/Y'),
-                    'thumbnail' => 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=150&auto=format&fit=crop'
-                ],
-                [
-                    'id'        => 2,
-                    'title'     => __('Cách chọn công suất loa Line Array phù hợp cho hội trường', 'hacoled'),
-                    'permalink' => '#',
-                    'date'      => date('d/m/Y', strtotime('-2 days')),
-                    'thumbnail' => 'https://images.unsplash.com/photo-1470229722913-7c090bf8c04c?q=80&w=150&auto=format&fit=crop'
-                ],
-                [
-                    'id'        => 3,
-                    'title'     => __('Xu hướng lắp đặt màn hình LED quảng cáo ngoài trời 2026', 'hacoled'),
-                    'permalink' => '#',
-                    'date'      => date('d/m/Y', strtotime('-5 days')),
-                    'thumbnail' => 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=150&auto=format&fit=crop'
-                ],
-                [
-                    'id'        => 4,
-                    'title'     => __('Báo giá thi công trọn gói màn hình LED P2 trong nhà', 'hacoled'),
-                    'permalink' => '#',
-                    'date'      => date('d/m/Y', strtotime('-7 days')),
-                    'thumbnail' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=150&auto=format&fit=crop'
-                ]
-            ];
-        }
-        ?>
-        <div class="space-y-4">
-          <?php foreach ($latest_posts as $lp): 
-            $thumb = $lp['thumbnail'] ?: '';
-          ?>
-            <div class="flex items-center gap-3.5 group cursor-pointer" onclick="window.location.href='<?php echo esc_url($lp['permalink']); ?>'">
-              <div class="w-20 aspect-video rounded-lg overflow-hidden border border-slate-200/80 bg-slate-50 shrink-0 relative shadow-sm">
-                <?php if (!empty($thumb)): ?>
-                  <img src="<?php echo esc_url($thumb); ?>" alt="<?php echo esc_attr($lp['title']); ?>" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
-                <?php else: ?>
-                  <div class="w-full h-full bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
-                    <i class="ph-bold ph-image text-slate-350 text-sm"></i>
-                  </div>
-                <?php endif; ?>
-              </div>
-              <div class="space-y-0.5 flex-1">
-                <h4 class="text-xs font-bold text-slate-800 leading-snug group-hover:text-accent-red transition-colors line-clamp-2">
-                  <a href="<?php echo esc_url($lp['permalink']); ?>"><?php echo esc_html($lp['title']); ?></a>
-                </h4>
-                <span class="text-[9px] font-mono text-slate-400 block"><?php echo esc_html($lp['date']); ?></span>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-        <?php 
-        $widget_latest_content = ob_get_clean();
 
-        $this->renderComponent('widget', [
-            'title'   => __('Bài viết liên quan mới nhất', 'hacoled'),
-            'content' => $widget_latest_content
-        ]);
-        ?>
 
         <!-- Sidebar Widget: Product Categories -->
         <?php 
