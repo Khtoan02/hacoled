@@ -91,28 +91,8 @@ return [
     'led_trang_tri' => [
         'label' => 'LED Trang Trí Tòa Nhà',
         'enabled' => true,
-        'kind' => 'mega',
+        'kind' => 'link',
         'url' => home_url('/led-trang-tri-toa-nha/'),
-        'columns' => [
-            [
-                'title' => 'LED Trang Trí',
-                'icon' => 'sparkles',
-                'tone' => 'red',
-                'item_columns' => 1,
-                'items' => [
-                    ['label' => 'LED trang trí tòa nhà', 'url' => home_url('/led-trang-tri-toa-nha/')],
-                ],
-            ]
-        ],
-        'visual' => [
-            'image' => $assets . 'showcase-led.webp',
-            'fallback' => '',
-            'alt' => 'Giải pháp LED trang trí tòa nhà nghệ thuật',
-            'badge' => 'LED Trang Trí',
-            'title' => 'Giải pháp LED trang trí tòa nhà nghệ thuật',
-            'cta' => 'Tìm hiểu thêm',
-            'url' => home_url('/led-trang-tri-toa-nha/'),
-        ],
     ],
     'solutions' => [
         'label' => 'Giải Pháp',
