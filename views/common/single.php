@@ -173,10 +173,22 @@ $this->renderHeader($header_type ?? 'default');
           $catalog_repo = new \HacoLED\Theme\Repositories\CatalogRepository();
           $faq = ['title' => '', 'intro' => '', 'items' => []];
           $post_id = $post['id'] ?? get_the_ID();
-          $post_terms = wp_get_post_terms( $post_id, 'category' );
-          if ( ! empty( $post_terms ) && ! is_wp_error( $post_terms ) ) {
-              $primary_term = $post_terms[0];
-              $faq = $catalog_repo->categoryFaq( $primary_term );
+          
+          // 1. Prioritize Post-specific FAQ configured on the edit screen
+          $post_faq_items = get_post_meta($post_id, 'post_faq_items', true);
+          if (is_array($post_faq_items) && !empty($post_faq_items)) {
+              $faq = [
+                  'title' => get_post_meta($post_id, 'post_faq_title', true) ?: '',
+                  'intro' => get_post_meta($post_id, 'post_faq_intro', true) ?: '',
+                  'items' => $post_faq_items,
+              ];
+          } else {
+              // 2. Fallback to Post Category FAQ
+              $post_terms = wp_get_post_terms( $post_id, 'category' );
+              if ( ! empty( $post_terms ) && ! is_wp_error( $post_terms ) ) {
+                  $primary_term = $post_terms[0];
+                  $faq = $catalog_repo->categoryFaq( $primary_term );
+              }
           }
           if ( ! empty( $faq['items'] ) ) :
           ?>
