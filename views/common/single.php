@@ -85,11 +85,89 @@ $this->renderHeader($header_type ?? 'default');
         </div>
 
         <!-- Full HTML Post Body -->
-        <article class="prose-custom text-slate-650 leading-relaxed pt-2">
-          <?php 
-          echo apply_filters('the_content', $post['content']); 
-          ?>
-        </article>
+        <div x-data="{ lightboxOpen: false, lightboxImage: '' }">
+          <style>
+            /* Polish Article Images & Prevent skewing */
+            .prose-custom img {
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              max-width: 100%;
+              height: auto !important; /* Force proportional height */
+              border-radius: 12px;
+              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+              cursor: zoom-in;
+              transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+            }
+            .prose-custom img:hover {
+              transform: scale(1.015);
+              opacity: 0.95;
+            }
+            /* Style for WordPress image captions */
+            .prose-custom .wp-caption {
+              max-width: 100% !important;
+              margin: 1.5rem auto !important;
+              text-align: center;
+              background-color: #f8fafc;
+              padding: 8px;
+              border-radius: 14px;
+              border: 1px solid #f1f5f9;
+            }
+            .prose-custom .wp-caption img {
+              margin-bottom: 6px;
+            }
+            .prose-custom .wp-caption-text {
+              font-size: 12px !important;
+              color: #64748b !important;
+              margin: 4px 0 0 0 !important;
+              font-style: italic;
+              line-height: 1.5;
+            }
+          </style>
+
+          <article class="prose-custom text-slate-650 leading-relaxed pt-2"
+                   @click="
+                     if ($event.target.tagName === 'IMG') {
+                       lightboxImage = $event.target.src;
+                       lightboxOpen = true;
+                     }
+                   ">
+            <?php 
+            echo apply_filters('the_content', $post['content']); 
+            ?>
+          </article>
+
+          <!-- Lightbox Modal -->
+          <div x-show="lightboxOpen" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0" 
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100" 
+            x-transition:leave-end="opacity-0"
+            x-cloak 
+            class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/85 backdrop-blur-md p-4" 
+            @click="lightboxOpen = false" 
+            @keydown.escape.window="lightboxOpen = false">
+            
+            <!-- Close button -->
+            <button class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl focus:outline-none transition-colors" @click="lightboxOpen = false">
+              <i class="ph-bold ph-x"></i>
+            </button>
+            
+            <!-- Image container with scale transition -->
+            <div class="relative max-w-full max-h-full flex items-center justify-center"
+              x-show="lightboxOpen"
+              x-transition:enter="transition ease-out duration-300 transform"
+              x-transition:enter-start="scale-95"
+              x-transition:enter-end="scale-100"
+              x-transition:leave="transition ease-in duration-200 transform"
+              x-transition:leave-start="scale-100"
+              x-transition:leave-end="scale-95">
+              <img :src="lightboxImage" class="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain border border-white/10" @click.stop />
+            </div>
+          </div>
+        </div>
 
         <!-- Article Footer: Social Share -->
         <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-100 text-xs">

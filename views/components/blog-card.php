@@ -44,6 +44,7 @@ $insight_chips = [__('Phân tích', 'hacoled'), __('Ứng dụng', 'hacoled'), _
           class="absolute inset-0 h-full w-full object-cover object-center brightness-[1.02] contrast-[1.03] saturate-[1.1] transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
           decoding="async"
+          onerror="this.onerror=null; this.src='<?php echo esc_url(get_template_directory_uri() . '/assets/images/services-hero.webp'); ?>';"
         />
       <?php else: ?>
         <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#1C0505] via-[#5a0c0c] to-[#D4AF37]/40">
