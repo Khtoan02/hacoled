@@ -192,30 +192,29 @@ $this->renderHeader($header_type ?? 'default');
           }
           if ( ! empty( $faq['items'] ) ) :
           ?>
-              <div class="mt-12 pt-8 border-t border-slate-100" x-data="{ activeFaq: null }">
-                <h3 class="text-sm font-bold text-gray-900 pb-3 border-b border-gray-100 mb-6 flex items-center gap-2">
-                  <i class="ph-bold ph-question text-[#D90429]"></i>
-                  <span><?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?></span>
-                </h3>
-                <?php if (!empty($faq['intro'])): ?>
-                  <p class="text-xs text-gray-500 mb-4"><?php echo wp_kses_post($faq['intro']); ?></p>
-                <?php endif; ?>
-                <div class="space-y-3">
+              <div class="mt-12 pt-8 border-t border-slate-100 space-y-4">
+                <div class="flex flex-col gap-1 mb-6">
+                  <h3 class="text-sm font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                    <i class="ph-bold ph-question text-[#D90429] text-base"></i>
+                    <span><?php echo esc_html(!empty($faq['title']) ? $faq['title'] : __('Câu hỏi thường gặp', 'hacoled')); ?></span>
+                  </h3>
+                  <?php if (!empty($faq['intro'])): ?>
+                    <p class="text-xs text-slate-500 leading-relaxed mt-1"><?php echo wp_kses_post($faq['intro']); ?></p>
+                  <?php endif; ?>
+                </div>
+                
+                <div class="space-y-4">
                   <?php foreach ($faq['items'] as $index => $faqItem): ?>
-                    <div class="border border-slate-100 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
-                      <button @click="activeFaq === <?php echo $index; ?> ? activeFaq = null : activeFaq = <?php echo $index; ?>"
-                              class="w-full px-5 py-4 text-left flex items-center justify-between gap-4 font-bold text-xs text-slate-800 hover:text-[#D90429] transition-colors focus:outline-none">
+                    <details class="group rounded-2xl border border-slate-200/80 bg-slate-50/40 p-5 transition-all duration-300 open:border-[#D90429]/30 open:bg-white open:shadow-[0_15px_30px_rgba(217,4,41,0.03)]"
+                      <?php echo $index === 0 ? 'open' : ''; ?>>
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-xs font-bold text-slate-850 transition-colors hover:text-[#D90429] group-open:text-[#D90429] [&_::-webkit-details-marker]:hidden">
                         <span><?php echo esc_html($faqItem['question']); ?></span>
-                        <i class="ph-bold text-[#D90429] transition-transform duration-300"
-                           :class="activeFaq === <?php echo $index; ?> ? 'ph-minus rotate-180' : 'ph-plus'"></i>
-                      </button>
-                      <div x-show="activeFaq === <?php echo $index; ?>"
-                           x-collapse
-                           x-cloak
-                           class="px-5 pb-4 text-xs text-slate-500 leading-relaxed border-t border-slate-50/50 pt-3">
+                        <i class="ph-bold ph-caret-down text-slate-500 transition-transform duration-300 group-open:text-[#D90429] group-open:rotate-180 text-xs"></i>
+                      </summary>
+                      <div class="border-t border-slate-100 mt-4 pt-4 text-[11px] leading-relaxed text-slate-600 prose prose-slate max-w-none">
                         <?php echo wp_kses_post($faqItem['answer']); ?>
                       </div>
-                    </div>
+                    </details>
                   <?php endforeach; ?>
                 </div>
               </div>
