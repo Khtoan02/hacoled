@@ -46,7 +46,7 @@ class CatalogRepository {
     }
 
     public function featuredProjects($limit = 3) {
-        $category_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
+        $category_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an-tieu-bieu-moi') ?: 'du-an-tieu-bieu-moi';
         return $this->posts([
             'post_type' => ['post', 'page'], 'posts_per_page' => absint($limit),
             'category_name' => $category_slug, 'post_status' => 'publish',
