@@ -1,6 +1,6 @@
 <?php
 /**
- * Building Decorative LED Page View Template - Premium Light Architectural Design
+ * Building Decorative LED Page View Template - Professional B2B Landing Design
  *
  * @var array  $page
  * @var array  $products
@@ -11,90 +11,114 @@
 
 $this->renderHeader($header_type ?? 'default');
 
-// Prepare mock projects if the database is empty or doesn't have enough building projects
+// Prepare mock projects with B2B details
 $display_projects = $projects;
 if (empty($display_projects)) {
     $display_projects = [
         [
             'title'      => __('Chiếu sáng mỹ thuật tòa nhà Geleximco Building Láng Hạ', 'hacoled'),
             'client'     => __('Tập đoàn Geleximco', 'hacoled'),
-            'tech_specs' => 'LED Linear RGB | DMX512',
+            'tech_specs' => 'LED Linear RGB | Hệ thống DMX512',
             'year'       => '2026',
             'image'      => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop',
         ],
         [
             'title'      => __('Thi công màn hình LED lưới ngoài trời tại Vietcombank Tower TP.HCM', 'hacoled'),
-            'client'     => __('Vietcombank', 'hacoled'),
-            'tech_specs' => 'LED Mesh P16-32 | 8000 nits',
+            'client'     => __('Ngân hàng Vietcombank', 'hacoled'),
+            'tech_specs' => 'LED Mesh P16-32 | Độ sáng 8000 nits',
             'year'       => '2026',
             'image'      => 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
         ],
         [
             'title'      => __('Hệ thống LED viền chạy hiệu ứng tòa nhà VPBank Tower Hà Nội', 'hacoled'),
-            'client'     => __('VPBank', 'hacoled'),
-            'tech_specs' => 'LED Linear DMX | IP68',
+            'client'     => __('Ngân hàng VPBank', 'hacoled'),
+            'tech_specs' => 'LED Linear DMX512 | Tiêu chuẩn IP68',
             'year'       => '2026',
             'image'      => 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=800&auto=format&fit=crop',
         ],
         [
             'title'      => __('LED trang trí kiến trúc mặt dựng tòa nhà Discovery Complex', 'hacoled'),
             'client'     => __('Kinh Đô TCI Group', 'hacoled'),
-            'tech_specs' => 'LED Pixel Dot 50mm | RGB',
+            'tech_specs' => 'LED Pixel Dot 50mm | Lập trình hiệu ứng Cloud',
             'year'       => '2025',
             'image'      => 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=800&auto=format&fit=crop',
         ],
         [
             'title'      => __('Lắp đặt LED chiếu rọi mặt dựng Landmark 81', 'hacoled'),
-            'client'     => __('Vingroup', 'hacoled'),
-            'tech_specs' => 'LED Wall Washer 48W | RGBW',
+            'client'     => __('Tập đoàn Vingroup', 'hacoled'),
+            'tech_specs' => 'LED Wall Washer 48W | Điều khiển DMX',
             'year'       => '2026',
             'image'      => 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=800&auto=format&fit=crop',
         ]
     ];
 }
 
-// Prepare mock products if WooCommerce is empty or doesn't return products
+// Prepare mock products with detailed B2B specifications
 $display_products = $products;
 if (empty($display_products)) {
     $display_products = [
         [
             'id'          => 801,
             'title'       => __('LED Lưới Trong Suốt Haco-Mesh M16', 'hacoled'),
-            'description' => __('Giải pháp LED lưới chuyên dụng cho mặt kính tòa nhà. Khối lượng siêu nhẹ, độ trong suốt cao từ 70-80%, cản gió cực thấp và độ sáng lên đến 8000 nits giúp hiển thị sắc nét ngay cả dưới ánh nắng mặt trời trực tiếp.', 'hacoled'),
+            'description' => __('Giải pháp LED lưới chuyên dụng cho mặt kính tòa nhà văn phòng, trung tâm thương mại. Khối lượng siêu nhẹ (chỉ 8kg/m2), độ trong suốt cao 75-80%, cản gió tối đa, độ sáng lên đến 8000 nits hỗ trợ hiển thị sắc nét dưới ánh nắng.', 'hacoled'),
             'thumbnail'   => 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop',
-            'category'    => __('LED lưới tòa nhà', 'hacoled'),
+            'category'    => __('LED lưới mặt dựng kính', 'hacoled'),
             'permalink'   => '#',
+            'specs'       => [
+                'refresh'   => '3840Hz',
+                'bright'    => '8000 nits',
+                'warranty'  => '36 Tháng',
+                'ic'        => 'DMX512 / ArtNet'
+            ]
         ],
         [
             'id'          => 802,
-            'title'       => __('LED Thanh Facade Cao Cấp Haco-Linear L100', 'hacoled'),
-            'description' => __('LED thanh chuyên dụng chạy viền tòa nhà, bo góc kiến trúc. Thiết kế nhôm anode bền bỉ, chuẩn kháng nước tuyệt đối IP68, hỗ trợ lập trình hiệu ứng chuyển động RGBW mượt mà qua giao thức DMX512.', 'hacoled'),
+            'title'       => __('LED Thanh Facade Haco-Linear L100', 'hacoled'),
+            'description' => __('Đèn LED thanh chạy viền kiến trúc ngoài trời. Thân nhôm anode bền bỉ chịu ăn mòn muối biển, thấu kính polycarbonate kháng UV cường độ cao, chuẩn bảo vệ nước tuyệt đối IP68 và lập trình DMX512 mượt mà.', 'hacoled'),
             'thumbnail'   => 'https://images.unsplash.com/photo-1608976328267-e673d3ec06ce?q=80&w=800&auto=format&fit=crop',
-            'category'    => __('LED thanh trang trí', 'hacoled'),
+            'category'    => __('LED thanh chạy viền', 'hacoled'),
             'permalink'   => '#',
+            'specs'       => [
+                'refresh'   => '1920Hz',
+                'bright'    => '1500 nits',
+                'warranty'  => '36 Tháng',
+                'ic'        => 'DMX512 Auto-Address'
+            ]
         ],
         [
             'id'          => 803,
-            'title'       => __('LED Điểm Pixel Dot Thông Minh Haco-Pixel P40', 'hacoled'),
-            'description' => __('Đèn LED điểm thông minh thiết kế dạng chuỗi. Thích hợp lắp đặt trên các bề mặt cong phức tạp, khối bê tông tòa nhà. Khả năng phối màu không giới hạn, tạo các màn hình trình chiếu video tự do.', 'hacoled'),
+            'title'       => __('LED Điểm Pixel Dot Haco-Pixel P40', 'hacoled'),
+            'description' => __('Đèn LED điểm thông minh thiết kế dạng chuỗi linh hoạt. Chuyên dùng cho các mặt dựng bê tông lớn, kiến trúc phi quy tắc hoặc uốn cong phức tạp. Vỏ chống cháy chuyên dụng, góc nhìn rộng đến 120 độ.', 'hacoled'),
             'thumbnail'   => 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=800&auto=format&fit=crop',
             'category'    => __('LED điểm thông minh', 'hacoled'),
             'permalink'   => '#',
+            'specs'       => [
+                'refresh'   => '3840Hz',
+                'bright'    => '2000 nits',
+                'warranty'  => '24 Tháng',
+                'ic'        => 'DMX512 / TTL'
+            ]
         ],
         [
             'id'          => 804,
-            'title'       => __('Đèn LED Pha Chiếu Tường Nghệ Thuật Haco-Wall Washer W36', 'hacoled'),
-            'description' => __('Đèn pha led rọi tường công suất cao với góc chiếu định hướng chính xác. Chuyên dùng để làm nổi bật bề mặt tường phẳng lớn hoặc cột trụ tòa nhà, thay đổi màu sắc RGBW sinh động từ xa.', 'hacoled'),
+            'title'       => __('Đèn LED Pha Rọi Tường Haco-Wall Washer W36', 'hacoled'),
+            'description' => __('Đèn pha led rọi tường công suất cao với góc chiếu hẹp (15/30/45 độ) định hướng chính xác. Chuyên dùng chiếu rọi làm nổi bật các cột trụ lớn, mặt tiền phẳng đứng của các tòa nhà di sản, khách sạn sang trọng.', 'hacoled'),
             'thumbnail'   => 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=800&auto=format&fit=crop',
-            'category'    => __('LED pha chiếu tường', 'hacoled'),
+            'category'    => __('LED pha rọi kiến trúc', 'hacoled'),
             'permalink'   => '#',
+            'specs'       => [
+                'refresh'   => 'N/A',
+                'bright'    => '5400 lm',
+                'warranty'  => '36 Tháng',
+                'ic'        => 'DMX512 / On-Off'
+            ]
         ]
     ];
 }
 ?>
 
-<!-- Premium Building LED Template Wrapper (Light Theme synchronized with Homepage) -->
-<main class="relative bg-[#F8F6F5] pt-28 md:pt-52 pb-24 overflow-hidden min-h-[90vh]">
+<!-- Premium B2B LED Landing Page Wrapper -->
+<main class="relative bg-[#F8F6F5] pt-28 md:pt-52 pb-24 overflow-hidden min-h-[90vh] text-slate-800">
   
   <!-- Glowing Background Orbs -->
   <div class="glow-red top-1/4 left-1/4 opacity-10 w-[500px] h-[500px]"></div>
@@ -102,8 +126,8 @@ if (empty($display_products)) {
 
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
 
-    <!-- Breadcrumbs with Schema.org Microdata -->
-    <nav aria-label="Breadcrumb" class="gsap-reveal mb-8 text-xs font-semibold text-slate-500 uppercase tracking-widest flex items-center gap-2" data-direction="up" data-delay="0.1" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <!-- B2B Breadcrumbs with Schema.org Microdata -->
+    <nav aria-label="Breadcrumb" class="gsap-reveal mb-8 text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2" data-direction="up" data-delay="0.1" itemscope itemtype="https://schema.org/BreadcrumbList">
       <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="text-slate-500 hover:text-[#B31217] transition-colors" itemprop="item">
           <span itemprop="name"><?php _e('Trang chủ', 'hacoled'); ?></span>
@@ -112,74 +136,110 @@ if (empty($display_products)) {
       </span>
       <span class="text-slate-400">/</span>
       <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <span class="text-slate-700 font-bold" itemprop="name"><?php echo esc_html($page['title']); ?></span>
+        <span class="text-slate-700 font-extrabold" itemprop="name"><?php echo esc_html($page['title']); ?></span>
         <meta itemprop="position" content="2" />
       </span>
     </nav>
 
-    <!-- SECTION 1: HERO SECTION -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-24 min-h-[60vh]">
+    <!-- SECTION 1: B2B HERO SECTION -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-28 min-h-[65vh]">
       <div class="lg:col-span-7 space-y-6 gsap-reveal" data-direction="up" data-delay="0.2">
-        <div class="w-12 h-1 bg-gradient-to-r from-[#B31217] via-[#FBBF24] to-yellow-500 rounded-full"></div>
-        <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('GIẢI PHÁP CHIẾU SÁNG MỸ THUẬT', 'hacoled'); ?></span>
-        <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-tight uppercase">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-950 via-slate-800 to-[#B31217]"><?php _e('LED Trang Trí', 'hacoled'); ?></span>
-          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#B31217] via-red-650 to-[#FBBF24]"><?php _e('Tòa Nhà Cao Tầng', 'hacoled'); ?></span>
+        <!-- Trust badge above headline -->
+        <div class="inline-flex items-center gap-2 bg-[#B31217]/10 border border-[#B31217]/25 px-4 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-widest text-[#B31217] font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#B31217] animate-ping"></span>
+          <?php _e('Nhà Thầu Chiếu Sáng Mỹ Thuật Kiến Trúc Trọn Gói', 'hacoled'); ?>
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight uppercase font-heading">
+          <span class="text-slate-900"><?php _e('Giải Pháp LED', 'hacoled'); ?></span>
+          <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#B31217] via-red-700 to-[#FBBF24]"><?php _e('Trang Trí Tòa Nhà', 'hacoled'); ?></span>
+          <span class="text-slate-900 text-3xl sm:text-4xl block font-bold tracking-normal normal-case mt-2"><?php _e('Đạt chuẩn kỹ thuật & Mỹ thuật đô thị', 'hacoled'); ?></span>
         </h1>
-        <p class="text-slate-655 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
-          <?php _e('HacoLED tự hào cung cấp giải pháp chiếu sáng mỹ thuật kiến trúc trọn gói. Biến mặt tiền tòa nhà khô khan thành tác phẩm nghệ thuật ánh sáng sống động vào ban đêm, nâng tầm giá trị thương hiệu và tạo điểm nhấn biểu tượng bền vững.', 'hacoled'); ?>
+        
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-light max-w-2xl">
+          <?php _e('HacoLED mang đến giải pháp chiếu sáng mỹ thuật tòa nhà cao tầng từ khảo sát kỹ thuật, lập phương án thiết kế hiệu ứng 3D, cung cấp vật tư nhập khẩu CO/CQ chính ngạch và thi công an toàn trên cao chuyên nghiệp.', 'hacoled'); ?>
         </p>
-        <div class="flex flex-col sm:flex-row items-center gap-4 pt-4">
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#B31217] to-[#E60000] hover:from-[#E60000] hover:to-[#B31217] text-white font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg shadow-red-955/15 transition-all duration-300 transform hover:-translate-y-0.5">
-            <span><?php _e('Nhận Tư Vấn Thiết Kế 3D Miễn Phí', 'hacoled'); ?></span>
+
+        <!-- B2B Trust Indicators Strip -->
+        <div class="grid grid-cols-3 gap-4 py-4 border-y border-slate-200/60 max-w-xl">
+          <div>
+            <span class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider"><?php _e('Cam kết CO/CQ', 'hacoled'); ?></span>
+            <span class="text-xs text-slate-500 font-light"><?php _e('Nhập khẩu chính ngạch', 'hacoled'); ?></span>
+          </div>
+          <div class="border-x border-slate-200/60 px-4">
+            <span class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider"><?php _e('Bảo hành vàng', 'hacoled'); ?></span>
+            <span class="text-xs text-slate-500 font-light"><?php _e('36 tháng tận công trình', 'hacoled'); ?></span>
+          </div>
+          <div class="pl-2">
+            <span class="block text-xs font-extrabold text-slate-900 uppercase tracking-wider"><?php _e('Thiết kế 3D', 'hacoled'); ?></span>
+            <span class="text-xs text-slate-500 font-light"><?php _e('Miễn phí phương án sơ bộ', 'hacoled'); ?></span>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#B31217] hover:bg-[#E60000] text-white font-extrabold text-xs uppercase px-8 py-4.5 rounded-xl tracking-wider shadow-lg shadow-red-950/15 transition-all duration-300 transform hover:-translate-y-0.5">
+            <span><?php _e('Liên Hệ Nhận Phương Án Thiết Kế 3D', 'hacoled'); ?></span>
             <i class="ph-bold ph-arrow-right text-[11px]"></i>
           </a>
-          <a href="#building-categories" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-slate-250 hover:border-slate-400 text-slate-800 font-bold text-xs uppercase px-8 py-4 rounded-full tracking-wider transition-all duration-300 bg-white shadow-sm">
-            <span><?php _e('Khám Phá Giải Pháp', 'hacoled'); ?></span>
-            <i class="ph-bold ph-arrow-down text-[11px] text-[#B31217]"></i>
+          <a href="#facade-products" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-slate-250 hover:border-slate-400 text-slate-800 font-bold text-xs uppercase px-8 py-4.5 rounded-xl tracking-wider transition-all duration-300 bg-white shadow-sm">
+            <i class="ph-bold ph-download-simple text-[#B31217]"></i>
+            <span><?php _e('Tải Catalogue Thiết Bị B2B', 'hacoled'); ?></span>
           </a>
         </div>
       </div>
+      
       <div class="lg:col-span-5 relative gsap-reveal" data-direction="right" data-delay="0.3">
-        <!-- Abstract neon building mockup representation -->
-        <div class="relative w-full aspect-[4/5] max-w-[450px] mx-auto rounded-3xl overflow-hidden border border-white bg-white/70 p-6 flex flex-col justify-end shadow-2xl backdrop-blur-md">
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-100/90 via-transparent to-transparent z-10"></div>
-          <!-- Decorative Background pattern simulating light pixels -->
-          <div class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none" style="filter: invert(1);"></div>
-          
-          <!-- Neon facade lighting abstract graphic -->
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60">
-            <div class="w-[80%] h-[90%] border-l border-r border-t border-dashed border-[#B31217]/20 relative">
-              <div class="absolute left-1/4 right-1/4 top-0 bottom-0 border-l border-r border-dashed border-[#FBBF24]/20"></div>
+        <!-- Professional Architecture LED simulation container -->
+        <div class="relative w-full aspect-[4/5] max-w-[450px] mx-auto rounded-3xl overflow-hidden border border-white/90 bg-white/80 p-6 flex flex-col justify-between shadow-2xl backdrop-blur-xl">
+          <!-- Glassmorphic header of the simulation -->
+          <div class="flex items-center justify-between border-b border-slate-150 pb-4">
+            <span class="text-[10px] font-bold text-[#B31217] font-mono tracking-widest uppercase">HacoLED Facade Studio</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+          </div>
+
+          <!-- Abstract digital building facade graphic representation -->
+          <div class="my-6 flex-1 flex items-center justify-center pointer-events-none relative min-h-[220px]">
+            <!-- Graphic facade mesh -->
+            <div class="w-[85%] h-full border-l border-r border-t border-dashed border-slate-300 relative">
+              <div class="absolute left-1/3 right-1/3 top-0 bottom-0 border-l border-r border-dashed border-slate-200"></div>
               <div class="absolute inset-0 bg-gradient-to-b from-[#B31217]/5 via-[#FBBF24]/3 to-transparent"></div>
-              <!-- Floating light points simulating pixel nodes -->
-              <span class="absolute top-[20%] left-[25%] w-2.5 h-2.5 rounded-full bg-[#B31217] shadow-glow-red animate-pulse"></span>
-              <span class="absolute top-[40%] right-[25%] w-2.5 h-2.5 rounded-full bg-[#FBBF24] shadow-glow-gold animate-pulse"></span>
-              <span class="absolute top-[60%] left-[50%] w-2.5 h-2.5 rounded-full bg-[#B31217] shadow-glow-red animate-pulse" style="animation-delay: 0.5s"></span>
-              <span class="absolute top-[30%] left-[75%] w-2.5 h-2.5 rounded-full bg-[#FBBF24] shadow-glow-gold animate-pulse" style="animation-delay: 0.8s"></span>
+              <!-- Simulated light lines -->
+              <div class="absolute left-[33%] top-[20%] w-[33%] h-0.5 bg-gradient-to-r from-transparent via-[#FBBF24] to-transparent shadow-glow-gold"></div>
+              <div class="absolute left-0 top-[45%] w-full h-0.5 bg-gradient-to-r from-transparent via-[#B31217] to-transparent shadow-glow-red"></div>
+              <div class="absolute left-[33%] top-[70%] w-[33%] h-0.5 bg-gradient-to-r from-transparent via-[#FBBF24] to-transparent shadow-glow-gold"></div>
+
+              <!-- Light nodes -->
+              <span class="absolute top-[20%] left-[33%] w-2 h-2 rounded-full bg-[#FBBF24] shadow-glow-gold animate-pulse"></span>
+              <span class="absolute top-[45%] left-[50%] w-2 h-2 rounded-full bg-[#B31217] shadow-glow-red animate-pulse" style="animation-delay: 0.3s"></span>
+              <span class="absolute top-[70%] right-[33%] w-2 h-2 rounded-full bg-[#FBBF24] shadow-glow-gold animate-pulse" style="animation-delay: 0.6s"></span>
             </div>
           </div>
 
-          <div class="relative z-20 space-y-3">
-            <span class="px-3 py-1 rounded-md bg-[#B31217]/10 border border-[#B31217]/20 text-xs font-bold text-[#B31217] uppercase tracking-wider inline-block">Facade Media Art</span>
-            <h4 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Vincom Plaza Facade LED</h4>
-            <p class="text-xs text-slate-550 leading-relaxed font-light">
-              Mô phỏng 3D mặt dựng lập trình ánh sáng thông minh. Giải pháp biến đổi diện mạo kiến trúc chỉ bằng một nút chạm từ xa.
-            </p>
+          <!-- Visual specs badge overlay -->
+          <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-2">
+            <span class="px-2 py-0.5 rounded bg-slate-900 text-[8px] font-bold text-white uppercase tracking-widest inline-block">Rendering Mode</span>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-500"><?php _e('Giao thức lập trình:', 'hacoled'); ?></span>
+              <span class="font-bold text-slate-800">DMX512 (250kbps)</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-500"><?php _e('Tần số quét quét hình:', 'hacoled'); ?></span>
+              <span class="font-bold text-[#B31217]">3840Hz (Flicker-Free)</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 2: APPLICATION CATEGORIES (GIỚI THIỆU HẠNG MỤC ÁP DỤNG) - Premium Light cards with Stagger/Scale Interactions -->
+    <!-- SECTION 2: APPLICATION CATEGORIES (GIỚI THIỆU HẠNG MỤC ÁP DỤNG) -->
     <div id="building-categories" class="mb-28 scroll-mt-24">
       <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 gsap-reveal" data-direction="up" data-delay="0.2">
-        <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('ỨNG DỤNG KIẾN TRÚC', 'hacoled'); ?></span>
+        <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('GIẢI PHÁP CHIẾU SÁNG MỸ THUẬT', 'hacoled'); ?></span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
-          <?php _e('Các Hạng Mục Áp Dụng LED Tòa Nhà', 'hacoled'); ?>
+          <?php _e('Phân Loại Giải Pháp LED Facade Tòa Nhà', 'hacoled'); ?>
         </h2>
-        <p class="text-slate-600 text-sm font-light">
-          Tùy theo cấu trúc mặt tiền (kính, bê tông hay nhôm định hình), HacoLED cung cấp các dòng sản phẩm tối ưu nhằm đạt hiệu quả thẩm mỹ vượt trội.
+        <p class="text-slate-550 text-sm font-light">
+          Tùy theo hiện trạng kiến trúc mặt dựng và kết cấu bề mặt, HacoLED tư vấn phương án kỹ thuật chuyên biệt nhằm tôn vinh tối đa hình khối công trình.
         </p>
       </div>
 
@@ -196,14 +256,14 @@ if (empty($display_products)) {
               <div class="w-10 h-10 rounded-xl bg-[#B31217]/10 border border-[#B31217]/20 flex items-center justify-center text-[#B31217] group-hover:rotate-6 transition-transform duration-300">
                 <i class="ph-fill ph-grid-four text-xl"></i>
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Lưới (LED Mesh)', 'hacoled'); ?></h3>
+              <h3 class="text-base font-extrabold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Lưới (LED Mesh)', 'hacoled'); ?></h3>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed font-light">
-              <?php _e('Chuyên lắp đặt trên bề mặt vách kính lớn tòa nhà. Không cản trở ánh sáng tự nhiên đi vào bên trong tòa nhà vào ban ngày, giữ nguyên cấu trúc kính sang trọng.', 'hacoled'); ?>
+              <?php _e('Giải pháp tối ưu cho mặt dựng kính lớn tòa nhà văn phòng, trung tâm thương mại. Giữ nguyên độ truyền sáng tự nhiên (70-85%) và tầm nhìn nội khu ban ngày.', 'hacoled'); ?>
             </p>
           </div>
           <div class="p-6 pt-0 border-t border-slate-100 text-[11px] font-mono text-[#B31217] font-bold flex items-center justify-between">
-            <span><?php _e('Độ trong suốt:', 'hacoled'); ?></span>
+            <span><?php _e('Độ trong kính kính:', 'hacoled'); ?></span>
             <span>70% - 85%</span>
           </div>
         </div>
@@ -219,14 +279,14 @@ if (empty($display_products)) {
               <div class="w-10 h-10 rounded-xl bg-amber-100 border border-[#FBBF24]/30 flex items-center justify-center text-[#FBBF24] group-hover:rotate-6 transition-transform duration-300">
                 <i class="ph-fill ph-rows text-xl"></i>
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Thanh (Linear)', 'hacoled'); ?></h3>
+              <h3 class="text-base font-extrabold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Thanh (Linear)', 'hacoled'); ?></h3>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed font-light">
-              <?php _e('Định hình toàn bộ viền góc, các đường nét kiến trúc nổi bật. Thích hợp dọc các góc tường phẳng, cột trụ đứng để phô diễn cấu trúc hình khối của công trình.', 'hacoled'); ?>
+              <?php _e('Nhấn mạnh viền góc cạnh và các trục thẳng nổi bật của tòa nhà. Lắp ráp nhôm định hình cao cấp, hòa hợp hoàn hảo vào các đường phào chỉ kiến trúc.', 'hacoled'); ?>
             </p>
           </div>
           <div class="p-6 pt-0 border-t border-slate-100 text-[11px] font-mono text-[#B31217] font-bold flex items-center justify-between">
-            <span><?php _e('Tiêu chuẩn:', 'hacoled'); ?></span>
+            <span><?php _e('Tiêu chuẩn chống nước:', 'hacoled'); ?></span>
             <span>IP67 / IP68 waterproof</span>
           </div>
         </div>
@@ -242,15 +302,15 @@ if (empty($display_products)) {
               <div class="w-10 h-10 rounded-xl bg-[#B31217]/10 border border-[#B31217]/20 flex items-center justify-center text-[#B31217] group-hover:rotate-6 transition-transform duration-300">
                 <i class="ph-fill ph-circles-four text-xl"></i>
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Điểm (Pixel Dot)', 'hacoled'); ?></h3>
+              <h3 class="text-base font-extrabold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Điểm (Pixel Dot)', 'hacoled'); ?></h3>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed font-light">
-              <?php _e('Lắp đặt rải đều theo các lưới ô bề mặt bê tông hoặc vách dựng phi quy tắc. Cho phép lập trình linh hoạt chạy chữ, đồ họa chuyển động theo yêu cầu của chủ đầu tư.', 'hacoled'); ?>
+              <?php _e('Phù hợp cho bề mặt bê tông dạng lưới hoặc vách dựng phi hình học. Khả năng lập trình độc lập từng điểm pixel để hiển thị đồ họa hoặc video quy mô lớn.', 'hacoled'); ?>
             </p>
           </div>
           <div class="p-6 pt-0 border-t border-slate-100 text-[11px] font-mono text-[#B31217] font-bold flex items-center justify-between">
-            <span><?php _e('Điều khiển:', 'hacoled'); ?></span>
-            <span>Cloud Smart Sync</span>
+            <span><?php _e('Giao thức điều khiển:', 'hacoled'); ?></span>
+            <span>Cloud Smart Sync / DMX512</span>
           </div>
         </div>
 
@@ -265,14 +325,14 @@ if (empty($display_products)) {
               <div class="w-10 h-10 rounded-xl bg-amber-100 border border-[#FBBF24]/30 flex items-center justify-center text-[#FBBF24] group-hover:rotate-6 transition-transform duration-300">
                 <i class="ph-fill ph-flashlight text-xl"></i>
               </div>
-              <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Pha Rọi', 'hacoled'); ?></h3>
+              <h3 class="text-base font-extrabold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Pha Rọi (Wall Washer)', 'hacoled'); ?></h3>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed font-light">
-              <?php _e('Giải pháp tạo mảng màu chuyển màu mượt mà quét từ dưới chân lên dọc theo các bề mặt tường phẳng đặc, cột trụ to rộng giúp tôn vinh hình khối kiến trúc cổ điển hoặc hiện đại.', 'hacoled'); ?>
+              <?php _e('Giải pháp hoàn hảo để tạo mảng màu chuyển sắc trượt dài dọc theo các cột trụ hay vách kín phẳng đặc lớn, lý tưởng cho khách sạn và công trình di sản.', 'hacoled'); ?>
             </p>
           </div>
           <div class="p-6 pt-0 border-t border-slate-100 text-[11px] font-mono text-[#B31217] font-bold flex items-center justify-between">
-            <span><?php _e('Góc chiếu rọi:', 'hacoled'); ?></span>
+            <span><?php _e('Góc chiếu rọi tường:', 'hacoled'); ?></span>
             <span>15° / 30° / 45°</span>
           </div>
         </div>
@@ -285,10 +345,10 @@ if (empty($display_products)) {
       <div class="absolute -left-20 -top-20 w-48 h-48 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
       
       <div class="mb-12 text-center space-y-2">
-        <span class="text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('TẦM NHÌN DỰ BÁO 2030', 'hacoled'); ?></span>
-        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase"><?php _e('Kiến Tạo Tương Lai Ánh Sáng Đô Thị', 'hacoled'); ?></h3>
+        <span class="text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('MỤC TIÊU CHIẾN LƯỢC ĐẾN 2030', 'hacoled'); ?></span>
+        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight uppercase"><?php _e('Tiên Phong Phát Triển Ánh Sáng Kiến Trúc Đô Thị', 'hacoled'); ?></h3>
         <p class="text-xs text-slate-500 font-light max-w-xl mx-auto">
-          <?php _e('Là một ngành hàng công nghệ mới mang tính đột phá, HacoLED tự tin đặt ra những con số dự phóng phát triển hạ tầng và công nghệ đến năm 2030.', 'hacoled'); ?>
+          <?php _e('Hướng ứng đề án đô thị thông minh và tiết kiệm năng lượng quốc gia, HacoLED cam kết phát triển các mục tiêu hạ tầng kỹ thuật chiếu sáng bền vững đến năm 2030.', 'hacoled'); ?>
         </p>
       </div>
 
@@ -299,7 +359,7 @@ if (empty($display_products)) {
             <span class="counter" data-target="200">0</span>
             <span class="text-xl">+</span>
           </div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Tòa nhà thắp sáng (2030)', 'hacoled'); ?></p>
+          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Dự án tòa nhà hoàn thành', 'hacoled'); ?></p>
         </div>
         <!-- Stat 2 -->
         <div class="space-y-2 pt-6 md:pt-0">
@@ -307,7 +367,7 @@ if (empty($display_products)) {
             <span class="counter" data-target="100000">0</span>
             <span class="text-xl">m+</span>
           </div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Mét dài LED tuyến tính', 'hacoled'); ?></p>
+          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Tổng chiều dài LED cung cấp', 'hacoled'); ?></p>
         </div>
         <!-- Stat 3 -->
         <div class="space-y-2 pt-6 md:pt-0">
@@ -315,7 +375,7 @@ if (empty($display_products)) {
             <span class="counter" data-target="50">0</span>
             <span class="text-xl">%</span>
           </div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Tiết kiệm điện năng Eco', 'hacoled'); ?></p>
+          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Mức độ tiết kiệm điện năng', 'hacoled'); ?></p>
         </div>
         <!-- Stat 4 -->
         <div class="space-y-2 pt-6 md:pt-0">
@@ -323,21 +383,21 @@ if (empty($display_products)) {
             <span class="counter" data-target="99">0</span>
             <span class="text-lg">.9%</span>
           </div>
-          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Tỉ lệ ổn định thời tiết', 'hacoled'); ?></p>
+          <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest font-mono"><?php _e('Tỉ lệ vận hành ổn định thực tế', 'hacoled'); ?></p>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 4: PROJECTS SHOWCASE (DỰ ÁN TIÊU BIỂU - Light Masonry Grid with Zoom & Tilt interactions) -->
+    <!-- SECTION 4: PROJECTS SHOWCASE (DỰ ÁN TIÊU BIỂU - Masonry Portfolio with B2B Details) -->
     <div class="mb-28">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 gsap-reveal" data-direction="up" data-delay="0.2">
         <div class="space-y-4">
-          <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('HỒ SƠ NĂNG LỰC THỰC TẾ', 'hacoled'); ?></span>
+          <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('HỒ SƠ NĂNG LỰC THI CÔNG', 'hacoled'); ?></span>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
-            <?php _e('Dự Án Tiêu Biểu Đã Thực Hiện', 'hacoled'); ?>
+            <?php _e('Các Công Trình Mặt Dựng Tiêu Biểu', 'hacoled'); ?>
           </h2>
-          <p class="text-slate-555 text-sm font-light max-w-2xl">
-            <?php _e('Hình ảnh thực tế từ các công trình được thiết kế mỹ thuật và tải trực tiếp từ trang quản lý HacoLED.', 'hacoled'); ?>
+          <p class="text-slate-550 text-sm font-light max-w-2xl">
+            <?php _e('Xem trước kết quả nghiệm thu thực tế tại các công trình lớn được quản lý và cấu hình linh hoạt từ Admin HacoLED.', 'hacoled'); ?>
           </p>
         </div>
       </div>
@@ -354,10 +414,18 @@ if (empty($display_products)) {
             <div class="relative overflow-hidden bg-slate-100 border-b border-slate-100">
               <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($project['title']); ?>" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               
+              <!-- Verified Project Badge -->
+              <div class="absolute top-4 left-4 z-10">
+                <span class="bg-green-600/90 text-white text-[8px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-md inline-flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                  <?php _e('Đã hoàn thành', 'hacoled'); ?>
+                </span>
+              </div>
+
               <!-- Year Badge -->
               <?php if (!empty($project['year'])): ?>
                 <div class="absolute top-4 right-4 z-10">
-                  <span class="bg-black/75 border border-white/10 backdrop-blur-md text-[#FBBF24] text-[9px] font-mono font-bold px-2.5 py-1 rounded-md">
+                  <span class="bg-slate-900/90 border border-white/10 text-[#FBBF24] text-[9px] font-mono font-bold px-2.5 py-1 rounded-md">
                     <?php echo esc_html($project['year']); ?>
                   </span>
                 </div>
@@ -368,7 +436,7 @@ if (empty($display_products)) {
             <div class="p-6 space-y-4">
               <div class="space-y-1">
                 <?php if (!empty($project['client'])): ?>
-                  <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php echo sprintf(__('Khách hàng: %s', 'hacoled'), esc_html($project['client'])); ?></span>
+                  <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php echo sprintf(__('Chủ đầu tư: %s', 'hacoled'), esc_html($project['client'])); ?></span>
                 <?php endif; ?>
                 <h3 class="text-base font-extrabold text-slate-900 leading-snug group-hover:text-[#B31217] transition-colors duration-300">
                   <?php echo esc_html($project['title']); ?>
@@ -378,7 +446,7 @@ if (empty($display_products)) {
               <!-- Technical Specs Strip -->
               <?php if (!empty($project['tech_specs'])): ?>
                 <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 text-[10px] text-slate-500 font-mono uppercase tracking-wider">
-                  <span><?php _e('Thông số kỹ thuật', 'hacoled'); ?></span>
+                  <span><?php _e('Cấu hình vật tư', 'hacoled'); ?></span>
                   <span class="text-[#B31217] font-bold bg-[#B31217]/5 px-2 py-1 rounded border border-[#B31217]/10">
                     <?php echo esc_html($project['tech_specs']); ?>
                   </span>
@@ -390,15 +458,15 @@ if (empty($display_products)) {
       </div>
     </div>
 
-    <!-- SECTION 5: PRODUCTS CATALOG (SẢN PHẨM THỰC TẾ - KHÔNG ĐỂ GIÁ, CÓ NÚT XEM CHI TIẾT) -->
-    <div class="mb-28 bg-[#FFFBEB] rounded-[3rem] p-8 md:p-16 border border-[#FDE68A]/20">
+    <!-- SECTION 5: PRODUCTS CATALOG (SẢN PHẨM THỰC TẾ - B2B SPECIFICATION SHEET) -->
+    <div id="facade-products" class="mb-28 bg-[#FFFBEB] rounded-[3rem] p-8 md:p-16 border border-[#FDE68A]/20">
       <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 gsap-reveal" data-direction="up" data-delay="0.2">
         <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('DANH MỤC THIẾT BỊ', 'hacoled'); ?></span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
-          <?php _e('Sản Phẩm LED Facade Chuyên Dụng', 'hacoled'); ?>
+          <?php _e('Danh Mục Thiết Bị LED Facade Chuẩn B2B', 'hacoled'); ?>
         </h2>
         <p class="text-slate-655 text-sm font-light">
-          <?php _e('Xem thông tin các thiết bị LED chuyên dụng phục vụ trang trí tòa nhà từ HacoLED. Thiết kế thẩm mỹ và kiểm định chặt chẽ.', 'hacoled'); ?>
+          <?php _e('Các dòng sản phẩm chuyên dụng nhập khẩu chính ngạch đầy đủ giấy chứng chỉ chất lượng phục vụ cho nhà thầu xây dựng và cơ điện.', 'hacoled'); ?>
         </p>
       </div>
 
@@ -420,30 +488,52 @@ if (empty($display_products)) {
               </span>
             </div>
 
-            <!-- Product Details -->
+            <!-- Product Details & B2B Spec Grid -->
             <div class="flex-1 flex flex-col justify-between space-y-4">
               <div class="space-y-2">
                 <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300">
                   <?php echo esc_html($prod['title']); ?>
                 </h3>
-                <p class="text-xs text-slate-600 leading-relaxed font-light line-clamp-4">
+                <p class="text-xs text-slate-500 leading-relaxed font-light line-clamp-3">
                   <?php echo wp_kses_post($prod['description']); ?>
                 </p>
               </div>
               
+              <!-- Spec Grid values -->
+              <?php if (!empty($prod['specs'])): ?>
+                <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-[10px] font-mono">
+                  <div class="flex justify-between border-r border-slate-200/60 pr-2">
+                    <span class="text-slate-400"><?php _e('Tần số quét:', 'hacoled'); ?></span>
+                    <span class="font-bold text-slate-700"><?php echo esc_html($prod['specs']['refresh']); ?></span>
+                  </div>
+                  <div class="flex justify-between pl-2">
+                    <span class="text-slate-400"><?php _e('Độ sáng:', 'hacoled'); ?></span>
+                    <span class="font-bold text-[#B31217]"><?php echo esc_html($prod['specs']['bright']); ?></span>
+                  </div>
+                  <div class="flex justify-between border-r border-slate-200/60 pr-2 pt-1 border-t border-slate-200/40">
+                    <span class="text-slate-400"><?php _e('Bảo hành:', 'hacoled'); ?></span>
+                    <span class="font-bold text-slate-700"><?php echo esc_html($prod['specs']['warranty']); ?></span>
+                  </div>
+                  <div class="flex justify-between pl-2 pt-1 border-t border-slate-200/40">
+                    <span class="text-slate-400"><?php _e('Hệ IC:', 'hacoled'); ?></span>
+                    <span class="font-bold text-slate-700"><?php echo esc_html($prod['specs']['ic']); ?></span>
+                  </div>
+                </div>
+              <?php endif; ?>
+
               <!-- Spec tags and Detail Link Button -->
-              <div class="flex items-center justify-between gap-4 pt-4 border-t border-slate-100 flex-wrap">
-                <div class="flex flex-wrap gap-2">
-                  <span class="px-2 py-1 text-[9px] font-bold text-slate-500 bg-slate-100 rounded">
-                    <i class="ph-bold ph-shield-check text-[#B31217] mr-1"></i><?php _e('CO/CQ Chuẩn', 'hacoled'); ?>
+              <div class="flex items-center justify-between gap-4 pt-2 border-t border-slate-100 flex-wrap">
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2 py-0.5 text-[9px] font-bold text-slate-500 bg-slate-100 rounded">
+                    <i class="ph-bold ph-shield-check text-[#B31217] mr-1"></i><?php _e('Đầy đủ CO/CQ', 'hacoled'); ?>
                   </span>
-                  <span class="px-2 py-1 text-[9px] font-bold text-slate-500 bg-slate-100 rounded">
-                    <i class="ph-bold ph-clock text-[#B31217] mr-1"></i><?php _e('BH 24-36T', 'hacoled'); ?>
+                  <span class="px-2 py-0.5 text-[9px] font-bold text-slate-500 bg-slate-100 rounded">
+                    <i class="ph-bold ph-seal-check text-[#B31217] mr-1"></i><?php _e('ISO 9001', 'hacoled'); ?>
                   </span>
                 </div>
                 <?php if (!empty($prod['permalink']) && $prod['permalink'] !== '#') : ?>
-                  <a href="<?php echo esc_url($prod['permalink']); ?>" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-[#B31217] text-slate-700 hover:text-white border border-slate-200 hover:border-[#B31217] font-bold text-xs uppercase tracking-wider transition-all duration-300 pointer-events-auto shadow-sm">
-                    <span><?php _e('Xem chi tiết', 'hacoled'); ?></span>
+                  <a href="<?php echo esc_url($prod['permalink']); ?>" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-[#B31217] text-slate-700 hover:text-white border border-slate-250 hover:border-[#B31217] font-bold text-xs uppercase tracking-wider transition-all duration-300 pointer-events-auto shadow-sm">
+                    <span><?php _e('Yêu cầu báo giá B2B', 'hacoled'); ?></span>
                     <i class="ph-bold ph-arrow-up-right text-[10px]"></i>
                   </a>
                 <?php endif; ?>
@@ -459,7 +549,7 @@ if (empty($display_products)) {
       <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 gsap-reveal" data-direction="up" data-delay="0.2">
         <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('TIÊU CHUẨN DỊCH VỤ HACOLED', 'hacoled'); ?></span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
-          <?php _e('Cam Kết 3F & Tiêu Chí Chuyên Biệt', 'hacoled'); ?>
+          <?php _e('Cam Kết Chuẩn 3F & Tiêu Chí An Toàn Trên Cao', 'hacoled'); ?>
         </h2>
         <p class="text-slate-550 text-sm font-light">
           HacoLED mang chuẩn phục vụ 3F độc quyền kết hợp chặt chẽ với các tiêu chuẩn an toàn kỹ thuật khắt khe của ngành cơ điện trên cao.
@@ -473,7 +563,7 @@ if (empty($display_products)) {
         <div class="p-8 sm:p-12 rounded-3xl bg-white/70 backdrop-blur-xl border border-white/80 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col justify-between space-y-8">
           <div>
             <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono mb-2"><?php _e('DỊCH VỤ 3F', 'hacoled'); ?></span>
-            <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide mb-6"><?php _e('Trải Nghiệm Dịch Vụ 3F', 'hacoled'); ?></h3>
+            <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide mb-6"><?php _e('Hệ Giá Trị Dịch Vụ 3F', 'hacoled'); ?></h3>
             
             <div class="space-y-6">
               
@@ -485,7 +575,7 @@ if (empty($display_products)) {
                 <div class="space-y-1">
                   <h4 class="text-base font-bold text-slate-900">Friendly (Tận Tâm & Thân Thiện)</h4>
                   <p class="text-xs text-slate-650 leading-relaxed font-light">
-                    Tư vấn nhiệt tình, hỗ trợ khách hàng lên bản vẽ kỹ thuật và mô phỏng 3D miễn phí trước khi quyết định đầu tư.
+                    Đồng hành cùng khách hàng từ bước khảo sát dự án, tư vấn phương án thiết kế hiệu ứng ánh sáng 3D sơ bộ hoàn toàn miễn phí.
                   </p>
                 </div>
               </div>
@@ -498,7 +588,7 @@ if (empty($display_products)) {
                 <div class="space-y-1">
                   <h4 class="text-base font-bold text-slate-900">Fast (Tốc Độ & Phản Hồi Nhanh)</h4>
                   <p class="text-xs text-slate-650 leading-relaxed font-light">
-                    Đáp ứng mọi cuộc gọi kỹ thuật trong vòng 2 giờ. Khắc phục sự cố hệ thống điều khiển ngoài trời tốc độ tối đa.
+                    Hỗ trợ kỹ thuật 24/7. Phản hồi yêu cầu khắc phục sự cố tại công trình trong vòng 2 giờ tại các thành phố lớn Hà Nội và TP.HCM.
                   </p>
                 </div>
               </div>
@@ -511,7 +601,7 @@ if (empty($display_products)) {
                 <div class="space-y-1">
                   <h4 class="text-base font-bold text-slate-900">Full (Trọn Vẹn & Đầy Đủ)</h4>
                   <p class="text-xs text-slate-650 leading-relaxed font-light">
-                    Hợp đồng minh bạch, cung cấp đầy đủ giấy chứng nhận nguồn gốc xuất xứ CO/CQ. Bảo hành vàng dài hạn lên đến 3 năm.
+                    Hợp đồng kinh tế minh bạch, cung cấp hồ sơ kiểm định CO/CQ đầy đủ. Bảo hành vàng 36 tháng đối với toàn bộ hệ thống chiếu sáng mặt dựng.
                   </p>
                 </div>
               </div>
@@ -527,7 +617,7 @@ if (empty($display_products)) {
         <div class="p-8 sm:p-12 rounded-3xl bg-[#FFF5F5] border border-[#B31217]/10 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-out flex flex-col justify-between space-y-8">
           <div>
             <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono mb-2"><?php _e('KỸ THUẬT ĐẶC THÙ', 'hacoled'); ?></span>
-            <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide mb-6"><?php _e('Yêu Cầu Kỹ Thuật Đặc Thù', 'hacoled'); ?></h3>
+            <h3 class="text-2xl font-black text-slate-900 uppercase tracking-wide mb-6"><?php _e('Tiêu Chuẩn Cơ Điện Trên Cao', 'hacoled'); ?></h3>
             
             <div class="space-y-6">
               
@@ -537,9 +627,9 @@ if (empty($display_products)) {
                   <i class="ph-bold ph-wind text-xl"></i>
                 </div>
                 <div class="space-y-1">
-                  <h4 class="text-base font-bold text-slate-900"><?php _e('An Toàn Trên Cao & Tải Gió', 'hacoled'); ?></h4>
+                  <h4 class="text-base font-bold text-slate-900"><?php _e('Chứng Chỉ Thi Công & Chống Tải Gió', 'hacoled'); ?></h4>
                   <p class="text-xs text-slate-655 leading-relaxed font-light">
-                    Đội ngũ thi công đạt chứng chỉ an toàn lao động trên cao. Kết cấu giá đỡ tính toán chịu sức gió bão lên đến cấp 12.
+                    100% nhân sự leo cao có chứng chỉ an toàn lao động trên cao. Kết cấu khung giàn chịu lực được tính toán chống rung lắc và sức gió bão lên đến cấp 12.
                   </p>
                 </div>
               </div>
@@ -550,9 +640,9 @@ if (empty($display_products)) {
                   <i class="ph-bold ph-drop text-xl"></i>
                 </div>
                 <div class="space-y-1">
-                  <h4 class="text-base font-bold text-slate-900"><?php _e('Kháng Thời Tiết IP68 & Chống Ăn Mòn', 'hacoled'); ?></h4>
+                  <h4 class="text-base font-bold text-slate-900"><?php _e('Kháng Thời Tiết IP68 & Chống Muối Biển', 'hacoled'); ?></h4>
                   <p class="text-xs text-slate-655 leading-relaxed font-light">
-                    Sử dụng vật liệu nhôm hàng không anode chống chịu muối biển ăn mòn. Module đạt chuẩn IP68 chống tia cực tím độc hại.
+                    Sử dụng hợp kim nhôm hàng không anode hóa, chống ăn mòn muối biển vượt trội. Keo đổ module chống tia cực tím UV và đạt chuẩn chống nước bụi IP68.
                   </p>
                 </div>
               </div>
@@ -563,9 +653,9 @@ if (empty($display_products)) {
                   <i class="ph-bold ph-cloud-arrow-up text-xl"></i>
                 </div>
                 <div class="space-y-1">
-                  <h4 class="text-base font-bold text-slate-900"><?php _e('Hệ Điều Khiển Đám Mây Smart Facade', 'hacoled'); ?></h4>
+                  <h4 class="text-base font-bold text-slate-900"><?php _e('Hệ Điều Khiển Tập Trung Thông Minh', 'hacoled'); ?></h4>
                   <p class="text-xs text-slate-655 leading-relaxed font-light">
-                    Hỗ trợ quản lý nội dung từ xa thông qua đám mây. Tự động lập lịch trình chiếu và đồng bộ nhiều vách tòa nhà.
+                    Lập trình hiệu ứng ánh sáng thông minh qua hệ điều khiển DMX512. Tích hợp module IoT để hẹn giờ và điều chỉnh đồng bộ từ xa qua đám mây (Cloud).
                   </p>
                 </div>
               </div>
@@ -573,7 +663,7 @@ if (empty($display_products)) {
             </div>
           </div>
           <div class="pt-6 border-t border-slate-100">
-            <span class="text-xs text-slate-400 font-mono"><?php _e('Đảm bảo kỹ thuật và mỹ thuật bền vững', 'hacoled'); ?></span>
+            <span class="text-xs text-slate-400 font-mono"><?php _e('Cam kết chất lượng và an toàn bền vững', 'hacoled'); ?></span>
           </div>
         </div>
 
@@ -584,21 +674,21 @@ if (empty($display_products)) {
     <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#B31217] via-[#A30F14] to-[#8A0B10] border border-[#B31217]/20 p-8 sm:p-12 text-center max-w-4xl mx-auto shadow-2xl gsap-reveal" data-direction="up" data-delay="0.4">
       <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
       <div class="relative z-10 space-y-6">
-        <span class="text-xs font-bold text-[#FBBF24] uppercase tracking-widest font-mono"><?php _e('ĐỐI TÁC THI CÔNG TIN CẬY', 'hacoled'); ?></span>
+        <span class="text-xs font-bold text-[#FBBF24] uppercase tracking-widest font-mono"><?php _e('LIÊN HỆ PHÒNG DỰ ÁN B2B', 'hacoled'); ?></span>
         <h3 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight uppercase">
-          <?php _e('Liên Hệ HacoLED Để Thiết Kế Ánh Sáng Tòa Nhà', 'hacoled'); ?>
+          <?php _e('Nhận Tư Vấn Kỹ Thuật & Khảo Sát Hiện Trạng Tòa Nhà', 'hacoled'); ?>
         </h3>
         <p class="text-slate-200 text-xs max-w-xl mx-auto leading-relaxed font-light">
-          <?php _e('Bắt đầu nâng tầm kiến trúc tòa nhà của bạn ngay hôm nay. HacoLED sẵn sàng hỗ trợ khảo sát thực địa và tư vấn phương án kỹ thuật miễn phí.', 'hacoled'); ?>
+          <?php _e('Bộ phận kỹ sư dự án HacoLED sẵn sàng hỗ trợ khảo sát trực tiếp tại công trình trên toàn quốc để đưa ra phương án thiết kế ánh sáng và dự toán ngân sách tối ưu.', 'hacoled'); ?>
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FBBF24] hover:bg-yellow-500 text-slate-900 font-extrabold text-xs uppercase px-8 py-4 rounded-full tracking-wider shadow-lg transition-all duration-300">
-            <span><?php _e('Gửi Yêu Cầu Thiết Kế', 'hacoled'); ?></span>
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FBBF24] hover:bg-yellow-500 text-slate-900 font-extrabold text-xs uppercase px-8 py-4 rounded-xl tracking-wider shadow-lg transition-all duration-300">
+            <span><?php _e('Yêu Cầu Khảo Sát & Thiết Kế 3D', 'hacoled'); ?></span>
             <i class="ph-bold ph-arrow-right text-[11px] text-slate-900"></i>
           </a>
-          <a href="tel:0342324488" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-bold text-xs uppercase px-8 py-4 rounded-full tracking-wider transition-all duration-300">
+          <a href="tel:0342324488" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-bold text-xs uppercase px-8 py-4 rounded-xl tracking-wider transition-all duration-300">
             <i class="ph-fill ph-phone-call text-[13px] text-[#FBBF24]"></i>
-            <span>Hotline: 034.232.4488</span>
+            <span>Hotline B2B: 034.232.4488</span>
           </a>
         </div>
       </div>
