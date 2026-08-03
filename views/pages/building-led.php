@@ -59,7 +59,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, No Overlays, Calculated Top Padding for Fixed Header) -->
+  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, No Overlays, Left-Aligned Hero Stack) -->
   <section class="relative pt-44 lg:pt-52 pb-24 lg:pb-32 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden min-h-[75vh] flex flex-col justify-center">
     <!-- Raw 100% Opacity 4K Background Image (No Dark Overlay) -->
     <div class="absolute inset-0 z-0 overflow-hidden">
@@ -76,29 +76,26 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
         </div>
       </div>
 
-      <!-- Split Hero Header (Properly calculated padding under fixed website header) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-        <div class="lg:col-span-8 space-y-6">
-          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
-            Chiếu Sáng Mỹ Thuật<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-[#FBBF24]">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
-          </h1>
-        </div>
+      <!-- Left-Aligned Hero Content Block (Stacked on the Left) -->
+      <div class="max-w-3xl space-y-6">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+          Chiếu Sáng Mỹ Thuật<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-[#FBBF24]">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
+        </h1>
 
-        <div class="lg:col-span-4 space-y-6">
-          <p class="text-slate-100 text-sm sm:text-base leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] bg-slate-950/60 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
-            Chúng tôi tư vấn, thiết kế 3D và thi công trọn gói hệ thống LED mặt dựng tòa nhà cao tầng. Tối ưu năng lượng, vận hành thông minh qua DMX512 và Cloud IoT.
-          </p>
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-black/50">
-              <i class="ph-bold ph-chats-circle text-base"></i>
-              <span>Khảo Sát & Báo Giá 3D</span>
-            </a>
-            <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-950/80 backdrop-blur-md border border-slate-700 text-slate-100 hover:text-white font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-xl">
-              <span>Dự Án</span>
-              <i class="ph-bold ph-arrow-down text-xs"></i>
-            </a>
-          </div>
+        <p class="text-slate-100 text-sm sm:text-base leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] bg-slate-950/60 p-5 rounded-2xl border border-white/10 backdrop-blur-sm max-w-2xl">
+          Chúng tôi tư vấn, thiết kế 3D và thi công trọn gói hệ thống LED mặt dựng tòa nhà cao tầng. Tối ưu năng lượng, vận hành thông minh qua DMX512 và Cloud IoT.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-black/50">
+            <i class="ph-bold ph-chats-circle text-base"></i>
+            <span>Khảo Sát & Báo Giá 3D</span>
+          </a>
+          <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-950/80 backdrop-blur-md border border-slate-700 text-slate-100 hover:text-white font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-xl">
+            <span>Dự Án</span>
+            <i class="ph-bold ph-arrow-down text-xs"></i>
+          </a>
         </div>
       </div>
 
