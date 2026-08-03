@@ -23,7 +23,7 @@ $unsplash_ids = [
     'photo-1449034446853-66c86144b0ad', 'photo-1516450360452-9312f5e86fc7', 'photo-1502877338535-766e1452684a',
     'photo-1504608524841-42fe6f032b4b', 'photo-1469474968028-56623f02e42e', 'photo-1447752875215-b2761acb3c5d',
     'photo-1472214222541-d510753a4907', 'photo-1500530855697-b586d89ba3ee', 'photo-1513829096999-497860229434',
-    'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171', 'photo-1513829096999-497860229434',
+    'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171', 'photo-1513836279014-a89f7a76ae86',
     'photo-1522071820081-009f0129c71c', 'photo-1515187029135-18ee286d815b', 'photo-1497366811353-6870744d04b2',
     'photo-1504384308090-c894fdcc538d', 'photo-1542744094-3a31f103e35f', 'photo-1454165804606-c3d57bc86b40',
     'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1531482615713-2afd69097998',
@@ -277,13 +277,21 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
   </section>
 
   <!-- SECTION 2: ULTRA-MODERN BENTO FEATURE GRID "Tại sao chọn HacoLED" -->
-  <section class="py-28 px-4 lg:px-8 bg-gradient-to-b from-[#FAFAFA] via-slate-50 to-[#F5F5F7] text-slate-900 border-b border-slate-200/80 relative">
-    <div class="max-w-[1440px] mx-auto space-y-16">
+  <section class="py-28 px-4 lg:px-8 bg-gradient-to-b from-[#FAFAFA] via-slate-50 to-[#F5F5F7] text-slate-900 border-b border-slate-200/80 relative overflow-hidden">
+    
+    <!-- Giant Watermark Typography -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
+      <span class="text-[18vw] font-black text-slate-200/50 leading-none tracking-tighter uppercase font-mono">
+        SOLUTIONS
+      </span>
+    </div>
+
+    <div class="max-w-[1440px] mx-auto relative z-10 space-y-16">
       
-      <!-- Section Header -->
+      <!-- Section Header (Unified Giant Watermark Style) -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div class="space-y-3 max-w-2xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200/80 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-200/80 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest">
             <i class="ph-bold ph-sparkle text-sm"></i>
             <span>TẠI SAO CHỌN HACOLED FACADE</span>
           </div>
@@ -381,7 +389,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
               </p>
             </div>
             <div class="flex gap-2 text-[11px] font-mono font-bold">
-              <span class="px-3 py-1 bg-red-[#B31217] text-[#B31217] rounded-lg border border-red-200/80">ISO 9001</span>
+              <span class="px-3 py-1 bg-red-50 text-[#B31217] rounded-lg border border-red-200/80">ISO 9001</span>
               <span class="px-3 py-1 bg-red-50 text-[#B31217] rounded-lg border border-red-200/80">CE Certified</span>
             </div>
           </div>
@@ -411,20 +419,30 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
   </section>
 
   <!-- SECTION 3: STAGGERED PRODUCTS CATALOGUE (Sản Phẩm Danh Mục 'led-trang-tri-toa-nha' Trình Bày So Le) -->
-  <section class="py-32 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative">
-    <div class="max-w-[1440px] mx-auto space-y-24">
+  <section class="py-32 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative overflow-hidden">
+    
+    <!-- Giant Watermark Typography -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
+      <span class="text-[18vw] font-black text-slate-100/90 leading-none tracking-tighter uppercase font-mono">
+        PRODUCTS
+      </span>
+    </div>
+
+    <div class="max-w-[1440px] mx-auto relative z-10 space-y-24">
       
-      <!-- Section Header -->
-      <div class="text-center max-w-3xl mx-auto space-y-4">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
-          <i class="ph-bold ph-lightning text-sm"></i>
-          <span>DANH MỤC: LED-TRANG-TRI-TOA-NHA</span>
+      <!-- Section Header (Unified Giant Watermark Style) -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-3 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
+            <i class="ph-bold ph-lightning text-sm"></i>
+            <span>DANH MỤC: LED-TRANG-TRI-TOA-NHA</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 leading-tight">
+            Sản Phẩm LED Facade <span class="text-[#B31217]">Chính Hãng.</span>
+          </h2>
         </div>
-        <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 leading-tight">
-          Sản Phẩm LED Facade <span class="text-[#B31217]">Chính Hãng.</span>
-        </h2>
-        <p class="text-slate-500 text-xs sm:text-sm font-normal">
-          Dữ liệu được lấy trực tiếp từ hệ thống danh mục WooCommerce sản phẩm LED Trang Trí Tòa Nhà.
+        <p class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
+          Dữ liệu được lấy trực tiếp từ hệ thống danh mục WooCommerce sản phẩm LED Trang Trí Tòa Nhà đạt chuẩn CO/CQ.
         </p>
       </div>
 
@@ -529,10 +547,10 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
 
     <div class="max-w-[1440px] mx-auto relative z-10 space-y-16">
       
-      <!-- Section Title & Intro -->
+      <!-- Section Title & Intro (Unified Giant Watermark Style) -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div class="space-y-3 max-w-xl">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
             <i class="ph-bold ph-buildings text-sm"></i>
             <span>HỒ SƠ NĂNG LỰC DỰ ÁN</span>
           </div>
@@ -602,15 +620,29 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
   </section>
 
   <!-- SECTION 5: HIGH-IMPACT B2B SOLUTION PACKAGES -->
-  <section class="py-32 px-4 lg:px-8 bg-white border-b border-slate-200/80">
-    <div class="max-w-[1240px] mx-auto space-y-16">
+  <section class="py-32 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative overflow-hidden">
+    
+    <!-- Giant Watermark Typography -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
+      <span class="text-[18vw] font-black text-slate-100/90 leading-none tracking-tighter uppercase font-mono">
+        PACKAGES
+      </span>
+    </div>
+
+    <div class="max-w-[1240px] mx-auto relative z-10 space-y-16">
       
-      <div class="text-center max-w-2xl mx-auto space-y-3">
-        <span class="text-xs font-mono font-bold text-[#B31217] uppercase tracking-widest">GÓI TƯ VẤN THI CÔNG B2B</span>
-        <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900">
-          Các Gói Giải Pháp LED Facade
-        </h2>
-        <p class="text-slate-500 text-xs sm:text-sm font-normal">
+      <!-- Section Header (Unified Giant Watermark Style) -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-3 max-w-xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
+            <i class="ph-bold ph-cubes text-sm"></i>
+            <span>GÓI TƯ VẤN THI CÔNG B2B</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 leading-tight">
+            Các Gói Giải Pháp <span class="text-[#B31217]">LED Facade.</span>
+          </h2>
+        </div>
+        <p class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
           Lựa chọn gói giải pháp tối ưu dựa theo nhu cầu kiến trúc và ngân sách đầu tư của doanh nghiệp.
         </p>
       </div>
@@ -739,14 +771,31 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
   </section>
 
   <!-- SECTION 7: CLIENT TESTIMONIAL REVIEWS -->
-  <section class="py-28 px-4 lg:px-8 bg-white border-b border-slate-200/80">
-    <div class="max-w-[1240px] mx-auto space-y-16">
+  <section class="py-28 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative overflow-hidden">
+    
+    <!-- Giant Watermark Typography -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
+      <span class="text-[18vw] font-black text-slate-100/90 leading-none tracking-tighter uppercase font-mono">
+        REVIEWS
+      </span>
+    </div>
+
+    <div class="max-w-[1240px] mx-auto relative z-10 space-y-16">
       
-      <div class="text-center max-w-2xl mx-auto space-y-3">
-        <span class="text-xs font-mono font-bold text-[#B31217] uppercase tracking-widest">ĐÁNH GIÁ TỪ CHỦ ĐẦU TƯ</span>
-        <h2 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-slate-900">
-          Khách Hàng Nói Gì Về HacoLED
-        </h2>
+      <!-- Section Header (Unified Giant Watermark Style) -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-3 max-w-xl">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
+            <i class="ph-bold ph-star text-sm"></i>
+            <span>ĐÁNH GIÁ TỪ CHỦ ĐẦU TƯ</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 leading-tight">
+            Khách Hàng Nói Gì <span class="text-[#B31217]">Về HacoLED.</span>
+          </h2>
+        </div>
+        <p class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
+          Ý kiến đánh giá và sự hài lòng thực tế từ các chủ đầu tư tòa nhà cao tầng hàng đầu tại Việt Nam.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -814,14 +863,22 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
   </section>
 
   <!-- SECTION 8: FREQUENTLY ASKED QUESTIONS ACCORDION -->
-  <section class="py-28 px-4 lg:px-8 bg-[#FAFAFA]">
-    <div class="max-w-[1240px] mx-auto space-y-16">
+  <section class="py-28 px-4 lg:px-8 bg-[#FAFAFA] relative overflow-hidden">
+    
+    <!-- Giant Watermark Typography -->
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
+      <span class="text-[18vw] font-black text-slate-200/60 leading-none tracking-tighter uppercase font-mono">
+        QUESTIONS
+      </span>
+    </div>
+
+    <div class="max-w-[1240px] mx-auto relative z-10 space-y-16">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
         <!-- Left Callout Box -->
         <div class="lg:col-span-5 bg-white p-8 lg:p-9 rounded-3xl border border-slate-200/90 shadow-lg space-y-6">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase border border-red-200/80">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase border border-red-200/80">
             <i class="ph-bold ph-headset text-sm"></i>
             <span>TƯ VẤN TRỰC TIẾP</span>
           </div>
