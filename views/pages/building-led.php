@@ -53,14 +53,14 @@ for ($i = 0; $i < 50; $i++) {
     ];
 }
 
-$hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_16_34 3 thg 8, 2026.png';
+$hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_lighting_4K_202608031635.jpeg';
 ?>
 
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (ULTRA-GLASSY LIGHT EDITION) -->
 <main class="relative bg-[#F8F6F5] text-slate-900 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
   <!-- SECTION 1: HERO SECTION (Raw 4K Background Image + Ultra-Transparent Glassmorphism + White-to-Gold Gradient Text, No Shadows) -->
-  <section class="relative pt-44 lg:pt-52 pb-16 lg:pb-20 px-4 lg:px-8 border-b border-slate-200 overflow-hidden min-h-screen flex flex-col justify-between">
+  <section class="relative pt-44 lg:pt-52 pb-24 lg:pb-32 px-4 lg:px-8 border-b border-slate-200 overflow-hidden min-h-[85vh] flex flex-col justify-center">
     <!-- Raw 100% Opacity Custom Background Image -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade" class="w-full h-full object-cover opacity-100">
@@ -104,24 +104,6 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
       </div>
 
     </div>
-
-    <!-- Client Logos Marquee (Ultra-Transparent Glass Theme) -->
-    <div class="max-w-[1440px] mx-auto w-full relative z-10 pt-12 pb-4">
-      <div class="bg-white/25 border border-white/40 backdrop-blur-2xl rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
-        <span class="text-[10px] font-mono font-bold tracking-widest text-slate-200 uppercase">ĐÃ ĐỒNG HÀNH CÙNG CÁC TẬP ĐOÀN VÀ CHỦ ĐẦU TƯ HÀNG ĐẦU</span>
-        
-        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-95 text-xs font-mono font-bold text-white">
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">VINGROUP</span>
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">GELEXIMCO</span>
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">VIETCOMBANK</span>
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">VPBANK</span>
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">BITEXCO</span>
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">SUN GROUP</span>
-          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">NOVALAND</span>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <!-- SECTION 2: BENTO FEATURE GRID "Tại sao chọn HacoLED" (Light Theme) -->
@@ -664,18 +646,6 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
         lightboxImg.src = '';
       }, 300);
       document.body.style.overflow = '';
-    };
-
-    const nextImage = () => {
-      let nextIdx = currentIdx + 1;
-      if (nextIdx >= projectsData.length) nextIdx = 0;
-      openLightbox(nextIdx);
-    };
-
-    const prevImage = () => {
-      let prevIdx = currentIdx - 1;
-      if (prevIdx < 0) prevIdx = projectsData.length - 1;
-      openLightbox(prevIdx);
     };
 
     projectCards.forEach(card => {
