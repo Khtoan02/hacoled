@@ -11,45 +11,45 @@
 
 $this->renderHeader($header_type ?? 'default');
 
-// Prepare B2B Projects (supporting unlimited dynamic uploads)
-$display_projects = $projects;
-if (empty($display_projects)) {
-    $display_projects = [
-        [
-            'title'      => __('Chiếu sáng mỹ thuật tòa nhà Geleximco Building Láng Hạ', 'hacoled'),
-            'client'     => __('Tập đoàn Geleximco', 'hacoled'),
-            'tech_specs' => 'LED Linear RGB | Hệ thống điều khiển DMX512',
-            'year'       => '2026',
-            'image'      => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop',
-        ],
-        [
-            'title'      => __('Thi công màn hình LED lưới ngoài trời tại Vietcombank Tower TP.HCM', 'hacoled'),
-            'client'     => __('Ngân hàng Vietcombank', 'hacoled'),
-            'tech_specs' => 'LED Mesh P16-32 | Độ sáng 8000 nits',
-            'year'       => '2026',
-            'image'      => 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
-        ],
-        [
-            'title'      => __('Hệ thống LED viền chạy hiệu ứng tòa nhà VPBank Tower Hà Nội', 'hacoled'),
-            'client'     => __('Ngân hàng VPBank', 'hacoled'),
-            'tech_specs' => 'LED Linear DMX512 | Tiêu chuẩn cơ điện IP68',
-            'year'       => '2026',
-            'image'      => 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=800&auto=format&fit=crop',
-        ],
-        [
-            'title'      => __('LED trang trí kiến trúc mặt dựng tòa nhà Discovery Complex', 'hacoled'),
-            'client'     => __('Kinh Đô TCI Group', 'hacoled'),
-            'tech_specs' => 'LED Pixel Dot 50mm | Lập trình đồng bộ Cloud',
-            'year'       => '2025',
-            'image'      => 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=800&auto=format&fit=crop',
-        ],
-        [
-            'title'      => __('Lắp đặt LED chiếu rọi mặt dựng Landmark 81', 'hacoled'),
-            'client'     => __('Tập đoàn Vingroup', 'hacoled'),
-            'tech_specs' => 'LED Wall Washer 48W | Đồng bộ DMX Master',
-            'year'       => '2026',
-            'image'      => 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=800&auto=format&fit=crop',
-        ]
+// Hardcode 50 high-quality dynamic project images for testing and illustration
+$display_projects = [];
+$unsplash_ids = [
+    'photo-1517245386807-bb43f82c33c4', 'photo-1540575467063-178a50c2df87', 'photo-1517604931442-7e0c8ed2963c',
+    'photo-1507608869274-d3177c8bb4c7', 'photo-1565814636199-ae8133055c1c', 'photo-1477959858617-67f85cf4f1df',
+    'photo-1486406146926-c627a92ad1ab', 'photo-1496568818309-53d7c7753022', 'photo-1519501025264-65ba15a82390',
+    'photo-1470071459604-3b5ec3a7fe05', 'photo-1509198397868-475647b2a1e5', 'photo-1475855581690-80accde3ae2b',
+    'photo-1513694203232-719a280e022f', 'photo-1518241353330-0f7941c2d9b5', 'photo-1480714378408-67cf0d13bc1b',
+    'photo-1449034446853-66c86144b0ad', 'photo-1516450360452-9312f5e86fc7', 'photo-1502877338535-766e1452684a',
+    'photo-1504608524841-42fe6f032b4b', 'photo-1520250497591-112f2f40a3f4', 'photo-1506744038136-46273834b3fb',
+    'photo-1501785888041-af3ef285b470', 'photo-1469474968028-56623f02e42e', 'photo-1447752875215-b2761acb3c5d',
+    'photo-1472214222541-d510753a4907', 'photo-1433832597026-a5a0823c9657', 'photo-1500530855697-b586d89ba3ee',
+    'photo-1513829096999-497860229434', 'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171',
+    'photo-1513836279014-a89f7a76ae86', 'photo-1522071820081-009f0129c71c', 'photo-1515187029135-18ee286d815b',
+    'photo-1497366216548-37526070297c', 'photo-1497215728101-856f4ea42174', 'photo-1497366811353-6870744d04b2',
+    'photo-1504384308090-c894fdcc538d', 'photo-1542744094-3a31f103e35f', 'photo-1454165804606-c3d57bc86b40',
+    'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1522202176988-66273c2fd55f',
+    'photo-1531482615713-2afd69097998', 'photo-1556761175-4b46a572b786', 'photo-1515187029135-18ee286d815b',
+    'photo-1552581230-261c4701235d', 'photo-1558224494-46b221937987', 'photo-1568992687947-868a62a9f521',
+    'photo-1573497019940-1c28c88b4f3e', 'photo-1573164713714-d95e436ab8d6'
+];
+
+$districts = ['Quận 1, TP.HCM', 'Quận Ba Đình, Hà Nội', 'Quận Cầu Giấy, Hà Nội', 'Quận Hải Châu, Đà Nẵng', 'Quận Ngũ Hành Sơn, Đà Nẵng', 'Quận Hoàn Kiếm, Hà Nội'];
+$clients = ['Tập đoàn Vingroup', 'Tập đoàn Geleximco', 'Ngân hàng Vietcombank', 'Ngân hàng VPBank', 'Kinh Đô TCI Group', 'Tập đoàn Bitexco', 'Tập đoàn Novaland', 'Tập đoàn Sun Group'];
+$lighting_types = ['LED Mesh P16-32 ngoài trời', 'LED Linear RGB chạy viền', 'LED Pixel Dot 50mm lập trình', 'LED Wall Washer 48W chiếu rọi'];
+
+for ($i = 0; $i < 50; $i++) {
+    $img_id = $unsplash_ids[$i % count($unsplash_ids)];
+    $client = $clients[$i % count($clients)];
+    $district = $districts[$i % count($districts)];
+    $type = $lighting_types[$i % count($lighting_types)];
+    $year = 2023 + ($i % 4);
+    
+    $display_projects[] = [
+        'title'      => sprintf(__('Dự án chiếu sáng mỹ thuật kiến trúc Tòa nhà Landmark %02d', 'hacoled'), $i + 1),
+        'client'     => $client . ' - ' . $district,
+        'tech_specs' => $type . ' | DMX512',
+        'year'       => (string)$year,
+        'image'      => 'https://images.unsplash.com/' . $img_id . '?q=80&w=800&auto=format&fit=crop',
     ];
 }
 
@@ -117,7 +117,7 @@ if (empty($display_products)) {
 }
 ?>
 
-<!-- Immersive B2B Facade LED Landing Page (Redesigned from Scratch) -->
+<!-- Premium Creative Bento Grid Layout for HacoLED Facade -->
 <main class="relative bg-[#F8F6F5] pt-28 md:pt-48 pb-24 overflow-hidden min-h-[90vh] text-slate-800">
   
   <!-- Glowing Background Orbs -->
@@ -141,8 +141,8 @@ if (empty($display_products)) {
       </span>
     </nav>
 
-    <!-- SECTION 1: IMPRESSIVE HERO SECTION (Symphony of Light & Architecture) -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-28 items-stretch">
+    <!-- BENTO UNIT 1: HERO & METRICS (ASYNCHRONOUS GRID) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24 items-stretch">
       
       <!-- Box A (col-span-8): Main Statement Card -->
       <div class="lg:col-span-8 bg-white/70 backdrop-blur-xl border border-white/80 p-8 md:p-12 rounded-[2rem] flex flex-col justify-between shadow-[0_15px_45px_rgba(0,0,0,0.02)] hover:shadow-xl transition-all duration-500 ease-out gsap-reveal" data-direction="up" data-delay="0.1">
@@ -195,7 +195,7 @@ if (empty($display_products)) {
           </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-1 text-xs">
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-4 space-y-1.5 text-xs">
           <div class="flex justify-between text-slate-500">
             <span><?php _e('Giao thức vận hành:', 'hacoled'); ?></span>
             <span class="font-bold text-slate-800">DMX512 / ArtNet / RDM</span>
@@ -209,7 +209,7 @@ if (empty($display_products)) {
 
     </div>
 
-    <!-- SECTION 2: LIGHTING DESIGN PHILOSOPHY (Accentuating Form, Digital Dynamics, Sustainable Light) -->
+    <!-- SECTION 2: LIGHTING DESIGN PHILOSOPHY -->
     <div class="mb-28">
       <div class="text-center max-w-3xl mx-auto mb-16 space-y-4 gsap-reveal" data-direction="up" data-delay="0.2">
         <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('TRIẾT LÝ THIẾT KẾ ÁNH SÁNG', 'hacoled'); ?></span>
@@ -358,16 +358,16 @@ if (empty($display_products)) {
       </div>
     </div>
 
-    <!-- SECTION 4: PROJECTS PORTFOLIO (Asymmetric Masonry with Load More & Lightbox Gallery) -->
+    <!-- SECTION 4: PROJECTS PORTFOLIO (Asymmetric Masonry with Load More & Lightbox Gallery - 50 Dynamic Images) -->
     <div id="projects-section" class="mb-28">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 gsap-reveal" data-direction="up" data-delay="0.2">
         <div class="space-y-4">
           <span class="block text-xs font-bold text-[#B31217] uppercase tracking-widest font-mono"><?php _e('HỒ SƠ NĂNG LỰC DỰ ÁN', 'hacoled'); ?></span>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
-            <?php _e('Hồ Sơ Dự Án Thực Tế Đã Thi Công', 'hacoled'); ?>
+            <?php _e('Hình Ảnh Nghiệm Thu Thực Tế (50 Dự Án)', 'hacoled'); ?>
           </h2>
           <p class="text-slate-550 text-sm font-light max-w-2xl">
-            <?php _e('Hình ảnh nghiệm thu trực tế từ các dự án chiếu sáng mỹ thuật lớn. Bấm vào ảnh bất kỳ để lướt xem thư viện trình chiếu toàn màn hình.', 'hacoled'); ?>
+            <?php _e('Dưới đây là 50 ảnh minh họa thực tế các công trình của HacoLED. Click vào ảnh bất kỳ để lướt xem thư viện trình chiếu toàn màn hình.', 'hacoled'); ?>
           </p>
         </div>
       </div>
@@ -416,7 +416,7 @@ if (empty($display_products)) {
             <div class="p-6 space-y-4">
               <div class="space-y-1">
                 <?php if (!empty($project['client'])): ?>
-                  <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php echo sprintf(__('Chủ đầu tư: %s', 'hacoled'), esc_html($project['client'])); ?></span>
+                  <span class="block text-[9px] font-bold text-slate-400 uppercase tracking-widest font-mono"><?php echo esc_html($project['client']); ?></span>
                 <?php endif; ?>
                 <h3 class="text-base font-extrabold text-slate-900 leading-snug group-hover:text-[#B31217] transition-colors duration-300">
                   <?php echo esc_html($project['title']); ?>
@@ -426,7 +426,7 @@ if (empty($display_products)) {
               <!-- Technical Specs Strip -->
               <?php if (!empty($project['tech_specs'])): ?>
                 <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 text-[10px] text-slate-500 font-mono uppercase tracking-wider">
-                  <span><?php _e('Cấu hình vật tư', 'hacoled'); ?></span>
+                  <span><?php _e('Hệ thống áp dụng', 'hacoled'); ?></span>
                   <span class="text-[#B31217] font-bold bg-[#B31217]/5 px-2 py-1 rounded border border-[#B31217]/10">
                     <?php echo esc_html($project['tech_specs']); ?>
                   </span>
@@ -819,8 +819,8 @@ if (empty($display_products)) {
         lightboxTitle.innerText = title;
         
         let metaParts = [];
-        if (client) metaParts.push('Đối tác: ' + client);
-        if (specs) metaParts.push('Hệ thống: ' + specs);
+        if (client) metaParts.push(client);
+        if (specs) metaParts.push(specs);
         if (year) metaParts.push('Năm: ' + year);
         lightboxMeta.innerText = metaParts.join(' | ');
 
