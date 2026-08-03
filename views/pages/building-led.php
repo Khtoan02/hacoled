@@ -57,11 +57,17 @@ for ($i = 0; $i < 50; $i++) {
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Dark Ambient Glow & Grid background - Image 3 Reference) -->
-  <section class="relative pt-32 pb-44 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden">
+  <!-- SECTION 1: HERO SECTION (Dark Ambient Glow & Skyscraper Background Image) -->
+  <section class="relative pt-32 pb-44 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden bg-slate-950">
+    <!-- Hero Skyscraper Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=1920&auto=format&fit=crop" alt="HacoLED Building Facade Night" class="w-full h-full object-cover opacity-25 scale-105 transform">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/80 via-[#0B0B0E]/90 to-[#0B0B0E]"></div>
+    </div>
+
     <!-- Ambient Radial Glow Arc -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#B31217]/25 via-[#FBBF24]/10 to-transparent blur-[120px] rounded-full pointer-events-none"></div>
-    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#B31217]/30 via-[#FBBF24]/15 to-transparent blur-[120px] rounded-full pointer-events-none z-0"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none z-0"></div>
 
     <div class="max-w-[1440px] mx-auto relative z-10">
       
