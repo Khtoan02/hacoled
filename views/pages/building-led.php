@@ -52,16 +52,18 @@ for ($i = 0; $i < 50; $i++) {
         'image'      => 'https://images.unsplash.com/' . $img_id . '?q=80&w=1000&auto=format&fit=crop',
     ];
 }
+
+$hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LED_decoration_4K_202608031454.jpeg';
 ?>
 
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Vibrant Skyscraper Background Image with Soft Gradient Overlay) -->
+  <!-- SECTION 1: HERO SECTION (Dark Ambient Glow & Custom 4K Skyscraper Background Image) -->
   <section class="relative pt-32 pb-44 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden bg-slate-950">
-    <!-- Bright Vivid Skyscraper Background Image -->
+    <!-- Custom 4K Hero Skyscraper Background Image -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-      <img src="https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=1920&auto=format&fit=crop" alt="HacoLED Building Facade Night" class="w-full h-full object-cover opacity-65 scale-105 transform brightness-110 contrast-105">
+      <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade 4K" class="w-full h-full object-cover opacity-65 scale-105 transform brightness-110 contrast-105">
       <div class="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/50 via-[#0B0B0E]/70 to-[#0B0B0E]"></div>
     </div>
 
