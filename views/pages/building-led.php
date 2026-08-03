@@ -59,14 +59,14 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, No Overlays, Left-Aligned Hero Stack) -->
-  <section class="relative pt-44 lg:pt-52 pb-24 lg:pb-32 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden min-h-[75vh] flex flex-col justify-center">
+  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, Including Client Logos Marquee inside Hero) -->
+  <section class="relative pt-44 lg:pt-52 pb-16 lg:pb-20 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden min-h-screen flex flex-col justify-between">
     <!-- Raw 100% Opacity 4K Background Image (No Dark Overlay) -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade 4K" class="w-full h-full object-cover opacity-100">
     </div>
 
-    <div class="max-w-[1440px] mx-auto w-full relative z-10 space-y-8">
+    <div class="max-w-[1440px] mx-auto w-full relative z-10 space-y-8 my-auto">
       
       <!-- Top Badge -->
       <div class="flex justify-start">
@@ -76,7 +76,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
         </div>
       </div>
 
-      <!-- Left-Aligned Hero Content Block (Stacked on the Left) -->
+      <!-- Left-Aligned Hero Content Block -->
       <div class="max-w-3xl space-y-6">
         <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
           Chiếu Sáng Mỹ Thuật<br/>
@@ -99,34 +99,28 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
         </div>
       </div>
 
-      <!-- Giant Faint Background Watermark Text "HACOLED" -->
-      <div class="pt-8 flex justify-center pointer-events-none select-none overflow-hidden opacity-30">
-        <span class="text-[12vw] sm:text-[14vw] font-black text-white/20 leading-none tracking-tighter uppercase font-mono drop-shadow-lg">
-          HACOLED
-        </span>
-      </div>
-
     </div>
-  </section>
 
-  <!-- SECTION 2: CLIENT LOGOS MARQUEE (Image 1 top reference) -->
-  <section class="py-12 bg-[#0E0E12] border-b border-slate-800/80">
-    <div class="max-w-[1440px] mx-auto px-4 text-center space-y-6">
-      <span class="text-[10px] font-mono font-bold tracking-widest text-slate-500 uppercase">ĐÃ ĐỒNG HÀNH CÙNG CÁC TẬP ĐOÀN VÀ CHỦ ĐẦU TƯ HÀNG ĐẦU</span>
-      
-      <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-60 grayscale hover:grayscale-0 transition-all duration-500 text-xs font-mono font-bold text-slate-300">
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">VINGROUP</span>
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">GELEXIMCO</span>
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">VIETCOMBANK</span>
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">VPBANK</span>
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">BITEXCO</span>
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">SUN GROUP</span>
-        <span class="px-4 py-2 bg-slate-900/60 rounded-lg border border-slate-800">NOVALAND</span>
+    <!-- Client Logos Marquee Integrated Inside Hero Section Bottom -->
+    <div class="max-w-[1440px] mx-auto w-full relative z-10 pt-12 pb-4">
+      <div class="bg-slate-950/80 border border-slate-800/80 backdrop-blur-md rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
+        <span class="text-[10px] font-mono font-bold tracking-widest text-slate-400 uppercase">ĐÃ ĐỒNG HÀNH CÙNG CÁC TẬP ĐOÀN VÀ CHỦ ĐẦU TƯ HÀNG ĐẦU</span>
+        
+        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500 text-xs font-mono font-bold text-slate-200">
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">VINGROUP</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">GELEXIMCO</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">VIETCOMBANK</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">VPBANK</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">BITEXCO</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">SUN GROUP</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">NOVALAND</span>
+        </div>
       </div>
     </div>
+
   </section>
 
-  <!-- SECTION 3: BENTO FEATURE GRID "Tại sao chọn HacoLED" (Replace your Engineering Team - Image 1 middle reference) -->
+  <!-- SECTION 2: BENTO FEATURE GRID "Tại sao chọn HacoLED" (Replace your Engineering Team - Image 1 middle reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#F8F6F5] text-slate-900 border-b border-slate-200">
     <div class="max-w-[1440px] mx-auto space-y-16">
       
@@ -238,7 +232,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 4: PROJECTS WITH GIANT WATERMARK TEXT (Image 1 middle reference) -->
+  <!-- SECTION 3: PROJECTS WITH GIANT WATERMARK TEXT (Image 1 middle reference) -->
   <section id="projects-section" class="py-28 px-4 lg:px-8 bg-[#0B0B0E] relative overflow-hidden border-b border-slate-800/80">
     
     <!-- Massive Watermark Text "PROJECTS" -->
@@ -303,7 +297,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 5: EXTENSIVE PACKAGES / B2B SOLUTION PLANS (Image 2 middle reference) -->
+  <!-- SECTION 4: EXTENSIVE PACKAGES / B2B SOLUTION PLANS (Image 2 middle reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0B0B0E] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
@@ -375,7 +369,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 6: THE FOUNDER'S DESK / ĐỘI NGŨ KỸ SƯ (Image 2 middle reference) -->
+  <!-- SECTION 5: THE FOUNDER'S DESK / ĐỘI NGŨ KỸ SƯ (Image 2 middle reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0E0E12] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto bg-slate-900/90 rounded-3xl border border-slate-800 p-8 sm:p-12 shadow-2xl">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -404,7 +398,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 7: TESTIMONIAL REVIEWS (Image 1 & 2 bottom reference) -->
+  <!-- SECTION 6: TESTIMONIAL REVIEWS (Image 1 & 2 bottom reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#F8F6F5] text-slate-900 border-b border-slate-200">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
@@ -464,7 +458,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 8: FREQUENTLY ASKED QUESTIONS ACCORDION (Image 2 bottom reference) -->
+  <!-- SECTION 7: FREQUENTLY ASKED QUESTIONS ACCORDION (Image 2 bottom reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0B0B0E] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
@@ -489,7 +483,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 1 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
               <span>HacoLED có hỗ trợ dựng bản vẽ 3D hiệu ứng miễn phí không?</span>
               <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
             </button>
@@ -500,7 +494,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 2 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
               <span>Hệ thống LED ngoài trời có chịu được bão và chống nước tốt không?</span>
               <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
             </button>
@@ -511,7 +505,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 3 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
               <span>Thời gian thi công hoàn thiện một tòa nhà mất bao lâu?</span>
               <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
             </button>
@@ -522,7 +516,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 4 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
               <span>Chính sách bảo hành và sửa chữa sự cố như thế nào?</span>
               <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
             </button>
