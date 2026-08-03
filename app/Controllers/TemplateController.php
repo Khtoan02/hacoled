@@ -826,6 +826,67 @@ class TemplateController extends Controller {
     }
 
     /**
+     * Building Decorative LED Page Template handler
+     */
+    public function buildingLed() {
+        $page_data = $this->get_current_page_data(__('LED trang trí tòa nhà HacoLED', 'hacoled'));
+
+        // Query actual products
+        $products = [];
+        if (class_exists('HacoLED\Theme\Models\LedScreenModel')) {
+            $products = \HacoLED\Theme\Models\LedScreenModel::get_products(8);
+        }
+
+        // Query standard projects
+        $projects_cat_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
+        $args = [
+            'post_type'      => 'post',
+            'posts_per_page' => 6,
+            'category_name'  => $projects_cat_slug,
+            'post_status'    => 'publish',
+            'orderby'        => 'date',
+            'order'          => 'DESC'
+        ];
+        $query = new \WP_Query($args);
+        if (!$query->have_posts()) {
+            $args['category_name'] = 'projects';
+            $query = new \WP_Query($args);
+        }
+
+        $projects = [];
+        if ($query->have_posts()) {
+            while ($query->have_posts()) {
+                $query->the_post();
+                $categories = get_the_category();
+                $cat_name = !empty($categories) ? $categories[0]->name : __('Dự án', 'hacoled');
+                
+                $tech_specs = get_post_meta(get_the_ID(), '_project_tech_specs', true) ?: 'LED P3.0 | 4K UHD';
+                
+                $projects[] = [
+                    'id'         => get_the_ID(),
+                    'title'      => get_the_title(),
+                    'category'   => $cat_name,
+                    'excerpt'    => get_the_excerpt(),
+                    'permalink'  => get_permalink(),
+                    'thumbnail'  => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
+                    'tech_specs' => $tech_specs,
+                    'year'       => get_the_date('Y'),
+                    'client'     => get_post_meta(get_the_ID(), '_project_client', true) ?: __('Chủ đầu tư HacoLED', 'hacoled')
+                ];
+            }
+            wp_reset_postdata();
+        }
+
+        $this->render($this->resolveLayoutView($page_data['id'], 'pages/building-led'), [
+            'page'        => $page_data,
+            'products'    => $products,
+            'projects'    => $projects,
+            'header_type' => 'default',
+            'footer_type' => 'default'
+        ]);
+    }
+
+    /**
      * Private helper to fetch active page content or return fallback
      */
     private function get_current_page_data($fallback_title) {

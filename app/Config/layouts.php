@@ -19,6 +19,14 @@ return [
                 'page' => ['type' => 'page_template', 'template' => 'page-templates/about.php'],
             ],
         ],
+        'building_led' => [
+            'label'       => 'LED trang trí toà nhà',
+            'description' => 'Giao diện chuyên biệt cho ngành hàng LED trang trí toà nhà.',
+            'controller_action' => 'buildingLed',
+            'implementations' => [
+                'page' => ['type' => 'page_template', 'template' => 'page-templates/building-led.php'],
+            ],
+        ],
         'services' => [
             'label'       => 'Dịch vụ HacoLED',
             'description' => 'Giao diện trình bày danh sách và quy trình dịch vụ.',

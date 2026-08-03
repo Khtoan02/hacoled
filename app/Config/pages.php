@@ -19,6 +19,11 @@ return [
         'slug'     => 'gioi-thieu',
         'template' => 'page-templates/about.php',
     ],
+    'building_led' => [
+        'title'    => 'LED trang trí toà nhà',
+        'slug'     => 'led-trang-tri-toa-nha',
+        'template' => 'page-templates/building-led.php',
+    ],
     'services' => [
         'title'    => 'Dịch vụ',
         'slug'     => 'dich-vu',
