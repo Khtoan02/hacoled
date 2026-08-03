@@ -59,47 +59,42 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Dark Ambient Glow & Custom 4K Skyscraper Background Image) -->
-  <section class="relative pt-32 pb-44 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden bg-slate-950">
-    <!-- Custom 4K Hero Skyscraper Background Image -->
+  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, No Overlays, Calculated Top Padding for Fixed Header) -->
+  <section class="relative pt-44 lg:pt-52 pb-24 lg:pb-32 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden min-h-[75vh] flex flex-col justify-center">
+    <!-- Raw 100% Opacity 4K Background Image (No Dark Overlay) -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-      <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade 4K" class="w-full h-full object-cover opacity-65 scale-105 transform brightness-110 contrast-105">
-      <div class="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/50 via-[#0B0B0E]/70 to-[#0B0B0E]"></div>
+      <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade 4K" class="w-full h-full object-cover opacity-100">
     </div>
 
-    <!-- Ambient Radial Glow Arc -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#B31217]/30 via-[#FBBF24]/15 to-transparent blur-[120px] rounded-full pointer-events-none z-0"></div>
-    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none z-0"></div>
-
-    <div class="max-w-[1440px] mx-auto relative z-10">
+    <div class="max-w-[1440px] mx-auto w-full relative z-10 space-y-8">
       
       <!-- Top Badge -->
-      <div class="flex justify-center mb-8">
-        <div class="inline-flex items-center gap-2 bg-slate-900/90 border border-slate-700/80 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-slate-300 shadow-xl backdrop-blur-md">
+      <div class="flex justify-start">
+        <div class="inline-flex items-center gap-2 bg-slate-950/80 border border-slate-700/80 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-slate-200 shadow-2xl backdrop-blur-md">
           <span class="w-2 h-2 rounded-full bg-[#FBBF24] animate-pulse"></span>
           <span>HACOLED FACADE · Nhà thầu chiếu sáng mỹ thuật 3D</span>
         </div>
       </div>
 
-      <!-- Split Hero Header (Matching Image 3 layout) -->
+      <!-- Split Hero Header (Properly calculated padding under fixed website header) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
         <div class="lg:col-span-8 space-y-6">
-          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white drop-shadow-md">
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
             Chiếu Sáng Mỹ Thuật<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-[#FBBF24]">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
           </h1>
         </div>
 
         <div class="lg:col-span-4 space-y-6">
-          <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal drop-shadow">
+          <p class="text-slate-100 text-sm sm:text-base leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] bg-slate-950/60 p-5 rounded-2xl border border-white/10 backdrop-blur-sm">
             Chúng tôi tư vấn, thiết kế 3D và thi công trọn gói hệ thống LED mặt dựng tòa nhà cao tầng. Tối ưu năng lượng, vận hành thông minh qua DMX512 và Cloud IoT.
           </p>
-          <div class="flex items-center gap-4">
-            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-[#FBBF24]/20">
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-black/50">
               <i class="ph-bold ph-chats-circle text-base"></i>
               <span>Khảo Sát & Báo Giá 3D</span>
             </a>
-            <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-900/90 backdrop-blur-md border border-slate-700 text-slate-200 hover:text-white font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-all duration-300">
+            <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-950/80 backdrop-blur-md border border-slate-700 text-slate-100 hover:text-white font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-xl">
               <span>Dự Án</span>
               <i class="ph-bold ph-arrow-down text-xs"></i>
             </a>
@@ -107,9 +102,9 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
         </div>
       </div>
 
-      <!-- Giant Faint Background Watermark Text "HACOLED" (Image 3 bottom watermark) -->
-      <div class="mt-20 flex justify-center pointer-events-none select-none overflow-hidden">
-        <span class="text-[12vw] sm:text-[14vw] font-black text-slate-700/25 leading-none tracking-tighter uppercase font-mono">
+      <!-- Giant Faint Background Watermark Text "HACOLED" -->
+      <div class="pt-8 flex justify-center pointer-events-none select-none overflow-hidden opacity-30">
+        <span class="text-[12vw] sm:text-[14vw] font-black text-white/20 leading-none tracking-tighter uppercase font-mono drop-shadow-lg">
           HACOLED
         </span>
       </div>
