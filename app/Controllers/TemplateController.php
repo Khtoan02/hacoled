@@ -825,9 +825,6 @@ class TemplateController extends Controller {
         ]);
     }
 
-    /**
-     * Building Decorative LED Page Template handler
-     */
     public function buildingLed() {
         $page_data = $this->get_current_page_data(__('LED trang trí tòa nhà HacoLED', 'hacoled'));
 
@@ -837,44 +834,54 @@ class TemplateController extends Controller {
             $products = \HacoLED\Theme\Models\LedScreenModel::get_products(8);
         }
 
-        // Query standard projects
-        $projects_cat_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
-        $args = [
-            'post_type'      => 'post',
-            'posts_per_page' => 6,
-            'category_name'  => $projects_cat_slug,
-            'post_status'    => 'publish',
-            'orderby'        => 'date',
-            'order'          => 'DESC'
-        ];
-        $query = new \WP_Query($args);
-        if (!$query->have_posts()) {
-            $args['category_name'] = 'projects';
-            $query = new \WP_Query($args);
+        // Fetch custom building LED projects uploaded via admin metabox
+        $projects = [];
+        if ($page_data['id'] > 0) {
+            $custom_projects_json = get_post_meta($page_data['id'], '_building_led_projects', true);
+            if (!empty($custom_projects_json)) {
+                $projects = json_decode($custom_projects_json, true);
+            }
         }
 
-        $projects = [];
-        if ($query->have_posts()) {
-            while ($query->have_posts()) {
-                $query->the_post();
-                $categories = get_the_category();
-                $cat_name = !empty($categories) ? $categories[0]->name : __('Dự án', 'hacoled');
-                
-                $tech_specs = get_post_meta(get_the_ID(), '_project_tech_specs', true) ?: 'LED P3.0 | 4K UHD';
-                
-                $projects[] = [
-                    'id'         => get_the_ID(),
-                    'title'      => get_the_title(),
-                    'category'   => $cat_name,
-                    'excerpt'    => get_the_excerpt(),
-                    'permalink'  => get_permalink(),
-                    'thumbnail'  => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
-                    'tech_specs' => $tech_specs,
-                    'year'       => get_the_date('Y'),
-                    'client'     => get_post_meta(get_the_ID(), '_project_client', true) ?: __('Chủ đầu tư HacoLED', 'hacoled')
-                ];
-            }
-            wp_reset_postdata();
+        // If no custom projects are configured, fallback to default mock projects (diverse ratios for Masonry)
+        if (empty($projects) || !is_array($projects)) {
+            $projects = [
+                [
+                    'title'      => __('Chiếu sáng mỹ thuật tòa nhà Geleximco Building Láng Hạ', 'hacoled'),
+                    'client'     => __('Tập đoàn Geleximco', 'hacoled'),
+                    'tech_specs' => 'LED Linear RGB | DMX512',
+                    'year'       => '2026',
+                    'image'      => 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop',
+                ],
+                [
+                    'title'      => __('Thi công màn hình LED lưới ngoài trời tại Vietcombank Tower TP.HCM', 'hacoled'),
+                    'client'     => __('Vietcombank', 'hacoled'),
+                    'tech_specs' => 'LED Mesh P16-32 | 8000 nits',
+                    'year'       => '2026',
+                    'image'      => 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop',
+                ],
+                [
+                    'title'      => __('Hệ thống LED viền chạy hiệu ứng tòa nhà VPBank Tower Hà Nội', 'hacoled'),
+                    'client'     => __('VPBank', 'hacoled'),
+                    'tech_specs' => 'LED Linear DMX | IP68',
+                    'year'       => '2026',
+                    'image'      => 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=800&auto=format&fit=crop',
+                ],
+                [
+                    'title'      => __('LED trang trí kiến trúc mặt dựng tòa nhà Discovery Complex', 'hacoled'),
+                    'client'     => __('Kinh Đô TCI Group', 'hacoled'),
+                    'tech_specs' => 'LED Pixel Dot 50mm | RGB',
+                    'year'       => '2025',
+                    'image'      => 'https://images.unsplash.com/photo-1507608869274-d3177c8bb4c7?q=80&w=800&auto=format&fit=crop',
+                ],
+                [
+                    'title'      => __('Lắp đặt LED chiếu rọi mặt dựng Landmark 81', 'hacoled'),
+                    'client'     => __('Vingroup', 'hacoled'),
+                    'tech_specs' => 'LED Wall Washer 48W | RGBW',
+                    'year'       => '2026',
+                    'image'      => 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=800&auto=format&fit=crop',
+                ]
+            ];
         }
 
         $this->render($this->resolveLayoutView($page_data['id'], 'pages/building-led'), [

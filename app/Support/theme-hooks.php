@@ -1239,3 +1239,211 @@ function hacoled_save_post_faq_meta($post_id) {
     }
 }
 add_action('save_post', 'hacoled_save_post_faq_meta');
+
+// 10. BUILDING DECORATIVE LED PAGE METABOX
+function hacoled_admin_enqueue_building_led_scripts($hook) {
+    global $post;
+    if ($hook === 'post.php' || $hook === 'post-new.php') {
+        if ($post && 'page' === $post->post_type) {
+            wp_enqueue_media();
+        }
+    }
+}
+add_action('admin_enqueue_scripts', 'hacoled_admin_enqueue_building_led_scripts');
+
+function hacoled_add_building_led_meta_box() {
+    add_meta_box(
+        'building_led_meta',
+        'Cấu hình Dự án LED trang trí tòa nhà (Masonry)',
+        'hacoled_building_led_meta_box_callback',
+        'page',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'hacoled_add_building_led_meta_box');
+
+function hacoled_building_led_meta_box_callback($post) {
+    wp_nonce_field('hacoled_save_building_led_meta', 'hacoled_building_led_nonce');
+
+    $projects_data = get_post_meta($post->ID, '_building_led_projects', true);
+    if (!is_array($projects_data)) {
+        $projects_data = json_decode($projects_data, true);
+    }
+    if (empty($projects_data) || !is_array($projects_data)) {
+        $projects_data = [];
+    }
+    ?>
+    <div id="hacoled-building-led-meta-wrapper" style="max-width: 100%;">
+        <p class="description" style="margin-bottom:15px;">
+            <?php esc_html_e('Cấu hình danh sách dự án hiển thị dạng Masonry cho trang LED trang trí tòa nhà. Thêm ảnh và điền thông tin chi tiết.', 'hacoled'); ?>
+        </p>
+
+        <div id="building-projects-container" style="display:flex; flex-direction:column; gap:15px;">
+            <?php 
+            $index = 0;
+            foreach ($projects_data as $project) : 
+                $title = isset($project['title']) ? esc_attr($project['title']) : '';
+                $client = isset($project['client']) ? esc_attr($project['client']) : '';
+                $tech_specs = isset($project['tech_specs']) ? esc_attr($project['tech_specs']) : '';
+                $year = isset($project['year']) ? esc_attr($project['year']) : '';
+                $image = isset($project['image']) ? esc_url($project['image']) : '';
+            ?>
+                <div class="project-row" style="border:1px solid #d0d7de; padding:15px; border-radius:8px; background:#f9f9f9; position:relative;">
+                    <button type="button" class="remove-project-btn button button-link-delete" style="position:absolute; top:10px; right:10px;"><?php esc_html_e('Xóa', 'hacoled'); ?></button>
+                    
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:10px; max-width: 800px;">
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Tên công trình', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[<?php echo $index; ?>][title]" value="<?php echo $title; ?>" style="width:100%;">
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Khách hàng / Chủ đầu tư', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[<?php echo $index; ?>][client]" value="<?php echo $client; ?>" style="width:100%;">
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 2fr; gap:15px; align-items: end; max-width: 800px;">
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Thông số kỹ thuật', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[<?php echo $index; ?>][tech_specs]" value="<?php echo $tech_specs; ?>" style="width:100%;" placeholder="VD: LED Mesh P16">
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Năm hoàn thành', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[<?php echo $index; ?>][year]" value="<?php echo $year; ?>" style="width:100%;" placeholder="2026">
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Hình ảnh dự án', 'hacoled'); ?></label>
+                            <div style="display:flex; gap:5px;">
+                                <input type="text" name="b_projects[<?php echo $index; ?>][image]" class="project-image-url" value="<?php echo $image; ?>" style="flex:1;">
+                                <button type="button" class="select-project-image button"><?php esc_html_e('Chọn ảnh', 'hacoled'); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php 
+                $index++;
+            endforeach; 
+            ?>
+        </div>
+
+        <div style="margin-top:20px;">
+            <button type="button" id="add-project-row-btn" class="button button-primary"><?php esc_html_e('Thêm dự án mới', 'hacoled'); ?></button>
+        </div>
+    </div>
+
+    <script>
+    jQuery(document).ready(function($) {
+        let index = <?php echo $index; ?>;
+        
+        // Add new row
+        $('#add-project-row-btn').on('click', function() {
+            let rowHtml = `
+                <div class="project-row" style="border:1px solid #d0d7de; padding:15px; border-radius:8px; background:#f9f9f9; position:relative; margin-top:15px;">
+                    <button type="button" class="remove-project-btn button button-link-delete" style="position:absolute; top:10px; right:10px;"><?php esc_html_e('Xóa', 'hacoled'); ?></button>
+                    
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:10px; max-width: 800px;">
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Tên công trình', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[\${index}][title]" value="" style="width:100%;">
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Khách hàng / Chủ đầu tư', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[\${index}][client]" value="" style="width:100%;">
+                        </div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 2fr; gap:15px; align-items: end; max-width: 800px;">
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Thông số kỹ thuật', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[\${index}][tech_specs]" value="" style="width:100%;" placeholder="VD: LED Mesh P16">
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Năm hoàn thành', 'hacoled'); ?></label>
+                            <input type="text" name="b_projects[\${index}][year]" value="" style="width:100%;" placeholder="2026">
+                        </div>
+                        <div>
+                            <label style="display:block; font-weight:600; margin-bottom:4px;"><?php esc_html_e('Hình ảnh dự án', 'hacoled'); ?></label>
+                            <div style="display:flex; gap:5px;">
+                                <input type="text" name="b_projects[\${index}][image]" class="project-image-url" value="" style="flex:1;">
+                                <button type="button" class="select-project-image button"><?php esc_html_e('Chọn ảnh', 'hacoled'); ?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#building-projects-container').append(rowHtml);
+            index++;
+        });
+
+        // Remove row
+        $(document).on('click', '.remove-project-btn', function() {
+            if (confirm('<?php echo esc_js(__('Bạn chắc chắn muốn xóa dự án này?', 'hacoled')); ?>')) {
+                $(this).closest('.project-row').remove();
+            }
+        });
+
+        // Media Uploader
+        $(document).on('click', '.select-project-image', function(e) {
+            e.preventDefault();
+            let button = $(this);
+            let inputField = button.siblings('.project-image-url');
+
+            let custom_uploader = wp.media({
+                title: '<?php echo esc_js(__('Chọn hình ảnh dự án', 'hacoled')); ?>',
+                button: {
+                    text: '<?php echo esc_js(__('Sử dụng ảnh này', 'hacoled')); ?>'
+                },
+                multiple: false
+            });
+
+            custom_uploader.on('select', function() {
+                let attachment = custom_uploader.state().get('selection').first().toJSON();
+                inputField.val(attachment.url);
+            });
+
+            custom_uploader.open();
+        });
+    });
+    </script>
+    <?php
+}
+
+function hacoled_save_building_led_meta($post_id) {
+    if (!isset($_POST['hacoled_building_led_nonce']) || !wp_verify_nonce($_POST['hacoled_building_led_nonce'], 'hacoled_save_building_led_meta')) {
+        return;
+    }
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    if (isset($_POST['b_projects']) && is_array($_POST['b_projects'])) {
+        $clean_projects = [];
+        foreach ($_POST['b_projects'] as $proj) {
+            $title = isset($proj['title']) ? sanitize_text_field(wp_unslash($proj['title'])) : '';
+            $client = isset($proj['client']) ? sanitize_text_field(wp_unslash($proj['client'])) : '';
+            $tech_specs = isset($proj['tech_specs']) ? sanitize_text_field(wp_unslash($proj['tech_specs'])) : '';
+            $year = isset($proj['year']) ? sanitize_text_field(wp_unslash($proj['year'])) : '';
+            $image = isset($proj['image']) ? esc_url_raw(wp_unslash($proj['image'])) : '';
+
+            // Only save if it has a title or image
+            if ($title !== '' || $image !== '') {
+                $clean_projects[] = [
+                    'title'      => $title,
+                    'client'     => $client,
+                    'tech_specs' => $tech_specs,
+                    'year'       => $year,
+                    'image'      => $image
+                ];
+            }
+        }
+        update_post_meta($post_id, '_building_led_projects', json_encode($clean_projects, JSON_UNESCAPED_UNICODE));
+    } else {
+        delete_post_meta($post_id, '_building_led_projects');
+    }
+}
+add_action('save_post', 'hacoled_save_building_led_meta');
+
