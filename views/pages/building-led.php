@@ -1,6 +1,6 @@
 <?php
 /**
- * Building Decorative LED Page View Template - Complete Aceternity UI Reference Layout
+ * Building Decorative LED Page View Template - Complete Aceternity UI Reference Layout (HacoLED Brand Red Theme)
  *
  * @var array  $page
  * @var array  $products
@@ -27,7 +27,7 @@ $unsplash_ids = [
     'photo-1513836279014-a89f7a76ae86', 'photo-1522071820081-009f0129c71c', 'photo-1515187029135-18ee286d815b',
     'photo-1497366216548-37526070297c', 'photo-1497215728101-856f4ea42174', 'photo-1497366811353-6870744d04b2',
     'photo-1504384308090-c894fdcc538d', 'photo-1542744094-3a31f103e35f', 'photo-1454165804606-c3d57bc86b40',
-    'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1522202176988-66273c2fd55f',
+    'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1522071820081-009f0129c71c',
     'photo-1531482615713-2afd69097998', 'photo-1556761175-4b46a572b786', 'photo-1515187029135-18ee286d815b',
     'photo-1552581230-261c4701235d', 'photo-1558224494-46b221937987', 'photo-1568992687947-868a62a9f521',
     'photo-1573497019940-1c28c88b4f3e', 'photo-1573164713714-d95e436ab8d6'
@@ -56,22 +56,22 @@ for ($i = 0; $i < 50; $i++) {
 $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LED_decoration_4K_202608031454.jpeg';
 ?>
 
-<!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
+<!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (SIGNATURE BRAND RED THEME) -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, Including Client Logos Marquee inside Hero) -->
+  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, Brand Red Highlights) -->
   <section class="relative pt-44 lg:pt-52 pb-16 lg:pb-20 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden min-h-screen flex flex-col justify-between">
-    <!-- Raw 100% Opacity 4K Background Image (No Dark Overlay) -->
+    <!-- Raw 100% Opacity 4K Background Image -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade 4K" class="w-full h-full object-cover opacity-100">
     </div>
 
     <div class="max-w-[1440px] mx-auto w-full relative z-10 space-y-8 my-auto">
       
-      <!-- Top Badge -->
+      <!-- Top Badge (Brand Red Accent) -->
       <div class="flex justify-start">
-        <div class="inline-flex items-center gap-2 bg-slate-950/80 border border-slate-700/80 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-slate-200 shadow-2xl backdrop-blur-md">
-          <span class="w-2 h-2 rounded-full bg-[#FBBF24] animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 bg-slate-950/85 border border-[#B31217]/50 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-slate-200 shadow-2xl backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-[#B31217] animate-pulse"></span>
           <span>HACOLED FACADE · Nhà thầu chiếu sáng mỹ thuật 3D</span>
         </div>
       </div>
@@ -80,21 +80,22 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
       <div class="max-w-3xl space-y-6">
         <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
           Chiếu Sáng Mỹ Thuật<br/>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-[#FBBF24]">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-red-100 to-[#E62E34]">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
         </h1>
 
-        <p class="text-slate-100 text-sm sm:text-base leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] bg-slate-950/60 p-5 rounded-2xl border border-white/10 backdrop-blur-sm max-w-2xl">
+        <p class="text-slate-100 text-sm sm:text-base leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] bg-slate-950/70 p-5 rounded-2xl border border-white/10 backdrop-blur-sm max-w-2xl">
           Chúng tôi tư vấn, thiết kế 3D và thi công trọn gói hệ thống LED mặt dựng tòa nhà cao tầng. Tối ưu năng lượng, vận hành thông minh qua DMX512 và Cloud IoT.
         </p>
 
         <div class="flex flex-wrap items-center gap-4 pt-2">
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-black/50">
+          <!-- Primary CTA Button (HacoLED Brand Red Gradient) -->
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-gradient-to-r from-[#B31217] via-[#D91E24] to-[#B31217] hover:from-[#D91E24] hover:to-[#B31217] text-white font-black text-xs uppercase px-8 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-[#B31217]/50 border border-red-500/30">
             <i class="ph-bold ph-chats-circle text-base"></i>
             <span>Khảo Sát & Báo Giá 3D</span>
           </a>
-          <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-950/80 backdrop-blur-md border border-slate-700 text-slate-100 hover:text-white font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-xl">
+          <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-950/85 backdrop-blur-md border border-slate-700 hover:border-red-500 text-slate-100 hover:text-white font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-xl">
             <span>Dự Án</span>
-            <i class="ph-bold ph-arrow-down text-xs"></i>
+            <i class="ph-bold ph-arrow-down text-xs text-red-500"></i>
           </a>
         </div>
       </div>
@@ -103,24 +104,24 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
     <!-- Client Logos Marquee Integrated Inside Hero Section Bottom -->
     <div class="max-w-[1440px] mx-auto w-full relative z-10 pt-12 pb-4">
-      <div class="bg-slate-950/80 border border-slate-800/80 backdrop-blur-md rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
+      <div class="bg-slate-950/85 border border-slate-800/80 backdrop-blur-md rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
         <span class="text-[10px] font-mono font-bold tracking-widest text-slate-400 uppercase">ĐÃ ĐỒNG HÀNH CÙNG CÁC TẬP ĐOÀN VÀ CHỦ ĐẦU TƯ HÀNG ĐẦU</span>
         
         <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-500 text-xs font-mono font-bold text-slate-200">
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">VINGROUP</span>
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">GELEXIMCO</span>
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">VIETCOMBANK</span>
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">VPBANK</span>
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">BITEXCO</span>
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">SUN GROUP</span>
-          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80">NOVALAND</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">VINGROUP</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">GELEXIMCO</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">VIETCOMBANK</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">VPBANK</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">BITEXCO</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">SUN GROUP</span>
+          <span class="px-4 py-2 bg-slate-900/90 rounded-lg border border-slate-700/80 hover:border-[#B31217]">NOVALAND</span>
         </div>
       </div>
     </div>
 
   </section>
 
-  <!-- SECTION 2: BENTO FEATURE GRID "Tại sao chọn HacoLED" (Replace your Engineering Team - Image 1 middle reference) -->
+  <!-- SECTION 2: BENTO FEATURE GRID "Tại sao chọn HacoLED" (Brand Red Theme Accent) -->
   <section class="py-24 px-4 lg:px-8 bg-[#F8F6F5] text-slate-900 border-b border-slate-200">
     <div class="max-w-[1440px] mx-auto space-y-16">
       
@@ -131,13 +132,13 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
         </h2>
       </div>
 
-      <!-- Bento Grid Layout (5 cards matching Image 1 middle) -->
+      <!-- Bento Grid Layout -->
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
         
         <!-- Card 1: Tall Dark Card on Left (col-span-4) -->
         <div class="md:col-span-4 bg-[#0B0B0E] text-white p-8 rounded-3xl border border-slate-800 flex flex-col justify-between space-y-8 shadow-xl">
           <div class="space-y-4">
-            <span class="px-3 py-1 rounded-full bg-[#B31217]/20 border border-[#B31217]/30 text-[#B31217] font-mono text-[10px] font-bold uppercase tracking-wider">3D Facade Studio</span>
+            <span class="px-3 py-1 rounded-full bg-[#B31217]/20 border border-[#B31217]/40 text-[#E62E34] font-mono text-[10px] font-bold uppercase tracking-wider">3D Facade Studio</span>
             <h3 class="text-2xl font-bold">Thiết Kế & Mô Phỏng 3D Sơ Bộ Miễn Phí</h3>
             <p class="text-xs text-slate-400 leading-relaxed font-light">
               Chúng tôi tiến hành dựng toàn bộ hiệu ứng ánh sáng 3D trên mô hình tòa nhà của bạn trước khi thi công, giúp chủ đầu tư duyệt phương án trực quan 100%.
@@ -148,7 +149,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
             <div class="w-full aspect-[4/3] rounded-2xl bg-slate-900 overflow-hidden border border-slate-800 relative">
               <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-80" alt="3D Simulation">
             </div>
-            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-[#FBBF24] text-slate-950 font-extrabold text-xs uppercase py-3.5 rounded-xl hover:bg-amber-400 transition-colors">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-[#B31217] hover:bg-red-700 text-white font-extrabold text-xs uppercase py-3.5 rounded-xl transition-colors shadow-lg">
               <span>Đăng ký bản vẽ 3D</span>
               <i class="ph-bold ph-arrow-right text-xs"></i>
             </a>
@@ -161,8 +162,8 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
           <!-- Card 2: Top Left (Tracking & Status) -->
           <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div class="space-y-2">
-              <div class="w-10 h-10 rounded-xl bg-amber-100 text-[#FBBF24] flex items-center justify-center font-bold">
-                <i class="ph-bold ph-[#B31217] ph-clock-afternoon text-xl"></i>
+              <div class="w-10 h-10 rounded-xl bg-red-50 text-[#B31217] flex items-center justify-center font-bold">
+                <i class="ph-bold ph-clock-afternoon text-xl"></i>
               </div>
               <h4 class="text-lg font-bold text-slate-900">Giám Sát Tiến Độ 24/7</h4>
               <p class="text-xs text-slate-500 font-light leading-relaxed">
@@ -171,14 +172,14 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
             </div>
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center justify-between text-xs font-mono">
               <span class="text-slate-500">Trạng thái thi công:</span>
-              <span class="text-green-600 font-bold">● Đang đúng tiến độ</span>
+              <span class="text-[#B31217] font-bold">● Đang đúng tiến độ</span>
             </div>
           </div>
 
           <!-- Card 3: Top Right (Cloud & IoT Map) -->
           <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div class="space-y-2">
-              <div class="w-10 h-10 rounded-xl bg-red-100 text-[#B31217] flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-red-50 text-[#B31217] flex items-center justify-center font-bold">
                 <i class="ph-bold ph-cloud-arrow-up text-xl"></i>
               </div>
               <h4 class="text-lg font-bold text-slate-900">Quản Lý Đám Mây IoT</h4>
@@ -188,14 +189,14 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
             </div>
             <div class="bg-slate-900 text-white p-3 rounded-xl flex items-center justify-between text-xs font-mono">
               <span>HacoLED Portal Cloud</span>
-              <span class="text-[#FBBF24] font-bold">Online</span>
+              <span class="text-red-400 font-bold">Online</span>
             </div>
           </div>
 
           <!-- Card 4: Bottom Left (Certified Hardware IP68) -->
           <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div class="space-y-2">
-              <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-red-50 text-[#B31217] flex items-center justify-center font-bold">
                 <i class="ph-bold ph-shield-check text-xl"></i>
               </div>
               <h4 class="text-lg font-bold text-slate-900">Vật Tư Chuẩn IP68 & CO/CQ</h4>
@@ -204,15 +205,15 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
               </p>
             </div>
             <div class="flex gap-2 text-[10px] font-mono font-bold">
-              <span class="px-2.5 py-1 bg-slate-100 rounded text-slate-700">ISO 9001</span>
-              <span class="px-2.5 py-1 bg-slate-100 rounded text-slate-700">CE Certified</span>
+              <span class="px-2.5 py-1 bg-red-50 text-[#B31217] rounded">ISO 9001</span>
+              <span class="px-2.5 py-1 bg-red-50 text-[#B31217] rounded">CE Certified</span>
             </div>
           </div>
 
           <!-- Card 5: Bottom Right (Warranty & Life support) -->
           <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div class="space-y-2">
-              <div class="w-10 h-10 rounded-xl bg-green-100 text-green-600 flex items-center justify-center font-bold">
+              <div class="w-10 h-10 rounded-xl bg-red-50 text-[#B31217] flex items-center justify-center font-bold">
                 <i class="ph-bold ph-wrench text-xl"></i>
               </div>
               <h4 class="text-lg font-bold text-slate-900">Bảo Hành Vàng 36 Tháng</h4>
@@ -232,7 +233,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 3: PROJECTS WITH GIANT WATERMARK TEXT (Image 1 middle reference) -->
+  <!-- SECTION 3: PROJECTS WITH GIANT WATERMARK TEXT (Brand Red Theme) -->
   <section id="projects-section" class="py-28 px-4 lg:px-8 bg-[#0B0B0E] relative overflow-hidden border-b border-slate-800/80">
     
     <!-- Massive Watermark Text "PROJECTS" -->
@@ -246,7 +247,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
       
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div class="space-y-3 max-w-xl">
-          <span class="text-xs font-mono font-bold text-[#FBBF24] uppercase tracking-widest">HỒ SƠ NĂNG LỰC DỰ ÁN</span>
+          <span class="text-xs font-mono font-bold text-red-500 uppercase tracking-widest">HỒ SƠ NĂNG LỰC DỰ ÁN</span>
           <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight uppercase text-white">
             Công Trình Thực Tế Đã Thi Công.
           </h2>
@@ -265,20 +266,20 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
           // Show first 6 images, hide the rest for high performance initial load
           $hide_class = ($index >= 6) ? 'hidden project-item-hidden' : '';
         ?>
-          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-xl hover:border-[#B31217]/50 hover:-translate-y-1 transition-all duration-500 cursor-pointer" data-project-index="<?php echo $index; ?>">
+          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-800 shadow-xl hover:border-[#B31217] hover:-translate-y-1 transition-all duration-500 cursor-pointer" data-project-index="<?php echo $index; ?>">
             <div class="relative overflow-hidden aspect-[4/3]">
               <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($project['title']); ?>" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
               <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
               
-              <span class="absolute top-4 left-4 px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700 text-[9px] font-mono font-bold text-[#FBBF24]">
+              <span class="absolute top-4 left-4 px-2.5 py-1 rounded-md bg-[#B31217] text-white text-[9px] font-mono font-bold shadow-md">
                 <?php echo esc_html($project['year']); ?>
               </span>
             </div>
 
             <div class="p-6 space-y-2 relative z-10 -mt-12">
               <span class="block text-[9px] font-mono text-slate-400 uppercase tracking-widest"><?php echo esc_html($project['client']); ?></span>
-              <h3 class="text-base font-bold text-white group-hover:text-[#FBBF24] transition-colors"><?php echo esc_html($project['title']); ?></h3>
-              <p class="text-[10px] font-mono text-[#B31217] font-bold"><?php echo esc_html($project['tech_specs']); ?></p>
+              <h3 class="text-base font-bold text-white group-hover:text-red-400 transition-colors"><?php echo esc_html($project['title']); ?></h3>
+              <p class="text-[10px] font-mono text-red-500 font-bold"><?php echo esc_html($project['tech_specs']); ?></p>
             </div>
           </div>
         <?php endforeach; ?>
@@ -287,8 +288,8 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
       <!-- Load More Trigger Button -->
       <?php if (count($display_projects) > 6): ?>
         <div class="text-center pt-8">
-          <button id="load-more-projects-btn" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-extrabold text-xs uppercase px-8 py-4 rounded-xl transition-all duration-300 cursor-pointer">
-            <i class="ph-bold ph-plus text-[#FBBF24]"></i>
+          <button id="load-more-projects-btn" class="inline-flex items-center gap-2 bg-slate-900 hover:bg-[#B31217] text-white border border-slate-700 font-extrabold text-xs uppercase px-8 py-4 rounded-xl transition-all duration-300 cursor-pointer shadow-lg">
+            <i class="ph-bold ph-plus text-red-500"></i>
             <span><?php echo sprintf(__('Xem thêm %d dự án khác', 'hacoled'), count($display_projects) - 6); ?></span>
           </button>
         </div>
@@ -297,12 +298,12 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 4: EXTENSIVE PACKAGES / B2B SOLUTION PLANS (Image 2 middle reference) -->
+  <!-- SECTION 4: EXTENSIVE PACKAGES / B2B SOLUTION PLANS (Brand Red Theme) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0B0B0E] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
       <div class="text-center max-w-2xl mx-auto space-y-3">
-        <span class="text-xs font-mono font-bold text-[#FBBF24] uppercase tracking-widest">GÓI TƯ VẤN THI CÔNG B2B</span>
+        <span class="text-xs font-mono font-bold text-red-500 uppercase tracking-widest">GÓI TƯ VẤN THI CÔNG B2B</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
           Các Gói Giải Pháp LED Facade
         </h2>
@@ -322,18 +323,18 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
               <li>✔ Thân Nhôm Anode Chống Rỉ</li>
             </ul>
           </div>
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-colors">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center bg-slate-800 hover:bg-[#B31217] text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-colors">
             Nhận báo giá chi tiết
           </a>
         </div>
 
-        <!-- Package 2: Featured Dark Card -->
-        <div class="bg-gradient-to-b from-[#B31217]/30 to-slate-900 p-8 rounded-3xl border border-[#B31217]/50 flex flex-col justify-between space-y-8 relative shadow-2xl scale-[1.03]">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#B31217] text-white text-[9px] font-mono font-bold uppercase rounded-full">
+        <!-- Package 2: Featured Brand Red Card -->
+        <div class="bg-gradient-to-b from-[#B31217]/40 via-slate-900 to-slate-900 p-8 rounded-3xl border border-[#B31217] flex flex-col justify-between space-y-8 relative shadow-2xl scale-[1.03]">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#B31217] text-white text-[9px] font-mono font-bold uppercase rounded-full shadow-lg">
             Khuyên dùng cho tòa kính
           </div>
           <div class="space-y-4 pt-2">
-            <span class="text-xs font-mono text-[#FBBF24] uppercase">GÓI TRUYỀN THÔNG TRONG SUỐT</span>
+            <span class="text-xs font-mono text-red-400 uppercase">GÓI TRUYỀN THÔNG TRONG SUỐT</span>
             <h3 class="text-xl font-bold text-white">LED Lưới Facade Mesh</h3>
             <p class="text-xs text-slate-300 font-light">Biến mặt vách kính tòa nhà thành màn hình video sống động nhưng vẫn giữ độ truyền sáng 80%.</p>
             <ul class="text-xs text-slate-200 space-y-2 border-t border-slate-800 pt-4 font-mono">
@@ -342,7 +343,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
               <li>✔ Quản Lý Đám Mây IoT Từ Xa</li>
             </ul>
           </div>
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase py-3.5 rounded-xl transition-colors shadow-lg">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center bg-[#B31217] hover:bg-red-700 text-white font-extrabold text-xs uppercase py-3.5 rounded-xl transition-colors shadow-lg shadow-[#B31217]/40">
             Đăng ký khảo sát 3D
           </a>
         </div>
@@ -359,7 +360,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
               <li>✔ Lập Trình Kịch Bản Lễ Tết</li>
             </ul>
           </div>
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-colors">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center bg-slate-800 hover:bg-[#B31217] text-white font-bold text-xs uppercase py-3.5 rounded-xl transition-colors">
             Nhận báo giá chi tiết
           </a>
         </div>
@@ -369,7 +370,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 5: THE FOUNDER'S DESK / ĐỘI NGŨ KỸ SƯ (Image 2 middle reference) -->
+  <!-- SECTION 5: THE FOUNDER'S DESK / ĐỘI NGŨ KỸ SƯ (Brand Red Theme) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0E0E12] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto bg-slate-900/90 rounded-3xl border border-slate-800 p-8 sm:p-12 shadow-2xl">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -381,7 +382,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
         <!-- Right Letter text -->
         <div class="lg:col-span-7 space-y-6">
-          <span class="text-xs font-mono text-[#FBBF24] font-bold uppercase tracking-widest">CAM KẾT TỪ GIÁM ĐỐC KỸ THUẬT HACOLED</span>
+          <span class="text-xs font-mono text-red-500 font-bold uppercase tracking-widest">CAM KẾT TỪ GIÁM ĐỐC KỸ THUẬT HACOLED</span>
           <h3 class="text-2xl sm:text-3xl font-bold text-white leading-tight">
             "Mỗi công trình là một kiệt tác ánh sáng được thi công với sự chính xác tuyệt đối."
           </h3>
@@ -390,7 +391,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
           </p>
           <div class="pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono">
             <span class="text-slate-300 font-bold">Ban Kỹ Thuật Dự Án HacoLED</span>
-            <span class="text-[#FBBF24]">Hà Nội & TP.HCM</span>
+            <span class="text-red-500 font-bold">Hà Nội & TP.HCM</span>
           </div>
         </div>
 
@@ -398,7 +399,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 6: TESTIMONIAL REVIEWS (Image 1 & 2 bottom reference) -->
+  <!-- SECTION 6: TESTIMONIAL REVIEWS (Brand Red Theme) -->
   <section class="py-24 px-4 lg:px-8 bg-[#F8F6F5] text-slate-900 border-b border-slate-200">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
@@ -417,7 +418,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
             "HacoLED đã tư vấn và dựng bản vẽ 3D rất trực quan cho tòa nhà trụ sở của chúng tôi. Quá trình thi công chuyên nghiệp và cực kỳ an toàn."
           </p>
           <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-slate-900 text-white font-bold flex items-center justify-center text-xs">V</div>
+            <div class="w-8 h-8 rounded-full bg-[#B31217] text-white font-bold flex items-center justify-center text-xs">V</div>
             <div>
               <h5 class="text-xs font-bold text-slate-900">Đại diện Ban Dự án</h5>
               <span class="text-[10px] text-slate-400 font-mono">Vietcombank Tower</span>
@@ -445,7 +446,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
             "Tốc độ ứng cứu sự cố kỹ thuật của HacoLED rất ấn tượng. Chỉ sau hơn 1 giờ nhận báo tin là kỹ sư đã tới tận công trình xử lý xong."
           </p>
           <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-bold flex items-center justify-center text-xs">V</div>
+            <div class="w-8 h-8 rounded-full bg-[#B31217] text-white font-bold flex items-center justify-center text-xs">V</div>
             <div>
               <h5 class="text-xs font-bold text-slate-900">Đội ngũ Vận hành Cơ điện</h5>
               <span class="text-[10px] text-slate-400 font-mono">VPBank Tower</span>
@@ -458,34 +459,34 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
     </div>
   </section>
 
-  <!-- SECTION 7: FREQUENTLY ASKED QUESTIONS ACCORDION (Image 2 bottom reference) -->
+  <!-- SECTION 7: FREQUENTLY ASKED QUESTIONS ACCORDION (Brand Red Theme) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0B0B0E] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
-        <!-- Left Callout Box (Image 2 bottom reference) -->
-        <div class="lg:col-span-5 bg-slate-900 p-8 rounded-3xl border border-slate-800 space-y-6">
-          <span class="text-xs font-mono text-[#FBBF24] uppercase">TƯ VẤN TRỰC TIẾP</span>
+        <!-- Left Callout Box -->
+        <div class="lg:col-span-5 bg-slate-900 p-8 rounded-3xl border border border-slate-800 space-y-6">
+          <span class="text-xs font-mono text-red-500 uppercase font-bold">TƯ VẤN TRỰC TIẾP</span>
           <h3 class="text-2xl font-bold text-white">Bạn Cần Đội Ngũ Kỹ Sư Khảo Sát Tận Nơi?</h3>
           <p class="text-xs text-slate-400 font-light leading-relaxed">
             Đăng ký thông tin công trình của bạn ngay hôm nay. Đội ngũ kỹ sư HacoLED sẽ cử cán bộ tới khảo sát đo đạc thực địa trong 24h.
           </p>
-          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-[#FBBF24] text-slate-950 font-extrabold text-xs uppercase py-4 rounded-xl hover:bg-amber-400 transition-colors">
+          <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full inline-flex items-center justify-center gap-2 bg-[#B31217] hover:bg-red-700 text-white font-extrabold text-xs uppercase py-4 rounded-xl transition-colors shadow-lg shadow-[#B31217]/40">
             <i class="ph-bold ph-phone-call text-sm"></i>
             <span>Yêu cầu khảo sát ngay</span>
           </a>
         </div>
 
-        <!-- Right FAQ Accordion List (Image 2 bottom reference) -->
+        <!-- Right FAQ Accordion List -->
         <div class="lg:col-span-7 space-y-4">
           <h3 class="text-xl font-bold text-white mb-6">Câu Hỏi Thường Gặp (FAQ)</h3>
 
           <!-- FAQ Item 1 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white hover:text-red-400 flex justify-between items-center cursor-pointer transition-colors">
               <span>HacoLED có hỗ trợ dựng bản vẽ 3D hiệu ứng miễn phí không?</span>
-              <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
+              <i class="ph-bold ph-caret-down text-red-500 faq-icon transition-transform"></i>
             </button>
             <div class="faq-content hidden px-5 pb-5 text-xs text-slate-400 font-light leading-relaxed border-t border-slate-800/50 pt-3">
               Có. 100% các dự án chiếu sáng mặt dựng tòa nhà khi liên hệ HacoLED đều được đội ngũ kiến trúc sư dựng phương án 3D miễn phí để chủ đầu tư duyệt trước khi ký hợp đồng.
@@ -494,9 +495,9 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 2 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white hover:text-red-400 flex justify-between items-center cursor-pointer transition-colors">
               <span>Hệ thống LED ngoài trời có chịu được bão và chống nước tốt không?</span>
-              <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
+              <i class="ph-bold ph-caret-down text-red-500 faq-icon transition-transform"></i>
             </button>
             <div class="faq-content hidden px-5 pb-5 text-xs text-slate-400 font-light leading-relaxed border-t border-slate-800/50 pt-3">
               Toàn bộ thiết bị LED Facade của HacoLED đều đạt chuẩn bảo vệ IP68 chống nước tuyệt đối. Hệ giàn khung giá đỡ được tính toán kết cấu chịu lực gió bão lên đến cấp 12.
@@ -505,7 +506,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 3 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white hover:text-red-400 flex justify-between items-center cursor-pointer transition-colors">
               <span>Thời gian thi công hoàn thiện một tòa nhà mất bao lâu?</span>
               <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
             </button>
@@ -516,7 +517,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LE
 
           <!-- FAQ Item 4 -->
           <div class="faq-item bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-[#FBBF24] flex justify-between items-center cursor-pointer">
+            <button class="faq-toggle w-full p-5 text-left font-bold text-sm text-white hover:text-red-400 flex justify-between items-center cursor-pointer transition-colors">
               <span>Chính sách bảo hành và sửa chữa sự cố như thế nào?</span>
               <i class="ph-bold ph-caret-down text-slate-400 faq-icon transition-transform"></i>
             </button>
