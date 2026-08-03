@@ -57,12 +57,12 @@ for ($i = 0; $i < 50; $i++) {
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Dark Ambient Glow & Skyscraper Background Image) -->
+  <!-- SECTION 1: HERO SECTION (Vibrant Skyscraper Background Image with Soft Gradient Overlay) -->
   <section class="relative pt-32 pb-44 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden bg-slate-950">
-    <!-- Hero Skyscraper Background Image -->
-    <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=1920&auto=format&fit=crop" alt="HacoLED Building Facade Night" class="w-full h-full object-cover opacity-25 scale-105 transform">
-      <div class="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/80 via-[#0B0B0E]/90 to-[#0B0B0E]"></div>
+    <!-- Bright Vivid Skyscraper Background Image -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=1920&auto=format&fit=crop" alt="HacoLED Building Facade Night" class="w-full h-full object-cover opacity-65 scale-105 transform brightness-110 contrast-105">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0B0B0E]/50 via-[#0B0B0E]/70 to-[#0B0B0E]"></div>
     </div>
 
     <!-- Ambient Radial Glow Arc -->
@@ -82,22 +82,22 @@ for ($i = 0; $i < 50; $i++) {
       <!-- Split Hero Header (Matching Image 3 layout) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
         <div class="lg:col-span-8 space-y-6">
-          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white">
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] text-white drop-shadow-md">
             Chiếu Sáng Mỹ Thuật<br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-amber-200">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
           </h1>
         </div>
 
         <div class="lg:col-span-4 space-y-6">
-          <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-normal drop-shadow">
             Chúng tôi tư vấn, thiết kế 3D và thi công trọn gói hệ thống LED mặt dựng tòa nhà cao tầng. Tối ưu năng lượng, vận hành thông minh qua DMX512 và Cloud IoT.
           </p>
           <div class="flex items-center gap-4">
-            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-[#FBBF24]/10">
+            <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-extrabold text-xs uppercase px-7 py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-[#FBBF24]/20">
               <i class="ph-bold ph-chats-circle text-base"></i>
               <span>Khảo Sát & Báo Giá 3D</span>
             </a>
-            <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-900 border border-slate-700 text-slate-300 hover:text-white font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-all duration-300">
+            <a href="#projects-section" class="inline-flex items-center gap-2 bg-slate-900/90 backdrop-blur-md border border-slate-700 text-slate-200 hover:text-white font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-all duration-300">
               <span>Dự Án</span>
               <i class="ph-bold ph-arrow-down text-xs"></i>
             </a>
@@ -107,7 +107,7 @@ for ($i = 0; $i < 50; $i++) {
 
       <!-- Giant Faint Background Watermark Text "HACOLED" (Image 3 bottom watermark) -->
       <div class="mt-20 flex justify-center pointer-events-none select-none overflow-hidden">
-        <span class="text-[12vw] sm:text-[14vw] font-black text-slate-800/20 leading-none tracking-tighter uppercase font-mono">
+        <span class="text-[12vw] sm:text-[14vw] font-black text-slate-700/25 leading-none tracking-tighter uppercase font-mono">
           HACOLED
         </span>
       </div>
