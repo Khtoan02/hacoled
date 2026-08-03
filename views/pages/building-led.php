@@ -31,6 +31,16 @@ $unsplash_ids = [
     'photo-1568992687947-868a62a9f521', 'photo-1573497019940-1c28c88b4f3e', 'photo-1573164713714-d95e436ab8d6'
 ];
 
+// Diverse aspect ratio classes to produce true staggered Pinterest-style Masonry layout
+$aspect_ratios = [
+    'aspect-[3/4]',   // Tall portrait
+    'aspect-[4/3]',   // Standard landscape
+    'aspect-[1/1]',   // Square
+    'aspect-[16/10]', // Wide landscape
+    'aspect-[9/12]',  // Medium tall
+    'aspect-[4/5]',   // Soft portrait
+];
+
 $districts = ['Quận 1, TP.HCM', 'Quận Ba Đình, Hà Nội', 'Quận Cầu Giấy, Hà Nội', 'Quận Hải Châu, Đà Nẵng', 'Quận Ngũ Hành Sơn, Đà Nẵng', 'Quận Hoàn Kiếm, Hà Nội'];
 $clients = ['Tập đoàn Vingroup', 'Tập đoàn Geleximco', 'Ngân hàng Vietcombank', 'Ngân hàng VPBank', 'Kinh Đô TCI Group', 'Tập đoàn Bitexco', 'Tập đoàn Novaland', 'Tập đoàn Sun Group'];
 $lighting_types = ['LED Mesh P16-32 ngoài trời', 'LED Linear RGB chạy viền', 'LED Pixel Dot 50mm lập trình', 'LED Wall Washer 48W chiếu rọi'];
@@ -41,13 +51,15 @@ for ($i = 0; $i < 50; $i++) {
     $district = $districts[$i % count($districts)];
     $type = $lighting_types[$i % count($lighting_types)];
     $year = 2023 + ($i % 4);
+    $aspect = $aspect_ratios[$i % count($aspect_ratios)];
     
     $display_projects[] = [
-        'title'      => sprintf(__('Chiếu sáng mỹ thuật Tòa nhà Landmark %02d', 'hacoled'), $i + 1),
-        'client'     => $client . ' - ' . $district,
-        'tech_specs' => $type . ' | DMX512',
-        'year'       => (string)$year,
-        'image'      => 'https://images.unsplash.com/' . $img_id . '?q=80&w=1000&auto=format&fit=crop',
+        'title'        => sprintf(__('Chiếu sáng mỹ thuật Tòa nhà Landmark %02d', 'hacoled'), $i + 1),
+        'client'       => $client . ' - ' . $district,
+        'tech_specs'   => $type . ' | DMX512',
+        'year'         => (string)$year,
+        'aspect_ratio' => $aspect,
+        'image'        => 'https://images.unsplash.com/' . $img_id . '?q=80&w=1000&auto=format&fit=crop',
     ];
 }
 
@@ -186,7 +198,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
               <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#B31217] flex items-center justify-center font-bold shadow-sm border border-red-200/60">
                 <i class="ph-bold ph-cloud-arrow-up text-2xl"></i>
               </div>
-              <h4 class="text-xl font-extrabold text-slate-900">Quản Lý Đám Mây IoT</h4>
+              <h4 class="text-lg font-extrabold text-slate-900">Quản Lý Đám Mây IoT</h4>
               <p class="text-xs text-slate-600 font-normal leading-relaxed">
                 Đồng bộ điều khiển kịch bản chiếu sáng từ xa qua Internet, hỗ trợ đặt lịch bật/tắt theo lễ tết tự động.
               </p>
@@ -238,7 +250,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
     </div>
   </section>
 
-  <!-- SECTION 3: LUXURY FULL-IMAGE MASONRY PROJECTS WITH GIANT WATERMARK TEXT -->
+  <!-- SECTION 3: TRUE STAGGERED MASONRY PROJECTS GALLERY WITH HOVER OVERLAY ONLY -->
   <section id="projects-section" class="py-32 px-4 lg:px-8 bg-white relative overflow-hidden border-b border-slate-200/80">
     
     <!-- Giant Watermark Typography -->
@@ -262,43 +274,48 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
           </h2>
         </div>
         <p class="text-slate-500 text-xs sm:text-sm max-w-md font-normal leading-relaxed">
-          Dưới đây là các dự án chiếu sáng mặt dựng biểu tượng. Nhấp vào ảnh để lướt xem hình ảnh full-size sắc nét.
+          Dưới đây là các dự án chiếu sáng mặt dựng biểu tượng. Rê chuột vào ảnh để xem chi tiết dự án, hoặc nhấp vào ảnh để lướt xem ảnh full-size.
         </p>
       </div>
 
-      <!-- Bento Masonry Projects Grid (100% Full Card Edge-to-Edge Image Fill) -->
-      <div id="projects-masonry-container" class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+      <!-- Dynamic Staggered Masonry Gallery Container (Clean Image by default -> Fade-in Glass Overlay on Hover) -->
+      <div id="projects-masonry-container" class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
         <?php foreach ($display_projects as $index => $project): 
           $image_url = !empty($project['image']) ? $project['image'] : (!empty($project['thumbnail']) ? $project['thumbnail'] : '');
           if (empty($image_url)) continue;
           
+          $aspect_class = !empty($project['aspect_ratio']) ? $project['aspect_ratio'] : 'aspect-[4/3]';
           // Show first 6 images, hide the rest for performance
           $hide_class = ($index >= 6) ? 'hidden project-item-hidden' : '';
         ?>
-          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-3xl overflow-hidden bg-slate-950 border border-slate-200/80 shadow-lg hover:shadow-2xl hover:border-[#B31217] hover:-translate-y-1.5 transition-all duration-500 cursor-pointer" data-project-index="<?php echo $index; ?>">
-            <div class="relative overflow-hidden aspect-[4/3] w-full">
-              <!-- Full Card Image Cover -->
+          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-3xl overflow-hidden bg-slate-950 border border-slate-200/80 shadow-md hover:shadow-2xl hover:border-[#B31217] transition-all duration-500 cursor-pointer" data-project-index="<?php echo $index; ?>">
+            <div class="relative overflow-hidden w-full <?php echo esc_attr($aspect_class); ?>">
+              
+              <!-- Clean Raw Image by Default -->
               <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($project['title']); ?>" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
               
-              <!-- Gradient Overlay for Crisp Text Readability -->
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent"></div>
-              
-              <!-- Year Badge -->
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#FBBF24] text-slate-950 text-[10px] font-mono font-bold shadow-md z-10">
-                Năm <?php echo esc_html($project['year']); ?>
-              </span>
+              <!-- Smooth Fade-In Glass Overlay on Hover ONLY (opacity-0 -> group-hover:opacity-100) -->
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6 z-10">
+                
+                <!-- Top Badges on Hover -->
+                <div class="flex items-center justify-between w-full">
+                  <span class="px-3 py-1 rounded-full bg-[#FBBF24] text-slate-950 text-[10px] font-mono font-bold shadow-md">
+                    Năm <?php echo esc_html($project['year']); ?>
+                  </span>
+                  <div class="w-9 h-9 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center border border-white/20">
+                    <i class="ph-bold ph-arrows-out-simple text-sm"></i>
+                  </div>
+                </div>
 
-              <!-- Zoom Icon -->
-              <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 border border-white/20">
-                <i class="ph-bold ph-arrows-out-simple text-sm"></i>
+                <!-- Bottom Text Info on Hover -->
+                <div class="space-y-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <span class="block text-[10px] font-mono text-amber-300 font-bold uppercase tracking-widest drop-shadow"><?php echo esc_html($project['client']); ?></span>
+                  <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-[#FBBF24] transition-colors leading-snug drop-shadow-md"><?php echo esc_html($project['title']); ?></h3>
+                  <p class="text-[11px] font-mono text-slate-300 drop-shadow"><?php echo esc_html($project['tech_specs']); ?></p>
+                </div>
+
               </div>
 
-              <!-- Text Content Overlay Floating Over Image Bottom -->
-              <div class="absolute bottom-0 left-0 right-0 p-6 space-y-1.5 z-10">
-                <span class="block text-[10px] font-mono text-amber-300 font-bold uppercase tracking-widest drop-shadow"><?php echo esc_html($project['client']); ?></span>
-                <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-[#FBBF24] transition-colors leading-snug drop-shadow-md"><?php echo esc_html($project['title']); ?></h3>
-                <p class="text-[11px] font-mono text-slate-300 drop-shadow"><?php echo esc_html($project['tech_specs']); ?></p>
-              </div>
             </div>
           </div>
         <?php endforeach; ?>
