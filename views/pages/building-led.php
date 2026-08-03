@@ -11,26 +11,24 @@
 
 $this->renderHeader($header_type ?? 'default');
 
-// Hardcode 50 high-quality dynamic project images for testing and illustration
+// Curated architectural night facade & LED building lighting photos
 $display_projects = [];
 $unsplash_ids = [
-    'photo-1565814636199-ae8133055c1c', 'photo-1540575467063-178a50c2df87', 'photo-1517604931442-7e0c8ed2963c',
-    'photo-1507608869274-d3177c8bb4c7', 'photo-1517245386807-bb43f82c33c4', 'photo-1477959858617-67f85cf4f1df',
-    'photo-1486406146926-c627a92ad1ab', 'photo-1496568818309-53d7c7753022', 'photo-1519501025264-65ba15a82390',
-    'photo-1470071459604-3b5ec3a7fe05', 'photo-1509198397868-475647b2a1e5', 'photo-1475855581690-80accde3ae2b',
-    'photo-1513694203232-719a280e022f', 'photo-1518241353330-0f7941c2d9b5', 'photo-1480714378408-67cf0d13bc1b',
+    'photo-1519501025264-65ba15a82390', 'photo-1477959858617-67f85cf4f1df', 'photo-1486406146926-c627a92ad1ab',
+    'photo-1513694203232-719a280e022f', 'photo-1514565131-fce0801e5785', 'photo-1565814636199-ae8133055c1c',
+    'photo-1496568818309-53d7c7753022', 'photo-1480714378408-67cf0d13bc1b', 'photo-1509198397868-475647b2a1e5',
+    'photo-1518241353330-0f7941c2d9b5', 'photo-1506744038136-46273834b3fb', 'photo-1520250497591-112f2f40a3f4',
+    'photo-1497215728101-856f4ea42174', 'photo-1497366216548-37526070297c', 'photo-1512917774080-9991f1c4c750',
+    'photo-1541888946425-d0fbb186a5b2', 'photo-1470071459604-3b5ec3a7fe05', 'photo-1475855581690-80accde3ae2b',
     'photo-1449034446853-66c86144b0ad', 'photo-1516450360452-9312f5e86fc7', 'photo-1502877338535-766e1452684a',
-    'photo-1504608524841-42fe6f032b4b', 'photo-1520250497591-112f2f40a3f4', 'photo-1506744038136-46273834b3fb',
-    'photo-1501785888041-af3ef285b470', 'photo-1469474968028-56623f02e42e', 'photo-1447752875215-b2761acb3c5d',
-    'photo-1472214222541-d510753a4907', 'photo-1433832597026-a5a0823c9657', 'photo-1500530855697-b586d89ba3ee',
-    'photo-1513829096999-497860229434', 'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171',
-    'photo-1513836279014-a89f7a76ae86', 'photo-1522071820081-009f0129c71c', 'photo-1515187029135-18ee286d815b',
-    'photo-1497366216548-37526070297c', 'photo-1497215728101-856f4ea42174', 'photo-1497366811353-6870744d04b2',
+    'photo-1504608524841-42fe6f032b4b', 'photo-1469474968028-56623f02e42e', 'photo-1447752875215-b2761acb3c5d',
+    'photo-1472214222541-d510753a4907', 'photo-1500530855697-b586d89ba3ee', 'photo-1513829096999-497860229434',
+    'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171', 'photo-1513836279014-a89f7a76ae86',
+    'photo-1522071820081-009f0129c71c', 'photo-1515187029135-18ee286d815b', 'photo-1497366811353-6870744d04b2',
     'photo-1504384308090-c894fdcc538d', 'photo-1542744094-3a31f103e35f', 'photo-1454165804606-c3d57bc86b40',
-    'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1522071820081-009f0129c71c',
-    'photo-1531482615713-2afd69097998', 'photo-1556761175-4b46a572b786', 'photo-1515187029135-18ee286d815b',
-    'photo-1552581230-261c4701235d', 'photo-1558224494-46b221937987', 'photo-1568992687947-868a62a9f521',
-    'photo-1573497019940-1c28c88b4f3e', 'photo-1573164713714-d95e436ab8d6'
+    'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1531482615713-2afd69097998',
+    'photo-1556761175-4b46a572b786', 'photo-1552581230-261c4701235d', 'photo-1558224494-46b221937987',
+    'photo-1568992687947-868a62a9f521', 'photo-1573497019940-1c28c88b4f3e', 'photo-1573164713714-d95e436ab8d6'
 ];
 
 $districts = ['Quận 1, TP.HCM', 'Quận Ba Đình, Hà Nội', 'Quận Cầu Giấy, Hà Nội', 'Quận Hải Châu, Đà Nẵng', 'Quận Ngũ Hành Sơn, Đà Nẵng', 'Quận Hoàn Kiếm, Hà Nội'];
@@ -240,7 +238,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
     </div>
   </section>
 
-  <!-- SECTION 3: LUXURY MASONRY PROJECTS WITH GIANT WATERMARK TEXT -->
+  <!-- SECTION 3: LUXURY FULL-IMAGE MASONRY PROJECTS WITH GIANT WATERMARK TEXT -->
   <section id="projects-section" class="py-32 px-4 lg:px-8 bg-white relative overflow-hidden border-b border-slate-200/80">
     
     <!-- Giant Watermark Typography -->
@@ -268,7 +266,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
         </p>
       </div>
 
-      <!-- Bento Masonry Projects Grid -->
+      <!-- Bento Masonry Projects Grid (100% Full Card Edge-to-Edge Image Fill) -->
       <div id="projects-masonry-container" class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
         <?php foreach ($display_projects as $index => $project): 
           $image_url = !empty($project['image']) ? $project['image'] : (!empty($project['thumbnail']) ? $project['thumbnail'] : '');
@@ -277,24 +275,30 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
           // Show first 6 images, hide the rest for performance
           $hide_class = ($index >= 6) ? 'hidden project-item-hidden' : '';
         ?>
-          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-lg hover:shadow-2xl hover:border-[#B31217] hover:-translate-y-1.5 transition-all duration-500 cursor-pointer" data-project-index="<?php echo $index; ?>">
-            <div class="relative overflow-hidden aspect-[4/3]">
+          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-3xl overflow-hidden bg-slate-950 border border-slate-200/80 shadow-lg hover:shadow-2xl hover:border-[#B31217] hover:-translate-y-1.5 transition-all duration-500 cursor-pointer" data-project-index="<?php echo $index; ?>">
+            <div class="relative overflow-hidden aspect-[4/3] w-full">
+              <!-- Full Card Image Cover -->
               <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($project['title']); ?>" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-black/30 to-transparent"></div>
               
-              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#FBBF24] text-slate-950 text-[10px] font-mono font-bold shadow-md">
+              <!-- Gradient Overlay for Crisp Text Readability -->
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent"></div>
+              
+              <!-- Year Badge -->
+              <span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#FBBF24] text-slate-950 text-[10px] font-mono font-bold shadow-md z-10">
                 Năm <?php echo esc_html($project['year']); ?>
               </span>
 
-              <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <!-- Zoom Icon -->
+              <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 border border-white/20">
                 <i class="ph-bold ph-arrows-out-simple text-sm"></i>
               </div>
-            </div>
 
-            <div class="p-6 space-y-2 relative z-10 -mt-10">
-              <span class="block text-[10px] font-mono text-amber-300 font-bold uppercase tracking-widest"><?php echo esc_html($project['client']); ?></span>
-              <h3 class="text-base font-extrabold text-white group-hover:text-[#FBBF24] transition-colors leading-snug"><?php echo esc_html($project['title']); ?></h3>
-              <p class="text-[11px] font-mono text-slate-300"><?php echo esc_html($project['tech_specs']); ?></p>
+              <!-- Text Content Overlay Floating Over Image Bottom -->
+              <div class="absolute bottom-0 left-0 right-0 p-6 space-y-1.5 z-10">
+                <span class="block text-[10px] font-mono text-amber-300 font-bold uppercase tracking-widest drop-shadow"><?php echo esc_html($project['client']); ?></span>
+                <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-[#FBBF24] transition-colors leading-snug drop-shadow-md"><?php echo esc_html($project['title']); ?></h3>
+                <p class="text-[11px] font-mono text-slate-300 drop-shadow"><?php echo esc_html($project['tech_specs']); ?></p>
+              </div>
             </div>
           </div>
         <?php endforeach; ?>
