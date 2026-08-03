@@ -56,11 +56,11 @@ for ($i = 0; $i < 50; $i++) {
 $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_lighting_4K_202608031635.jpeg';
 ?>
 
-<!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (ULTRA-GLASSY LIGHT EDITION) -->
+<!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (FULL SCREEN HERO EDITION) -->
 <main class="relative bg-[#F8F6F5] text-slate-900 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Raw 4K Background Image + Ultra-Transparent Glassmorphism + White-to-Gold Gradient Text, No Shadows) -->
-  <section class="relative pt-44 lg:pt-52 pb-24 lg:pb-32 px-4 lg:px-8 border-b border-slate-200 overflow-hidden min-h-[85vh] flex flex-col justify-center">
+  <!-- SECTION 1: HERO SECTION (Full 100vh Viewport Screen + Raw 4K Background Image + Ultra-Transparent Glassmorphism) -->
+  <section class="relative min-h-screen pt-36 lg:pt-44 pb-16 lg:pb-24 px-4 lg:px-8 border-b border-slate-200 overflow-hidden flex flex-col justify-center">
     <!-- Raw 100% Opacity Custom Background Image -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade" class="w-full h-full object-cover opacity-100">
@@ -631,7 +631,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
         lightboxMeta.innerText = metaParts.join(' | ');
 
         lightboxImg.onload = () => {
-          lightboxImg.classList.remove('opacity-0', 'scale-[#B31217] scale-100');
+          lightboxImg.classList.remove('opacity-0', 'scale-95');
           lightboxImg.classList.add('opacity-100', 'scale-100');
         };
       }, 150);
@@ -646,6 +646,18 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
         lightboxImg.src = '';
       }, 300);
       document.body.style.overflow = '';
+    };
+
+    const nextImage = () => {
+      let nextIdx = currentIdx + 1;
+      if (nextIdx >= projectsData.length) nextIdx = 0;
+      openLightbox(nextIdx);
+    };
+
+    const prevImage = () => {
+      let prevIdx = currentIdx - 1;
+      if (prevIdx < 0) prevIdx = projectsData.length - 1;
+      openLightbox(prevIdx);
     };
 
     projectCards.forEach(card => {
