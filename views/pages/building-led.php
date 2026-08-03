@@ -1,6 +1,6 @@
 <?php
 /**
- * Building Decorative LED Page View Template - Complete Aceternity UI Reference Layout (Light Theme Edition)
+ * Building Decorative LED Page View Template - Complete Aceternity UI Reference Layout (Ultra-Glassy Light Edition)
  *
  * @var array  $page
  * @var array  $products
@@ -56,10 +56,10 @@ for ($i = 0; $i < 50; $i++) {
 $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_16_34 3 thg 8, 2026.png';
 ?>
 
-<!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (LIGHT THEME EDITION) -->
+<!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (ULTRA-GLASSY LIGHT EDITION) -->
 <main class="relative bg-[#F8F6F5] text-slate-900 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Raw 4K Background Image + Light Glassmorphism + Yellow Hero Accent) -->
+  <!-- SECTION 1: HERO SECTION (Raw 4K Background Image + Ultra-Transparent Glassmorphism + White-to-Gold Gradient Text, No Shadows) -->
   <section class="relative pt-44 lg:pt-52 pb-16 lg:pb-20 px-4 lg:px-8 border-b border-slate-200 overflow-hidden min-h-screen flex flex-col justify-between">
     <!-- Raw 100% Opacity Custom Background Image -->
     <div class="absolute inset-0 z-0 overflow-hidden">
@@ -68,9 +68,9 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
 
     <div class="max-w-[1440px] mx-auto w-full relative z-10 space-y-8 my-auto">
       
-      <!-- Top Badge (Light Glass + Yellow Dot) -->
+      <!-- Top Badge (Ultra Transparent Glass + Yellow Dot) -->
       <div class="flex justify-start">
-        <div class="inline-flex items-center gap-2 bg-white/90 border border-white/80 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-slate-900 shadow-xl backdrop-blur-md">
+        <div class="inline-flex items-center gap-2 bg-white/25 border border-white/50 px-4 py-1.5 rounded-full text-xs font-mono font-semibold text-white shadow-xl backdrop-blur-xl">
           <span class="w-2.5 h-2.5 rounded-full bg-[#FBBF24] animate-pulse"></span>
           <span>HACOLED FACADE · Nhà thầu chiếu sáng mỹ thuật 3D</span>
         </div>
@@ -78,13 +78,14 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
 
       <!-- Left-Aligned Hero Content Block -->
       <div class="max-w-3xl space-y-6">
-        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-slate-900 drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)]">
+        <!-- Headline: From White to Premium Gold Yellow, NO TEXT SHADOW -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-transparent bg-clip-text bg-gradient-to-r from-white via-[#FDE047] to-[#FBBF24]">
           Chiếu Sáng Mỹ Thuật<br/>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#B31217] via-amber-600 to-[#F59E0B]">Kiến Tạo Biểu Tượng Tòa Nhà.</span>
+          Kiến Tạo Biểu Tượng Tòa Nhà.
         </h1>
 
-        <!-- Light Glass Description Box -->
-        <p class="text-slate-800 text-sm sm:text-base leading-relaxed font-normal bg-white/85 p-6 rounded-2xl border border-white/80 shadow-2xl backdrop-blur-md max-w-2xl">
+        <!-- Ultra-Transparent Glass Description Box -->
+        <p class="text-slate-100 text-sm sm:text-base leading-relaxed font-medium bg-white/25 p-6 rounded-2xl border border-white/40 shadow-2xl backdrop-blur-2xl max-w-2xl">
           Chúng tôi tư vấn, thiết kế 3D và thi công trọn gói hệ thống LED mặt dựng tòa nhà cao tầng. Tối ưu năng lượng, vận hành thông minh qua DMX512 và Cloud IoT.
         </p>
 
@@ -94,28 +95,29 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
             <i class="ph-bold ph-chats-circle text-base"></i>
             <span>Khảo Sát & Báo Giá 3D</span>
           </a>
-          <a href="#projects-section" class="inline-flex items-center gap-2 bg-white/90 backdrop-blur-md border border-slate-300 text-slate-900 hover:bg-white font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-lg">
+          <!-- Secondary Ultra-Glass Button -->
+          <a href="#projects-section" class="inline-flex items-center gap-2 bg-white/30 backdrop-blur-xl border border-white/50 text-white hover:bg-white/40 font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-lg">
             <span>Dự Án</span>
-            <i class="ph-bold ph-arrow-down text-xs text-[#B31217]"></i>
+            <i class="ph-bold ph-arrow-down text-xs text-[#FBBF24]"></i>
           </a>
         </div>
       </div>
 
     </div>
 
-    <!-- Client Logos Marquee (Light Glass Theme) -->
+    <!-- Client Logos Marquee (Ultra-Transparent Glass Theme) -->
     <div class="max-w-[1440px] mx-auto w-full relative z-10 pt-12 pb-4">
-      <div class="bg-white/85 border border-white/80 backdrop-blur-md rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
-        <span class="text-[10px] font-mono font-bold tracking-widest text-slate-600 uppercase">ĐÃ ĐỒNG HÀNH CÙNG CÁC TẬP ĐOÀN VÀ CHỦ ĐẦU TƯ HÀNG ĐẦU</span>
+      <div class="bg-white/25 border border-white/40 backdrop-blur-2xl rounded-2xl p-6 md:p-8 text-center space-y-6 shadow-2xl">
+        <span class="text-[10px] font-mono font-bold tracking-widest text-slate-200 uppercase">ĐÃ ĐỒNG HÀNH CÙNG CÁC TẬP ĐOÀN VÀ CHỦ ĐẦU TƯ HÀNG ĐẦU</span>
         
-        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-90 text-xs font-mono font-bold text-slate-800">
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">VINGROUP</span>
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">GELEXIMCO</span>
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">VIETCOMBANK</span>
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">VPBANK</span>
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">BITEXCO</span>
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">SUN GROUP</span>
-          <span class="px-4 py-2 bg-white/90 rounded-lg border border-slate-200 shadow-sm hover:border-[#B31217]">NOVALAND</span>
+        <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-95 text-xs font-mono font-bold text-white">
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">VINGROUP</span>
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">GELEXIMCO</span>
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">VIETCOMBANK</span>
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">VPBANK</span>
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">BITEXCO</span>
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">SUN GROUP</span>
+          <span class="px-4 py-2 bg-white/25 backdrop-blur-md rounded-lg border border-white/40 shadow-sm hover:border-[#FBBF24]">NOVALAND</span>
         </div>
       </div>
     </div>
@@ -237,7 +239,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
   <!-- SECTION 3: PROJECTS WITH GIANT WATERMARK TEXT (Light Theme) -->
   <section id="projects-section" class="py-28 px-4 lg:px-8 bg-[#F8F6F5] relative overflow-hidden border-b border-slate-200">
     
-    <!-- Massive Watermark Text "PROJECTS" (Light Faint Watermark) -->
+    <!-- Massive Watermark Text "PROJECTS" -->
     <div class="absolute top-8 left-1/2 -translate-x-1/2 pointer-events-none select-none">
       <span class="text-[16vw] font-black text-slate-300/40 leading-none tracking-tighter uppercase font-mono">
         PROJECTS
@@ -647,7 +649,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_1
         lightboxMeta.innerText = metaParts.join(' | ');
 
         lightboxImg.onload = () => {
-          lightboxImg.classList.remove('opacity-0', 'scale-95');
+          lightboxImg.classList.remove('opacity-0', 'scale-[#B31217] scale-100');
           lightboxImg.classList.add('opacity-100', 'scale-100');
         };
       }, 150);
