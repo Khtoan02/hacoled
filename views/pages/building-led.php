@@ -1,6 +1,6 @@
 <?php
 /**
- * Building Decorative LED Page View Template - Creative Bento Grid Design
+ * Building Decorative LED Page View Template - Creative Bento Grid with B2B Lightbox
  *
  * @var array  $page
  * @var array  $products
@@ -305,7 +305,7 @@ if (empty($display_products)) {
                 </div>
                 <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Thanh (Linear)', 'hacoled'); ?></h3>
               </div>
-              <p class="text-xs text-slate-650 leading-relaxed font-light">
+              <p class="text-xs text-slate-655 leading-relaxed font-light">
                 <?php _e('Nhấn mạnh cấu trúc hình khối, chạy dọc các trục phẳng phào chỉ đứng hoặc bo viền góc tòa nhà cao tầng.', 'hacoled'); ?>
               </p>
             </div>
@@ -326,7 +326,7 @@ if (empty($display_products)) {
                 </div>
                 <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300"><?php _e('LED Điểm (Pixel Dot)', 'hacoled'); ?></h3>
               </div>
-              <p class="text-xs text-slate-650 leading-relaxed font-light">
+              <p class="text-xs text-slate-655 leading-relaxed font-light">
                 <?php _e('Bố trí dạng chuỗi lưới tự do trên các bề mặt bê tông, gạch hoặc kiến trúc phi quy tắc của trung tâm thương mại.', 'hacoled'); ?>
               </p>
             </div>
@@ -367,7 +367,7 @@ if (empty($display_products)) {
       </div>
     </div>
 
-    <!-- SECTION 4: PROJECTS SHOWCASE (DỰ ÁN TIÊU BIỂU - Asymmetric Masonry Portfolio) -->
+    <!-- SECTION 4: PROJECTS SHOWCASE (DỰ ÁN TIÊU BIỂU - Asymmetric Masonry Portfolio with Lazy Load More & Lightbox Overlay) -->
     <div class="mb-28">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 gsap-reveal" data-direction="up" data-delay="0.2">
         <div class="space-y-4">
@@ -376,23 +376,33 @@ if (empty($display_products)) {
             <?php _e('Hồ Sơ Năng Lực Dự Án Tiêu Biểu', 'hacoled'); ?>
           </h2>
           <p class="text-slate-550 text-sm font-light max-w-2xl">
-            <?php _e('Hình ảnh thực tế nghiệm thu từ các dự án lớn, cấu hình và tải lên linh hoạt qua khu vực quản trị trang trong Admin HacoLED.', 'hacoled'); ?>
+            <?php _e('Hình ảnh thực tế nghiệm thu từ các dự án lớn. Click vào hình ảnh bất kỳ để mở slide trình chiếu toàn màn hình chất lượng cao.', 'hacoled'); ?>
           </p>
         </div>
       </div>
 
       <!-- CSS Columns responsive Masonry Grid Layout -->
-      <div class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-        <?php foreach ($display_projects as $project): 
+      <div id="projects-masonry-container" class="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+        <?php foreach ($display_projects as $index => $project): 
           $image_url = !empty($project['image']) ? $project['image'] : (!empty($project['thumbnail']) ? $project['thumbnail'] : '');
           if (empty($image_url)) continue;
+          
+          // Hide items starting from index 6 to support 50+ images smoothly without cluttering initial page weight
+          $hide_class = ($index >= 6) ? 'hidden project-item-hidden' : '';
         ?>
           <!-- Masonry Project Card -->
-          <div class="break-inside-avoid group relative rounded-2xl overflow-hidden border border-white/80 bg-white/70 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:border-[#B31217]/30 hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-500 ease-out flex flex-col">
+          <div class="project-card-item <?php echo esc_attr($hide_class); ?> break-inside-avoid group relative rounded-2xl overflow-hidden border border-white/80 bg-white/70 backdrop-blur-xl shadow-[0_10px_35px_rgba(0,0,0,0.03)] hover:shadow-2xl hover:border-[#B31217]/30 hover:-translate-y-1.5 hover:scale-[1.01] transition-all duration-500 ease-out flex flex-col cursor-pointer" data-project-index="<?php echo $index; ?>">
             <!-- Thumbnail Cover -->
             <div class="relative overflow-hidden bg-slate-100 border-b border-slate-100">
-              <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($project['title']); ?>" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+              <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($project['title']); ?>" loading="lazy" decoding="async" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
               
+              <!-- Hover Overlay visual hint -->
+              <div class="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                <div class="w-12 h-12 rounded-full bg-[#B31217] text-white flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                  <i class="ph-bold ph-magnifying-glass-plus text-lg"></i>
+                </div>
+              </div>
+
               <!-- Verified Project Badge -->
               <div class="absolute top-4 left-4 z-10">
                 <span class="bg-green-600/95 text-white text-[8px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md shadow-md inline-flex items-center gap-1">
@@ -435,6 +445,16 @@ if (empty($display_products)) {
           </div>
         <?php endforeach; ?>
       </div>
+
+      <!-- Load More Action Trigger button -->
+      <?php if (count($display_projects) > 6): ?>
+        <div class="text-center pt-16 gsap-reveal" data-direction="up">
+          <button id="load-more-projects-btn" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 hover:text-[#B31217] font-extrabold text-xs uppercase px-8 py-4.5 rounded-xl border border-slate-250 hover:border-[#B31217]/30 shadow-sm transition-all duration-300 cursor-pointer">
+            <i class="ph-bold ph-plus text-[#B31217]"></i>
+            <span><?php echo sprintf(__('Xem thêm %d hình ảnh & công trình khác', 'hacoled'), count($display_projects) - 6); ?></span>
+          </button>
+        </div>
+      <?php endif; ?>
     </div>
 
     <!-- SECTION 5: PRODUCTS CATALOG (SẢN PHẨM THỰC TẾ - B2B SPECIFICATION SHEET) -->
@@ -473,7 +493,7 @@ if (empty($display_products)) {
                 <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B31217] transition-colors duration-300">
                   <?php echo esc_html($prod['title']); ?>
                 </h3>
-                <p class="text-xs text-slate-500 leading-relaxed font-light line-clamp-3">
+                <p class="text-xs text-slate-550 leading-relaxed font-light line-clamp-3">
                   <?php echo wp_kses_post($prod['description']); ?>
                 </p>
               </div>
@@ -511,7 +531,7 @@ if (empty($display_products)) {
                   </span>
                 </div>
                 <?php if (!empty($prod['permalink']) && $prod['permalink'] !== '#') : ?>
-                  <a href="<?php echo esc_url($prod['permalink']); ?>" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-[#B31217] text-slate-700 hover:text-white border border-slate-250 hover:border-[#B31217] font-bold text-xs uppercase tracking-wider transition-all duration-300 pointer-events-auto shadow-sm">
+                  <a href="<?php echo esc_url(prod['permalink'] ?? '#'); ?>" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white hover:bg-[#B31217] text-slate-700 hover:text-white border border-slate-250 hover:border-[#B31217] font-bold text-xs uppercase tracking-wider transition-all duration-300 pointer-events-auto shadow-sm">
                     <span><?php _e('Bản vẽ & Báo giá B2B', 'hacoled'); ?></span>
                     <i class="ph-bold ph-arrow-up-right text-[10px]"></i>
                   </a>
@@ -662,7 +682,7 @@ if (empty($display_products)) {
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#FBBF24] hover:bg-yellow-500 text-slate-900 font-extrabold text-xs uppercase px-8 py-4 rounded-xl tracking-wider shadow-lg transition-all duration-300">
-            <span><?php _e('Đăng Ký Khảo Sát & Tư Vấn', 'hacoled'); ?></span>
+            <span>\<?php _e('Đăng Ký Khảo Sát & Tư Vấn', 'hacoled'); ?></span>
             <i class="ph-bold ph-arrow-right text-[11px] text-slate-900"></i>
           </a>
           <a href="tel:0342324488" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-bold text-xs uppercase px-8 py-4 rounded-xl tracking-wider transition-all duration-300">
@@ -676,9 +696,40 @@ if (empty($display_products)) {
   </div>
 </main>
 
-<!-- Number counters Javascript (same as home.php counters) -->
+<!-- Lightbox Overlay HTML -->
+<div id="project-lightbox" class="fixed inset-0 bg-black/95 z-[9999] hidden flex flex-col items-center justify-center p-4 select-none opacity-0 transition-opacity duration-300 backdrop-blur-md">
+  <!-- Close Button -->
+  <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer border border-white/10">
+    <i class="ph-bold ph-x text-xl"></i>
+  </button>
+  
+  <!-- Main Wrapper -->
+  <div class="relative max-w-5xl max-h-[75vh] w-full flex items-center justify-center">
+    <!-- Prev Arrow -->
+    <button id="lightbox-prev" class="absolute left-4 z-20 w-12 h-12 rounded-full bg-black/40 hover:bg-[#B31217] text-white flex items-center justify-center transition-all cursor-pointer border border-white/10 hover:scale-105">
+      <i class="ph-bold ph-caret-left text-xl"></i>
+    </button>
+    
+    <!-- Image -->
+    <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl transition-all duration-300 transform scale-95 opacity-0">
+    
+    <!-- Next Arrow -->
+    <button id="lightbox-next" class="absolute right-4 z-20 w-12 h-12 rounded-full bg-black/40 hover:bg-[#B31217] text-white flex items-center justify-center transition-all cursor-pointer border border-white/10 hover:scale-105">
+      <i class="ph-bold ph-caret-right text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Caption text block -->
+  <div class="mt-6 text-center space-y-1 px-4 max-w-xl">
+    <h4 id="lightbox-title" class="text-white text-lg font-bold"></h4>
+    <p id="lightbox-meta" class="text-slate-400 text-xs font-mono uppercase tracking-wider"></p>
+  </div>
+</div>
+
+<!-- Project data, Load More and Lightbox Slider scripts -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // 1. ANIC COUNTERS LOGIC
     const counters = document.querySelectorAll('.counter');
     const animateCounters = () => {
       counters.forEach(counter => {
@@ -698,7 +749,6 @@ if (empty($display_products)) {
       });
     };
 
-    // Scroll trigger observer
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -712,6 +762,136 @@ if (empty($display_products)) {
     if (statsBlock) {
       observer.observe(statsBlock.parentElement.parentElement);
     }
+
+    // 2. LOAD MORE LOGIC (Supports smooth grid expansion of 50+ images without slow initial loads)
+    const loadMoreBtn = document.getElementById('load-more-projects-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        const hiddenItems = document.querySelectorAll('.project-item-hidden');
+        hiddenItems.forEach((item, index) => {
+          // Remove hidden class
+          item.classList.remove('hidden', 'project-item-hidden');
+          // Add opacity transitions
+          item.style.opacity = '0';
+          setTimeout(() => {
+            item.style.transition = 'opacity 500ms ease-out, transform 500ms ease-out';
+            item.style.opacity = '1';
+          }, index * 80); // Stagger fade-in effect
+        });
+        
+        // Hide the button since everything is loaded
+        loadMoreBtn.parentElement.classList.add('hidden');
+      });
+    }
+
+    // 3. LIGHTBOX GALLERY SLIDER LOGIC
+    const projectsData = <?php echo json_encode($display_projects); ?>;
+    const projectCards = document.querySelectorAll('.project-card-item');
+    const lightbox = document.getElementById('project-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxMeta = document.getElementById('lightbox-meta');
+
+    let currentIdx = 0;
+
+    const openLightbox = (index) => {
+      currentIdx = parseInt(index);
+      const proj = projectsData[currentIdx];
+      if (!proj) return;
+
+      const imgUrl = proj.image || proj.thumbnail;
+      if (!imgUrl) return;
+
+      // Show lightbox overlay
+      lightbox.classList.remove('hidden');
+      setTimeout(() => {
+        lightbox.classList.remove('opacity-0');
+        lightbox.classList.add('opacity-100', 'flex');
+      }, 10);
+
+      // Disable page scrolling
+      document.body.style.overflow = 'hidden';
+
+      loadLightboxImage(imgUrl, proj.title, proj.client || '', proj.tech_specs || '', proj.year || '');
+    };
+
+    const loadLightboxImage = (url, title, client, specs, year) => {
+      // Fade out image before load
+      lightboxImg.classList.add('opacity-0', 'scale-95');
+      lightboxImg.classList.remove('opacity-100', 'scale-100');
+
+      setTimeout(() => {
+        lightboxImg.src = url;
+        lightboxTitle.innerText = title;
+        
+        let metaParts = [];
+        if (client) metaParts.push('Đối tác: ' + client);
+        if (specs) metaParts.push('Hệ thống: ' + specs);
+        if (year) metaParts.push('Năm: ' + year);
+        lightboxMeta.innerText = metaParts.join(' | ');
+
+        lightboxImg.onload = () => {
+          lightboxImg.classList.remove('opacity-0', 'scale-95');
+          lightboxImg.classList.add('opacity-100', 'scale-100');
+        };
+      }, 150);
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('opacity-100');
+      lightbox.classList.add('opacity-0');
+      setTimeout(() => {
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        lightboxImg.src = '';
+      }, 300);
+
+      // Enable page scrolling
+      document.body.style.overflow = '';
+    };
+
+    const nextImage = () => {
+      let nextIdx = currentIdx + 1;
+      if (nextIdx >= projectsData.length) nextIdx = 0;
+      openLightbox(nextIdx);
+    };
+
+    const prevImage = () => {
+      let prevIdx = currentIdx - 1;
+      if (prevIdx < 0) prevIdx = projectsData.length - 1;
+      openLightbox(prevIdx);
+    };
+
+    // Attach click events on grid cards
+    projectCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const index = card.getAttribute('data-project-index');
+        openLightbox(index);
+      });
+    });
+
+    // Control hooks
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxNext.addEventListener('click', nextImage);
+    lightboxPrev.addEventListener('click', prevImage);
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // Close on clicking backdrop (except active controls)
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightbox.querySelector('.relative')) {
+        closeLightbox();
+      }
+    });
   });
 </script>
 
