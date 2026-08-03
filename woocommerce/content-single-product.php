@@ -13,6 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 
 global $product;
+$controller = new \HacoLED\Theme\Controllers\ProductController();
 
 /**
  * Hook: woocommerce_before_single_product.
@@ -486,7 +487,7 @@ $price_html = $product->get_price_html();
                 <div class="space-y-6 lg:sticky lg:top-32 lg:z-20 w-full">
                 
                 <!-- Sidebar Widget: Hotline Contact -->
-                <?php $this->renderComponent('widgets/hotline'); ?>
+                <?php $controller->renderComponent('widgets/hotline'); ?>
 
                 <!-- Widget 1: Sản phẩm cùng danh mục -->
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
@@ -542,7 +543,7 @@ $price_html = $product->get_price_html();
                 </div>
 
                 <!-- Widget 2: Dự án mới nhất -->
-                <?php $this->renderComponent('widgets/recent-projects'); ?>
+                <?php $controller->renderComponent('widgets/recent-projects'); ?>
 
                 <!-- Widget 3: Bài viết mới nhất -->
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
