@@ -53,17 +53,17 @@ for ($i = 0; $i < 50; $i++) {
     ];
 }
 
-$hero_bg_url = get_template_directory_uri() . '/assets/images/Modern_building_LED_decoration_4K_202608031454.jpeg';
+$hero_bg_url = get_template_directory_uri() . '/assets/images/ChatGPT Image 15_16_34 3 thg 8, 2026.png';
 ?>
 
 <!-- ACETERNITY UI STYLE LANDING PAGE FOR HACOLED FACADE (SIGNATURE BRAND RED THEME) -->
 <main class="relative bg-[#0B0B0E] text-slate-100 min-h-screen overflow-hidden selection:bg-[#B31217] selection:text-white font-sans">
   
-  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity 4K Background Image, Brand Red Highlights) -->
+  <!-- SECTION 1: HERO SECTION (Raw 100% Opacity Background Image, Brand Red Highlights) -->
   <section class="relative pt-44 lg:pt-52 pb-16 lg:pb-20 px-4 lg:px-8 border-b border-slate-800/80 overflow-hidden min-h-screen flex flex-col justify-between">
-    <!-- Raw 100% Opacity 4K Background Image -->
+    <!-- Raw 100% Opacity Custom Background Image -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-      <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade 4K" class="w-full h-full object-cover opacity-100">
+      <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Building Facade" class="w-full h-full object-cover opacity-100">
     </div>
 
     <div class="max-w-[1440px] mx-auto w-full relative z-10 space-y-8 my-auto">
