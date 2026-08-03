@@ -303,87 +303,7 @@ for ($i = 0; $i < 50; $i++) {
     </div>
   </section>
 
-  <!-- SECTION 5: COMPARISON TABLE "HacoLED VS Đơn vị thông thường" (Image 2 top reference) -->
-  <section class="py-24 px-4 lg:px-8 bg-[#F8F6F5] text-slate-900 border-b border-slate-200">
-    <div class="max-w-[1200px] mx-auto space-y-16">
-      
-      <div class="text-center max-w-2xl mx-auto space-y-3">
-        <span class="text-xs font-mono font-bold text-[#B31217] uppercase tracking-widest">BẢNG SO SÁNH GIÁ TRỊ</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-slate-900">
-          HacoLED VS Đơn Vị Thi Công Thông Thường
-        </h2>
-      </div>
-
-      <!-- Table Box (Matching Image 2 top) -->
-      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs">
-            <thead class="bg-slate-900 text-white font-mono uppercase text-[10px] tracking-wider border-b border-slate-800">
-              <tr>
-                <th class="p-4 sm:p-6 w-1/3">Tiêu Chí Đánh Giá</th>
-                <th class="p-4 sm:p-6 w-1/3 text-[#FBBF24] font-bold">✔ HacoLED Facade</th>
-                <th class="p-4 sm:p-6 w-1/3 text-slate-400">Đơn Vị Thông Thường</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-100 text-slate-700">
-              <tr class="hover:bg-slate-50/80">
-                <td class="p-4 sm:p-6 font-bold">Phương án Thiết kế 3D</td>
-                <td class="p-4 sm:p-6 text-green-700 font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Dựng mô phỏng 3D miễn phí trước thi công</td>
-                <td class="p-4 sm:p-6 text-amber-600 font-medium flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Không có bản vẽ 3D trực quan</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <td class="p-4 sm:p-6 font-bold">Quản lý & Lập trình</td>
-                <td class="p-4 sm:p-6 text-green-700 font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Đồng bộ DMX512 & Cloud IoT từ xa</td>
-                <td class="p-4 sm:p-6 text-amber-600 font-medium flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Lập trình thủ công đơn giản</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <td class="p-4 sm:p-6 font-bold">Chất lượng Vật tư</td>
-                <td class="p-4 sm:p-6 text-green-700 font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Chuẩn IP68, nhôm anode, CO/CQ đầy đủ</td>
-                <td class="p-4 sm:p-6 text-amber-600 font-medium flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Vật tư trôi nổi không chứng nhận</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <td class="p-4 sm:p-6 font-bold">Tải Gió & Leo Cao</td>
-                <td class="p-4 sm:p-6 text-green-700 font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Đạt chuẩn an toàn chịu bão cấp 12</td>
-                <td class="p-4 sm:p-6 text-amber-600 font-medium flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Thi công tự phát thiếu chứng chỉ</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <td class="p-4 sm:p-6 font-bold">Tiến Độ & Phản Hồi</td>
-                <td class="p-4 sm:p-6 text-green-700 font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Ứng cứu xử lý sự cố tại chỗ trong 2h</td>
-                <td class="p-4 sm:p-6 text-amber-600 font-medium flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Phản hồi chậm trễ 24 - 48h</td>
-              </tr>
-              <tr class="hover:bg-slate-50/80">
-                <td class="p-4 sm:p-6 font-bold">Chính sách Bảo hành</td>
-                <td class="p-4 sm:p-6 text-green-700 font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> Bảo hành vàng 36 tháng trọn gói</td>
-                <td class="p-4 sm:p-6 text-amber-600 font-medium flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Bảo hành ngắn hạn hoặc từ chối trách nhiệm</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- 3 Callout Cards Below Comparison Table (Image 2 top reference) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center space-y-2">
-          <div class="w-8 h-8 rounded-full bg-amber-100 text-[#B31217] mx-auto flex items-center justify-center font-bold">1</div>
-          <h4 class="font-bold text-slate-900 text-sm">Khảo Sát Nhanh 24h</h4>
-          <p class="text-xs text-slate-500 font-light">Kỹ sư tới tận công trình đo đạc và lập phương án ngay lập tức.</p>
-        </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center space-y-2">
-          <div class="w-8 h-8 rounded-full bg-amber-100 text-[#B31217] mx-auto flex items-center justify-center font-bold">2</div>
-          <h4 class="font-bold text-slate-900 text-sm">Tiết Kiệm 50% Điện</h4>
-          <p class="text-xs text-slate-500 font-light">Công nghệ Eco-LED thế hệ mới giảm thiểu tối đa chi phí vận hành.</p>
-        </div>
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center space-y-2">
-          <div class="w-8 h-8 rounded-full bg-amber-100 text-[#B31217] mx-auto flex items-center justify-center font-bold">3</div>
-          <h4 class="font-bold text-slate-900 text-sm">An Toàn Tuyệt Đối</h4>
-          <p class="text-xs text-slate-500 font-light">Hệ giàn cơ khí chắc chắn, 100% thợ thi công có chứng chỉ leo cao.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- SECTION 6: EXTENSIVE PACKAGES / B2B SOLUTION PLANS (Image 2 middle reference) -->
+  <!-- SECTION 5: EXTENSIVE PACKAGES / B2B SOLUTION PLANS (Image 2 middle reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0B0B0E] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
@@ -455,7 +375,7 @@ for ($i = 0; $i < 50; $i++) {
     </div>
   </section>
 
-  <!-- SECTION 7: THE FOUNDER'S DESK / ĐỘI NGŨ KỸ SƯ (Image 2 middle reference) -->
+  <!-- SECTION 6: THE FOUNDER'S DESK / ĐỘI NGŨ KỸ SƯ (Image 2 middle reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0E0E12] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto bg-slate-900/90 rounded-3xl border border-slate-800 p-8 sm:p-12 shadow-2xl">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -484,7 +404,7 @@ for ($i = 0; $i < 50; $i++) {
     </div>
   </section>
 
-  <!-- SECTION 8: TESTIMONIAL REVIEWS (Image 1 & 2 bottom reference) -->
+  <!-- SECTION 7: TESTIMONIAL REVIEWS (Image 1 & 2 bottom reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#F8F6F5] text-slate-900 border-b border-slate-200">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
@@ -544,7 +464,7 @@ for ($i = 0; $i < 50; $i++) {
     </div>
   </section>
 
-  <!-- SECTION 9: FREQUENTLY ASKED QUESTIONS ACCORDION (Image 2 bottom reference) -->
+  <!-- SECTION 8: FREQUENTLY ASKED QUESTIONS ACCORDION (Image 2 bottom reference) -->
   <section class="py-24 px-4 lg:px-8 bg-[#0B0B0E] border-b border-slate-800/80">
     <div class="max-w-[1200px] mx-auto space-y-16">
       
