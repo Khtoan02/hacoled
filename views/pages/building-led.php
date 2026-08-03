@@ -23,7 +23,7 @@ $unsplash_ids = [
     'photo-1449034446853-66c86144b0ad', 'photo-1516450360452-9312f5e86fc7', 'photo-1502877338535-766e1452684a',
     'photo-1504608524841-42fe6f032b4b', 'photo-1469474968028-56623f02e42e', 'photo-1447752875215-b2761acb3c5d',
     'photo-1472214222541-d510753a4907', 'photo-1500530855697-b586d89ba3ee', 'photo-1513829096999-497860229434',
-    'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171', 'photo-1513836279014-a89f7a76ae86',
+    'photo-1518495973542-4542c06a5843', 'photo-1505232458729-4106786a5171', 'photo-1513829096999-497860229434',
     'photo-1522071820081-009f0129c71c', 'photo-1515187029135-18ee286d815b', 'photo-1497366811353-6870744d04b2',
     'photo-1504384308090-c894fdcc538d', 'photo-1542744094-3a31f103e35f', 'photo-1454165804606-c3d57bc86b40',
     'photo-1519389950473-47ba0277781c', 'photo-1531403009284-440f080d1e12', 'photo-1531482615713-2afd69097998',
@@ -63,61 +63,165 @@ for ($i = 0; $i < 50; $i++) {
     ];
 }
 
-// Staggered / Alternating Products Showcase Items
-$staggered_products = [
-    [
-        'name'        => 'Đèn LED Thanh Linear RGB / DMX512 High Power',
-        'subtitle'    => 'CHUYÊN DỤNG CHẠY VIỀN KIẾN TRÚC TÒA NHÀ',
-        'desc'        => 'Module LED thanh định hình chuyên dụng chiếu sáng viền và gờ kiến trúc. Điều khiển từng pixel độc lập qua chuẩn DMX512, tạo dải hiệu ứng chuyển màu rực rỡ và mượt mà tuyệt đối.',
-        'image'       => 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=800&auto=format&fit=crop',
-        'specs'       => ['Chuẩn IP68 kháng nước', 'Chip LED OSRAM / CREE', 'Tuổi thọ 50.000 giờ'],
-        'badge'       => 'Sản phẩm bán chạy #1',
-        'highlights'  => [
-            'Thân nhôm Anode đúc nguyên khối chống ăn mòn muối biển.',
-            'Kính cường lực 4mm chịu lực va đập cơ học cấp IK10.',
-            'Tích hợp mạch bảo vệ quá nhiệt & quá áp thông minh.'
+// FETCH REAL PRODUCTS FROM WOOCOMMERCE CATEGORY: 'led-trang-tri-toa-nha'
+$staggered_products = [];
+$category_slug = 'led-trang-tri-toa-nha';
+
+if (function_exists('wc_get_products')) {
+    $wc_products = wc_get_products([
+        'category' => [$category_slug],
+        'limit'    => 10,
+        'status'   => 'publish',
+    ]);
+
+    if (!empty($wc_products)) {
+        foreach ($wc_products as $wc_prod) {
+            $p_id = $wc_prod->get_id();
+            $p_image = get_the_post_thumbnail_url($p_id, 'large');
+            if (empty($p_image)) {
+                $p_image = wc_placeholder_img_src('large');
+            }
+            
+            $excerpt = wp_strip_all_tags($wc_prod->get_short_description());
+            if (empty($excerpt)) {
+                $excerpt = wp_strip_all_tags(get_the_excerpt($p_id));
+            }
+            if (empty($excerpt)) {
+                $excerpt = __('Sản phẩm LED trang trí mặt dựng tòa nhà chất lượng cao nhập khẩu chính ngạch, đạt chuẩn IP68, hỗ trợ điều khiển lập trình DMX512.', 'hacoled');
+            }
+
+            $sku = $wc_prod->get_sku();
+
+            $staggered_products[] = [
+                'id'          => $p_id,
+                'name'        => $wc_prod->get_name(),
+                'permalink'   => get_permalink($p_id),
+                'subtitle'    => $sku ? ('SKU: ' . $sku) : 'THIẾT BỊ LED FACADE CHÍNH HÃNG',
+                'desc'        => $excerpt,
+                'image'       => $p_image,
+                'price_html'  => $wc_prod->get_price_html(),
+                'specs'       => ['Chuẩn IP68', 'DMX512', 'CO/CQ Chính Hãng'],
+                'badge'       => 'Sản phẩm HacoLED',
+                'highlights'  => [
+                    'Nhập khẩu chính ngạch, có đầy đủ chứng chỉ CO/CQ.',
+                    'Hỗ trợ khảo sát & dựng bản vẽ mô phỏng 3D miễn phí.',
+                    'Bảo hành vàng 36 tháng tận nơi tại Hà Nội & TP.HCM.'
+                ]
+            ];
+        }
+    }
+}
+
+// Fallback via WP_Query if wc_get_products returned empty
+if (empty($staggered_products)) {
+    $cat_query = new WP_Query([
+        'post_type'      => 'product',
+        'posts_per_page' => 10,
+        'post_status'    => 'publish',
+        'tax_query'      => [
+            [
+                'taxonomy' => 'product_cat',
+                'field'    => 'slug',
+                'terms'    => $category_slug,
+            ],
+        ],
+    ]);
+
+    if ($cat_query->have_posts()) {
+        while ($cat_query->have_posts()) {
+            $cat_query->the_post();
+            $p_id = get_the_ID();
+            $p_image = get_the_post_thumbnail_url($p_id, 'large');
+            if (empty($p_image)) {
+                $p_image = 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=800&auto=format&fit=crop';
+            }
+
+            $staggered_products[] = [
+                'id'          => $p_id,
+                'name'        => get_the_title(),
+                'permalink'   => get_permalink(),
+                'subtitle'    => 'THIẾT BỊ LED FACADE CHÍNH HÃNG',
+                'desc'        => get_the_excerpt() ?: __('Sản phẩm LED trang trí mặt dựng tòa nhà chất lượng cao nhập khẩu chính ngạch, đạt chuẩn IP68, hỗ trợ điều khiển lập trình DMX512.', 'hacoled'),
+                'image'       => $p_image,
+                'price_html'  => '',
+                'specs'       => ['Chuẩn IP68', 'DMX512', 'CO/CQ Chính Hãng'],
+                'badge'       => 'Sản phẩm HacoLED',
+                'highlights'  => [
+                    'Nhập khẩu chính ngạch, có đầy đủ chứng chỉ CO/CQ.',
+                    'Hỗ trợ khảo sát & dựng bản vẽ mô phỏng 3D miễn phí.',
+                    'Bảo hành vàng 36 tháng tận nơi tại Hà Nội & TP.HCM.'
+                ]
+            ];
+        }
+        wp_reset_postdata();
+    }
+}
+
+// Default curated fallback if no products are in category yet
+if (empty($staggered_products)) {
+    $staggered_products = [
+        [
+            'name'        => 'Đèn LED Thanh Linear RGB / DMX512 High Power',
+            'permalink'   => hacoled_managed_page_url('contact'),
+            'subtitle'    => 'CHUYÊN DỤNG CHẠY VIỀN KIẾN TRÚC TÒA NHÀ',
+            'desc'        => 'Module LED thanh định hình chuyên dụng chiếu sáng viền và gờ kiến trúc. Điều khiển từng pixel độc lập qua chuẩn DMX512, tạo dải hiệu ứng chuyển màu rực rỡ và mượt mà tuyệt đối.',
+            'image'       => 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?q=80&w=800&auto=format&fit=crop',
+            'price_html'  => '',
+            'specs'       => ['Chuẩn IP68 kháng nước', 'Chip LED OSRAM / CREE', 'Tuổi thọ 50.000 giờ'],
+            'badge'       => 'Sản phẩm bán chạy #1',
+            'highlights'  => [
+                'Thân nhôm Anode đúc nguyên khối chống ăn mòn muối biển.',
+                'Kính cường lực 4mm chịu lực va đập cơ học cấp IK10.',
+                'Tích hợp mạch bảo vệ quá nhiệt & quá áp thông minh.'
+            ]
+        ],
+        [
+            'name'        => 'Màn Hình LED Lưới Trong Suốt Facade Mesh P16-32',
+            'permalink'   => hacoled_managed_page_url('contact'),
+            'subtitle'    => 'TRUYỀN THÔNG TRONG SUỐT VÁCH KÍNH TÒA NHÀ',
+            'desc'        => 'Giải pháp biến toàn bộ mặt dựng kính tòa nhà cao tầng thành màn hình video quảng cáo khổng lồ. Độ truyền sáng trên 80% đảm bảo văn phòng bên trong vẫn tràn ngập ánh sáng tự nhiên.',
+            'image'       => 'https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800&auto=format&fit=crop',
+            'price_html'  => '',
+            'specs'       => ['Độ truyền sáng >80%', 'Độ sáng 8000 nits Nắng', 'Siêu nhẹ 6kg/m²'],
+            'badge'       => 'Công nghệ đột phá 2026',
+            'highlights'  => [
+                'Trọng lượng siêu nhẹ không ảnh hưởng tới kết cấu chịu lực kính.',
+                'Tiết kiệm 35% điện năng so với màn hình LED cabin thông thường.',
+                'Đạt tiêu chuẩn kháng gió bão nhiệt đới lên tới cấp 12.'
+            ]
+        ],
+        [
+            'name'        => 'LED Điểm Pixel Dot 50mm Lập Trình Ma Trận',
+            'permalink'   => hacoled_managed_page_url('contact'),
+            'subtitle'    => 'TẠO MÀN HÌNH ĐIỂM SÁNG TRÊN MẶT VÁCH CONG',
+            'desc'        => 'Chuỗi LED điểm Pixel đính trên giàn khung lưới thép ngoài trời. Tạo thành ma trận điểm sáng khổng lồ linh hoạt uốn lượn theo mọi đường cong phức tạp của công trình.',
+            'image'       => 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800&auto=format&fit=crop',
+            'price_html'  => '',
+            'specs'       => ['Đường kính 50mm IP68', 'Điều khiển SPI/DMX', 'Bọc keo PU chống UV'],
+            'badge'       => 'Linh hoạt mọi bề mặt',
+            'highlights'  => [
+                'Vỏ nhựa Bayer chịu nhiệt độ ngoài trời từ -40°C đến +80°C.',
+                'Dây dẫn lõi đồng nguyên chất mạ niken chống đứt gãy.',
+                'Hỗ trợ lập trình trình chiếu kịch bản ánh sáng theo mùa.'
+            ]
+        ],
+        [
+            'name'        => 'Đèn Pha LED Wall Washer 48W Chiếu Rọi Cột',
+            'permalink'   => hacoled_managed_page_url('contact'),
+            'subtitle'    => 'CHIẾU QUÉT MẢNG MÀU NGHỆ THUẬT VÁCH TƯỜNG',
+            'desc'        => 'Dòng đèn pha rọi chuyên dụng tạo các dải sáng quét cao từ 10m đến 30m dọc theo cột tòa nhà. Tôn vinh từng đường gờ hoa văn kiến trúc tân cổ điển & hiện đại.',
+            'image'       => 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=800&auto=format&fit=crop',
+            'price_html'  => '',
+            'specs'       => ['Công suất 48W - 108W', 'Chuẩn chống nước IP67', 'Góc chiếu rọi 15°-60°'],
+            'badge'       => 'Rọi xa tới 30m',
+            'highlights'  => [
+                'Thấu kính quang học PMMA đối ứng không gây chói mắt.',
+                'Van thở cân bằng áp suất chống ngưng tụ hơi nước bên trong.',
+                'Bảo hành đổi mới vật tư 36 tháng tận nơi.'
+            ]
         ]
-    ],
-    [
-        'name'        => 'Màn Hình LED Lưới Trong Suốt Facade Mesh P16-32',
-        'subtitle'    => 'TRUYỀN THÔNG TRONG SUỐT VÁCH KÍNH TÒA NHÀ',
-        'desc'        => 'Giải pháp biến toàn bộ mặt dựng kính tòa nhà cao tầng thành màn hình video quảng cáo khổng lồ. Độ truyền sáng trên 80% đảm bảo văn phòng bên trong vẫn tràn ngập ánh sáng tự nhiên.',
-        'image'       => 'https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=800&auto=format&fit=crop',
-        'specs'       => ['Độ truyền sáng >80%', 'Độ sáng 8000 nits Nắng', 'Siêu nhẹ 6kg/m²'],
-        'badge'       => 'Công nghệ đột phá 2026',
-        'highlights'  => [
-            'Trọng lượng siêu nhẹ không ảnh hưởng tới kết cấu chịu lực kính.',
-            'Tiết kiệm 35% điện năng so với màn hình LED cabin thông thường.',
-            'Đạt tiêu chuẩn kháng gió bão nhiệt đới lên tới cấp 12.'
-        ]
-    ],
-    [
-        'name'        => 'LED Điểm Pixel Dot 50mm Lập Trình Ma Trận',
-        'subtitle'    => 'TẠO MÀN HÌNH ĐIỂM SÁNG TRÊN MẶT VÁCH CONG',
-        'desc'        => 'Chuỗi LED điểm Pixel đính trên giàn khung lưới thép ngoài trời. Tạo thành ma trận điểm sáng khổng lồ linh hoạt linh hoạt uốn lượn theo mọi đường cong phức tạp của công trình.',
-        'image'       => 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=800&auto=format&fit=crop',
-        'specs'       => ['Đường kính 50mm IP68', 'Điều khiển SPI/DMX', 'Bọc keo PU chống UV'],
-        'badge'       => 'Linh hoạt mọi bề mặt',
-        'highlights'  => [
-            'Vỏ nhựa Bayer chịu nhiệt độ ngoài trời từ -40°C đến +80°C.',
-            'Dây dẫn lõi đồng nguyên chất mạ niken chống đứt gãy.',
-            'Hỗ trợ lập trình trình chiếu kịch bản ánh sáng theo mùa.'
-        ]
-    ],
-    [
-        'name'        => 'Đèn Pha LED Wall Washer 48W Chiếu Rọi Cột',
-        'subtitle'    => 'CHIẾU QUÉT MẢNG MÀU NGHỆ THUẬT VÁCH TƯỜNG',
-        'desc'        => 'Dòng đèn pha rọi chuyên dụng tạo các dải sáng quét cao từ 10m đến 30m dọc theo cột tòa nhà. Tôn vinh từng đường gờ hoa văn kiến trúc tân cổ điển & hiện đại.',
-        'image'       => 'https://images.unsplash.com/photo-1565814636199-ae8133055c1c?q=80&w=800&auto=format&fit=crop',
-        'specs'       => ['Công suất 48W - 108W', 'Chuẩn chống nước IP67', 'Góc chiếu rọi 15°-60°'],
-        'badge'       => 'Rọi xa tới 30m',
-        'highlights'  => [
-            'Thấu kính quang học PMMA đối ứng không gây chói mắt.',
-            'Van thở cân bằng áp suất chống ngưng tụ hơi nước bên trong.',
-            'Bảo hành đổi mới vật tư 36 tháng tận nơi.'
-        ]
-    ]
-];
+    ];
+}
 
 $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_lighting_4K_202608031635.jpeg';
 ?>
@@ -252,9 +356,9 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
           <div class="bg-white p-7 rounded-3xl border border-slate-200/90 shadow-lg hover:shadow-xl hover:border-[#B31217]/40 transition-all duration-300 space-y-6 flex flex-col justify-between">
             <div class="space-y-3">
               <div class="w-12 h-12 rounded-2xl bg-red-50 text-[#B31217] flex items-center justify-center font-bold shadow-sm border border-red-200/60">
-                <i class="ph-bold ph-[#B31217] ph-cloud-arrow-up text-2xl"></i>
+                <i class="ph-bold ph-cloud-arrow-up text-2xl"></i>
               </div>
-              <h4 class="text-xl font-extrabold text-slate-900">Quản Lý Đám Mây IoT</h4>
+              <h4 class="text-lg font-extrabold text-slate-900">Quản Lý Đám Mây IoT</h4>
               <p class="text-xs text-slate-600 font-normal leading-relaxed">
                 Đồng bộ điều khiển kịch bản chiếu sáng từ xa qua Internet, hỗ trợ đặt lịch bật/tắt theo lễ tết tự động.
               </p>
@@ -277,7 +381,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
               </p>
             </div>
             <div class="flex gap-2 text-[11px] font-mono font-bold">
-              <span class="px-3 py-1 bg-red-50 text-[#B31217] rounded-lg border border-red-200/80">ISO 9001</span>
+              <span class="px-3 py-1 bg-red-[#B31217] text-[#B31217] rounded-lg border border-red-200/80">ISO 9001</span>
               <span class="px-3 py-1 bg-red-50 text-[#B31217] rounded-lg border border-red-200/80">CE Certified</span>
             </div>
           </div>
@@ -306,7 +410,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
     </div>
   </section>
 
-  <!-- SECTION 3: STAGGERED PRODUCTS CATALOGUE (Sản Phẩm Trình Bày So Le Zig-Zag) -->
+  <!-- SECTION 3: STAGGERED PRODUCTS CATALOGUE (Sản Phẩm Danh Mục 'led-trang-tri-toa-nha' Trình Bày So Le) -->
   <section class="py-32 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative">
     <div class="max-w-[1440px] mx-auto space-y-24">
       
@@ -314,13 +418,13 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
       <div class="text-center max-w-3xl mx-auto space-y-4">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase tracking-widest border border-red-200/80">
           <i class="ph-bold ph-lightning text-sm"></i>
-          <span>DANH MỤC SẢN PHẨM NỔI BẬT</span>
+          <span>DANH MỤC: LED-TRANG-TRI-TOA-NHA</span>
         </div>
         <h2 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900 leading-tight">
-          Thiết Bị LED Facade <span class="text-[#B31217]">Cao Cấp.</span>
+          Sản Phẩm LED Facade <span class="text-[#B31217]">Chính Hãng.</span>
         </h2>
         <p class="text-slate-500 text-xs sm:text-sm font-normal">
-          Các dòng sản phẩm LED trang trí mặt dựng tòa nhà nhập khẩu chính ngạch, đạt tiêu chuẩn Châu Âu CO/CQ.
+          Dữ liệu được lấy trực tiếp từ hệ thống danh mục WooCommerce sản phẩm LED Trang Trí Tòa Nhà.
         </p>
       </div>
 
@@ -328,21 +432,29 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
       <div class="space-y-28">
         <?php foreach ($staggered_products as $idx => $prod): 
           $is_even = ($idx % 2 === 1);
+          $product_url = !empty($prod['permalink']) ? $prod['permalink'] : hacoled_managed_page_url('contact');
         ?>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <!-- Product Image Column (Alternates Left / Right) -->
             <div class="lg:col-span-6 <?php echo $is_even ? 'lg:order-2' : 'lg:order-1'; ?>">
               <div class="relative group rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-2xl">
-                <div class="aspect-[4/3] w-full overflow-hidden">
+                <a href="<?php echo esc_url($product_url); ?>" class="block aspect-[4/3] w-full overflow-hidden">
                   <img src="<?php echo esc_url($prod['image']); ?>" alt="<?php echo esc_attr($prod['name']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                   <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80"></div>
-                </div>
+                </a>
 
                 <!-- Top Badge -->
                 <span class="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-[#FBBF24] text-slate-950 text-xs font-mono font-bold shadow-lg">
                   <?php echo esc_html($prod['badge']); ?>
                 </span>
+
+                <!-- Price Tag if available -->
+                <?php if (!empty($prod['price_html'])): ?>
+                  <div class="absolute top-5 right-5 px-4 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md text-amber-300 text-xs font-mono font-bold border border-white/20">
+                    <?php echo wp_kses_post($prod['price_html']); ?>
+                  </div>
+                <?php endif; ?>
 
                 <!-- Bottom Specs Pill Bar -->
                 <div class="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
@@ -362,7 +474,9 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
                   <?php echo esc_html($prod['subtitle']); ?>
                 </span>
                 <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                  <?php echo esc_html($prod['name']); ?>
+                  <a href="<?php echo esc_url($product_url); ?>" class="hover:text-[#B31217] transition-colors">
+                    <?php echo esc_html($prod['name']); ?>
+                  </a>
                 </h3>
               </div>
 
@@ -384,12 +498,12 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
 
               <!-- CTA Actions -->
               <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
-                <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase px-7 py-3.5 rounded-xl transition-all shadow-md">
-                  <span>Nhận Báo Giá 3D</span>
+                <a href="<?php echo esc_url($product_url); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase px-7 py-3.5 rounded-xl transition-all shadow-md">
+                  <span>Xem Chi Tiết Sản Phẩm</span>
                   <i class="ph-bold ph-arrow-right text-xs"></i>
                 </a>
                 <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-[#B31217] hover:text-white text-slate-900 font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-colors border border-slate-200">
-                  <span>Thông Số Kỹ Thuật</span>
+                  <span>Yêu Cầu Báo Giá 3D</span>
                   <i class="ph-bold ph-file-text text-xs"></i>
                 </a>
               </div>
