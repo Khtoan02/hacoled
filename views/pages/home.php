@@ -312,13 +312,20 @@ function haco_render_product_slides($categories) {
         while ($query->have_posts()) {
   $query->the_post();
   global $product;
+  $active_product = $product;
+  if (empty($active_product) && function_exists('wc_get_product')) {
+      $active_product = wc_get_product(get_the_ID());
+  }
   $img = get_the_post_thumbnail_url(get_the_ID(), 'medium') ?: 'https://via.placeholder.com/600x400';
   $title = get_the_title();
-  $price = $product->get_price_html();
   $link = get_permalink();
   $tag = "Mới";
-  if ($product->is_on_sale()) $tag = "Sale";
-  elseif ($product->is_featured()) $tag = "Hot";
+  $price = __('Liên hệ', 'hacoled');
+  if (is_a($active_product, 'WC_Product')) {
+      $price = $active_product->get_price_html();
+      if ($active_product->is_on_sale()) $tag = "Sale";
+      elseif ($active_product->is_featured()) $tag = "Hot";
+  }
   ?>
       <div class="swiper-slide rounded-2xl overflow-hidden group cursor-pointer relative" onclick="window.location.href='<?php echo esc_url($link); ?>'">
           <div class="aspect-square relative overflow-hidden bg-gray-100">
@@ -964,16 +971,27 @@ function haco_render_product_slides($categories) {
                             while ($product_query->have_posts()) :
                                 $product_query->the_post();
                                 global $product;
+                                $active_product = $product;
+                                if (empty($active_product) && function_exists('wc_get_product')) {
+                                    $active_product = wc_get_product(get_the_ID());
+                                }
                                 $terms = get_the_terms(get_the_ID(), 'product_cat');
                                 $category_name = (!empty($terms) && !is_wp_error($terms)) ? $terms[0]->name : $section['label'];
                                 
+                                $description = get_the_excerpt();
+                                $price_html = __('Liên hệ', 'hacoled');
+                                if (is_a($active_product, 'WC_Product')) {
+                                    $description = $active_product->get_short_description() ?: get_the_excerpt();
+                                    $price_html = $active_product->get_price_html() ?: __('Liên hệ', 'hacoled');
+                                }
+
                                 echo '<div class="swiper-slide h-auto">';
                                 $this->renderComponent('product-card', [
                                     'title'       => get_the_title(),
-                                    'description' => $product->get_short_description() ?: get_the_excerpt(),
+                                    'description' => $description,
                                     'permalink'   => get_permalink(),
                                     'thumbnail'   => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
-                                    'price'       => $product->get_price_html() ?: __('Liên hệ', 'hacoled'),
+                                    'price'       => $price_html,
                                     'category'    => $category_name,
                                 ]);
                                 echo '</div>';

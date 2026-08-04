@@ -11,7 +11,7 @@ defined('ABSPATH') || exit;
 global $product;
 
 $product_id = get_queried_object_id();
-$product    = wc_get_product($product_id);
+$product    = function_exists('wc_get_product') ? wc_get_product($product_id) : false;
 
 if (!$product) {
     $this->render('catalog/product', compact('header_type', 'footer_type'));

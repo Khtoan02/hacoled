@@ -70,7 +70,7 @@ $category_slug = 'led-trang-tri-toa-nha';
 if (function_exists('wc_get_products')) {
     $wc_products = wc_get_products([
         'category' => [$category_slug],
-        'limit'    => 10,
+        'limit'    => -1,
         'status'   => 'publish',
     ]);
 
@@ -116,7 +116,7 @@ if (function_exists('wc_get_products')) {
 if (empty($staggered_products)) {
     $cat_query = new WP_Query([
         'post_type'      => 'product',
-        'posts_per_page' => 10,
+        'posts_per_page' => -1,
         'post_status'    => 'publish',
         'tax_query'      => [
             [
@@ -418,7 +418,7 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
     </div>
   </section>
 
-  <!-- SECTION 3: STAGGERED PRODUCTS CATALOGUE (Sản Phẩm Danh Mục 'led-trang-tri-toa-nha' Trình Bày So Le) -->
+  <!-- SECTION 3: PRODUCTS CATALOGUE (Sản Phẩm Danh Mục 'led-trang-tri-toa-nha' Trình Bày Đồng Bộ) -->
   <section class="py-32 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative overflow-hidden">
     
     <!-- Giant Watermark Typography -->
@@ -446,90 +446,92 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
         </p>
       </div>
 
-      <!-- Alternating / Staggered Product Rows -->
-      <div class="space-y-28">
-        <?php foreach ($staggered_products as $idx => $prod): 
-          $is_even = ($idx % 2 === 1);
-          $product_url = !empty($prod['permalink']) ? $prod['permalink'] : hacoled_managed_page_url('contact');
-        ?>
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Product Image Column (Alternates Left / Right) -->
-            <div class="lg:col-span-6 <?php echo $is_even ? 'lg:order-2' : 'lg:order-1'; ?>">
-              <div class="relative group rounded-3xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-2xl">
-                <a href="<?php echo esc_url($product_url); ?>" class="block aspect-[4/3] w-full overflow-hidden">
-                  <img src="<?php echo esc_url($prod['image']); ?>" alt="<?php echo esc_attr($prod['name']); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80"></div>
-                </a>
-
-                <!-- Top Badge -->
-                <span class="absolute top-5 left-5 px-3.5 py-1.5 rounded-full bg-[#FBBF24] text-slate-950 text-xs font-mono font-bold shadow-lg">
-                  <?php echo esc_html($prod['badge']); ?>
-                </span>
-
-                <!-- Price Tag if available -->
-                <?php if (!empty($prod['price_html'])): ?>
-                  <div class="absolute top-5 right-5 px-4 py-1.5 rounded-full bg-slate-900/90 backdrop-blur-md text-amber-300 text-xs font-mono font-bold border border-white/20">
-                    <?php echo wp_kses_post($prod['price_html']); ?>
-                  </div>
-                <?php endif; ?>
-
-                <!-- Bottom Specs Pill Bar -->
-                <div class="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
-                  <?php foreach ($prod['specs'] as $sp): ?>
-                    <span class="px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md text-white text-[11px] font-mono border border-white/20">
-                      ✔ <?php echo esc_html($sp); ?>
-                    </span>
-                  <?php endforeach; ?>
-                </div>
+      <!-- Product Slider Carousel (Synchronized with Website's Component Style) -->
+      <div class="product-slider-wrapper relative group/slider mt-12 md:mt-16">
+        <style>
+          .product-slider-wrapper {
+              overflow: visible !important;
+          }
+          .product-swiper {
+              display: block !important;
+              overflow-x: auto !important;
+              scroll-behavior: smooth !important;
+              scroll-snap-type: x mandatory !important;
+              scrollbar-width: none !important;
+              -ms-overflow-style: none !important;
+              padding-top: 12px !important;
+              padding-bottom: 16px !important;
+              margin-top: 0 !important;
+              margin-bottom: 0 !important;
+          }
+          .product-swiper::-webkit-scrollbar {
+              display: none !important;
+          }
+          .product-swiper .swiper-wrapper {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              gap: 1.25rem !important;
+              width: 100% !important;
+              padding-top: 0.5rem !important;
+              padding-bottom: 0.5rem !important;
+          }
+          .product-swiper .swiper-slide {
+              flex: 0 0 auto !important;
+              width: 82vw !important;
+              max-width: 320px !important;
+              scroll-snap-align: start !important;
+          }
+          @media (min-width: 640px) {
+              .product-swiper .swiper-slide {
+                  width: calc(50% - 0.65rem) !important;
+                  max-width: 360px !important;
+              }
+          }
+          @media (min-width: 1024px) {
+              .product-swiper .swiper-slide {
+                  width: calc(25% - 0.95rem) !important;
+                  max-width: 350px !important;
+              }
+          }
+          .custom-swiper-prev:disabled,
+          .custom-swiper-next:disabled {
+              opacity: 0 !important;
+              visibility: hidden !important;
+              pointer-events: none !important;
+          }
+        </style>
+        
+        <div class="swiper product-swiper py-3 !overflow-visible">
+          <div class="swiper-wrapper">
+            <?php foreach ($staggered_products as $prod): 
+              $product_url = !empty($prod['permalink']) ? $prod['permalink'] : hacoled_managed_page_url('contact');
+              $terms = get_the_terms($prod['id'] ?? 0, 'product_cat');
+              $category_name = (!empty($terms) && !is_wp_error($terms)) ? $terms[0]->name : __('LED Trang Trí Tòa Nhà', 'hacoled');
+            ?>
+              <div class="swiper-slide h-auto">
+                <?php 
+                $this->renderComponent('product-card', [
+                    'title'       => $prod['name'],
+                    'description' => $prod['desc'],
+                    'permalink'   => $product_url,
+                    'thumbnail'   => $prod['image'],
+                    'price'       => !empty($prod['price_html']) ? $prod['price_html'] : __('Liên hệ', 'hacoled'),
+                    'category'    => $category_name,
+                ]);
+                ?>
               </div>
-            </div>
-
-            <!-- Product Info Content Column (Alternates Right / Left) -->
-            <div class="lg:col-span-6 space-y-6 <?php echo $is_even ? 'lg:order-1' : 'lg:order-2'; ?>">
-              <div class="space-y-2">
-                <span class="text-xs font-mono font-bold text-[#B31217] uppercase tracking-widest block">
-                  <?php echo esc_html($prod['subtitle']); ?>
-                </span>
-                <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                  <a href="<?php echo esc_url($product_url); ?>" class="hover:text-[#B31217] transition-colors">
-                    <?php echo esc_html($prod['name']); ?>
-                  </a>
-                </h3>
-              </div>
-
-              <p class="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
-                <?php echo esc_html($prod['desc']); ?>
-              </p>
-
-              <!-- Highlight Bullets -->
-              <div class="space-y-3 pt-2">
-                <?php foreach ($prod['highlights'] as $hl): ?>
-                  <div class="flex items-start gap-3 text-xs sm:text-sm text-slate-800">
-                    <div class="w-5 h-5 rounded-full bg-red-50 text-[#B31217] flex items-center justify-center flex-shrink-0 mt-0.5 border border-red-200">
-                      <i class="ph-bold ph-check text-xs"></i>
-                    </div>
-                    <span><?php echo esc_html($hl); ?></span>
-                  </div>
-                <?php endforeach; ?>
-              </div>
-
-              <!-- CTA Actions -->
-              <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
-                <a href="<?php echo esc_url($product_url); ?>" class="inline-flex items-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase px-7 py-3.5 rounded-xl transition-all shadow-md">
-                  <span>Xem Chi Tiết Sản Phẩm</span>
-                  <i class="ph-bold ph-arrow-right text-xs"></i>
-                </a>
-                <a href="<?php echo esc_url(hacoled_managed_page_url('contact')); ?>" class="inline-flex items-center gap-2 bg-slate-100 hover:bg-[#B31217] hover:text-white text-slate-900 font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-colors border border-slate-200">
-                  <span>Yêu Cầu Báo Giá 3D</span>
-                  <i class="ph-bold ph-file-text text-xs"></i>
-                </a>
-              </div>
-
-            </div>
-
+            <?php endforeach; ?>
           </div>
-        <?php endforeach; ?>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button class="custom-swiper-prev absolute top-1/2 -translate-y-1/2 -left-2 md:-left-6 w-10 h-10 md:w-12 md:h-12 bg-white text-gray-800 rounded-full shadow-lg border border-gray-100 flex items-center justify-center hover:bg-[#B31217] hover:text-white hover:border-[#B31217] hover:scale-110 hover:shadow-[0_8px_25px_rgba(204,0,0,0.3)] transition-all duration-300 z-20 opacity-80 md:opacity-0 group-hover/slider:opacity-100 -translate-x-1 md:-translate-x-4 group-hover/slider:translate-x-0" aria-label="Previous slide">
+            <i class="ph-bold ph-caret-left text-lg md:text-xl"></i>
+        </button>
+        <button class="custom-swiper-next absolute top-1/2 -translate-y-1/2 -right-2 md:-right-6 w-10 h-10 md:w-12 md:h-12 bg-white text-gray-800 rounded-full shadow-lg border border-gray-100 flex items-center justify-center hover:bg-[#B31217] hover:text-white hover:border-[#B31217] hover:scale-110 hover:shadow-[0_8px_25px_rgba(204,0,0,0.3)] transition-all duration-300 z-20 opacity-80 md:opacity-0 group-hover/slider:opacity-100 translate-x-1 md:translate-x-4 group-hover/slider:translate-x-0" aria-label="Next slide">
+            <i class="ph-bold ph-caret-right text-lg md:text-xl"></i>
+        </button>
       </div>
 
     </div>
@@ -1111,6 +1113,31 @@ $hero_bg_url = get_template_directory_uri() . '/assets/images/Building_with_LED_
       if (e.target === lightbox || e.target === lightbox.querySelector('.relative')) {
         closeLightbox();
       }
+    });
+
+    // 4. PRODUCT CAROUSEL SLIDER NATIVE INTERACTION
+    document.querySelectorAll('.product-slider-wrapper').forEach((wrapper) => {
+      const slider = wrapper.querySelector('.product-swiper');
+      const previous = wrapper.querySelector('.custom-swiper-prev');
+      const next = wrapper.querySelector('.custom-swiper-next');
+      if (!slider) return;
+
+      let scrollRaf = null;
+      const updateButtons = () => {
+        if (scrollRaf) cancelAnimationFrame(scrollRaf);
+        const scrollLeft = slider.scrollLeft;
+        const clientWidth = slider.clientWidth;
+        const scrollWidth = slider.scrollWidth;
+
+        scrollRaf = requestAnimationFrame(() => {
+          if (previous) previous.disabled = scrollLeft <= 4;
+          if (next) next.disabled = scrollLeft + clientWidth >= scrollWidth - 4;
+        });
+      };
+      previous?.addEventListener('click', () => slider.scrollBy({ left: -slider.clientWidth * 0.85, behavior: 'smooth' }));
+      next?.addEventListener('click', () => slider.scrollBy({ left: slider.clientWidth * 0.85, behavior: 'smooth' }));
+      slider.addEventListener('scroll', updateButtons, { passive: true });
+      updateButtons();
     });
   });
 </script>
