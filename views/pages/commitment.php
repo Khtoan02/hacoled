@@ -21,19 +21,13 @@ $this->renderHeader($header_type ?? 'default');
 
   <div class="max-w-[1440px] mx-auto px-4 lg:px-8 relative z-10">
 
-    <!-- Breadcrumbs with Schema.org Microdata -->
-    <nav aria-label="Breadcrumb" class="gsap-reveal mb-6 text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2" data-direction="up" data-delay="0.1" itemscope itemtype="https://schema.org/BreadcrumbList">
-      <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="text-slate-500 hover:text-accent-gold transition-colors" itemprop="item">
-          <span itemprop="name"><?php _e('Trang chủ', 'hacoled'); ?></span>
-        </a>
-        <meta itemprop="position" content="1" />
-      </span>
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="gsap-reveal mb-6 text-xs font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-2" data-direction="up" data-delay="0.1">
+      <a href="<?php echo esc_url(home_url('/')); ?>" class="text-slate-500 hover:text-accent-gold transition-colors">
+        <?php _e('Trang chủ', 'hacoled'); ?>
+      </a>
       <span class="text-slate-400">/</span>
-      <span itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <span class="text-slate-650" itemprop="name"><?php echo esc_html($page['title']); ?></span>
-        <meta itemprop="position" content="2" />
-      </span>
+      <span class="text-slate-650"><?php echo esc_html($page['title']); ?></span>
     </nav>
 
     <!-- SECTION 1: HERO TITLE & INTRODUCTION -->

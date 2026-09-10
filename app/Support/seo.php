@@ -159,74 +159,63 @@ function hacoled_output_home_structured_data() {
         return;
     }
 
-    $schemas = [
-        [
-            '@context' => 'https://schema.org',
-            '@type' => 'BreadcrumbList',
-            'itemListElement' => [
-                [
-                    '@type' => 'ListItem',
-                    'position' => 1,
-                    'name' => 'Trang chủ HacoLED',
-                    'item' => home_url('/'),
+    $faq_schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type' => 'Question',
+                'name' => 'Quy trình khảo sát và thi công màn hình LED diễn ra như thế nào?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'HacoLED thực hiện 5 bước: tiếp nhận và tư vấn, khảo sát mặt bằng, thiết kế và báo giá, thi công lắp đặt, sau đó bàn giao, hướng dẫn vận hành và kích hoạt bảo hành.',
                 ],
             ],
-        ],
-        [
-            '@context' => 'https://schema.org',
-            '@type' => 'FAQPage',
-            'mainEntity' => [
-                [
-                    '@type' => 'Question',
-                    'name' => 'Quy trình khảo sát và thi công màn hình LED diễn ra như thế nào?',
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => 'HacoLED thực hiện 5 bước: tiếp nhận và tư vấn, khảo sát mặt bằng, thiết kế và báo giá, thi công lắp đặt, sau đó bàn giao, hướng dẫn vận hành và kích hoạt bảo hành.',
-                    ],
+            [
+                '@type' => 'Question',
+                'name' => 'Nguồn gốc linh kiện màn hình LED của HacoLED từ đâu?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Module, card điều khiển và bộ nguồn được nhập khẩu chính ngạch từ các thương hiệu như Novastar, Colorlight và Qiangli, kèm chứng nhận xuất xứ CO và chất lượng CQ theo dự án.',
                 ],
-                [
-                    '@type' => 'Question',
-                    'name' => 'Nguồn gốc linh kiện màn hình LED của HacoLED từ đâu?',
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => 'Module, card điều khiển và bộ nguồn được nhập khẩu chính ngạch từ các thương hiệu như Novastar, Colorlight và Qiangli, kèm chứng nhận xuất xứ CO và chất lượng CQ theo dự án.',
-                    ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Chính sách bảo hành và bảo trì hệ thống ra sao?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'HacoLED áp dụng bảo hành tại nơi lắp đặt từ 24 đến 36 tháng, hỗ trợ kỹ thuật trực tuyến 24/7 và bố trí xử lý tại hiện trường khi cần thiết.',
                 ],
-                [
-                    '@type' => 'Question',
-                    'name' => 'Chính sách bảo hành và bảo trì hệ thống ra sao?',
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => 'HacoLED áp dụng bảo hành tại nơi lắp đặt từ 24 đến 36 tháng, hỗ trợ kỹ thuật trực tuyến 24/7 và bố trí xử lý tại hiện trường khi cần thiết.',
-                    ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Tuổi thọ trung bình của hệ thống màn hình LED là bao lâu?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Với linh kiện phù hợp và hệ thống tản nhiệt được thi công đúng kỹ thuật, màn hình LED có tuổi thọ thiết kế lên tới 100.000 giờ hoạt động.',
                 ],
-                [
-                    '@type' => 'Question',
-                    'name' => 'Tuổi thọ trung bình của hệ thống màn hình LED là bao lâu?',
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => 'Với linh kiện phù hợp và hệ thống tản nhiệt được thi công đúng kỹ thuật, màn hình LED có tuổi thọ thiết kế lên tới 100.000 giờ hoạt động.',
-                    ],
-                ],
-                [
-                    '@type' => 'Question',
-                    'name' => 'HacoLED có hỗ trợ thiết kế 3D trước khi thi công không?',
-                    'acceptedAnswer' => [
-                        '@type' => 'Answer',
-                        'text' => 'Có. Đội ngũ kỹ thuật cung cấp bản vẽ và phối cảnh 3D để khách hàng hình dung phương án bố trí, quy mô và thẩm mỹ trước khi chốt phương án thi công.',
-                    ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'HacoLED có hỗ trợ thiết kế 3D trước khi thi công không?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Có. Đội ngũ kỹ thuật cung cấp bản vẽ và phối cảnh 3D để khách hàng hình dung phương án bố trí, quy mô và thẩm mỹ trước khi chốt phương án thi công.',
                 ],
             ],
         ],
     ];
 
-    foreach ($schemas as $schema) {
-        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
-    }
+    echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n";
 }
 add_action('wp_head', 'hacoled_output_home_structured_data', 30);
 
 function hacoled_output_blog_structured_data() {
+    // Rank Math handles breadcrumb schema; avoid duplicate BreadcrumbList injection
+    if (function_exists('rank_math') || class_exists('\RankMath')) {
+        return;
+    }
+
     if (!hacoled_is_blog_hub()) {
         return;
     }
