@@ -192,6 +192,46 @@ class LayoutRegistry {
     }
 
     /**
+     * Return available category layouts for product taxonomies.
+     */
+    public static function categoryLayouts() {
+        $config = self::config();
+
+        return isset($config['category_layouts']) && is_array($config['category_layouts'])
+            ? $config['category_layouts']
+            : [
+                'default' => [
+                    'label'       => __('Mặc định (Danh mục sản phẩm chuẩn)', 'hacoled'),
+                    'description' => __('Giao diện danh mục sản phẩm WooCommerce tiêu chuẩn.', 'hacoled'),
+                    'view'        => 'catalog/category',
+                ],
+            ];
+    }
+
+    /**
+     * Resolve a per-category layout view while retaining a safe default view.
+     */
+    public static function resolveCategoryView($term_id, $default_view = 'catalog/category') {
+        $term_id = absint($term_id);
+
+        if (!$term_id) {
+            return $default_view;
+        }
+
+        $selected = sanitize_key((string) get_term_meta($term_id, '_hacoled_category_layout', true));
+        $layouts = self::categoryLayouts();
+
+        if ($selected && isset($layouts[$selected]['view'])) {
+            $view = self::sanitizeRelativePath($layouts[$selected]['view']);
+            if ($view && file_exists(get_template_directory() . '/views/' . $view . '.php')) {
+                return $view;
+            }
+        }
+
+        return $default_view;
+    }
+
+    /**
      * Permit only relative theme paths made from predictable characters.
      */
     private static function sanitizeRelativePath($path) {
@@ -200,3 +240,4 @@ class LayoutRegistry {
         return preg_match('/^[a-zA-Z0-9\/_-]+(?:\.php)?$/', $path) ? $path : '';
     }
 }
+

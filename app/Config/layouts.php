@@ -115,4 +115,17 @@ return [
             ],
         ],
     ],
+    'category_layouts' => [
+        'default' => [
+            'label'       => 'Mặc định (Danh mục sản phẩm chuẩn)',
+            'description' => 'Giao diện danh mục sản phẩm WooCommerce tiêu chuẩn với bộ lọc và danh sách sản phẩm.',
+            'view'        => 'catalog/category',
+        ],
+        'landing_led_ads' => [
+            'label'       => 'Landing Page Quảng Cáo - Màn Hình LED (Chủ đề 1: Báo Giá & Giải Pháp Trọn Gói)',
+            'description' => 'Giao diện chuyên biệt chạy Ads, tối ưu chuyển đổi, form báo giá nhanh, bảng dự toán chi phí và hồ sơ năng lực.',
+            'view'        => 'catalog/category-landing-led',
+        ],
+    ],
 ];
+

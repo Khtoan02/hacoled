@@ -16,6 +16,7 @@ require_once __DIR__ . '/Support/header-menu.php';
 require_once __DIR__ . '/Support/seo.php';
 require_once __DIR__ . '/Support/security-headers.php';
 require_once __DIR__ . '/Support/page-cache.php';
+require_once __DIR__ . '/Support/lead-manager.php';
 
 if (is_admin()) {
     $page_template_manager = new HacoLED\Theme\Admin\PageTemplateManager();
@@ -24,6 +25,10 @@ if (is_admin()) {
     $content_layout_manager = new HacoLED\Theme\Admin\ContentLayoutManager();
     $content_layout_manager->register();
 
+    $category_layout_manager = new HacoLED\Theme\Admin\CategoryLayoutManager();
+    $category_layout_manager->register();
+
     $header_menu_manager = new HacoLED\Theme\Admin\HeaderMenuManager();
     $header_menu_manager->register();
 }
+
