@@ -643,7 +643,7 @@ $solutions_data = [
        - Chuyển không gian theo dạng Arrow Slide (Prev/Next) & Tabs
        - Chiều cao thiết kế vừa vặn trong 1 màn hình
   =========================================== -->
-  <section id="solutions-studio-section" class="py-8 sm:py-10 lg:py-12 px-4 lg:px-8 bg-gradient-to-b from-[#FAFAFA] via-white to-[#FAFAFA] relative overflow-hidden border-b border-slate-200/80 scroll-mt-20">
+  <section id="solutions-studio-section" class="py-8 sm:py-10 lg:py-12 px-4 lg:px-8 bg-gradient-to-b from-[#FAFAFA] via-white to-[#FAFAFA] relative overflow-hidden border-b border-slate-200/80 scroll-mt-36 lg:scroll-mt-40">
     
     <!-- Giant Watermark Typography -->
     <div class="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none select-none">
@@ -736,7 +736,7 @@ $solutions_data = [
 
                   <!-- Hover Zoom Hint -->
                   <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white font-mono text-xs font-bold pointer-events-none">
-                    <div class="px-4 py-2 rounded-xl bg-black/80 border border-white/30 flex items-center gap-2 shadow-2xl backdrop-blur-xs">
+                    <div class="px-4 py-2 rounded-xl bg-black/80 border border-white/30 flex items-center gap-2 shadow-2xl backdrop-blur-sm">
                       <i class="ph-bold ph-magnifying-glass-plus text-base text-[#FBBF24]"></i>
                       <span>Click Phóng To Chi Tiết Ảnh Gốc</span>
                     </div>
@@ -745,7 +745,10 @@ $solutions_data = [
 
                 <!-- Bottom Equipment List (underneath the image) -->
                 <div class="pt-0.5">
-                  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-<?php echo count($sol['items']); ?> gap-2 sm:gap-2.5">
+                  <?php 
+                  $grid_cols_class = (count($sol['items']) === 6) ? 'lg:grid-cols-6' : 'lg:grid-cols-5';
+                  ?>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 <?php echo $grid_cols_class; ?> gap-2 sm:gap-2.5">
                     <?php foreach ($sol['items'] as $it): ?>
                       <div class="bg-slate-50/90 hover:bg-red-50/40 p-2.5 sm:p-3 rounded-xl border border-slate-200/80 hover:border-[#B31217]/40 transition-all duration-300 space-y-1">
                         <div class="flex items-center justify-between">
@@ -1241,10 +1244,11 @@ $solutions_data = [
         </div>
 
       </div>
+    </div>
+  </section>
 
   <!-- ==========================================
-       SECTION: CATEGORY SEO CONTENT BLOCK (Text-Only Micro-Typography 6-7px)
-       Tối ưu điểm SEO On-page, Entity Authority & Organic Ranking
+       SECTION: CATEGORY SEO CONTENT BLOCK (Text-Only Entity Authority & Organic Ranking)
   =========================================== -->
   <?php
   // 1. Get category article content from term meta or category description
@@ -1300,50 +1304,68 @@ $solutions_data = [
       ';
   }
 
-  // 2. Strict Filter: REMOVE all <img>, <picture>, <figure>, <svg> to keep ONLY pure text/semantic markup as requested
-  $cat_seo_clean = preg_replace('/<img[^>]*>/i', '', $cat_seo_raw);
+  // 2. Strict Filter: Clean shortcodes like [caption]...[/caption] and unwanted tags
+  $cat_seo_clean = preg_replace('/\[caption[^\]]*\].*?\[\/caption\]/is', '', $cat_seo_raw);
+  $cat_seo_clean = preg_replace('/\[.*?\]/', '', $cat_seo_clean);
+  $cat_seo_clean = preg_replace('/<img[^>]*>/i', '', $cat_seo_clean);
   $cat_seo_clean = preg_replace('/<picture[\s\S]*?<\/picture>/i', '', $cat_seo_clean);
   $cat_seo_clean = preg_replace('/<figure[\s\S]*?<\/figure>/i', '', $cat_seo_clean);
   $cat_seo_clean = preg_replace('/<svg[\s\S]*?<\/svg>/i', '', $cat_seo_clean);
+  $cat_seo_clean = wpautop(trim($cat_seo_clean));
   ?>
 
-  <section id="category-seo-article-section" class="py-6 px-4 lg:px-8 bg-[#F8F9FA] border-t border-slate-200/60 select-text">
-    <div class="max-w-[1440px] mx-auto">
-      <div class="seo-micro-content" style="font-size: 7px; line-height: 1.45; color: #94a3b8; opacity: 0.65;">
-        <style>
-          #category-seo-article-section .seo-micro-content h2 {
-            font-size: 8px !important;
-            font-weight: 700 !important;
-            color: #64748b !important;
-            margin: 6px 0 3px 0 !important;
-            text-transform: uppercase;
-          }
-          #category-seo-article-section .seo-micro-content h3 {
-            font-size: 7.5px !important;
-            font-weight: 700 !important;
-            color: #64748b !important;
-            margin: 5px 0 2px 0 !important;
-          }
-          #category-seo-article-section .seo-micro-content p {
-            margin-bottom: 4px !important;
-            font-size: 7px !important;
-            line-height: 1.45 !important;
-          }
-          #category-seo-article-section .seo-micro-content ul {
-            margin: 3px 0 5px 12px !important;
-            list-style-type: disc !important;
-          }
-          #category-seo-article-section .seo-micro-content li {
-            margin-bottom: 2px !important;
-            font-size: 7px !important;
-            line-height: 1.45 !important;
-          }
-          #category-seo-article-section .seo-micro-content strong {
-            color: #64748b !important;
-            font-weight: 600 !important;
-          }
-        </style>
-        <?php echo $cat_seo_clean; ?>
+  <section id="category-seo-article-section" class="py-12 px-4 lg:px-8 bg-slate-50 border-t border-slate-200/80 select-text">
+    <div class="max-w-5xl mx-auto">
+      <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="border-b border-slate-100 pb-4">
+          <span class="text-xs font-mono font-bold text-[#B31217] uppercase tracking-wider">THÔNG TIN KỸ THUẬT & HƯỚNG DẪN</span>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-1 uppercase">Tổng Quan Màn Hình LED HacoLED</h2>
+        </div>
+        <div class="category-seo-article text-xs sm:text-sm text-slate-600 leading-relaxed space-y-4">
+          <style>
+            #category-seo-article-section .category-seo-article h2,
+            #category-seo-article-section .category-seo-article h3 {
+              font-size: 1.125rem !important;
+              font-weight: 800 !important;
+              color: #0f172a !important;
+              margin: 1.25rem 0 0.5rem 0 !important;
+              text-transform: uppercase;
+            }
+            #category-seo-article-section .category-seo-article p {
+              margin-bottom: 0.75rem !important;
+              line-height: 1.7 !important;
+            }
+            #category-seo-article-section .category-seo-article ul {
+              margin: 0.5rem 0 0.75rem 1.25rem !important;
+              list-style-type: disc !important;
+            }
+            #category-seo-article-section .category-seo-article li {
+              margin-bottom: 0.35rem !important;
+            }
+            #category-seo-article-section .category-seo-article table {
+              width: 100% !important;
+              border-collapse: collapse !important;
+              margin: 1rem 0 !important;
+              font-size: 0.8125rem !important;
+            }
+            #category-seo-article-section .category-seo-article th,
+            #category-seo-article-section .category-seo-article td {
+              border: 1px solid #e2e8f0 !important;
+              padding: 0.5rem 0.75rem !important;
+              text-align: left !important;
+            }
+            #category-seo-article-section .category-seo-article th {
+              background-color: #f8fafc !important;
+              font-weight: 700 !important;
+              color: #0f172a !important;
+            }
+            #category-seo-article-section .category-seo-article strong {
+              color: #0f172a !important;
+              font-weight: 700 !important;
+            }
+          </style>
+          <?php echo $cat_seo_clean; ?>
+        </div>
       </div>
     </div>
   </section>

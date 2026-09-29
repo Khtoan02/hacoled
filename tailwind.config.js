@@ -8,6 +8,30 @@ module.exports = {
     "./woocommerce/**/*.php",
     "./src/js/**/*.js"
   ],
+  safelist: [
+    'lg:grid-cols-5',
+    'lg:grid-cols-6',
+    'aspect-[2481/1222]',
+    'h-[210px]',
+    'h-[230px]',
+    'h-[240px]',
+    'h-[280px]',
+    'h-[290px]',
+    'h-[310px]',
+    '-scale-x-100',
+    'bg-[#B31217]',
+    'bg-[#F8F9FA]',
+    'bg-[#FAFAFA]',
+    'bg-[#FBBF24]',
+    'bg-black/45',
+    'backdrop-blur-xl',
+    'text-[16vw]',
+    'text-[18vw]',
+    'max-w-[1440px]',
+    'w-[300px]',
+    'sm:w-[360px]',
+    'lg:w-[410px]',
+  ],
   theme: {
     extend: {
       colors: {
