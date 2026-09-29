@@ -604,7 +604,7 @@ $solutions_data = [
         <div class="flex justify-start">
           <div class="inline-flex items-center gap-2.5 bg-black/40 lg:bg-white/20 border border-white/40 px-4 py-2 rounded-full text-xs font-mono font-bold text-white shadow-xl backdrop-blur-xl">
             <span class="w-2.5 h-2.5 rounded-full bg-[#FBBF24] animate-pulse"></span>
-            <span>HACOLED PRO · Đơn vị thi công màn hình LED số 1 Việt Nam</span>
+            <span>HACOLED PRO · Đơn vị cung cấp giải pháp uy tín cho các công trình lớn</span>
           </div>
         </div>
 
@@ -1243,129 +1243,6 @@ $solutions_data = [
 
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================
-       SECTION: CATEGORY SEO CONTENT BLOCK (Text-Only Entity Authority & Organic Ranking)
-  =========================================== -->
-  <?php
-  // 1. Get category article content from term meta or category description
-  $term_obj = $current_term instanceof WP_Term ? $current_term : (function_exists('get_queried_object') ? get_queried_object() : null);
-  $cat_seo_raw = '';
-  
-  if ($term_obj instanceof WP_Term) {
-      $term_seo_meta = get_term_meta($term_obj->term_id, '_category_seo_article', true)
-          ?: get_term_meta($term_obj->term_id, 'seo_description', true)
-          ?: get_term_meta($term_obj->term_id, '_hacoled_seo_article', true);
-      
-      if (!empty($term_seo_meta)) {
-          $cat_seo_raw = $term_seo_meta;
-      } elseif (!empty($term_obj->description) && mb_strlen(strip_tags($term_obj->description)) > 250) {
-          $cat_seo_raw = $term_obj->description;
-      }
-  }
-
-  // If no long article exists yet in term, provide the authoritative HacoLED Màn Hình LED SEO comprehensive entity text
-  if (empty($cat_seo_raw)) {
-      $cat_seo_raw = '
-      <article class="category-seo-article">
-        <h2>Tổng quan về Màn hình LED và Giải pháp hiển thị kỹ thuật số 2026</h2>
-        <p>Màn hình LED (Light Emitting Diode Display) là hệ thống hiển thị kỹ thuật số thế hệ mới, được cấu thành từ hàng triệu bóng diode phát quang siêu nhỏ gắn trên các tấm module LED riêng biệt. Với ưu thế vượt trội về độ sáng cực cao từ 800 đến 8000 nits, dải màu chuẩn DCI-P3 98%, tần số làm mới (refresh rate) đạt 3840Hz đến 7680Hz và khả năng mở rộng kích thước vô hạn không đường viền (bezel-less), màn hình LED đã trở thành giải pháp hiển thị thay thế hoàn toàn máy chiếu truyền thống và màn hình ghép LCD trong mọi lĩnh vực từ hội nghị, sân khấu, sự kiện đến quảng cáo thương mại ngoài trời.</p>
-
-        <h3>1. Cấu tạo kỹ thuật hoàn chỉnh của hệ thống màn hình LED chuyên nghiệp</h3>
-        <p>Một hệ thống màn hình LED hoàn chỉnh bao gồm các phân hệ phần cứng và điều khiển đồng bộ:</p>
-        <ul>
-          <li><strong>Module LED hiển thị:</strong> Trái tim của màn hình, tích hợp các chip LED SMD hoặc COB với mật độ điểm ảnh pixel pitch từ P0.9 đến P10. Bề mặt module được phủ keo bảo vệ chống ẩm, chống tĩnh điện ESD và chống va đập.</li>
-          <li><strong>Khung Cabinet định hình:</strong> Hệ khung nhôm đúc định hình (Die-cast Aluminum) có độ chính xác cơ khí dưới 0.1mm, trọng lượng nhẹ, tản nhiệt tự nhiên không gây ồn và hỗ trợ tháo lắp bảo trì mặt trước (Front Maintenance) bằng nam châm hút chân không.</li>
-          <li><strong>Hệ thống nguồn chuyển đổi (Power Supply):</strong> Bộ đổi nguồn công nghiệp Meanwell hoặc Chuanglian 5V-40A/60A đạt chứng chỉ CE/UL, hiệu suất chuyển đổi > 88%, tích hợp mạch bảo vệ quá áp, quá tải và chống sét lan truyền.</li>
-          <li><strong>Hệ thống Card thu nhận (Receiving Card):</strong> Card điều khiển Novastar MRV series hoặc Colorlight i5A xử lý tín hiệu màu sắc 16-bit grayscale, cân chỉnh độ sáng từng điểm ảnh (Pixel-by-pixel calibration).</li>
-          <li><strong>Bộ vi xử lý video trung tâm (LED Video Processor):</strong> Thiết bị xử lý tín hiệu 4K UHD hỗ trợ đa ngõ vào HDMI 2.0, DP 1.4, SDI, cho phép phóng to, thu nhỏ, cắt hình, PIP (Picture-in-Picture) và đồng bộ âm thanh ra dàn loa hội trường.</li>
-        </ul>
-
-        <h3>2. Phân loại màn hình LED theo không gian ứng dụng</h3>
-        <p>Tùy theo môi trường lắp đặt và khoảng cách quan sát, màn hình LED được phân bổ thành 3 nhóm giải pháp chính:</p>
-        <ul>
-          <li><strong>Màn hình LED Trong Nhà (Indoor):</strong> Các dòng P0.9, P1.25, P1.53, P1.86, P2.0, P2.5, P3.0. Đặc trưng bởi độ tương phản cao 5000:1 - 10000:1, độ sáng dịu mắt 600 - 1000 nits, góc nhìn siêu rộng 160 độ ngang và dọc. Ứng dụng rộng rãi cho phòng họp hội đồng quản trị, hội trường cơ quan nhà nước, trung tâm tiệc cưới và rạp chiếu phim tại gia cao cấp.</li>
-          <li><strong>Màn hình LED Ngoài Trời (Outdoor):</strong> Các dòng P2.5, P3.0, P4.0, P5.0, P6, P10. Thiết kế tiêu chuẩn kháng nước và bụi bẩn IP65/IP68, độ sáng từ 5500 đến 8500 nits giúp hình ảnh rõ nét dưới ánh sáng mặt trời gay gắt. Hoạt động bền bỉ trong dải nhiệt độ -20°C đến +65°C, chống chịu gió bão cấp 12.</li>
-          <li><strong>Màn hình LED Công Nghệ Đặc Biệt:</strong> Bao gồm màn hình LED cong 90 độ phục vụ hiệu ứng 3D Naked-Eye không kính, màn hình LED Film dán kính siêu mỏng 2.5mm với độ truyền sáng 85%, màn hình LED lưới trong suốt và màn hình LED Studio xR chuyên phục vụ kỹ xảo phim trường ảo truyền hình.</li>
-        </ul>
-
-        <h3>3. Bảng cự ly xem tối ưu và cách lựa chọn Pixel Pitch chuẩn xác</h3>
-        <p>Quy tắc tiêu chuẩn để lựa chọn độ phân giải màn hình LED: Cự ly quan sát tối thiểu (mét) bằng số Pitch (mm). Ví dụ màn hình P2.0 cho cự ly xem rõ nét từ 2 mét trở lên; màn hình P3.0 từ 3 mét; màn hình P4.0 từ 4 mét. Đối với phòng họp có cự ly người ngồi đầu tiên cách màn hình 1.5 - 2 mét, dòng P1.25 đến P1.86 COB là lựa chọn hoàn hảo để tránh hiện tượng moiré và lộ hạt điểm ảnh khi chụp ảnh quay phim.</p>
-
-        <h3>4. Báo giá tham khảo và các yếu tố cấu thành chi phí đầu tư</h3>
-        <p>Đơn giá màn hình LED tính theo mét vuông (m²) hoàn thiện, phụ thuộc vào: chủng loại module (SMD hay COB), thương hiệu bóng LED (Nationstar, Kinglight, Epistar), IC điều khiển (MBI, ICN), thương hiệu bộ xử lý tín hiệu và độ phức tạp của kết cấu khung giá đỡ cơ khí. HacoLED cam kết cung cấp bảng dự toán chi tiết bóc tách vật tư minh bạch, kèm chứng nhận xuất xứ CO và kiểm định chất lượng CQ chính ngạch.</p>
-
-        <h3>5. Tiêu chuẩn thi công và chế độ bảo hành tại HacoLED</h3>
-        <p>Với hơn 10 năm kinh nghiệm và hàng nghìn công trình trên khắp 63 tỉnh thành, HacoLED áp dụng quy trình kiểm định 4 bước nghiêm ngặt: khảo sát trắc đạc đo đạc góc nhìn thực tế, kiểm tra tải trọng kết cấu, chạy thử nghiệm liên tục (aging test) 72 giờ trước khi bàn giao và kích hoạt gói bảo hành vàng 36 tháng tận chân công trình. Kỹ sư HacoLED có mặt hỗ trợ kỹ thuật trong vòng 2 giờ tại Hà Nội, Đà Nẵng và TP.HCM.</p>
-      </article>
-      ';
-  }
-
-  // 2. Strict Filter: Clean shortcodes like [caption]...[/caption] and unwanted tags
-  $cat_seo_clean = preg_replace('/\[caption[^\]]*\].*?\[\/caption\]/is', '', $cat_seo_raw);
-  $cat_seo_clean = preg_replace('/\[.*?\]/', '', $cat_seo_clean);
-  $cat_seo_clean = preg_replace('/<img[^>]*>/i', '', $cat_seo_clean);
-  $cat_seo_clean = preg_replace('/<picture[\s\S]*?<\/picture>/i', '', $cat_seo_clean);
-  $cat_seo_clean = preg_replace('/<figure[\s\S]*?<\/figure>/i', '', $cat_seo_clean);
-  $cat_seo_clean = preg_replace('/<svg[\s\S]*?<\/svg>/i', '', $cat_seo_clean);
-  $cat_seo_clean = wpautop(trim($cat_seo_clean));
-  ?>
-
-  <section id="category-seo-article-section" class="py-12 px-4 lg:px-8 bg-slate-50 border-t border-slate-200/80 select-text">
-    <div class="max-w-5xl mx-auto">
-      <div class="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-10 shadow-sm space-y-6">
-        <div class="border-b border-slate-100 pb-4">
-          <span class="text-xs font-mono font-bold text-[#B31217] uppercase tracking-wider">THÔNG TIN KỸ THUẬT & HƯỚNG DẪN</span>
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-1 uppercase">Tổng Quan Màn Hình LED HacoLED</h2>
-        </div>
-        <div class="category-seo-article text-xs sm:text-sm text-slate-600 leading-relaxed space-y-4">
-          <style>
-            #category-seo-article-section .category-seo-article h2,
-            #category-seo-article-section .category-seo-article h3 {
-              font-size: 1.125rem !important;
-              font-weight: 800 !important;
-              color: #0f172a !important;
-              margin: 1.25rem 0 0.5rem 0 !important;
-              text-transform: uppercase;
-            }
-            #category-seo-article-section .category-seo-article p {
-              margin-bottom: 0.75rem !important;
-              line-height: 1.7 !important;
-            }
-            #category-seo-article-section .category-seo-article ul {
-              margin: 0.5rem 0 0.75rem 1.25rem !important;
-              list-style-type: disc !important;
-            }
-            #category-seo-article-section .category-seo-article li {
-              margin-bottom: 0.35rem !important;
-            }
-            #category-seo-article-section .category-seo-article table {
-              width: 100% !important;
-              border-collapse: collapse !important;
-              margin: 1rem 0 !important;
-              font-size: 0.8125rem !important;
-            }
-            #category-seo-article-section .category-seo-article th,
-            #category-seo-article-section .category-seo-article td {
-              border: 1px solid #e2e8f0 !important;
-              padding: 0.5rem 0.75rem !important;
-              text-align: left !important;
-            }
-            #category-seo-article-section .category-seo-article th {
-              background-color: #f8fafc !important;
-              font-weight: 700 !important;
-              color: #0f172a !important;
-            }
-            #category-seo-article-section .category-seo-article strong {
-              color: #0f172a !important;
-              font-weight: 700 !important;
-            }
-          </style>
-          <?php echo $cat_seo_clean; ?>
-        </div>
       </div>
     </div>
   </section>
