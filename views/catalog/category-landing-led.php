@@ -727,7 +727,7 @@ $solutions_data = [
                    class="solution-slide transition-opacity duration-300 space-y-3.5 <?php echo $slide_display_class; ?>">
 
                 <!-- Center Horizontal Panoramic Image with Red Annotation Pins (Exact 2481:1222 Ratio - Full Uncut Display) -->
-                <div class="relative w-full aspect-[2481/1222] rounded-2xl overflow-hidden border border-slate-200/90 shadow-md group cursor-pointer bg-slate-950"
+                <div class="relative w-full aspect-[2481/1222] max-h-[420px] lg:max-h-[460px] rounded-2xl overflow-hidden border border-slate-200/90 shadow-md group cursor-pointer bg-slate-950"
                      onclick="openImageLightbox('<?php echo esc_url($sol['scene_img']); ?>', '<?php echo esc_js($sol['title']); ?>', 'Ảnh phối cảnh và sơ đồ thiết bị đồng bộ HacoLED')">
                   
                   <img src="<?php echo esc_url($sol['scene_img']); ?>" 
