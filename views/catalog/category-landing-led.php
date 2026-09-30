@@ -1863,8 +1863,19 @@ $solutions_data = [
         if (typeof window.fbq === 'function') {
           window.fbq('track', 'Lead', { content_name: interest });
         }
+        // OpenAI / ChatGPT Ads Pixel (Standard Measurement Event: lead_created)
         if (typeof window.oaiq === 'function') {
-          window.oaiq('event', 'Lead', { content_name: interest, value: 1.0 });
+          try {
+            window.oaiq('measure', 'lead_created', {
+              type: 'customer_action',
+              currency: 'VND'
+            }, {
+              event_id: 'lead_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8)
+            });
+            console.log('[OpenAI Ads Pixel] lead_created event sent successfully');
+          } catch (oaiErr) {
+            console.warn('[OpenAI Ads Pixel] Error sending lead_created event:', oaiErr);
+          }
         }
 
         // HacoLED Internal Analytics Conversion Tracking
@@ -1916,6 +1927,23 @@ $solutions_data = [
         errorMsg.classList.remove('hidden');
       }
     });
+  };
+
+  // Helper for manual test in Console: hacoledTestOaiqLead()
+  window.hacoledTestOaiqLead = function() {
+    if (typeof window.oaiq === 'function') {
+      window.oaiq('measure', 'lead_created', {
+        type: 'customer_action',
+        currency: 'VND'
+      }, {
+        event_id: 'test_lead_' + Date.now()
+      });
+      console.log('✅ [OpenAI Ads Pixel] Manual test lead_created fired successfully!');
+      return 'Event sent! Check Ads Manager event stream.';
+    } else {
+      console.warn('❌ [OpenAI Ads Pixel] window.oaiq is not loaded.');
+      return 'window.oaiq is not loaded.';
+    }
   };
 </script>
 
