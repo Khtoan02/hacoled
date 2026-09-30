@@ -17,6 +17,7 @@ require_once __DIR__ . '/Support/seo.php';
 require_once __DIR__ . '/Support/security-headers.php';
 require_once __DIR__ . '/Support/page-cache.php';
 require_once __DIR__ . '/Support/lead-manager.php';
+require_once __DIR__ . '/Support/landing-analytics.php';
 
 if (is_admin()) {
     $page_template_manager = new HacoLED\Theme\Admin\PageTemplateManager();

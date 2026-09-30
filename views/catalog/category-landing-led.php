@@ -590,7 +590,7 @@ $solutions_data = [
        SECTION 1: HERO SECTION (Full 100vh Screen + Raw 4K Image + Ultra-Transparent Glassmorphism)
        Exact 1:1 Match with building-led.php
   =========================================== -->
-  <section class="relative min-h-screen pt-36 lg:pt-44 pb-16 lg:pb-24 px-4 lg:px-8 border-b border-slate-200/60 overflow-hidden flex flex-col justify-center">
+  <section id="sec-hero" data-track-section="sec-hero" data-section-name="Hero Banner Đầu Trang" class="relative min-h-screen pt-36 lg:pt-44 pb-16 lg:pb-24 px-4 lg:px-8 border-b border-slate-200/60 overflow-hidden flex flex-col justify-center">
     <!-- Raw 100% Opacity Custom Background Image (Flipped horizontally so LED screen sits on the right) -->
     <div class="absolute inset-0 z-0 overflow-hidden">
       <img src="<?php echo esc_url($hero_bg_url); ?>" alt="HacoLED Màn Hình LED" class="w-full h-full object-cover opacity-100 -scale-x-100 [transform:scaleX(-1)]" style="transform: scaleX(-1);">
@@ -621,12 +621,12 @@ $solutions_data = [
 
         <div class="flex flex-wrap items-center gap-4 pt-2">
           <!-- Primary CTA Button (Yellow Hero Accent) -->
-          <button type="button" onclick="openQuoteModal('Tất cả màn hình LED')" class="inline-flex items-center gap-2.5 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase px-7 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/30 border border-amber-300 cursor-pointer">
+          <button type="button" onclick="openQuoteModal('Tất cả màn hình LED')" data-track-cta="btn-quote-hero" data-track-label="Hero: Khảo Sát & Báo Giá Ngay" class="inline-flex items-center gap-2.5 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase px-7 py-4 rounded-xl transition-all duration-300 shadow-2xl shadow-amber-500/30 border border-amber-300 cursor-pointer">
             <i class="ph-bold ph-chats-circle text-base"></i>
             <span>Khảo Sát & Báo Giá Ngay</span>
           </button>
           <!-- Secondary Ultra-Glass Button -->
-          <a href="#solutions-studio-section" class="inline-flex items-center gap-2.5 bg-black/40 lg:bg-white/20 backdrop-blur-xl border border-white/40 text-white hover:bg-white/30 font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-lg">
+          <a href="#solutions-studio-section" data-track-cta="btn-scroll-solutions" data-track-label="Hero: Cuộn Xem 5 Giải Pháp Không Gian" class="inline-flex items-center gap-2.5 bg-black/40 lg:bg-white/20 backdrop-blur-xl border border-white/40 text-white hover:bg-white/30 font-bold text-xs uppercase px-6 py-4 rounded-xl transition-all duration-300 shadow-lg">
             <span>5 Giải Pháp Không Gian</span>
             <i class="ph-bold ph-arrow-down text-xs text-[#FBBF24]"></i>
           </a>
@@ -643,7 +643,7 @@ $solutions_data = [
        - Chuyển không gian theo dạng Arrow Slide (Prev/Next) & Tabs
        - Chiều cao thiết kế vừa vặn trong 1 màn hình
   =========================================== -->
-  <section id="solutions-studio-section" class="py-8 sm:py-10 lg:py-12 px-4 lg:px-8 bg-gradient-to-b from-[#FAFAFA] via-white to-[#FAFAFA] relative overflow-hidden border-b border-slate-200/80 scroll-mt-36 lg:scroll-mt-40">
+  <section id="solutions-studio-section" data-track-section="sec-solutions-studio" data-section-name="Studio 5 Giải Pháp Không Gian" class="py-8 sm:py-10 lg:py-12 px-4 lg:px-8 bg-gradient-to-b from-[#FAFAFA] via-white to-[#FAFAFA] relative overflow-hidden border-b border-slate-200/80 scroll-mt-36 lg:scroll-mt-40">
     
     <!-- Giant Watermark Typography -->
     <div class="absolute top-2 left-1/2 -translate-x-1/2 pointer-events-none select-none">
@@ -665,10 +665,10 @@ $solutions_data = [
       <div class="relative group/stage">
         
         <!-- Navigation Arrows (Left & Right) -->
-        <button type="button" id="sol-slide-prev" aria-label="Không gian trước" class="absolute -left-2 sm:-left-4 lg:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-slate-800 shadow-xl border border-slate-200/90 hover:bg-[#B31217] hover:text-white hover:border-[#B31217] hover:scale-110 transition-all duration-300 flex items-center justify-center cursor-pointer">
+        <button type="button" id="sol-slide-prev" aria-label="Không gian trước" data-track-cta="btn-sol-prev" data-track-label="Studio: Nút Lướt Trái Không Gian" class="absolute -left-2 sm:-left-4 lg:-left-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-slate-800 shadow-xl border border-slate-200/90 hover:bg-[#B31217] hover:text-white hover:border-[#B31217] hover:scale-110 transition-all duration-300 flex items-center justify-center cursor-pointer">
           <i class="ph-bold ph-caret-left text-lg sm:text-xl"></i>
         </button>
-        <button type="button" id="sol-slide-next" aria-label="Không gian kế tiếp" class="absolute -right-2 sm:-right-4 lg:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-slate-800 shadow-xl border border-slate-200/90 hover:bg-[#B31217] hover:text-white hover:border-[#B31217] hover:scale-110 transition-all duration-300 flex items-center justify-center cursor-pointer">
+        <button type="button" id="sol-slide-next" aria-label="Không gian kế tiếp" data-track-cta="btn-sol-next" data-track-label="Studio: Nút Lướt Phải Không Gian" class="absolute -right-2 sm:-right-4 lg:-right-5 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white text-slate-800 shadow-xl border border-slate-200/90 hover:bg-[#B31217] hover:text-white hover:border-[#B31217] hover:scale-110 transition-all duration-300 flex items-center justify-center cursor-pointer">
           <i class="ph-bold ph-caret-right text-lg sm:text-xl"></i>
         </button>
 
@@ -693,6 +693,8 @@ $solutions_data = [
               ?>
                 <button type="button" 
                         data-slide-index="<?php echo $tab_idx - 1; ?>"
+                        data-track-cta="tab-sol-<?php echo esc_attr($slug); ?>"
+                        data-track-label="Studio: Chọn Tab <?php echo esc_attr($sol['title']); ?>"
                         class="solution-pill-btn shrink-0 inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl border font-mono text-xs uppercase tracking-wide transition-all duration-300 cursor-pointer select-none <?php echo $pill_classes; ?>">
                   <span class="w-4 h-4 rounded flex items-center justify-center text-[10px] font-mono <?php echo $is_first ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'; ?>"><?php echo esc_html($num_str); ?></span>
                   <span class="whitespace-nowrap"><?php echo esc_html($short_name); ?></span>
@@ -705,6 +707,8 @@ $solutions_data = [
               <button type="button" 
                       id="sol-active-a4-btn"
                       onclick="openActiveSolutionA4()" 
+                      data-track-cta="btn-sol-a4"
+                      data-track-label="Studio: Xem Hồ Sơ Bản Vẽ A4"
                       class="inline-flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-950 font-mono font-bold text-xs uppercase px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl border border-slate-200/90 transition-all cursor-pointer shadow-xs">
                 <i class="ph-bold ph-file-text text-sm text-[#B31217]"></i>
                 <span>Xem Hồ Sơ A4</span>
@@ -814,7 +818,7 @@ $solutions_data = [
         // Use curated fallback products if database has 0 products
         $final_products = !empty($matched_products) ? $matched_products : $def['fallback_products'];
     ?>
-      <section id="sec-<?php echo esc_attr($slug); ?>" class="py-24 lg:py-28 px-4 lg:px-8 <?php echo $section_bg; ?> border-b border-slate-200/80 relative overflow-hidden scroll-mt-20">
+      <section id="sec-<?php echo esc_attr($slug); ?>" data-track-section="sec-<?php echo esc_attr($slug); ?>" data-section-name="<?php echo esc_attr($def['name']); ?>" class="py-24 lg:py-28 px-4 lg:px-8 <?php echo $section_bg; ?> border-b border-slate-200/80 relative overflow-hidden scroll-mt-20">
         
         <!-- Giant Watermark Typography -->
         <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
@@ -941,7 +945,7 @@ $solutions_data = [
        SECTION 4: REAL PROJECTS GALLERY - HORIZONTAL MASONRY LOOP RIBBON
        Trình bày danh mục dự án theo dạng Grid Masonry & Loop Ngang
   =========================================== -->
-  <section id="projects-section" class="py-20 lg:py-28 bg-[#FAFAFA] relative overflow-hidden border-b border-slate-200/80">
+  <section id="projects-section" data-track-section="sec-projects" data-section-name="Dự Án Trọng Điểm & Công Trình Tiêu Biểu" class="py-20 lg:py-28 bg-[#FAFAFA] relative overflow-hidden border-b border-slate-200/80">
     
     <!-- Giant Watermark Typography -->
     <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
@@ -1077,7 +1081,7 @@ $solutions_data = [
        SECTION 7: CLIENT TESTIMONIAL REVIEWS
        Exact 1:1 Match with building-led.php
   =========================================== -->
-  <section class="py-28 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative overflow-hidden">
+  <section id="sec-reviews" data-track-section="sec-reviews" data-section-name="Đánh Giá Khách Hàng (Reviews)" class="py-28 px-4 lg:px-8 bg-white border-b border-slate-200/80 relative overflow-hidden">
     
     <!-- Giant Watermark Typography -->
     <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
@@ -1168,7 +1172,7 @@ $solutions_data = [
        SECTION 8: FAQ ACCORDION & DIRECT ENGINEERING CALLOUT
        Exact 1:1 Match with building-led.php
   =========================================== -->
-  <section class="py-28 px-4 lg:px-8 bg-[#FAFAFA] relative overflow-hidden">
+  <section id="sec-faq" data-track-section="sec-faq" data-section-name="Câu Hỏi FAQ & Form Khảo Sát Kỹ Sư" class="py-28 px-4 lg:px-8 bg-[#FAFAFA] relative overflow-hidden">
     
     <!-- Giant Watermark Typography -->
     <div class="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none select-none">
@@ -1187,7 +1191,7 @@ $solutions_data = [
           <p class="text-xs text-slate-600 font-normal leading-relaxed">
             Đăng ký thông tin công trình của bạn ngay hôm nay. Đội ngũ kỹ sư HacoLED sẽ cử cán bộ kỹ thuật tới khảo sát đo đạc thực địa trong vòng 2 giờ tại Hà Nội & TP.HCM.
           </p>
-          <button type="button" onclick="openQuoteModal('Yêu cầu kỹ sư khảo sát thực địa')" class="w-full inline-flex items-center justify-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase py-4 rounded-xl transition-colors shadow-md cursor-pointer">
+          <button type="button" onclick="openQuoteModal('Yêu cầu kỹ sư khảo sát thực địa')" data-track-cta="btn-faq-survey" data-track-label="FAQ: Bấm Yêu Cầu Khảo Sát Tận Nơi 2H" class="w-full inline-flex items-center justify-center gap-2 bg-[#FBBF24] hover:bg-amber-400 text-slate-950 font-black text-xs uppercase py-4 rounded-xl transition-colors shadow-md cursor-pointer">
             <i class="ph-bold ph-phone-call text-base"></i>
             <span>Yêu cầu khảo sát ngay</span>
           </button>
@@ -1353,15 +1357,15 @@ $solutions_data = [
 =========================================== -->
 <div class="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200 p-2.5 shadow-[0_-5px_20px_rgba(0,0,0,0.1)]">
   <div class="grid grid-cols-3 gap-2">
-    <a href="tel:<?php echo esc_attr($hotline_clean); ?>" class="flex flex-col items-center justify-center py-2 px-1 bg-red-50 text-[#B31217] rounded-xl border border-red-200/80 font-bold text-[10px] text-center transition-colors">
+    <a href="tel:<?php echo esc_attr($hotline_clean); ?>" data-track-cta="btn-mobile-call" data-track-label="Thanh Mobile: Gọi Hotline" class="flex flex-col items-center justify-center py-2 px-1 bg-red-50 text-[#B31217] rounded-xl border border-red-200/80 font-bold text-[10px] text-center transition-colors">
       <i class="ph-bold ph-phone-call text-base mb-0.5"></i>
       <span>Gọi Hotline</span>
     </a>
-    <a href="<?php echo esc_url($zalo_url); ?>" target="_blank" rel="noopener" class="flex flex-col items-center justify-center py-2 px-1 bg-blue-50 text-blue-600 rounded-xl border border-blue-200/80 font-bold text-[10px] text-center transition-colors">
+    <a href="<?php echo esc_url($zalo_url); ?>" target="_blank" rel="noopener" data-track-cta="btn-mobile-zalo" data-track-label="Thanh Mobile: Chat Zalo" class="flex flex-col items-center justify-center py-2 px-1 bg-blue-50 text-blue-600 rounded-xl border border-blue-200/80 font-bold text-[10px] text-center transition-colors">
       <i class="ph-bold ph-chat-circle-dots text-base mb-0.5"></i>
       <span>Chat Zalo</span>
     </a>
-    <button type="button" onclick="openQuoteModal('Tư vấn Mobile')" class="flex flex-col items-center justify-center py-2 px-1 bg-[#FBBF24] text-slate-950 rounded-xl font-black text-[10px] text-center shadow-md cursor-pointer">
+    <button type="button" onclick="openQuoteModal('Tư vấn Mobile')" data-track-cta="btn-mobile-quote" data-track-label="Thanh Mobile: Báo Giá Nhanh" class="flex flex-col items-center justify-center py-2 px-1 bg-[#FBBF24] text-slate-950 rounded-xl font-black text-[10px] text-center shadow-md cursor-pointer">
       <i class="ph-bold ph-receipt text-base mb-0.5"></i>
       <span>Báo Giá Nhanh</span>
     </button>
@@ -1868,6 +1872,11 @@ $solutions_data = [
           window.oaiq('event', 'Lead', { content_name: interest, value: 1.0 });
         }
 
+        // HacoLED Internal Analytics Conversion Tracking
+        if (typeof window.hacoledTrackEvent === 'function') {
+          window.hacoledTrackEvent('form_submit', 'form-lead-modal', 'Đăng Ký Form Báo Giá: ' + interest, { phone: phone, name: formData.get('name') || '' });
+        }
+
         // Show success state
         form.classList.add('hidden');
         if (successMsg) {
@@ -1913,6 +1922,233 @@ $solutions_data = [
       }
     });
   };
+</script>
+
+<!-- ==========================================
+     HACOLED PRO LANDING ANALYTICS & CRO ENGINE
+     - Measures Daily Visits & Unique Visitors
+     - Measures Section-by-Section Reach & Dwell Time
+     - Measures All CTA Clicks, Hotline, Zalo, A4 & Lightbox
+=========================================== -->
+<script id="hacoled-analytics-engine">
+(function() {
+  const CONFIG = {
+    ajaxUrl: '<?php echo esc_url(admin_url('admin-ajax.php')); ?>',
+    isAdmin: <?php echo (is_user_logged_in() && current_user_can('manage_options')) ? '1' : '0'; ?>,
+    pageUrl: window.location.href,
+    sessKey: 'hacoled_led_session_id',
+    visitedSecsKey: 'hacoled_visited_secs_' + window.location.pathname,
+  };
+
+  // 1. Session ID (Persists in sessionStorage)
+  let sessionId = sessionStorage.getItem(CONFIG.sessKey);
+  let isFirstVisitInSession = false;
+  if (!sessionId) {
+    sessionId = 'sess_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 9);
+    sessionStorage.setItem(CONFIG.sessKey, sessionId);
+    isFirstVisitInSession = true;
+  }
+
+  // 2. Helper to detect device
+  function getDeviceType() {
+    const w = window.innerWidth;
+    if (w < 768) return 'mobile';
+    if (w < 1024) return 'tablet';
+    return 'desktop';
+  }
+
+  // 3. Robust Data Sender (Beacon API with Fetch Keepalive fallback)
+  function sendData(payload) {
+    payload.session_id = sessionId;
+    payload.is_admin = CONFIG.isAdmin;
+    const bodyStr = JSON.stringify(payload);
+    const targetUrl = CONFIG.ajaxUrl + '?action=hacoled_track_analytics';
+
+    if (navigator.sendBeacon) {
+      try {
+        const blob = new Blob([bodyStr], { type: 'application/json' });
+        navigator.sendBeacon(targetUrl, blob);
+        return;
+      } catch (e) {}
+    }
+
+    fetch(targetUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: bodyStr,
+      keepalive: true
+    }).catch(function() {});
+  }
+
+  // Public event tracker
+  window.hacoledTrackEvent = function(eventType, targetId, targetLabel, metadata) {
+    sendData({
+      type: 'event',
+      event_type: eventType,
+      target_id: targetId || '',
+      target_label: targetLabel || '',
+      metadata: metadata || null
+    });
+  };
+
+  // 4. Record Initial Visit
+  if (isFirstVisitInSession) {
+    const urlParams = new URLSearchParams(window.location.search);
+    sendData({
+      type: 'visit',
+      device: getDeviceType(),
+      referrer: document.referrer || '',
+      page_url: window.location.href,
+      utm_source: urlParams.get('utm_source') || '',
+      utm_medium: urlParams.get('utm_medium') || '',
+      utm_campaign: urlParams.get('utm_campaign') || '',
+      utm_term: urlParams.get('utm_term') || ''
+    });
+  }
+
+  // 5. Section-by-Section Visibility & Dwell Time Tracking (IntersectionObserver)
+  document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('[data-track-section]');
+    if (!sections.length || !('IntersectionObserver' in window)) return;
+
+    const visibleSections = new Map(); // sectionId => { time, name }
+    let recordedSections = new Set();
+    try {
+      const stored = sessionStorage.getItem(CONFIG.visitedSecsKey);
+      if (stored) recordedSections = new Set(JSON.parse(stored));
+    } catch(e) {}
+
+    const observer = new IntersectionObserver((entries) => {
+      const now = Date.now();
+      entries.forEach(entry => {
+        const sec = entry.target;
+        const secId = sec.getAttribute('data-track-section');
+        const secName = sec.getAttribute('data-section-name') || secId;
+
+        if (entry.isIntersecting) {
+          // Section entered screen
+          visibleSections.set(secId, { time: now, name: secName });
+        } else {
+          // Section left screen -> calculate dwell time
+          if (visibleSections.has(secId)) {
+            const entryData = visibleSections.get(secId);
+            const dwellSec = Math.round((now - entryData.time) / 1000);
+            visibleSections.delete(secId);
+
+            // Record section view if user spent at least 1 second viewing it
+            if (dwellSec >= 1) {
+              sendData({
+                type: 'event',
+                event_type: 'section_view',
+                target_id: secId,
+                target_label: 'Xem phần: ' + entryData.name,
+                dwell_time: dwellSec
+              });
+              recordedSections.add(secId);
+              try {
+                sessionStorage.setItem(CONFIG.visitedSecsKey, JSON.stringify(Array.from(recordedSections)));
+              } catch(e) {}
+            }
+          }
+        }
+      });
+    }, {
+      threshold: 0.35 // At least 35% of section is visible in viewport
+    });
+
+    sections.forEach(sec => observer.observe(sec));
+
+    // When leaving or switching tab, flush currently visible sections
+    function flushVisibleSections() {
+      const now = Date.now();
+      visibleSections.forEach((entryData, secId) => {
+        const dwellSec = Math.round((now - entryData.time) / 1000);
+        if (dwellSec >= 1) {
+          sendData({
+            type: 'event',
+            event_type: 'section_view',
+            target_id: secId,
+            target_label: 'Xem phần: ' + entryData.name,
+            dwell_time: dwellSec
+          });
+        }
+      });
+      visibleSections.clear();
+    }
+
+    // 6. Global CTA & Interactive Element Click Listener
+    document.body.addEventListener('click', function(e) {
+      // 6.1 Elements with explicit data-track-cta
+      const ctaEl = e.target.closest('[data-track-cta]');
+      if (ctaEl) {
+        const ctaId = ctaEl.getAttribute('data-track-cta');
+        const ctaLabel = ctaEl.getAttribute('data-track-label') || ctaEl.innerText.trim().substring(0, 50);
+        window.hacoledTrackEvent('cta_click', ctaId, ctaLabel);
+        return;
+      }
+
+      // 6.2 Phone link click
+      const telLink = e.target.closest('a[href^="tel:"]');
+      if (telLink) {
+        window.hacoledTrackEvent('cta_click', 'call-hotline', 'Bấm Gọi Hotline: ' + telLink.getAttribute('href').replace('tel:', ''));
+        return;
+      }
+
+      // 6.3 Zalo link click
+      const zaloLink = e.target.closest('a[href*="zalo.me"]');
+      if (zaloLink) {
+        window.hacoledTrackEvent('cta_click', 'chat-zalo', 'Bấm Chat Zalo Tư Vấn');
+        return;
+      }
+
+      // 6.4 FAQ accordion expand
+      const faqBtn = e.target.closest('.faq-toggle');
+      if (faqBtn) {
+        const questionText = faqBtn.querySelector('span')?.innerText.trim() || 'Câu hỏi FAQ';
+        window.hacoledTrackEvent('faq_expand', 'faq-question', 'Mở xem FAQ: ' + questionText);
+        return;
+      }
+
+      // 6.5 Project card click (Lightbox trigger)
+      const projectCard = e.target.closest('.project-card-item');
+      if (projectCard) {
+        const projTitle = projectCard.querySelector('h4')?.innerText.trim() || 'Dự án thực tế';
+        window.hacoledTrackEvent('lightbox_open', 'project-lightbox', 'Xem chi tiết dự án: ' + projTitle);
+        return;
+      }
+    });
+
+    // 7. Session Duration & Max Scroll Depth Ping
+    let maxScrollPct = 0;
+    const pageStartTime = Date.now();
+
+    window.addEventListener('scroll', function() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (scrollHeight > 0) {
+        const pct = Math.min(100, Math.round((scrollTop / scrollHeight) * 100));
+        if (pct > maxScrollPct) maxScrollPct = pct;
+      }
+    }, { passive: true });
+
+    function sendLeavePing() {
+      flushVisibleSections();
+      const totalSeconds = Math.round((Date.now() - pageStartTime) / 1000);
+      sendData({
+        type: 'ping',
+        scroll_depth: maxScrollPct,
+        time_seconds: totalSeconds
+      });
+    }
+
+    window.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden') {
+        sendLeavePing();
+      }
+    });
+    window.addEventListener('pagehide', sendLeavePing);
+  });
+})();
 </script>
 
 <?php
