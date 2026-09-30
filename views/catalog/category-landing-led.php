@@ -1931,19 +1931,36 @@ $solutions_data = [
 
   // Helper for manual test in Console: hacoledTestOaiqLead()
   window.hacoledTestOaiqLead = function() {
+    // 1. Client-side pixel trigger
     if (typeof window.oaiq === 'function') {
-      window.oaiq('measure', 'lead_created', {
-        type: 'customer_action',
-        currency: 'VND'
-      }, {
-        event_id: 'test_lead_' + Date.now()
-      });
-      console.log('✅ [OpenAI Ads Pixel] Manual test lead_created fired successfully!');
-      return 'Event sent! Check Ads Manager event stream.';
-    } else {
-      console.warn('❌ [OpenAI Ads Pixel] window.oaiq is not loaded.');
-      return 'window.oaiq is not loaded.';
+      try {
+        window.oaiq('measure', 'lead_created', {
+          type: 'customer_action',
+          currency: 'VND'
+        }, {
+          event_id: 'test_lead_' + Date.now()
+        });
+        console.log('✅ [OpenAI Ads Pixel (Client)] lead_created fired from browser!');
+      } catch (e) {
+        console.warn('⚠️ [OpenAI Ads Pixel (Client)] Browser error:', e);
+      }
     }
+
+    // 2. Server-Side CAPI trigger (Bypasses all client AdBlockers 100%)
+    fetch('<?php echo esc_url(admin_url('admin-ajax.php?action=hacoled_test_openai_pixel')); ?>')
+      .then(r => r.json())
+      .then(res => {
+        if (res && res.success) {
+          console.log('🚀 [OpenAI Ads CAPI (Server-Side)] ' + res.data.message);
+        } else {
+          console.warn('⚠️ [OpenAI Ads CAPI (Server-Side)] ' + (res.data ? res.data.message : 'Error'));
+        }
+      })
+      .catch(err => {
+        console.error('❌ [OpenAI Ads CAPI] Network error:', err);
+      });
+
+    return '🚀 Đang kích hoạt đồng thời cả Client-Pixel và Server-Side CAPI đến OpenAI Ads... Vui lòng xem kết quả bên dưới:';
   };
 </script>
 

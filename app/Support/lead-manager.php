@@ -299,6 +299,19 @@ function hacoled_handle_lead_submission() {
         update_post_meta($post_id, '_lead_gsheet_synced', $gsheet_success ? 1 : 0);
     }
 
+    // 5.1 Real-time Server-Side Conversion API to OpenAI Ads (100% AdBlock-Immune)
+    $openai_pixel_id = get_option('hacoled_openai_pixel_id', 'NhXp2gLbpTsH5htjNhaQGn');
+    $openai_success = hacoled_send_to_openai_pixel($openai_pixel_id, [
+        'page_url' => $page_url,
+        'interest' => $interest,
+        'phone'    => $phone,
+        'name'     => $name,
+    ]);
+
+    if ($post_id && !is_wp_error($post_id)) {
+        update_post_meta($post_id, '_lead_openai_synced', $openai_success ? 1 : 0);
+    }
+
     // 6. Return response to front-end
     wp_send_json_success([
         'message'       => 'Yêu cầu của bạn đã được ghi nhận thành công! Kỹ sư HacoLED sẽ gọi điện tư vấn và gửi file báo giá chi tiết qua Zalo cho bạn trong ít phút.',
@@ -355,3 +368,73 @@ function hacoled_send_to_google_sheet($webhook_url, $payload) {
 
     return false;
 }
+
+/**
+ * Send Lead Conversion to OpenAI Ads via Server-Side Conversion API (CAPI)
+ * Completely immune to client-side ad blockers.
+ */
+function hacoled_send_to_openai_pixel($pixel_id, $lead_info = []) {
+    if (empty($pixel_id)) return false;
+
+    $time_ms = round(microtime(true) * 1000);
+    $url = 'https://bzr.openai.com/v1/sdk/events?pid=' . rawurlencode($pixel_id) . '&st=oaiq-web&sv=0.1.41&t=' . $time_ms . '&ec=1';
+
+    $payload = [
+        'obref'  => wp_generate_uuid4(),
+        'events' => [
+            [
+                'type'         => 'lead_created',
+                'timestamp_ms' => $time_ms,
+                'id'           => wp_generate_uuid4(),
+                'source_url'   => !empty($lead_info['page_url']) ? esc_url_raw($lead_info['page_url']) : home_url('/man-hinh-led/'),
+                'data'         => [
+                    'type'     => 'customer_action',
+                    'currency' => 'VND',
+                ]
+            ]
+        ]
+    ];
+
+    $response = wp_remote_post($url, [
+        'body'        => json_encode($payload),
+        'headers'     => ['Content-Type' => 'text/plain'],
+        'timeout'     => 6,
+        'redirection' => 0,
+        'blocking'    => true,
+    ]);
+
+    if (!is_wp_error($response)) {
+        $code = wp_remote_retrieve_response_code($response);
+        if ($code === 200 || $code === 202) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Test Endpoint to manually fire OpenAI Ads Server-Side Conversion from Browser or Console
+ */
+add_action('wp_ajax_hacoled_test_openai_pixel', 'hacoled_handle_test_openai_pixel');
+add_action('wp_ajax_nopriv_hacoled_test_openai_pixel', 'hacoled_handle_test_openai_pixel');
+
+function hacoled_handle_test_openai_pixel() {
+    $pixel_id = get_option('hacoled_openai_pixel_id', 'NhXp2gLbpTsH5htjNhaQGn');
+    $success = hacoled_send_to_openai_pixel($pixel_id, [
+        'page_url' => home_url('/man-hinh-led/'),
+        'interest' => 'Kiểm tra kết nối OpenAI Ads Manager',
+    ]);
+
+    if ($success) {
+        wp_send_json_success([
+            'message' => 'Máy chủ HacoLED đã gửi thành công sự kiện lead_created đến OpenAI (HTTP 202 Accepted)! Hãy kiểm tra mục Event Details trên OpenAI Ads Manager.',
+            'status'  => 'accepted'
+        ]);
+    } else {
+        wp_send_json_error([
+            'message' => 'Không thể kết nối đến máy chủ OpenAI Ads'
+        ]);
+    }
+}
+
