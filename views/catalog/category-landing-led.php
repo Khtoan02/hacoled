@@ -1291,11 +1291,6 @@ $solutions_data = [
     </button>
 
     <div class="space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-[#B31217] font-mono text-xs font-bold uppercase border border-red-200/80">
-        <i class="ph-bold ph-lightning"></i>
-        <span>ƯU ĐÃI ADS 2026: GIẢM 10% TRỌN GÓI</span>
-      </div>
-      
       <h3 class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
         Nhận Báo Giá Màn Hình LED Tận Xưởng
       </h3>
