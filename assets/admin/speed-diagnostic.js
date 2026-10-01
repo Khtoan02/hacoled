@@ -316,6 +316,8 @@
                     <a href="${escapeHtml(data.url)}" target="_blank" class="font-mono text-xs text-blue-600">
                         ${escapeHtml(data.url)}
                     </a>
+                    ${data.resolved_ip ? `<br><span class="inline-block text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1 py-0.5 rounded border border-emerald-200 mt-1">⚡ Đo trực tiếp Host (${escapeHtml(data.resolved_ip)})</span>` : ''}
+                    ${data.qc_pop ? `<br><span class="inline-block text-[10px] font-mono text-blue-700 bg-blue-50 px-1 py-0.5 rounded border border-blue-200 mt-1">🌍 CDN Edge: ${escapeHtml(data.qc_pop)}</span>` : ''}
                 </td>
                 <td>
                     <span class="${data.http_code === 200 ? 'badge-green' : 'badge-red'} font-bold">

@@ -212,6 +212,28 @@ class SiteHealthSpeedManager {
             ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
             : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36';
 
+        $url_host = parse_url($url, PHP_URL_HOST);
+        $site_host = parse_url(home_url(), PHP_URL_HOST);
+        $server_ip = !empty($_SERVER['SERVER_ADDR']) && filter_var($_SERVER['SERVER_ADDR'], FILTER_VALIDATE_IP)
+            ? $_SERVER['SERVER_ADDR']
+            : '103.77.162.37';
+
+        $resolve_list = [];
+        if ($url_host && ($url_host === $site_host || strpos($url_host, 'hacoled.com') !== false)) {
+            // Force cURL to connect directly to origin server IP.
+            // Eliminates the 700ms - 900ms international round-trip ping to QUIC.cloud edge POP in Europe (Helsinki).
+            $resolve_list = [
+                "hacoled.com:443:{$server_ip}",
+                "hacoled.com:80:{$server_ip}",
+                "www.hacoled.com:443:{$server_ip}",
+                "www.hacoled.com:80:{$server_ip}",
+            ];
+            if ($url_host !== 'hacoled.com' && $url_host !== 'www.hacoled.com') {
+                $resolve_list[] = "{$url_host}:443:{$server_ip}";
+                $resolve_list[] = "{$url_host}:80:{$server_ip}";
+            }
+        }
+
         // Pre-warm cache if testing cached performance to ensure measurement reflects warm cache
         if (!$bypass_cache) {
             $warm_ch = curl_init();
@@ -221,6 +243,9 @@ class SiteHealthSpeedManager {
             curl_setopt($warm_ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($warm_ch, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($warm_ch, CURLOPT_USERAGENT, $user_agent);
+            if (!empty($resolve_list)) {
+                curl_setopt($warm_ch, CURLOPT_RESOLVE, $resolve_list);
+            }
             @curl_exec($warm_ch);
             @curl_close($warm_ch);
             usleep(100000); // 100ms pause for storage sync
@@ -239,6 +264,9 @@ class SiteHealthSpeedManager {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_ENCODING, ''); // Accepts gzip/deflate/br
+        if (!empty($resolve_list)) {
+            curl_setopt($ch, CURLOPT_RESOLVE, $resolve_list);
+        }
 
         curl_setopt($ch, CURLOPT_HEADERFUNCTION, function ($curl, $header_line) use (&$response_headers) {
             $len = strlen($header_line);
@@ -325,6 +353,8 @@ class SiteHealthSpeedManager {
             'cache_status'     => $litespeed_cache ?: 'Bỏ qua hoặc không có header',
             'content_encoding' => $content_encoding,
             'content_type'     => $content_type,
+            'resolved_ip'      => !empty($resolve_list) ? $server_ip : null,
+            'qc_pop'           => $response_headers['x-qc-pop'] ?? null,
             'html_analysis'    => $html_analysis,
             'tested_at'        => current_time('H:i:s d/m/Y'),
         ];
