@@ -324,10 +324,6 @@ function hacoled_async_styles($tag, $handle, $href, $media) {
         $tag .= '<link rel="stylesheet" id="' . esc_attr($handle) . '-css" href="' . esc_url($href) . '" media="all" />';
     }
 
-    if (is_front_page() && 'hacoled-compiled-tailwind' === $handle) {
-        $tag = '<link rel="stylesheet" id="hacoled-compiled-tailwind-css" href="' . esc_url($href) . '" media="print" onload="this.media=\'all\'" data-hacoled-full-style />';
-        $tag .= '<noscript><link rel="stylesheet" href="' . esc_url($href) . '" /></noscript>';
-    }
     return $tag;
 }
 

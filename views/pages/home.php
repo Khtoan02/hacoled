@@ -1529,9 +1529,135 @@ function haco_render_product_slides($categories) {
                         }
                     }
                 </style>
+                <?php
+                // Pre-render Bento Grid in PHP for zero-CLS and zero-TBT
+                $home_projects = array();
+                $default_home_projects = array(
+                    array(
+                        'title' => "Lắp đặt màn hình LED P3 trong nhà tại Phố Xanh Building",
+                        'category' => "Dự án trong nhà",
+                        'client' => "Phố Xanh Building",
+                        'desc' => "Dự án thi công và lắp đặt màn hình LED P3 độ phân giải cao trong nhà cho Phố Xanh Building.",
+                        'img' => get_template_directory_uri() . "/assets/images/services-hero.webp",
+                        'url' => "https://hacoled.com/lap-dat-man-hinh-led-p3-trong-nha-tai-pho-xanh-building/"
+                    ),
+                    array(
+                        'title' => "Lắp đặt màn hình LED P1.5 trong nhà tại CT Cổ Phần Đầu Đầu FORTUNE",
+                        'category' => "Dự án trong nhà",
+                        'client' => "CT Cổ Phần Đầu Tư FORTUNE",
+                        'desc' => "Thi công giải pháp màn hình LED P1.5 cao cấp, sắc nét trong nhà cho công ty cổ phần đầu tư Fortune.",
+                        'img' => get_template_directory_uri() . "/assets/images/home-solution-led.webp",
+                        'url' => "https://hacoled.com/man-hinh-led-p1-5-trong-nha-cong-ty-fotune/"
+                    ),
+                    array(
+                        'title' => "Lắp đặt màn hình LED P3.91 cho Trường THPT FPT Tây Hà Nội",
+                        'category' => "Dự án ngoài trời",
+                        'client' => "Trường THPT FPT Tây Hà Nội",
+                        'desc' => "Triển khai lắp đặt màn hình LED P3.91 ngoài trời phục vụ các hoạt động sự kiện tại THPT FPT Tây Hà Nội.",
+                        'img' => get_template_directory_uri() . "/assets/images/home-solution-videowall.webp",
+                        'url' => "https://hacoled.com/lap-dat-man-hinh-led-p3-91-cho-truong-thpt-fpt-tay-ha-noi/"
+                    ),
+                    array(
+                        'title' => "Lắp đặt màn hình LED P3 trong nhà tại thôn Ngọc – Hưng Yên",
+                        'category' => "Dự án trong nhà",
+                        'client' => "Nhà văn hóa thôn Ngọc – Hưng Yên",
+                        'desc' => "Hoàn thiện lắp đặt hệ thống màn hình LED P3 trong nhà phục vụ sinh hoạt tại nhà văn hóa thôn Ngọc.",
+                        'img' => get_template_directory_uri() . "/assets/images/home-solution-audio.webp",
+                        'url' => "https://hacoled.com/lap-dat-man-hinh-led-p3-trong-nha-tai-thon-ngoc-hung-yen/"
+                    ),
+                    array(
+                        'title' => "Lắp đặt màn hình LED P2 trong nhà tại Học Viện Kỹ Thuật Mật Mã",
+                        'category' => "Dự án trong nhà",
+                        'client' => "Học Viện Kỹ Thuật Mật Mã",
+                        'desc' => "Cung cấp và lắp đặt màn hình LED P2 trong nhà chất lượng cao phục vụ Học Viện Kỹ Thuật Mật Mã.",
+                        'img' => get_template_directory_uri() . "/assets/images/services-indoor.webp",
+                        'url' => "https://hacoled.com/lap-dat-man-hinh-led-p2-trong-nha-hoc-vien-ky-thuat-mat-ma/"
+                    ),
+                    array(
+                        'title' => "Lắp đặt màn hình LED P2 trong nhà tại Công Ty TNHH MTV Cao Su 75",
+                        'category' => "Dự án trong nhà",
+                        'client' => "Công Ty TNHH MTV Cao Su 75",
+                        'desc' => "Dự án thi công màn hình LED P2 trong nhà hiển thị sắc nét dành cho Công ty TNHH MTV Cao su 75.",
+                        'img' => get_template_directory_uri() . "/assets/images/services-outdoor.webp",
+                        'url' => "https://hacoled.com/lap-dat-man-hinh-led-p2-trong-nha-tai-cong-ty-cao-su-75/"
+                    )
+                );
+
+                $projects_cat_slug = get_theme_mod('hacoled_projects_cat_slug', 'du-an') ?: 'du-an';
+                $query_projects = new WP_Query([
+                    'post_type'      => 'post',
+                    'posts_per_page' => 6,
+                    'category_name'  => $projects_cat_slug,
+                    'post_status'    => 'publish',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC'
+                ]);
+                if ($query_projects->have_posts()) {
+                    while ($query_projects->have_posts()) {
+                        $query_projects->the_post();
+                        $cats = get_the_category();
+                        $cat_names = [];
+                        foreach ($cats as $c) {
+                            if ($c->slug !== 'du-an' && $c->slug !== 'projects' && $c->slug !== $projects_cat_slug) {
+                                $cat_names[] = $c->name;
+                            }
+                        }
+                        $cat_str = !empty($cat_names) ? implode(', ', $cat_names) : 'Dự án';
+                        $home_projects[] = [
+                            'title'    => get_the_title(),
+                            'category' => $cat_str,
+                            'client'   => get_post_meta(get_the_ID(), '_project_client', true) ?: (get_post_meta(get_the_ID(), '_project_location', true) ?: 'HacoLED'),
+                            'desc'     => wp_trim_words(get_the_excerpt(), 20),
+                            'img'      => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: get_template_directory_uri() . '/assets/images/services-hero.webp',
+                            'url'      => get_permalink()
+                        ];
+                    }
+                    wp_reset_postdata();
+                }
+                if (empty($home_projects)) {
+                    $home_projects = $default_home_projects;
+                } else if (count($home_projects) < 6) {
+                    for ($i = count($home_projects); $i < 6; $i++) {
+                        $home_projects[] = $default_home_projects[$i];
+                    }
+                }
+                ?>
                 <!-- Bento Grid: 3 cols, hero at [0] spans 2c×2r -->
                 <div id="projects-bento" class="fade-up" style="display: grid; gap: 12px;">
-                    <!-- JS injected -->
+                    <?php foreach ($home_projects as $idx => $p):
+                        $cat = explode(',', $p['category'])[0];
+                        $is_hero = ($idx === 0);
+                        $title_size = $is_hero ? 'text-lg md:text-xl' : 'text-xs md:text-sm';
+                        $item_class = $is_hero ? 'bento-item bento-item-hero' : 'bento-item';
+                    ?>
+                        <a href="<?php echo esc_url($p['url']); ?>" target="_blank" rel="noopener"
+                           class="<?php echo esc_attr($item_class); ?> group rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-0.5 relative">
+                            <img src="<?php echo esc_url($p['img']); ?>" alt="<?php echo esc_attr($p['title']); ?>" width="1024" height="576" loading="lazy" decoding="async"
+                                 class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+                            <div class="absolute top-3 left-3 z-10">
+                                <span class="bg-brand-red/90 backdrop-blur-sm text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow uppercase tracking-widest"><?php echo esc_html($cat); ?></span>
+                            </div>
+                            <?php if ($is_hero): ?>
+                            <div class="absolute top-3 right-3 z-10">
+                                <span class="bg-brand-gold text-[#1C0505] text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow-lg uppercase tracking-widest flex items-center gap-1">
+                                    <i class="ph-fill ph-star"></i> Nổi bật
+                                </span>
+                            </div>
+                            <?php endif; ?>
+                            <div class="absolute bottom-0 left-0 right-0 z-10 p-3 <?php echo $is_hero ? 'md:p-5' : 'md:p-3'; ?>">
+                                <h3 class="font-heading <?php echo esc_attr($title_size); ?> font-bold text-white leading-snug line-clamp-2 group-hover:text-brand-gold transition-colors duration-300"><?php echo esc_html($p['title']); ?></h3>
+                                <?php if ($is_hero): ?>
+                                    <p class="text-white/50 text-xs mt-1 line-clamp-2 md:line-clamp-1"><?php echo esc_html($p['desc']); ?></p>
+                                <?php endif; ?>
+                            </div>
+                            <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <span class="inline-flex items-center gap-1.5 bg-white/95 text-brand-red text-[11px] font-extrabold uppercase tracking-wider px-4 py-2 rounded-full shadow-xl backdrop-blur">
+                                    Xem dự án <?php echo esc_html($p['client']); ?> <i class="ph-bold ph-arrow-up-right"></i>
+                                </span>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
 
                 <div class="text-center mt-10 fade-up">
@@ -1586,14 +1712,68 @@ function haco_render_product_slides($categories) {
 
               <!-- Press Cards Grid: 3 cột × 2 hàng = 6 bài -->
               <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5" id="press-container">
-                  <!-- JS Injected -->
+                  <?php if (!empty($press_data)): ?>
+                      <?php foreach ($press_data as $idx => $p): 
+                          $is_logo_dark = !empty($p['logoDark']);
+                      ?>
+                          <a href="<?php echo esc_url($p['url']); ?>" target="_blank" rel="noopener"
+                             class="group flex flex-col h-full rounded-2xl overflow-hidden border border-white/10 bg-black/40 hover:bg-black/60 transition-all duration-300 shadow-md hover:shadow-xl fade-up"
+                             style="transition-delay: <?php echo $idx * 80; ?>ms">
+                              <!-- Image: Strict 16:9 -->
+                              <div class="relative w-full overflow-hidden flex-shrink-0" style="aspect-ratio: 16/9;">
+                                  <img src="<?php echo esc_url($p['img']); ?>" alt="<?php echo esc_attr($p['title']); ?>" width="1024" height="576" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                                  <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                  
+                                  <!-- Source Tag -->
+                                  <div class="absolute top-2.5 left-2.5 z-10">
+                                      <span class="bg-[#b31217] text-white text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
+                                          <?php echo esc_html($p['source']); ?>
+                                      </span>
+                                  </div>
+
+                                  <!-- Brand Logo -->
+                                  <div class="absolute top-2.5 right-2.5 z-10">
+                                      <div class="rounded px-1.5 py-0.5 flex items-center shadow-md border border-white/10"
+                                           style="background: <?php echo $is_logo_dark ? 'rgba(20,2,2,0.9)' : 'rgba(255,255,255,0.95)'; ?>; backdrop-filter: blur(4px);">
+                                          <img src="<?php echo esc_url($p['logo']); ?>" alt="Logo <?php echo esc_attr($p['source']); ?>" width="160" height="60" loading="lazy" decoding="async" class="h-3 max-w-[55px] object-contain">
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <!-- Content Area -->
+                              <div class="p-3 flex-1 flex flex-col justify-between bg-black/20 border-t border-white/5">
+                                  <h3 class="font-heading text-xs md:text-sm font-bold text-white leading-snug line-clamp-2 group-hover:text-[#fbbf24] transition-colors duration-300">
+                                      <?php echo esc_html($p['title']); ?>
+                                  </h3>
+                                  <div class="mt-2.5 pt-2 border-t border-white/5 flex items-center justify-between">
+                                      <span class="inline-flex items-center gap-1 text-white/40 text-[9px] font-bold uppercase tracking-wider group-hover:text-[#fbbf24] transition-colors duration-300">
+                                          Chi tiết <i class="ph-bold ph-arrow-right group-hover:translate-x-0.5 transition-transform"></i>
+                                      </span>
+                                      <div class="h-[1.5px] bg-[#fbbf24]/50 w-6 group-hover:w-10 transition-all duration-500 ease-out"></div>
+                                  </div>
+                              </div>
+                          </a>
+                      <?php endforeach; ?>
+                  <?php endif; ?>
               </div>
 
               <!-- Logo strip: tất cả tờ báo đưới grid -->
               <div class="mt-6 pt-5 border-t border-white/10 fade-up">
                   <p class="text-center text-white/40 text-xs font-bold uppercase tracking-widest mb-4">Đã được đăng tải bởi</p>
                   <div class="flex flex-wrap items-center justify-center gap-2" id="press-logo-strip">
-            <!-- JS Injected -->
+                      <?php if (!empty($press_data)): ?>
+                          <?php foreach ($press_data as $p): 
+                              $is_logo_dark = !empty($p['logoDark']);
+                          ?>
+                              <a href="<?php echo esc_url($p['url']); ?>" target="_blank" rel="noopener"
+                                 class="flex items-center justify-center px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg border border-white/10 hover:border-brand-gold/50 transition-all duration-300 group"
+                                 style="background: rgba(255,255,255,0.03); backdrop-filter: blur(4px);">
+                                  <img src="<?php echo esc_url($p['logo']); ?>" alt="Logo đối tác báo chí <?php echo esc_attr($p['source']); ?>" width="160" height="60" loading="lazy" decoding="async"
+                                       class="h-3.5 md:h-4.5 max-w-[65px] md:max-w-[80px] object-contain opacity-40 group-hover:opacity-100 transition-opacity duration-300"
+                                       style="<?php echo $is_logo_dark ? 'filter: brightness(10);' : ''; ?>">
+                              </a>
+                          <?php endforeach; ?>
+                      <?php endif; ?>
                   </div>
               </div>
           </div>
@@ -2056,7 +2236,7 @@ function haco_render_product_slides($categories) {
                 updateButtons();
             });
 
-            // 3. RENDER DỰ ÁN vào Bento Grid
+            // 3. TÍNH TOÁN KÍCH THƯỚC BENTO GRID
             const bentoGrid = document.getElementById('projects-bento');
             if (bentoGrid) {
                 let resizeRaf = null;
@@ -2070,7 +2250,6 @@ function haco_render_product_slides($categories) {
                         if (width >= 1024) {
                             bentoGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
                             const colWidth = (containerWidth - (2 * gap)) / 3;
-                            // Công thức tính để cả ô 1x1 và ô 2x2 đều đạt tỉ lệ xấp xỉ ~16:9
                             const rowHeight = (18 * colWidth - 7 * gap) / 32;
                             bentoGrid.style.gridAutoRows = `${rowHeight}px`;
                             bentoGrid.style.gap = `${gap}px`;
@@ -2088,99 +2267,8 @@ function haco_render_product_slides($categories) {
                     });
                 }
 
-                bentoGrid.innerHTML = projects.slice(0, 6).map((p, idx) => {
-                    const cat = p.category.split(',')[0].trim();
-                    const isHero = (idx === 0);
-                    const titleSize = isHero ? 'text-lg md:text-xl' : 'text-xs md:text-sm';
-                    const itemClass = isHero ? 'bento-item bento-item-hero' : 'bento-item';
-
-                    return `
-                    <a href="${p.url}" target="_blank" rel="noopener"
-                       class="${itemClass} group rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-0.5">
-                        <img src="${p.img}" ${responsiveImageAttrs(p.img, '100vw')} alt="${p.title}" width="1024" height="576" loading="lazy" decoding="async"
-                             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
-                        <div class="absolute top-3 left-3 z-10">
-                            <span class="bg-brand-red/90 backdrop-blur-sm text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow uppercase tracking-widest">${cat}</span>
-                        </div>
-                        ${isHero ? `<div class="absolute top-3 right-3 z-10">
-                            <span class="bg-brand-gold text-[#1C0505] text-[9px] font-extrabold px-2.5 py-1 rounded-full shadow-lg uppercase tracking-widest flex items-center gap-1">
-                                <i class="ph-fill ph-star"></i> Nổi bật
-                            </span>
-                        </div>` : ''}
-                        <div class="absolute bottom-0 left-0 right-0 z-10 p-3 ${isHero ? 'md:p-5' : 'md:p-3'}">
-                            <h3 class="font-heading ${titleSize} font-bold text-white leading-snug line-clamp-2 group-hover:text-brand-gold transition-colors duration-300">${p.title}</h3>
-                            ${isHero ? `<p class="text-white/50 text-xs mt-1 line-clamp-2 md:line-clamp-1">${p.desc}</p>` : ''}
-                        </div>
-                        <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <span class="inline-flex items-center gap-1.5 bg-white/95 text-brand-red text-[11px] font-extrabold uppercase tracking-wider px-4 py-2 rounded-full shadow-xl backdrop-blur">
-                                Xem dự án ${p.client} <i class="ph-bold ph-arrow-up-right"></i>
-                            </span>
-                        </div>
-                    </a>`;
-                }).join('');
-
                 resizeBentoGrid();
-                window.addEventListener('resize', resizeBentoGrid);
-            }
-
-
-            // 4. RENDER HTML BÁO CHÍ
-            document.getElementById('press-container').innerHTML = press.map((p, idx) => `
-                <a href="${p.url}" target="_blank" rel="noopener"
-                   class="group flex flex-col h-full rounded-2xl overflow-hidden border border-white/10 bg-black/40 hover:bg-black/60 transition-all duration-300 shadow-md hover:shadow-xl fade-up"
-                   style="transition-delay: ${idx * 80}ms">
-                    <!-- Image: Strict 16:9 -->
-                    <div class="relative w-full overflow-hidden flex-shrink-0" style="aspect-ratio: 16/9;">
-                        <img src="${p.img}" ${responsiveImageAttrs(p.img, '100vw')} alt="${p.title}" width="1024" height="576" loading="lazy" decoding="async" data-fallback-src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/home-solution-led.webp'); ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                        
-                        <!-- Source Tag -->
-                        <div class="absolute top-2.5 left-2.5 z-10">
-                            <span class="bg-[#b31217] text-white text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded shadow-sm">
-                                ${p.source}
-                            </span>
-                        </div>
-
-                        <!-- Brand Logo -->
-                        <div class="absolute top-2.5 right-2.5 z-10">
-                            <div class="rounded px-1.5 py-0.5 flex items-center shadow-md border border-white/10"
-                                 style="background: ${p.logoDark ? 'rgba(20,2,2,0.9)' : 'rgba(255,255,255,0.95)'}; backdrop-filter: blur(4px);">
-                                <img src="${p.logo}" alt="Logo ${p.source}" width="160" height="60" loading="lazy" decoding="async" class="h-3 max-w-[55px] object-contain" data-error-action="hide-show-next">
-                                <span class="text-[7px] font-extrabold uppercase tracking-widest" style="display:none;color:${p.logoDark ? '#fbbf24' : '#1C0505'}">${p.source}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Area: Low profile height -->
-                    <div class="p-3 flex-1 flex flex-col justify-between bg-black/20 border-t border-white/5">
-                        <h3 class="font-heading text-xs md:text-sm font-bold text-white leading-snug line-clamp-2 group-hover:text-[#fbbf24] transition-colors duration-300">
-                            ${p.title}
-                        </h3>
-                        <div class="mt-2.5 pt-2 border-t border-white/5 flex items-center justify-between">
-                            <span class="inline-flex items-center gap-1 text-white/40 text-[9px] font-bold uppercase tracking-wider group-hover:text-[#fbbf24] transition-colors duration-300">
-                                Chi tiết <i class="ph-bold ph-arrow-right group-hover:translate-x-0.5 transition-transform"></i>
-                            </span>
-                            <div class="h-[1.5px] bg-[#fbbf24]/50 w-6 group-hover:w-10 transition-all duration-500 ease-out"></div>
-                        </div>
-                    </div>
-                </a>
-            `).join('');
-
-            // Logo báo chí
-            const logoStrip = document.getElementById('press-logo-strip');
-            if (logoStrip) {
-                logoStrip.innerHTML = press.map(p => `
-                    <a href="${p.url}" target="_blank" rel="noopener"
-                       class="flex items-center justify-center px-2.5 py-1.5 md:px-3 md:py-2 rounded-lg border border-white/10 hover:border-brand-gold/50 transition-all duration-300 group"
-                       style="background: rgba(255,255,255,0.03); backdrop-filter: blur(4px);">
-                        <img src="${p.logo}" alt="Logo đối tác báo chí ${p.source}" width="160" height="60" loading="lazy" decoding="async"
-                             class="h-3.5 md:h-4.5 max-w-[65px] md:max-w-[80px] object-contain opacity-40 group-hover:opacity-100 transition-opacity duration-300"
-                             style="${p.logoDark ? 'filter: brightness(10)' : ''}"
-                             data-error-action="hide-show-next">
-                        <span class="text-[9px] font-bold text-white/45 group-hover:text-white uppercase tracking-wider" style="display:none">${p.source}</span>
-                    </a>
-                `).join('');
+                window.addEventListener('resize', resizeBentoGrid, { passive: true });
             }
         }
 
