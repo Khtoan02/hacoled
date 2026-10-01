@@ -138,8 +138,9 @@ function hacoled_scripts() {
         );
     }
 
-    // Enqueue complete Phosphor Icons stylesheet for all pages
-    $icon_stylesheet = '/assets/css/phosphor-icons.css';
+    // Enqueue minified Phosphor Icons stylesheet
+    $icon_min = '/assets/css/phosphor-icons.min.css';
+    $icon_stylesheet = file_exists(get_template_directory() . $icon_min) ? $icon_min : '/assets/css/phosphor-icons.css';
     $icon_stylesheet_path = get_template_directory() . $icon_stylesheet;
 
     if (file_exists($icon_stylesheet_path)) {
@@ -232,6 +233,24 @@ function hacoled_preload_front_page_hero_lcp() {
     }
 }
 add_action('wp_head', 'hacoled_preload_front_page_hero_lcp', 1);
+
+/**
+ * Serve llms.txt at root URL for AI agents and search bots without Rank Math 404 redirects.
+ */
+add_action('init', function() {
+    $request_uri = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+    if ($request_uri === '/llms.txt') {
+        header('Content-Type: text/markdown; charset=utf-8');
+        header('Cache-Control: public, max-age=604800');
+        $file = get_template_directory() . '/llms.txt';
+        if (file_exists($file)) {
+            readfile($file);
+        } else {
+            echo "# HacoLED\n\n> Nhà cung cấp và thi công màn hình LED hàng đầu Việt Nam.\n";
+        }
+        exit;
+    }
+}, 1);
 
 /**
  * Add intrinsic dimensions to local homepage images that are authored as raw

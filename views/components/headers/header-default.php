@@ -204,7 +204,7 @@
             <!-- Logo -->
             <div class="hdr-logo" id="hdr-logo-el">
               <a href="<?php echo esc_url(home_url('/')); ?>" class="hdr-logo-link" aria-label="HacoLED">
-                <img src="<?php echo esc_url($logo); ?>" alt="HacoLED" class="h-[72px] w-auto object-contain" />
+                <img src="<?php echo esc_url($logo); ?>" alt="HacoLED" class="h-[72px] w-auto object-contain" width="300" height="72" />
               </a>
             </div>
 
@@ -300,7 +300,7 @@
               :class="scrolled ? '!w-[115px] xl:!w-[125px] !opacity-100 !mr-5 lg:!mr-8 !pointer-events-auto' : 'w-0 opacity-0 mr-0 pointer-events-none'">
               <div class="hdr-logo-ds"></div>
               <a href="<?php echo esc_url(home_url('/')); ?>" :tabindex="scrolled ? 0 : -1" class="block relative z-10">
-                <img src="<?php echo esc_url($logo); ?>" alt="HacoLED" class="h-7 w-auto object-contain rounded" />
+                <img src="<?php echo esc_url($logo); ?>" alt="HacoLED" class="h-7 w-auto object-contain rounded" width="116" height="28" />
               </a>
             </div>
 

@@ -29,7 +29,8 @@ if (empty($footer_logo)) {
                style="background-image: url('<?php echo esc_url(get_template_directory_uri() . '/assets/images/dongson-optimized.webp'); ?>'); filter: invert(80%) sepia(35%) saturate(1200%) hue-rotate(345deg) brightness(102%) contrast(98%);"></div>
           <a class="relative z-10 inline-block" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
             <img class="w-[220px] max-w-full h-auto object-contain transition-all duration-300 hover:scale-[1.02] rounded" 
-                 src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" />
+                 src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
+                 width="220" height="53" />
           </a>
         </div>
 
