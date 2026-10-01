@@ -127,7 +127,6 @@ function hacoled_page_cache_try_serve() {
     }
 
     // 2. Cache MISS: Hook buffer to capture and store HTML
-    header('X-HacoLED-Page-Cache: MISS');
     header('X-LiteSpeed-Cache-Control: public, max-age=604800');
     header('X-LiteSpeed-Tag: hacoled_page,hacoled_html');
     header('Cache-Control: public, max-age=3600, stale-while-revalidate=86400');
