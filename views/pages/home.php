@@ -985,12 +985,18 @@ function haco_render_product_slides($categories) {
                                     $price_html = $active_product->get_price_html() ?: __('Liên hệ', 'hacoled');
                                 }
 
+                                $thumb_id = get_post_thumbnail_id(get_the_ID());
+                                $thumb_url = wp_get_attachment_image_url($thumb_id, 'medium')
+                                    ?: wp_get_attachment_image_url($thumb_id, 'woocommerce_thumbnail')
+                                    ?: wp_get_attachment_image_url($thumb_id, 'medium_large')
+                                    ?: (get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '');
+
                                 echo '<div class="swiper-slide h-auto">';
                                 $this->renderComponent('product-card', [
                                     'title'       => get_the_title(),
                                     'description' => $description,
                                     'permalink'   => get_permalink(),
-                                    'thumbnail'   => get_the_post_thumbnail_url(get_the_ID(), 'large') ?: '',
+                                    'thumbnail'   => $thumb_url,
                                     'price'       => $price_html,
                                     'category'    => $category_name,
                                 ]);
@@ -2221,11 +2227,10 @@ function haco_render_product_slides($categories) {
                 let scrollRaf = null;
                 const updateButtons = () => {
                     if (scrollRaf) cancelAnimationFrame(scrollRaf);
-                    const scrollLeft = slider.scrollLeft;
-                    const clientWidth = slider.clientWidth;
-                    const scrollWidth = slider.scrollWidth;
-
                     scrollRaf = requestAnimationFrame(() => {
+                        const scrollLeft = slider.scrollLeft;
+                        const clientWidth = slider.clientWidth;
+                        const scrollWidth = slider.scrollWidth;
                         if (previous) previous.disabled = scrollLeft <= 4;
                         if (next) next.disabled = scrollLeft + clientWidth >= scrollWidth - 4;
                     });
@@ -2233,7 +2238,11 @@ function haco_render_product_slides($categories) {
                 previous?.addEventListener('click', () => slider.scrollBy({ left: -slider.clientWidth * 0.85, behavior: 'smooth' }));
                 next?.addEventListener('click', () => slider.scrollBy({ left: slider.clientWidth * 0.85, behavior: 'smooth' }));
                 slider.addEventListener('scroll', updateButtons, { passive: true });
-                updateButtons();
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(updateButtons);
+                } else {
+                    setTimeout(updateButtons, 500);
+                }
             });
 
             // 3. TÍNH TOÁN KÍCH THƯỚC BENTO GRID
@@ -2242,11 +2251,10 @@ function haco_render_product_slides($categories) {
                 let resizeRaf = null;
                 function resizeBentoGrid() {
                     if (resizeRaf) cancelAnimationFrame(resizeRaf);
-                    const containerWidth = bentoGrid.clientWidth;
-                    const gap = 12;
-                    const width = window.innerWidth;
-                    
                     resizeRaf = requestAnimationFrame(() => {
+                        const containerWidth = bentoGrid.clientWidth;
+                        const gap = 12;
+                        const width = window.innerWidth;
                         if (width >= 1024) {
                             bentoGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
                             const colWidth = (containerWidth - (2 * gap)) / 3;
@@ -2267,7 +2275,11 @@ function haco_render_product_slides($categories) {
                     });
                 }
 
-                resizeBentoGrid();
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(resizeBentoGrid);
+                } else {
+                    setTimeout(resizeBentoGrid, 400);
+                }
                 window.addEventListener('resize', resizeBentoGrid, { passive: true });
             }
         }
@@ -2305,7 +2317,10 @@ function haco_render_product_slides($categories) {
         }, { threshold: 0.1 });
 
         const initHomepageContent = () => {
-            init();
+            const deferTask = window.requestIdleCallback || ((cb) => setTimeout(cb, 300));
+            deferTask(() => {
+                init();
+            });
             document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         };
         if (document.readyState === 'loading') {

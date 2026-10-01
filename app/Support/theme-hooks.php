@@ -190,6 +190,7 @@ function hacoled_front_page_asset_cleanup() {
         'wp-block-library-theme',
         'classic-theme-styles',
         'global-styles',
+        'contact-form-7',
     ] as $style_handle) {
         wp_dequeue_style($style_handle);
     }
@@ -205,6 +206,10 @@ function hacoled_front_page_asset_cleanup() {
         'jquery-migrate',
         'jquery-core',
         'jquery',
+        'contact-form-7',
+        'swv',
+        'wp-hooks',
+        'wp-i18n',
     ] as $script_handle) {
         wp_dequeue_script($script_handle);
     }
@@ -212,6 +217,21 @@ function hacoled_front_page_asset_cleanup() {
 add_action('wp_enqueue_scripts', 'hacoled_front_page_asset_cleanup', 100);
 add_action('wp_print_styles', 'hacoled_front_page_asset_cleanup', 100);
 add_action('wp_print_scripts', 'hacoled_front_page_asset_cleanup', 100);
+add_filter('wpcf7_load_js', static fn($load) => is_front_page() ? false : $load);
+add_filter('wpcf7_load_css', static fn($load) => is_front_page() ? false : $load);
+
+/**
+ * Preload LCP hero background image on front page to eliminate 1.2s resource load delay.
+ */
+function hacoled_preload_front_page_hero_lcp() {
+    if (is_front_page()) {
+        $hero_bg = get_theme_mod('hacoled_hero_bg') ?: (get_template_directory_uri() . '/assets/images/services-hero.webp');
+        if (!empty($hero_bg)) {
+            echo '<link rel="preload" as="image" href="' . esc_url($hero_bg) . '" fetchpriority="high">' . "\n";
+        }
+    }
+}
+add_action('wp_head', 'hacoled_preload_front_page_hero_lcp', 1);
 
 /**
  * Add intrinsic dimensions to local homepage images that are authored as raw

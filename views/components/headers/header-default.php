@@ -8,18 +8,7 @@
   <!-- OpenAI Ads / BZR Pixel Tracking (First-Party Hosted to prevent AdBlocker ERR_BLOCKED_BY_CLIENT) -->
   <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","<?php echo esc_url(get_template_directory_uri() . '/assets/js/oaiq.min.js'); ?>");oaiq("init",{pixelId:"NhXp2gLbpTsH5htjNhaQGn",debug:true});</script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@200;300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@200;300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@200;300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet">
-  </noscript>
+
 
 
 
