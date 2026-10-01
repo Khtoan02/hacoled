@@ -31,5 +31,8 @@ if (is_admin()) {
 
     $header_menu_manager = new HacoLED\Theme\Admin\HeaderMenuManager();
     $header_menu_manager->register();
+
+    $site_health_speed_manager = new HacoLED\Theme\Admin\SiteHealthSpeedManager();
+    $site_health_speed_manager->register();
 }
 
