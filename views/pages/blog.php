@@ -224,7 +224,7 @@ $render_card = static function ($post, $meta, $wide = false) use ($normalize_pos
         <h1 class="mt-5 text-3xl font-black leading-[1.08] tracking-tight text-brand-text sm:text-4xl lg:text-5xl">
           <?php _e('Tin tức, dự án và kiến thức AV', 'hacoled'); ?>
         </h1>
-        <p class="mt-4 max-w-3xl text-sm leading-7 text-brand-muted md:text-base">
+        <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
           <?php _e('Một nơi để theo dõi công trình đã bàn giao, tìm hiểu công nghệ màn hình LED - âm thanh và tra cứu hướng dẫn vận hành từ đội ngũ HacoLED.', 'hacoled'); ?>
         </p>
       </div>
@@ -272,7 +272,7 @@ $render_card = static function ($post, $meta, $wide = false) use ($normalize_pos
             <h2 id="featured-heading" class="mt-4 text-2xl font-black leading-tight tracking-tight text-brand-text sm:text-3xl">
               <a href="<?php echo esc_url($featured_post['permalink']); ?>" class="transition-colors hover:text-brand-red"><?php echo esc_html($featured_post['title']); ?></a>
             </h2>
-            <p class="mt-4 line-clamp-4 text-sm leading-7 text-brand-muted"><?php echo esc_html($featured_post['excerpt']); ?></p>
+            <p class="mt-4 line-clamp-4 text-sm leading-7 text-slate-600"><?php echo esc_html($featured_post['excerpt']); ?></p>
             <div class="mt-5"><?php $render_meta($featured_post); ?></div>
             <div class="mt-auto pt-7">
               <a href="<?php echo esc_url($featured_post['permalink']); ?>" class="inline-flex items-center gap-2 rounded-full bg-brand-red px-5 py-3 text-[11px] font-black uppercase tracking-wider text-white transition-colors hover:bg-brand-text">
@@ -344,7 +344,7 @@ $render_card = static function ($post, $meta, $wide = false) use ($normalize_pos
                     <?php echo esc_html($meta['label']); ?>
                   <?php endif; ?>
                 </h2>
-                <p class="mt-1 max-w-2xl text-xs leading-relaxed text-brand-muted md:text-sm"><?php echo esc_html($meta['desc']); ?></p>
+                <p class="mt-1 max-w-2xl text-xs leading-relaxed text-slate-600 md:text-sm"><?php echo esc_html($meta['desc']); ?></p>
               </div>
             </div>
             <?php if (!empty($cat_url)): ?>

@@ -511,7 +511,6 @@
             card.type = 'button';
             card.className = `sol-expanding-card ${expandedClass} relative rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl border border-slate-200/80 group text-left`;
             card.setAttribute('data-id', item.id);
-            card.setAttribute('aria-label', `Xem chi tiết ${item.title}`);
 
             card.innerHTML = `
                 <img src="${item.image}" alt="${item.title}" class="card-bg-img" loading="lazy">
@@ -568,7 +567,6 @@
             const card = document.createElement('button');
             card.type = 'button';
             card.className = 'bg-white border border-slate-200/90 hover:border-[#b31217]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group rounded-2xl p-4 flex items-start gap-3.5 cursor-pointer h-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-red focus-visible:ring-offset-2';
-            card.setAttribute('aria-label', `Xem chi tiết ${item.title}`);
             
             card.innerHTML = `
                 <div class="w-11 h-11 rounded-xl bg-rose-50 text-[#b31217] border border-rose-100 flex items-center justify-center text-lg shrink-0 group-hover:bg-[#b31217] group-hover:text-white transition-colors shadow-sm">

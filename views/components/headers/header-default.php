@@ -786,7 +786,7 @@
         <div class="flex justify-around items-center h-16 px-2">
 
           <!-- Tab 1: Trang chủ -->
-          <a href="<?php echo esc_url(home_url('/')); ?>"
+          <a href="<?php echo esc_url(home_url('/')); ?>" aria-label="Trang chủ HacoLED"
             class="flex items-center justify-center w-16 h-full transition-all duration-200"
             :class="activeDrawer === null && (window.location.pathname === '/' || window.location.pathname === '/index.php') ? 'text-[#fbbf24] scale-105' : 'text-white/70 hover:text-white'">
             <i class="text-[26px]"

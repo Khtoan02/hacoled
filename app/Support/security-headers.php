@@ -11,11 +11,11 @@ function hacoled_send_security_headers() {
         return;
     }
 
-    // Disable caching temporarily for real-time testing and verification
-    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-    header('Cache-Control: post-check=0, pre-check=0', false);
-    header('Pragma: no-cache');
-    header('Expires: Wed, 11 Jan 1984 05:00:00 GMT');
+    // Allow caching for production performance (removed no-store, no-cache)
+    // header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    // header('Cache-Control: post-check=0, pre-check=0', false);
+    // header('Pragma: no-cache');
+    // header('Expires: Wed, 11 Jan 1984 05:00:00 GMT');
 
     header('X-Content-Type-Options: nosniff');
     header('X-Frame-Options: SAMEORIGIN');
@@ -25,7 +25,7 @@ function hacoled_send_security_headers() {
     $policy = "default-src 'self' https:; "
         . "script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; "
         . "style-src 'self' 'unsafe-inline' https:; "
-        . "img-src 'self' data: https:; "
+        . "img-src 'self' data: blob: https:; "
         . "font-src 'self' data: https:; "
         . "connect-src 'self' https:; worker-src 'self' blob: https:; "
         . "frame-src 'self' https:; "

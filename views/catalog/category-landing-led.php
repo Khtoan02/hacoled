@@ -29,7 +29,7 @@ $hotline = get_theme_mod('hacoled_hotline', '0988.591.119');
 $hotline_clean = preg_replace('/[^0-9]/', '', $hotline);
 $zalo_url = 'https://zalo.me/' . $hotline_clean;
 $theme_uri = get_template_directory_uri();
-$hero_bg_url = $theme_uri . '/assets/images/hero-led-outdoor-building.png';
+$hero_bg_url = $theme_uri . '/assets/images/hero-led-outdoor-building.webp';
 
 // Curated 7 subcategory metadata mapping with rich fallbacks (5-6 products each for 1-row horizontal testing)
 $subcat_definitions = [
@@ -505,7 +505,7 @@ $solutions_data = [
         'subtitle'  => 'Tổ hợp hiển thị LED siêu nét và âm thanh hội trường phủ đều, truyền tải rõ ràng tới mọi vị trí trong khán phòng đa năng.',
         'icon'      => 'ph-buildings',
         'full_img'  => $theme_uri . '/assets/images/solutions/solution-hoi-truong.png',
-        'scene_img' => $theme_uri . '/assets/images/solutions/space-hoi-truong.png',
+        'scene_img' => $theme_uri . '/assets/images/solutions/space-hoi-truong.webp',
         'items'     => [
             ['number' => '01', 'name' => 'Màn Hình LED', 'specs' => 'LED P1.5 – P2.5 trong nhà', 'icon' => 'ph-monitor'],
             ['number' => '02', 'name' => 'Loa Hội Trường', 'specs' => 'Phủ âm đều, chống dội âm', 'icon' => 'ph-speaker-hifi'],
@@ -522,7 +522,7 @@ $solutions_data = [
         'subtitle'  => 'Hội nghị truyền hình 4K đa điểm cầu, hiển thị biểu đồ sắc nét và âm thanh hội nghị thu phát tự nhiên, vận hành 1 chạm.',
         'icon'      => 'ph-users',
         'full_img'  => $theme_uri . '/assets/images/solutions/solution-phong-hop.png',
-        'scene_img' => $theme_uri . '/assets/images/solutions/space-phong-hop.png',
+        'scene_img' => $theme_uri . '/assets/images/solutions/space-phong-hop.webp',
         'items'     => [
             ['number' => '01', 'name' => 'Màn Hình LED', 'specs' => 'Fine Pitch P1.25 – P1.86', 'icon' => 'ph-monitor'],
             ['number' => '02', 'name' => 'Loa Hội Trường', 'specs' => 'Khử tiếng vọng, rõ tiếng', 'icon' => 'ph-speaker-hifi'],
@@ -538,7 +538,7 @@ $solutions_data = [
         'subtitle'  => 'Nâng cao hiệu quả giảng dạy trực quan với màn hình LED cỡ lớn bảo vệ thị lực và hệ thống trợ giảng âm thanh phủ đều.',
         'icon'      => 'ph-graduation-cap',
         'full_img'  => $theme_uri . '/assets/images/solutions/solution-truong-hoc.jpg',
-        'scene_img' => $theme_uri . '/assets/images/solutions/space-truong-hoc.png',
+        'scene_img' => $theme_uri . '/assets/images/solutions/space-truong-hoc.webp',
         'items'     => [
             ['number' => '01', 'name' => 'Màn Hình LED', 'specs' => 'Hiển thị bài giảng rõ nét', 'icon' => 'ph-monitor'],
             ['number' => '02', 'name' => 'Loa Hội Trường', 'specs' => 'Rõ tiếng, chống dội âm', 'icon' => 'ph-speaker-hifi'],
@@ -554,7 +554,7 @@ $solutions_data = [
         'subtitle'  => 'Tổ hợp biểu diễn hoành tráng kết hợp backdrop LED 3840Hz, dàn âm thanh Line Array uy lực và ánh sáng moving head chuyên nghiệp.',
         'icon'      => 'ph-confetti',
         'full_img'  => $theme_uri . '/assets/images/solutions/solution-san-khau.png',
-        'scene_img' => $theme_uri . '/assets/images/solutions/space-san-khau.png',
+        'scene_img' => $theme_uri . '/assets/images/solutions/space-san-khau.webp',
         'items'     => [
             ['number' => '01', 'name' => 'Màn Hình LED', 'specs' => 'Quét 3840Hz chống sọc', 'icon' => 'ph-monitor'],
             ['number' => '02', 'name' => 'Loa Sự Kiện', 'specs' => 'Dàn treo Line Array khủng', 'icon' => 'ph-speaker-hifi'],
@@ -571,7 +571,7 @@ $solutions_data = [
         'subtitle'  => 'Màn hình LED biển hiệu & Billboard độ sáng cực cao 7500 nits, chuẩn kháng nước IP68, quản trị phát video từ xa qua Cloud IoT liên tục 24/7.',
         'icon'      => 'ph-megaphone',
         'full_img'  => $theme_uri . '/assets/images/solutions/solution-ngoai-troi.png',
-        'scene_img' => $theme_uri . '/assets/images/solutions/space-ngoai-troi.png',
+        'scene_img' => $theme_uri . '/assets/images/solutions/space-ngoai-troi.webp',
         'items'     => [
             ['number' => '01', 'name' => 'Màn Hình LED', 'specs' => 'Outdoor IP68, 7500 nits', 'icon' => 'ph-monitor'],
             ['number' => '02', 'name' => 'Bộ Xử Lý Trung Tâm', 'specs' => 'Processor & card phát đồng bộ', 'icon' => 'ph-cpu'],

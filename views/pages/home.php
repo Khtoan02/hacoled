@@ -952,7 +952,7 @@ function haco_render_product_slides($categories) {
                             </div>
                             <h2 id="<?php echo esc_attr('san-pham-' . sanitize_title($section['label'])); ?>" class="text-xl md:text-3xl lg:text-4xl font-extrabold uppercase tracking-tight text-brand-text mb-0"><?php echo esc_html($section['label']); ?></h2>
                         </div>
-                        <p class="text-brand-muted text-xs md:text-sm leading-relaxed mt-2 md:mt-0 mb-0"><?php echo esc_html($section['desc']); ?></p>
+                        <p class="text-slate-600 text-xs md:text-sm leading-relaxed mt-2 md:mt-0 mb-0"><?php echo esc_html($section['desc']); ?></p>
                     </div>
                     <div>
                         <!-- View All: Icon only on mobile, text + icon on desktop -->
@@ -1057,7 +1057,7 @@ function haco_render_product_slides($categories) {
                         <h2 id="uy-tin-hacoled" class="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-[-0.035em] text-brand-text leading-[1.04] mb-4">
                             Uy tín <span class="text-brand-red">tạo nên thương hiệu</span>
                         </h2>
-                        <p class="max-w-3xl text-sm md:text-base text-brand-muted leading-relaxed">
+                        <p class="max-w-3xl text-sm md:text-base text-slate-600 leading-relaxed">
                             Đối tác của <strong class="text-brand-text"><?php echo esc_html($strategic_partners_raw); ?></strong> và hàng trăm tập đoàn hàng đầu Việt Nam.
                         </p>
                     </div>
@@ -1509,7 +1509,7 @@ function haco_render_product_slides($categories) {
                         <span class="text-brand-red text-[10px] md:text-xs font-bold uppercase tracking-widest whitespace-nowrap">DỰ ÁN TIÊU BIỂU</span>
                     </div>
                     <h2 id="cong-trinh-tieu-bieu" class="text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-brand-text mb-3">Công Trình Tiêu Biểu</h2>
-                    <p class="text-brand-muted text-xs md:text-base leading-relaxed max-w-xl mx-auto px-2">Hàng ngàn công trình LED đã được HacoLED triển khai thành công trên toàn quốc.</p>
+                    <p class="text-slate-600 text-xs md:text-base leading-relaxed max-w-xl mx-auto px-2">Hàng ngàn công trình LED đã được HacoLED triển khai thành công trên toàn quốc.</p>
                 </div>
 
                 <style>
@@ -1614,7 +1614,7 @@ function haco_render_product_slides($categories) {
                         <span class="text-brand-red text-[10px] md:text-xs font-bold uppercase tracking-widest whitespace-nowrap">Hoạt Động Thực Tế</span>
                     </div>
                     <h2 id="su-kien-noi-bat" class="text-2xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-brand-text mb-3">Sự Kiện Nổi Bật</h2>
-                    <p class="text-brand-muted text-xs md:text-base leading-relaxed max-w-xl mx-auto px-2">Những dấu ấn nổi bật ghi lại hành trình HacoLED đồng hành cùng các sự kiện và đối tác trên khắp cả nước.</p>
+                    <p class="text-slate-600 text-xs md:text-base leading-relaxed max-w-xl mx-auto px-2">Những dấu ấn nổi bật ghi lại hành trình HacoLED đồng hành cùng các sự kiện và đối tác trên khắp cả nước.</p>
                 </div>
 
                 <?php
